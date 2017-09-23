@@ -40,3 +40,4 @@ yo angm
 
 
 # spini-angular
+# spini-get-spini
