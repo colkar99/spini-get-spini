@@ -31,7 +31,15 @@ module.exports = function (config) {
 			'app/modules/home/homeCtrl.js',
 			'app/modules/home/homeRoute.js',
 			'app/modules/home/homeService.js',
-			'app/modules/home/home-test.js'
+			'app/modules/home/home-test.js',
+			// this is used for refferal page start
+			'app/modules/refferal_user/refferalModule.js',
+			'app/modules/refferal_user/refferalCtrl.js',
+			'app/modules/refferal_user/refferalRoute.js',
+			'app/modules/refferal_user/refferalService.js',
+			'app/modules/refferal_user/refferal-test.js'
+			// refferal page end
+
 		],
 
 		// Test results reporter to use

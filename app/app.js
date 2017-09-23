@@ -19,7 +19,8 @@
 		'ngTouch',
 		'ngSanitize',
 		'ui.router',
-		'home'
+		'home',
+		'refferal'
 	]);
 
 })();
