@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt" ng-app="angular-app">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<base href="/">
+	<title>angular-app</title>
+	<meta name="description" content="Modular AngularJS with Angm-generator" />
+	<meta name="author" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=yes" />
+	<link rel="shortcut icon" href="app/assets/images/favicon.ico" />
+	<link rel="apple-touch-icon" href="app/assets/images/apple-touch-icon.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="app/assets/images/apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="app/assets/images/apple-touch-icon-114x114.png" />
+	<!-- injector:css -->
+	<link rel="stylesheet" href="/src/bower_components/bootstrap/dist/css/bootstrap.css">
+	<!-- endinjector -->
+</head>
+<body>
+
+<div ng-include="'app/modules/layouts/nav-bar/navbar.html'"></div>
+<!--Beginning-->
+<section id="wrapper" scroll-to>
+	<div class="view-slide-in" ui-view></div>
+</section>
+<!--End-->
+
+<!-- injector:js -->
+<script src="/src/bower_components/jquery/dist/jquery.js"></script>
+<script src="/src/bower_components/es5-shim/es5-shim.js"></script>
+<script src="/src/bower_components/json3/lib/json3.min.js"></script>
+<script src="/src/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/src/bower_components/angular/angular.js"></script>
+<script src="/src/bower_components/angular-touch/angular-touch.js"></script>
+<script src="/src/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="/src/bower_components/angular-aria/angular-aria.js"></script>
+<script src="/src/bower_components/angular-mocks/angular-mocks.js"></script>
+<script src="/src/bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="/src/bower_components/angular-animate/angular-animate.js"></script>
+<script src="/src/bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="/src/bower_components/angular-resource/angular-resource.js"></script>
+<script src="/src/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="/app/app.js"></script>
+<script src="/app/app.config.js"></script>
+<script src="/app/modules/home/homeModule.js"></script>
+<script src="/app/modules/home/homeRoute.js"></script>
+<script src="/app/modules/home/homeCtrl.js"></script>
+<script src="/app/modules/layouts/nav-bar/navBarCtrl.js"></script>
+<script src="/app/modules/home/homeService.js"></script>
+<script src="/app/modules/layouts/nav-bar/navbarService.js"></script>
+<script src="/app/modules/layouts/nav-bar/navbarDirective.js"></script>
+<!-- endinjector -->
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "generator-angm": {
+    "appName": "angular-app",
+    "angularCookies": true,
+    "angularAnimate": true,
+    "angularSanitize": true,
+    "angularBootstrap": true
+  }
+}
