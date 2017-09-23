@@ -14,13 +14,12 @@
 		'ngResource',
 		'ngAria',
 		 'ui.bootstrap',
-		
 		'ngCookies',
 		'ngAnimate',
 		'ngTouch',
 		'ngSanitize',
 		'ui.router',
-		'home',
+		'home'
 	]);
 
 })();

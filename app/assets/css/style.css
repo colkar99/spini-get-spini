@@ -1,0 +1,319 @@
+body{
+    background: #f7f7f7;
+}
+ul, li, p{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+input{
+    border: 1px solid #e3e3e3;
+    padding: 8px 15px;
+    outline: none;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+button{
+    background: #e83634;
+    color: #fff;
+    border: 0;
+    border: 0;
+    outline: none;
+    border-radius: 2px;
+    padding: 8px 15px;
+    border-top: 1px solid #e83634;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #5c5c5c;
+  /*font-weight: 400;*/
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #5c5c5c;
+  /*font-weight: 400;*/
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #5c5c5c;
+  /*font-weight: 400;*/
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #5c5c5c;
+  /*font-weight: 400;*/
+}
+/*header styles*/
+header{
+    background: #fff;
+}
+header hr{
+    margin: 0;
+    border: 1px solid #f7f7f7;
+}
+.main-header{
+    padding: 40px 0;
+}
+.main-header-logo a{
+
+}
+.main-header-logo a img{
+    width: 150px;
+}
+.main-header-search{
+    text-align: center;
+}
+.main-header-search input{
+    width: 90%;
+    background: #f7f7f7;
+}
+.main-header-search button{
+    background: url(../images/header/SearchIcon.png) #e83634;
+    height: 36px;
+    width: 36px;
+    background-repeat: no-repeat;
+    /*background-size: 20px;*/
+    background-position: center;
+    padding-bottom: 29px;
+    vertical-align: top;
+    cursor: pointer;
+}
+.main-header-partner{
+    text-align: center;
+}
+.main-header-partner button{
+    background: #fff;
+    border: 1px solid lightslategray;
+    padding: 6px 15px;
+    color: #888;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    font-size: 13px;
+    border-radius: 0;
+    margin-top: 3px;
+}
+.main-header-signin{
+    text-align: right;
+}
+.main-header-signin a{
+    color: #888;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+.main-header-signin a img{
+    width: 40px;
+    margin-left: 10px;
+}
+.main-header-navigation{
+
+}
+.main-header-navigation ul{
+    
+}
+.main-header-navigation ul li{
+    display: inline-block;
+    padding: 10px 20px 10px 0;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    background-position: left;
+}
+.main-header-navigation ul li:hover, .main-header-navigation-active{
+    border-bottom: 2px solid #b8bdbf;
+}
+.main-header-navigation ul li a:hover{
+    text-decoration: none;
+}
+.main-header-navigation ul li a{
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #888;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    padding-left: 25px;
+}
+.main-nav-food{
+    background: url('../images/02MenuBar/01Menu-Icn-Food.png')no-repeat;
+}
+.main-nav-education{
+    background: url('../images/02MenuBar/02Menu-Icn-EDU.png')no-repeat;
+}
+.main-nav-beauty{
+    background: url('../images/02MenuBar/03Menu-Icn-Beauty.png')no-repeat;
+}
+.main-nav-travel{
+    background: url('../images/02MenuBar/04Menu-Icn-Food.png')no-repeat;
+}
+.main-nav-personal_needs{
+    background: url('../images/02MenuBar/05Menu-Icn-Pers.png')no-repeat;
+}
+.main-nav-gadgets{
+    background: url('../images/02MenuBar/06Menu-Icn-Food.png')no-repeat;
+}
+.main-nav-clothing{
+    background: url('../images/02MenuBar/01Menu-Icn-Clothes.png')no-repeat;
+}
+.main-header-location{
+    line-height: 42px;
+    cursor: pointer;
+    text-align: right;
+}
+.main-header-location i{
+    color: #fff;
+    background: #38cad1;
+    padding: 5px;
+    border-radius: 50%;
+}
+.dropdown{
+    display: inline-block;
+}
+.dropdown-toggle, .dropdown{
+    color: #38cad1;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+/* slider style */
+.main-slider > div{
+    position: relative;
+    top: 50px;
+}
+.carousel-control.left, .carousel-control.right{
+    background: transparent;
+}
+/* how spini works style */
+.how-spini-works{
+    background: #fff;
+    padding: 100px 0;
+    box-shadow: 0 0 10px #b8bdbf;
+}
+
+/*offer container style*/
+.offers-grid{
+    position: relative;
+    bottom: 45px;
+}
+.offer-container{
+    box-shadow: 0 0 10px #b8bdbf;
+    background: #fff;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.offer-container:hover{
+    /*position: relative;
+    bottom: 40px;*/
+    box-shadow: 0 0 100px #888;
+    transition: 0.5s ease;
+    cursor: pointer;
+    -ms-transform: translate(0px,-50px); /* IE 9 */
+    -webkit-transform: translate(0px,-50px); /* Safari */
+    transform: translate(0px,-50px); /* Standard syntax */
+}
+.offer-container img{
+    width: 100%;
+    height: 250px;
+}
+.offer-details{
+    background: #fff;
+    padding: 20px 20px 0 20px;
+}
+.offer-details button{
+    background: url('../images/05Cards/Icn-GetCode-tag.png') #38cad1 no-repeat;
+    padding: 3px 5px 3px 25px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    border: 0;
+    background-position: left;
+    background-position-x: 3px;
+}
+.offer-details h3{
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 12px;
+}
+.offer-location b{
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: #7a7a7a;
+}
+.offer-location span{
+    color: #4c4c4c;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    background: url(../images/03Banner/Banner-Icn-pin@2x.png) no-repeat;
+    padding-left: 20px;
+    background-size: 20px;
+    background-position: 0px 1px;
+}
+.offer-details p{
+    font-size: 13px;
+    color: #4c4c4c;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    line-height: 24px;
+}
+.offer-share{
+    margin: 10px 0;
+    padding: 15px 0;
+}
+.offer-share label{
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    color: #b4b4b4;
+}
+.offer-share ul{
+
+}
+.offer-share ul li{
+    display: inline-block;
+}
+.offer-share ul li a{
+    background-size: contain;
+    height: 38px;
+    width: 38px;
+    display: block;
+}
+.offer-share-max a{
+    background: url(../images/05Cards/Icn-Share-Copy@2x.png) no-repeat;
+}
+.offer-share-fb a{
+    background: url(../images/05Cards/Icn-Share-FB@2x.png) no-repeat;
+}
+.offer-share-twitter a{
+    background: url(../images/05Cards/Icn-Share-Twitter@2x.png) no-repeat;
+}
+.offer-spini-treashure{
+
+}
+.offer-spini-treashure a{
+    color: #e83634;
+    padding: 15px;
+    border-top: 2px solid #f7f7f7;
+    display: inline-block;
+    display: block;
+    font-size: 13px;
+    background: url(../images/05Cards/Icn-SpiniTreasure@2x.png)no-repeat;
+    background-size: 32px;
+    background-position: 60% 45%;
+    text-align: right;
+}
+.offer-spini-treashure a:hover{
+    background-color:  #f7f5e8;
+
+}
+
+/*footer design*/
+footer{
+    margin-top: 20px;
+}
+footer p{
+    background: #fff;
+    text-align: center;
+    padding: 10px 0;
+}

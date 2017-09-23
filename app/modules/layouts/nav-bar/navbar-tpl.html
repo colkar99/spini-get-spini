@@ -1,20 +1,53 @@
-<nav class="navbar navbar-inverse">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="/#!/">{{ brand }}</a>
-		</div>
-		<div id="navbar" class="collapse navbar-collapse">
-			<ul class="nav navbar-nav">
-				<li ng-repeat="item in menus" ng-class="{active:isActive('#/' + item.link)}">
-					<a ui-sref="{{ item.link }}">{{ item.name }}</a>
-				</li>
-			</ul>
-		</div><!--/.nav-collapse -->
-	</div>
-</nav>
+<!-- header section -->
+<header>
+  <div class="container">
+    <div class="row main-header">
+      <div class="col-md-2 main-header-logo">
+        <a href="#">
+          <img src="/app/assets/images/header/Logo@2x.png" alt="spini-logo">
+        </a>
+      </div>
+      <div class="col-md-6 main-header-search">
+        <input type="text" placeholder="Search Offers">
+        <button></button>
+      </div>
+      <div class="col-md-2 main-header-partner">
+        <button>Become our partner</button>
+      </div>
+      <div class="col-md-2 main-header-signin">
+        <a href="#">Sign In <img src="/app/assets/images/header/UserIcon@2x.png"></a>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <nav class="main-header-navigation">
+          <ul>
+            <li class="main-nav-food"><a href="#">Food</a></li>
+            <li class="main-nav-education"><a href="#">Education</a></li>
+            <li class="main-nav-beauty"><a href="#">Beauty</a></li>
+            <li class="main-nav-travel"><a href="#">Travel</a></li>
+            <li class="main-nav-personal_needs"><a href="#">Personal needs</a></li>
+            <li class="main-nav-gadgets"><a href="#">Gadgets</a></li>
+            <li class="main-nav-clothing"><a href="#">Clothing</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-md-2 main-header-location">
+        <i class="glyphicon glyphicon-map-marker"></i>
+        <div class="dropdown">
+          <span class="dropdown-toggle" type="button" data-toggle="dropdown">Chennai
+          </span><span class="caret"></span>
+          <ul class="dropdown-menu">
+            <li><a href="#">Tricy</a></li>
+            <li><a href="#">Madurai</a></li>
+            <li><a href="#">Pondy</a></li>
+            <li><a href="#">kanchepuram</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
