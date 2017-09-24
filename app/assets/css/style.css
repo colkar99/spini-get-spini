@@ -381,7 +381,7 @@ footer p{
 
 #carousel-example-generic .carousel-indicators
 {
-bottom: -40px;
+bottom: -52px;
 }
 
 #carousel-example-generic  .carousel-indicators li
@@ -733,4 +733,52 @@ background: #dd001c;
 .falign
 {
         margin-top: 5px;
+}
+
+.grey{
+color: #b4b4b4;
+}
+
+.roate-270
+
+{
+    -ms-transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+
+.roate-90 {
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+
+.arrow-icobs{
+    background: url('/app/assets/images/icons8-Expand%20Arrow-64.png');
+    height: 20px;
+    width: 20px;
+    -ms-transform: rotate(7deg);
+    -webkit-transform: rotate(7deg);
+    transform: rotate(90deg);
+}
+
+.tes
+{
+        position: relative;
+    margin-left: 110%;
+    margin-top: 20%;
+    display: block;
+
+}
+
+.tes1
+{
+
+    /*    display: block;
+    position: relative;
+    margin-left: -110%;
+    margin-top: 20%;*/
+
 }
