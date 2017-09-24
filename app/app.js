@@ -21,7 +21,8 @@
 		'ui.router',
 		'home',
 		'refferal',
-		'redeemcoupon'
+		'redeemcoupon',
+		'loginModule'
 	]);
 
 })();
