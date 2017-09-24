@@ -422,6 +422,469 @@ header hr{
 
 }
 
+/*dass css */
+
+.white
+{
+        background: white;
+}
+
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(208, 197, 197, 0.81);
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.overlay-content {
+      position: relative;
+    top: 10%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 50px;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}
+
+#carousel-example-generic .carousel-indicators
+{
+bottom: -52px;
+}
+
+#carousel-example-generic  .carousel-indicators li
+{
+    border: 1px solid #b4b4b4;
+}
+
+#carousel-example-generic  .carousel-indicators .active
+{
+    border: 1px solid #b4b4b4;
+}
+
+    .pad10
+    {
+    padding: 10px;
+    }
+
+.fixed-height {
+    min-height: 400px;
+}
+
+.text-left
+{
+text-align: left;
+}
+
+.fagift:before {
+    content: "\f06b";
+    color: #e83634;
+}
+.text-trs
+{
+color: #e83634;
+    }
+
+    .border-10px
+    {
+            border-radius: 10px;
+    }
+
+[class^="icon"] {  display: inline-block; }
+
+.fa-star-o:before {
+    content: "\f006";
+    color: rgba(253, 253, 78, 0.84);
+}
+
+.pad-top-none
+{
+    padding-top: 0px;
+}
+.tm
+{
+        font-size: 22px;
+}
+.ts
+{
+         padding-bottom: 10px;
+}
+
+.offer-count
+{
+    font-size: 17px;
+}
+.offer-spini
+{
+    font-size: 17px;
+    color: #e83634;
+}
+.nopad
+{
+        padding: 0px;
+}
+
+.space-div
+{
+    padding-bottom: 15px;
+    padding-top: 10px;
+}
+
+.offer-wrap-text
+{
+    background: #f7f3e3;
+    padding: 8px;
+    border-left: #f5a623;
+    border-width: 3px;
+    border-style: solid;
+    border-bottom: none;
+    border-top: none;
+    border-right: none;
+    width: 100%;
+}
+.right
+{
+text-align:  right;
+display: block;
+}
+
+.timers
+{
+         font-size: 29px !important;
+    color: #FFEB3B !important;
+}
+.ft25px
+{
+        font-size: 25px;
+}
+.mr10px
+{
+        margin-top: 10px;
+}
+.offer-logo-set
+{
+      height: 100px !important;
+    width: 50%;
+    margin-top: -22px;
+}
+
+.offer-logo-set1 {
+    height: 75px !important;
+    width: 50%;
+    margin-top: -22px;
+}
+
+.offer-logo-40px {
+ font-size: 40px;
+}
+
+.mar63
+{
+
+        margin-left: 63px;
+    margin-right: 63px;
+}
+.mar10
+{
+
+        margin-top: 10px;
+
+}
+.mar-10px
+{
+    margin-right: -10px;
+    margin-left: -10px;
+}
+.backcls
+{
+   background:  #f7f5f5;
+}
+.mar25x
+{
+        margin-top: 25px;
+}
+
+.width100
+{
+
+      width: 100%;
+
+      }
+.popupcenter
+{
+ padding-top: 70px;
+    padding-bottom: 90px;
+    padding-right: 120px;
+    padding-left: 120px;
+  /*  border-top: #e8e4e4 solid 6px;*/
+    margin-top: 3px;
+    min-height: 200px;
+
+}
+.pad-bot0
+{
+    padding-bottom: 0px;
+}
+.popupfoot
+{
+
+    padding-right: 120px;
+    padding-left: 120px;
+
+}
+.nbr{
+    border-radius: 0px;
+}
+
+.min40 {
+    min-height: 40px;
+}
+
+.mar40 {
+    margin-top: 40px;
+}
+.font15px
+{
+        font-size: 15px;
+}
+.dotted
+{
+    background: #faf9ec;
+    /*border: dotted 1px;*/
+}
+.mar20bt
+{
+        margin-bottom: 10px;
+}
+.fbblue
+{
+    color: #3b68a2;
+}
+.pad-bot
+{
+        padding-bottom: 35px;
+}
+
+
+
+.fbblue::after{
+   content: '';
+    position: absolute;
+    left: 18%;
+    top: -34%;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    clear: both;
+    border-bottom: 20px solid #faf9ec;
+}
+.fbblue1::after{
+   content: '';
+    position: absolute;
+  left: 48%;
+    top: -35%;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    clear: both;
+    border-bottom: 20px solid #faf9ec;
+}
+.marbt20
+{
+        margin-bottom: 20px;
+}
+.padtop40
+{
+        padding-top: 40px;
+}
+.mar45
+{
+        margin-top: 45px;
+}
+.btnwid50
+{
+    width:  110px;
+    border-radius: 5px;
+}
+
+
+.popupfoot1 {
+    padding-right: 30px;
+    padding-left: 30px;
+}
+.gpad{
+    padding-bottom: 10px;
+    padding-top: 20px;
+}
+
+
+
+.social [class*="fa fa-"] {
+  background-color: #333;
+    border-radius: 30px;
+    color: #fff;
+    display: inline-block;
+    height: 40px;
+    line-height: 26px;
+    margin: auto 3px;
+    width: 40px;
+    font-size: 17px;
+    text-align: center;
+}
+
+.twitter {
+    background-color: #46c0fb !important;
+}
+
+.fb
+{
+   background:  #27558c !important;
+   color: white !important;
+}
+
+.clone {
+   background: #d8bcbc !important;
+    color: white !important;
+}
+.padtop30
+{
+    padding-top: 30px;
+}
+
+.pad-bot10 {
+    padding-bottom: 10px;
+}
+
+.poplogo
+{
+        height: 50px;
+    margin-top: 45px;
+}
+.bg-grey
+{
+    background: #f4f4f4;
+}
+
+.fbbutton
+{
+background: #42558f;
+    color: white;
+        font-size: 20px;
+    height: 50px;
+
+}
+.gbutton
+{
+background: #dd001c;
+    color: white;
+        font-size: 20px;
+    height: 50px;
+
+}
+
+.temp{
+        padding: 15px;
+
+}
+.left
+{
+        float: left;
+}
+
+.pad-bot-10
+{
+
+    padding-bottom: 10px;
+}
+.falign
+{
+        margin-top: 5px;
+}
+
+.grey{
+color: #b4b4b4;
+}
+
+.roate-270
+
+{
+    -ms-transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+
+.roate-90 {
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+
+.arrow-icobs{
+    background: url('/app/assets/images/icons8-Expand%20Arrow-64.png');
+    height: 20px;
+    width: 20px;
+    -ms-transform: rotate(7deg);
+    -webkit-transform: rotate(7deg);
+    transform: rotate(90deg);
+}
+
+.tes
+{
+        position: relative;
+    margin-left: 110%;
+    margin-top: 20%;
+    display: block;
+
+}
+
+.tes1
+{
+
+    /*    display: block;
+    position: relative;
+    margin-left: -110%;
+    margin-top: 20%;*/
+
+}
 /*footer design*/
 footer{
     margin-top: 20px;

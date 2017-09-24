@@ -27,6 +27,27 @@
 		vm.title = "Hello, angular-app!";
 		vm.version = "1.0.0";
 		vm.listFeatures = homeService.getFeaturesList();
+		vm.someValue ;
+		vm.getloginpopup = function(id) {
+			debugger
+    		// closeNav()
+    		vm.someValue= id;
+    		 document.getElementById("offer-popup").style.width = "100%";
+			}
+		vm.closeNav = function() {
+    		document.getElementById("offer-popup").style.width = "0%";
+			}	
+		vm.getcodepopup = function(someValue) {
+    // closeNav()
+    		document.getElementById("get-code-popup").style.width = "100%";
+    		document.getElementById("offer-popup").style.width = "0%";
+			}
+		vm.closegetcodepopup = function() {
+
+   // openNav()
+    		document.getElementById("get-code-popup").style.width = "0%";
+    		document.getElementById("offer-popup").style.width = "100%";
+			}	
 
 	}
 
