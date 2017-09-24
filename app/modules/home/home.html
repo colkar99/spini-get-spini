@@ -201,7 +201,7 @@
   </div>
   <!-- login POPUP -->
 
-<div id="login-popup" class="overlay">
+<div id="login-popup" class="overlay" >
   <a href="javascript:void(0)" class="closebtn" ng-click="vm.closepopup()">&times;</a>
   <div class="overlay-content">
     <div class="row ">
@@ -215,12 +215,12 @@
 <h5> Share & Earn Spini Treasure..!!!</h5>
 </div>
 
-<div class="text-center temp">
-   <button class="btn btn-block fbbutton " ng-click="vm.authenticate('facebook')">
+<div class="text-center temp" ng-controller="LoginCtrl as vm">
+   <button class="btn btn-block fbbutton " ng-click="vm.FbLogin('facebook')">
     <span class="fa fa-facebook left falign"></span> Sign in with Facebook
   </button>
 
-     <button g-login class="btn btn-block gbutton" ng-click="vm.authenticate('google')">
+     <button g-login class="btn btn-block gbutton" ng-click="vm.GoogleLogin('google')">
     <span class="fa fa-google left falign" ></span> Sign in with Google
   </button>
 

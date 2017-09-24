@@ -26,13 +26,32 @@
 		var vm = this;
 		vm.title = "Hello, angular-app!";
 		vm.version = "1.0.0";
-		vm.listFeatures = LoginService.getFeaturesList();
+		// vm.listFeatures = LoginService.getFeaturesList();
 
 
 		$scope.$on("FBLoginComplete",function (event, args) {
+
+			var auth = {};
+			auth.access_token = args.authData.authResponse.accessToken;
+			auth.role = 'referer';
+
+		  LoginService.Login(auth, function(result) {
+                if (result == 'referer') {
+
+                }
+               else if (result == 'vendor') {
+
+                }
+                else {
+                	console.log('not logged in');
+                }
+        	});
+
 			console.log('my event FBLoginComplete');
 			console.log(args)
 		} );
+
+
 
 		$scope.$on("GoogleLoginComplete",function (event, args) {
 			console.log('my event GoogleLoginComplete');

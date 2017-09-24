@@ -28,6 +28,31 @@
 		vm.version = "1.0.0";
 		vm.listFeatures = signupService.getFeaturesList();
 
+
+		$scope.$on("FBLoginComplete",function (event, args) {
+			console.log('my event FBLoginComplete');
+			console.log(args)
+		} );
+
+		$scope.$on("GoogleLoginComplete",function (event, args) {
+			console.log('my event GoogleLoginComplete');
+			console.log(args)
+
+		} );
+
+		vm.FbRegister = function()
+		 {
+		 	SocialLoginService.facebookLogin();
+
+		 }
+
+
+
+		vm.GoogleRegister= function()
+		 {
+		 	SocialLoginService.googleLogin();
+
+		 }
 	}
 
 })();

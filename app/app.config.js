@@ -7,7 +7,9 @@
      * # Config and run block
      * Configutation of the app
      */
-    angular.module('angular-app').config(configure).run(runBlock);
+    angular.module('angular-app').config(configure)
+     .constant('apiBaseURL', 'https://api.spini.co/v1/')
+    .run(runBlock);
     configure.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
 
     function configure($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
