@@ -1,51 +1,27 @@
-<div class="container signup-pad">
-	<div class="row">
-		<div class="col-sm-4 col-sm-offset-4 signup_page">
-			<div class="col-sm-12">
-				<h3 class="text-center">Signup with Spini</h3>
-			</div>
-			<div class="col-sm-12">
-				<p class="text-muted text-center signup-pad">EASILY USING</p>
-			</div>
-			<div class="col-sm-6">
-				<div class="">
-					<button class="btn btn-default">Signup with Facebook</button>
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<div class="">
-					<button class="btn  btn-default">Signup with Google</button>
-				</div>
-			</div>
-			<div class="col-sm-12 signup-pad">
-				<p class="text-muted signup-pad text-center">-OR USING EMAIL-</p>
-			</div>
-			<div class="col-sm-12 signup-pad">
-				<form>
-				  <div class="input-group">
-				    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				    <input id="email" type="text" class="form-control" name="email" placeholder="Email">
-				  </div>
-				  <div class="input-group">
-				    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-				    <input id="password" type="password" class="form-control" name="password" placeholder="Password">
-				  </div>
-				  <div class="input-group">
-				    <span class="input-group-addon">Text</span>
-				    <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info">
-				  </div>
-				</form>
-			</div>
+<div class="container">
+	<div class="col-md-4 col-md-offset-4">
+		<div class="well login-container">
+			<h3 class="text-center">SIGN UP</h3>
+			<input type="email" placeholder="Enter your email">
+			<input type="password" placeholder="Enter your password">
+			<input type="number" placeholder="Enter your number">
+			<button>SIGN UP</button>
+			<div class="text-center">(or)</div>
+			<button type="button" class="btn btn-default"><i class="fa fa-facebook" aria-hidden="true" style="color:#4267b2;"></i>  Facebook</button>
+			<button type="button" class="btn btn-default"><i class="fa fa-google" aria-hidden="true" style="color: #f55344;"></i>Google</button>
+			<a ui-sref="loginAuth" style="display: block; text-align: center; margin-top: 10px;">Already have login click here</a>
 		</div>
 	</div>
 </div>
-<style type="text/css">
-	.signup_page{
-		height: 500px;
-		background-color: #fff;
-		border:1px solid #c2c9cd;
+<style>
+	.login-container{
+		background: #fff;
+		margin: 50% 0;
 	}
-	.signup-pad{
-		padding: 15px;
+	.login-container input, .login-container button{
+		width: 100%;
+		display: block;
+		margin: 10px 0;
 	}
+
 </style>
