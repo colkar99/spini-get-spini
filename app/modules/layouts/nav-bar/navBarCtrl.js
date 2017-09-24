@@ -13,7 +13,7 @@
 		.module('angular-app')
 		.controller('NavBarCtrl', NavBar);
 
-	NavBar.$inject = ['homeService', 'MenuService'];
+	NavBar.$inject = ['homeService', 'MenuService', '$scope'];
 
 	/*
 	* recommend
@@ -21,9 +21,10 @@
 	* and bindable members up top.
 	*/
 
-	function NavBar(homeService, MenuService) {
+	function NavBar(homeService, MenuService, $scope) {
 		/*jshint validthis: true */
 		var vm = this;
+		$scope.open = false;
 		vm.title = "angular-app";
 
 		vm.menu = MenuService.listMenu();
