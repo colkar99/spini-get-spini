@@ -13,14 +13,15 @@
 	angular.module('angular-app', [
 		'ngResource',
 		'ngAria',
-		 'ui.bootstrap',
+		'ui.bootstrap',
 		'ngCookies',
 		'ngAnimate',
 		'ngTouch',
 		'ngSanitize',
 		'ui.router',
 		'home',
-		'refferal'
+		'refferal',
+		'redeemcoupon'
 	]);
 
 })();

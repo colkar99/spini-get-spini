@@ -22,12 +22,13 @@
 </head>
 <body>
 
-<div ng-include="'app/modules/layouts/nav-bar/navbar.html'"></div>
-<!--Beginning-->
-<section id="wrapper" scroll-to>
-	<div class="view-slide-in" ui-view></div>
-</section>
-<!--End-->
+	<div ng-include="'app/modules/layouts/nav-bar/navbar.html'"></div>
+	<!--Beginning-->
+	<section id="wrapper" scroll-to>
+		<div class="view-slide-in" ui-view></div>
+	</section>
+	<!--End-->
+	<footer><p>© 2017 All Rights Reserved</p></footer>
 
 <!-- injector:js -->
 <script src="/src/bower_components/jquery/dist/jquery.js"></script>
@@ -59,6 +60,13 @@
 <script src="/app/modules/refferal_user/refferalCtrl.js"></script>
 <script src="/app/modules/refferal_user/refferalService.js"></script>
 <!--refferal user link end-->
+
+<!-- redeemcoupon user link starts -->
+<script src="/app/modules/redeem_coupon/redeem_couponModule.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponRoute.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponCtrl.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponService.js"></script>
+<!--redeemcoupon user link end-->
 
 <!-- endinjector -->
 

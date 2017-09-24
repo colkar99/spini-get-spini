@@ -308,6 +308,120 @@ header hr{
 
 }
 
+/*coupon_redeem style*/
+.coupon-redeem-header{
+    padding: 25px 10px;
+}
+.coupon-redeem-header-logo{
+    color: #888;
+    letter-spacing: 0.5px;
+}
+.coupon-redeem-header-logo a{
+    display: block;
+    margin-bottom: 10px;
+}
+.coupon-redeem-header-logo a img{
+    width: 150px;
+}
+.coupon-redeem-header-logo span{
+    color: #888;
+    letter-spacing: 0.5px;
+}
+.coupon-redeem-header-login-info{
+    width: 200px;
+    text-align: right;
+    float: right;
+    margin-top: 12px;
+}
+.coupon-redeem-header-login-info > div{
+    display: inline-block;
+    vertical-align: middle;
+}
+.coupon-redeem-header-login-info > div b{
+    color: #333;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+.coupon-redeem-header-login-info > div label{
+    display: block;
+    color: #888;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+.coupon-redeem-header-login-info img{
+    width: 50px;
+}
+.coupon-redeem-header-border{
+    border-bottom: 1px solid #ccc;
+}
+.coupon-redeem-entry{
+    max-width: 500px;
+    margin: auto;
+    padding: 10px;
+}
+.coupon-redeem-entry h3{
+    font-weight: 300;
+    color: #888;
+    letter-spacing: 1px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.coupon-redeem-entry input{
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px 50px;
+    font-weight: 400;
+    color: #b2b2b2;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-repeat: no-repeat;
+    background-size: 14px;
+    background-position: 18px;
+}
+.price-entry{
+    background: url('../images/ProfileSection/Left-Nav/04Icn-Wallet-Up@2x.png');
+}
+.coupon-entry{
+    background: url('../images/ProfileSection/Left-Nav/03Icn-Offer-Up@2x.png');
+}
+.coupon-redeem-entry button{
+    padding: 15px 0;
+    width: 100%;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+.coupon-redeem-entry > div a{
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-decoration: underline;
+}
+.coupon-redeem-entry div a:first-child{
+    padding-right: 10px;
+    border-right: 1px solid;
+    margin-right: 10px;
+}
+.coupon-redeem-table thead tr td{
+    font-size: 13px;
+    color: #b2b2b2;
+    padding: 15px 20px;
+    text-align: right;
+}
+.coupon-redeem-table tbody tr{
+    background: #fff;
+    /* box-shadow: 0px 1px 2px #b2b2b2; */
+    border-radius: 3px;
+    border-bottom: 10px solid #f7f7f7;
+}
+.coupon-redeem-table tbody tr td{
+    text-align: right;
+    padding: 15px 20px;
+    font-weight: 300;
+    letter-spacing: 1px;
+
+}
+
 /*footer design*/
 footer{
     margin-top: 20px;

@@ -40,6 +40,14 @@ module.exports = function (config) {
 			'app/modules/refferal_user/refferal-test.js'
 			// refferal page end
 
+			// this is used for redeemcoupon page start
+			'app/modules/redeem_coupon/redeem_couponModule.js',
+			'app/modules/redeem_coupon/redeem_couponCtrl.js',
+			'app/modules/redeem_coupon/redeem_couponRoute.js',
+			'app/modules/redeem_coupon/redeem_couponService.js',
+			'app/modules/redeem_coupon/redeem_coupon-test.js'
+			// redeemcoupon page end
+
 		],
 
 		// Test results reporter to use
