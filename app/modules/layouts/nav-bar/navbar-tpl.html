@@ -15,7 +15,14 @@
         <button>Become our partner</button>
       </div>
       <div class="col-md-2 main-header-signin">
-        <a href="#">Sign In <img src="/app/assets/images/header/UserIcon@2x.png"></a>
+        <a href="#" ng-click="open = true">Sign In <img src="/app/assets/images/header/UserIcon@2x.png"></a>
+        <div class="manage-account" ng-show="open">
+          <i class="glyphicon glyphicon-remove-circle" ng-click="open = false"></i>
+          <b>Your Account</b>
+          <p>Access account and manage offers</p>
+          <button ui-sref="loginAuth" ng-click="open = false">SIGN UP</button>
+          <button ui-sref="loginAuth" ng-click="open = false">LOGIN</button>
+        </div>
       </div>
     </div>
   </div>
@@ -41,7 +48,7 @@
           <span class="dropdown-toggle" type="button" data-toggle="dropdown">Chennai
           </span><span class="caret"></span>
           <ul class="dropdown-menu">
-            <li><a href="#">Tricy</a></li>
+            <li><a href="#">Chennai</a></li>
             <li><a href="#">Madurai</a></li>
             <li><a href="#">Pondy</a></li>
             <li><a href="#">kanchepuram</a></li>
@@ -51,3 +58,33 @@
     </div>
   </div>
 </header>
+<style type="text/css">
+  .manage-account{
+    background: #fff;
+    padding: 20px 16px;
+    text-align: left;
+    width: 300px;
+    position: absolute;
+    z-index: 1;
+    box-shadow: 0px 0px 6px #888;
+    border-radius: 3px;
+    top: 50px;
+    left: -15px;
+  }
+  .manage-account i{
+    text-align: right;
+    display: block;
+    color: #b3b3b3;
+  }
+  .manage-account b{
+    margin: 10px 0px;
+  }
+  .manage-account p{
+    margin: 10px 0px;
+  }
+  .manage-account button{
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-right: 15px;
+  }
+</style>
