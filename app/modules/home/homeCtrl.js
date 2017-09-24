@@ -13,7 +13,7 @@
 		.module('angular-app')
 		.controller('HomeCtrl', Home);
 
-	Home.$inject = ['homeService'];
+	Home.$inject = ['homeService','$window','facebookService'];
 
 	/*
 	* recommend
@@ -21,7 +21,7 @@
 	* and bindable members up top.
 	*/
 
-	function Home(homeService) {
+	function Home(homeService,$window,facebookService) {
 		/*jshint validthis: true */
 		var vm = this;
 		vm.title = "Hello, angular-app!";
@@ -36,7 +36,7 @@
 			}
 		vm.closeNav = function() {
     		document.getElementById("offer-popup").style.width = "0%";
-			}	
+			}
 		vm.getcodepopup = function(someValue) {
     // closeNav()
     		document.getElementById("get-code-popup").style.width = "100%";
@@ -47,7 +47,12 @@
    // openNav()
     		document.getElementById("get-code-popup").style.width = "0%";
     		document.getElementById("offer-popup").style.width = "100%";
-			}	
+			}
+
+
+
+
+
 
 	}
 
