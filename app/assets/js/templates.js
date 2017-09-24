@@ -205,7 +205,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "  </div>\n" +
     "  <!-- login POPUP -->\n" +
     "\n" +
-    "<div id=\"login-popup\" class=\"overlay\">\n" +
+    "<div id=\"login-popup\" class=\"overlay\" >\n" +
     "  <a href=\"javascript:void(0)\" class=\"closebtn\" ng-click=\"vm.closepopup()\">&times;</a>\n" +
     "  <div class=\"overlay-content\">\n" +
     "    <div class=\"row \">\n" +
@@ -219,12 +219,12 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "<h5> Share & Earn Spini Treasure..!!!</h5>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"text-center temp\">\n" +
-    "   <button class=\"btn btn-block fbbutton \" ng-click=\"vm.authenticate('facebook')\">\n" +
+    "<div class=\"text-center temp\" ng-controller=\"LoginCtrl as vm\">\n" +
+    "   <button class=\"btn btn-block fbbutton \" ng-click=\"vm.FbLogin('facebook')\">\n" +
     "    <span class=\"fa fa-facebook left falign\"></span> Sign in with Facebook\n" +
     "  </button>\n" +
     "\n" +
-    "     <button g-login class=\"btn btn-block gbutton\" ng-click=\"vm.authenticate('google')\">\n" +
+    "     <button g-login class=\"btn btn-block gbutton\" ng-click=\"vm.GoogleLogin('google')\">\n" +
     "    <span class=\"fa fa-google left falign\" ></span> Sign in with Google\n" +
     "  </button>\n" +
     "\n" +

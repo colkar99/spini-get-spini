@@ -8,13 +8,11 @@
      * Service of the app
      */
     angular.module('angular-app').service('LoginService', LoginService).service('SocialLoginService', SocialLoginService);
-    LoginService.$inject = ['$http','$cookies', 'apiBaseURL'];
+    LoginService.$inject = ['$http', '$cookies', 'apiBaseURL'];
     SocialLoginService.$inject = ['$q', '$rootScope', '$window'];
 
-    function LoginService($http,$cookies, apiBaseURL) {
-
-
-    	var service = {};
+    function LoginService($http, $cookies, apiBaseURL) {
+        var service = {};
         service.Login = Login;
         service.Logout = Logout;
         return service;
@@ -23,14 +21,13 @@
             $http.post(apiBaseURL + '/facebook_user_token', {
                 auth: auth
             }).then(function(response) {
-            	var response = response.data;
+                var response = response.data;
                 // login successful if there's a token in the response
                 if (response.jwt) {
                     // store username and token in cookies storage to keep user logged in between page refreshes
-                    $cookies.put('role',response.role);
-                    $cookies.put('name',response.name);
-                    $cookies.put('token',response.jwt);
-
+                    $cookies.put('role', response.role);
+                    $cookies.put('name', response.name);
+                    $cookies.put('token', response.jwt);
                     // add jwt token to auth header for all requests made by the $http service
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.jwt;
                     // execute callback with true to indicate successful login
@@ -44,9 +41,10 @@
 
         function Logout() {
             // remove user from local storage and clear http auth header
-            angular.forEach($cookies, function (v, k) {
-    $cookieStore.remove(k);
-});            $http.defaults.headers.common.Authorization = '';
+            angular.forEach($cookies, function(v, k) {
+                $cookieStore.remove(k);
+            });
+            $http.defaults.headers.common.Authorization = '';
         }
     };
 

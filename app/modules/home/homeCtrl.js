@@ -42,6 +42,18 @@
 		}
 
 
+           vm.signupPOP = function() {
+              // closeNav()
+              document.getElementById("login-signup").style.width = "100%";
+          }
+
+          vm.signupPOPClose = function()  {
+
+             // openNav()
+              document.getElementById("login-signup").style.width = "0%";
+          }
+
+
 		vm.getloginpopup = function(id) {
 			debugger
     		// closeNav()

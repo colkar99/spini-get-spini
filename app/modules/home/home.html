@@ -240,6 +240,46 @@
 <!-- end login code -->
 
 
+<!-- login POPUP -->
+
+<div id="login-signup" class="overlay" ng-controller="signupCtrl as vm">
+  <a href="javascript:void(0)" class="closebtn" ng-click="vm.signupPOPClose()">&times;</a>
+  <div class="overlay-content">
+    <div class="row ">
+<div class="col-md-4 row col-md-offset-4 white nopad">
+<div class="text-center bg-grey nopad pad-bot-10">
+  <img class="poplogo" src="/app/assets/images/header/Logo@2x.png">
+
+
+<h3> SIGN UP WITH SPINI </h3>
+<br/>
+<h5> Share & Earn Spini Treasure..!!!</h5>
+</div>
+
+<div class="text-center temp" ng-controller="signupCtrl as vm">
+  {{sintitle}}
+   <button class="btn btn-block fbbutton " ng-click="vm.FbRegister('facebook')">
+    <span class="fa fa-facebook left falign"></span> Sign UP with Facebook
+  </button>
+
+     <button g-login class="btn btn-block gbutton" ng-click="vm.GoogleRegister('google')">
+    <span class="fa fa-google left falign" ></span> Sign UP with Google
+  </button>
+
+</div>
+<div>
+
+</div>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+<!-- end login code -->
+
+
 <!-- Get Code POPUP -->
 
 <div id="confirm-code-popup" class="overlay">
