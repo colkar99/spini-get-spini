@@ -55,15 +55,17 @@
 
 
 		vm.getloginpopup = function(id) {
-			debugger
-    		// closeNav()
+
     		vm.someValue= id;
     		 document.getElementById("offer-popup").style.width = "100%";
 			}
 		vm.closeNav = function() {
     		document.getElementById("offer-popup").style.width = "0%";
 			}
-		vm.getcodepopup = function(someValue) {
+
+
+		vm.getcodepopup = function() {
+               console.log('data');
     // closeNav()
     		document.getElementById("get-code-popup").style.width = "100%";
     		document.getElementById("offer-popup").style.width = "0%";

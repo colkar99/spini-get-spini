@@ -8,13 +8,13 @@
      * Controller of the app
      */
     angular.module('signupModule').controller('signupCtrl', signup);
-    signup.$inject = ['signupService','SocialLoginService'];
+    signup.$inject = ['signupService','SocialLoginService','$scope'];
     /*
      * recommend
      * Using function declarations
      * and bindable members up top.
      */
-    function signup(signupService,SocialLoginService) {
+    function signup(signupService,SocialLoginService,$scope) {
         /*jshint validthis: true */
         var vm = this;
         vm.data = 'data';

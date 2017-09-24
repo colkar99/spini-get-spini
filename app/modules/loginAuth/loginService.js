@@ -114,7 +114,7 @@
             facebookLogin: function() {
                 var _self = this;
                 FB.init({
-                    appId: '131797584045674',
+                    appId: '533881410299209',
                     status: true,
                     cookie: true,
                     xfbml: true,
