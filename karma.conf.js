@@ -37,8 +37,14 @@ module.exports = function (config) {
 			'app/modules/refferal_user/refferalCtrl.js',
 			'app/modules/refferal_user/refferalRoute.js',
 			'app/modules/refferal_user/refferalService.js',
-			'app/modules/refferal_user/refferal-test.js'
+			'app/modules/refferal_user/refferal-test.js',
 			// refferal page end
+			// loginAuth start
+			'/app/modules/loginAuth/loginModule.js',
+			'/app/modules/loginAuth/loginRoute.js',
+			'/app/modules/loginAuth/loginCtrl.js',
+			'/app/modules/loginAuth/loginService.js'
+			// loginAuth end
 
 		],
 

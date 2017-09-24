@@ -20,7 +20,8 @@
 		'ngSanitize',
 		'ui.router',
 		'home',
-		'refferal'
+		'refferal',
+		'loginModule'
 	]);
 
 })();
