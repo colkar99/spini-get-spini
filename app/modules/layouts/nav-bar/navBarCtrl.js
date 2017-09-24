@@ -24,7 +24,7 @@
 	function NavBar(homeService, MenuService, $scope) {
 		/*jshint validthis: true */
 		var vm = this;
-		$scope.open = false;
+		vm.open = false;
 		vm.title = "angular-app";
 
 		vm.menu = MenuService.listMenu();

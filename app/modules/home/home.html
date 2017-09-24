@@ -202,7 +202,7 @@
   <!-- login POPUP -->
 
 <div id="login-popup" class="overlay">
-  <a href="javascript:void(0)" class="closebtn" onclick="closegetcodepopup()">&times;</a>
+  <a href="javascript:void(0)" class="closebtn" ng-click="vm.closepopup()">&times;</a>
   <div class="overlay-content">
     <div class="row ">
 <div class="col-md-4 row col-md-offset-4 white nopad">
@@ -212,7 +212,7 @@
 
 <h3> SIGN UP WITH SPINI </h3>
 <br/>
-<h5> Share & Earn direct cash!!</h5>
+<h5> Share & Earn Spini Treasure..!!!</h5>
 </div>
 
 <div class="text-center temp">
@@ -235,16 +235,7 @@
 
 
 <script>
-function  getloginpopup() {
-    // closeNav()
-    document.getElementById("login-popup").style.width = "100%";
-}
 
-function  closepopup() {
-
-   // openNav()
-    document.getElementById("login-popup").style.width = "0%";
-}
 </script>
 <!-- end login code -->
 

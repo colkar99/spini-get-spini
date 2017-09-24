@@ -14,14 +14,14 @@
       <div class="col-md-2 main-header-partner">
         <button>Become our partner</button>
       </div>
-      <div class="col-md-2 main-header-signin">
-        <a href="#" ng-click="open = true">Sign In <img src="/app/assets/images/header/UserIcon@2x.png"></a>
-        <div class="manage-account" ng-show="open">
-          <i class="glyphicon glyphicon-remove-circle" ng-click="open = false"></i>
+      <div class="col-md-2 main-header-signin" ng-controller="HomeCtrl as vm">
+        <a href="#" ng-click="vm.open = true">Sign In <img src="/app/assets/images/header/UserIcon@2x.png"></a>
+        <div class="manage-account" ng-show="vm.open">
+          <i class="glyphicon glyphicon-remove-circle" ng-click="vm.open = false"></i>
           <b>Your Account</b>
           <p>Access account and manage offers</p>
-          <button ui-sref="signup" ng-click="open = false">SIGN UP</button>
-          <button ui-sref="loginAuth" ng-click="open = false">LOGIN</button>
+          <button ng-click="vm.getofferspopup(); vm.open = false">SIGN UP</button>
+          <button ng-click="vm.getofferspopup(); vm.open = false">LOGIN</button>
         </div>
       </div>
     </div>
