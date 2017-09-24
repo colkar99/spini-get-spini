@@ -51,8 +51,14 @@ module.exports = function (config) {
 			'app/modules/redeem_coupon/redeem_couponCtrl.js',
 			'app/modules/redeem_coupon/redeem_couponRoute.js',
 			'app/modules/redeem_coupon/redeem_couponService.js',
-			'app/modules/redeem_coupon/redeem_coupon-test.js'
+			'app/modules/redeem_coupon/redeem_coupon-test.js',
 			// redeemcoupon page end
+			// this is used for signup page
+			'/app/modules/redeem_coupon/redeem_couponModule.js',
+			'/app/modules/redeem_coupon/redeem_couponRoute.js',
+			'/app/modules/redeem_coupon/redeem_couponCtrl.js',
+			'/app/modules/redeem_coupon/redeem_couponService.js'
+			// sign up page end
 
 		],
 

@@ -10,10 +10,10 @@
 	*/
 
 	angular
-		.module('loginModule')
-		.controller('LoginCtrl', Login);
+		.module('signupModule')
+		.controller('signupCtrl', signup);
 
-	Login.$inject = ['LoginService'];
+	signup.$inject = ['signupService'];
 
 	/*
 	* recommend
@@ -21,12 +21,12 @@
 	* and bindable members up top.
 	*/
 
-	function Login(LoginService) {
+	function signup(signupService) {
 		/*jshint validthis: true */
 		var vm = this;
 		vm.title = "Hello, angular-app!";
 		vm.version = "1.0.0";
-		vm.listFeatures = LoginService.getFeaturesList();
+		vm.listFeatures = signupService.getFeaturesList();
 
 	}
 

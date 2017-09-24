@@ -22,7 +22,8 @@
 		'home',
 		'refferal',
 		'redeemcoupon',
-		'loginModule'
+		'loginModule',
+		'signupModule'
 	]);
 
 })();
