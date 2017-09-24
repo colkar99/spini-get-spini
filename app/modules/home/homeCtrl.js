@@ -13,7 +13,7 @@
 		.module('angular-app')
 		.controller('HomeCtrl', Home);
 
-	Home.$inject = ['homeService'];
+	Home.$inject = ['homeService','$auth'];
 
 	/*
 	* recommend
@@ -21,12 +21,16 @@
 	* and bindable members up top.
 	*/
 
-	function Home(homeService) {
+	function Home(homeService,$auth) {
 		/*jshint validthis: true */
 		var vm = this;
 		vm.title = "Hello, angular-app!";
 		vm.version = "1.0.0";
 		vm.listFeatures = homeService.getFeaturesList();
+
+		    vm.authenticate = function(provider) {
+      $auth.authenticate(provider);
+    };
 
 	}
 

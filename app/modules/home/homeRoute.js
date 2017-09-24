@@ -10,6 +10,10 @@
 
 angular.module('angular-app')
 	.config(['$stateProvider', function ($stateProvider) {
+
+
+
+
 		$stateProvider
 
 			.state('home', {
