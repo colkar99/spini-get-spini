@@ -28,6 +28,20 @@
 		vm.version = "1.0.0";
 		vm.listFeatures = homeService.getFeaturesList();
 		vm.someValue ;
+
+
+		 vm.getofferspopup = function() {
+		    // closeNav()
+		    document.getElementById("login-popup").style.width = "100%";
+		}
+
+		vm.closepopup = function()  {
+
+		   // openNav()
+		    document.getElementById("login-popup").style.width = "0%";
+		}
+
+
 		vm.getloginpopup = function(id) {
 			debugger
     		// closeNav()
@@ -52,3 +66,4 @@
 	}
 
 })();
+
