@@ -86,16 +86,16 @@
 
 <section class="offers-grid" ng-init="vm.getOffers()">
   <div class="container">
-    <div class="col-md-4" ng-repeat="offer in vm.offers track by $index">
+    <div class="col-md-4" ng-repeat="offer in vm.compaigns track by $index">
       <div class="offer-container">
         <img ng-src="{{offer.attributes.avatar_thumb}}" alt="offer-image">
         <div class="offer-details">
 
-          <button ng-click="vm.getloginpopup(offer.id)">GET CODE!</button>
+          <button ng-click="vm.getSlidepopup(offer.attributes.campaign_id)">GET CODE!</button>
 
           <h3>{{offer.attributes.name}}</h3>
           <div class="offer-location">
-            <b>At Cream & Fudge at - </b><span>T.Nagar</span>
+            <b>At - {{offer.attributes.business_name}}</b><span>{{offer.attributes.place}} </span>
           </div>
 
           <p>

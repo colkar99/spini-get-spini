@@ -23,11 +23,17 @@
         vm.openLoginPopup = function() {
             document.getElementById("login-popup").style.width = "100%";
         }
-        vm.getofferspopup = function() {
-            document.getElementById("login-popup").style.width = "100%";
+
+
+        vm.getSelectedCampaignOffers;
+
+        vm.getSlidepopup = function(campaign_id) {
+            vm.campaign_id = campaign_id;
+            console.log(campaign_id);
+            document.getElementById("offer-popup").style.width = "100%";
         }
-        vm.closepopup = function() {
-            document.getElementById("login-popup").style.width = "0%";
+        vm.closeSlidepopup = function() {
+            document.getElementById("offer-popup").style.width = "0%";
         }
         vm.signupPOP = function() {
             // closeNav()
@@ -55,18 +61,19 @@
             document.getElementById("get-code-popup").style.width = "0%";
             document.getElementById("offer-popup").style.width = "100%";
         }
-        vm.offers = [];
+
         vm.getOffers = function() {
             $http.get(apiBaseURL + '/home/offers').then(function(response) {
+                if(response)
+                {
                 var response = response.data.data;
-                response = _.uniqBy(response, function(e) {
-
+                vm.offers = [];
+                vm.compaigns = [];
+                vm.offers = response;
+                vm.compaigns = _.uniqBy(response, function(e) {
                     return e.attributes.campaign_id;
                 });
-                // login successful if there's a token in the response
-                if (response) {
-                    vm.offers = response;
-                }
+            }
             });
         }
         vm.open = false;
