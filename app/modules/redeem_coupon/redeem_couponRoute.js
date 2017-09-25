@@ -11,12 +11,12 @@
 angular.module('redeemcoupon')
 	.config(['$stateProvider', function ($stateProvider) {
 		$stateProvider
-			
+
 			.state('redeemcoupon', {
 				url: '/redeemcoupon',
 				templateUrl: 'app/modules/redeem_coupon/redeem_coupon.html',
-				controller: 'refferalCtrl',
+				controller: 'redeemcouponCtrl',
 				controllerAs: 'vm'
 			});
-			
+
 	}]);
