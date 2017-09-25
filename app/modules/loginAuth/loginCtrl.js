@@ -13,7 +13,7 @@
 		.module('loginModule')
 		.controller('LoginCtrl', Login);
 
-	Login.$inject = ['LoginService','SocialLoginService','$scope'];
+	Login.$inject = ['LoginService','SocialLoginService','$scope','$location'];
 
 	/*
 	* recommend
@@ -21,7 +21,7 @@
 	* and bindable members up top.
 	*/
 
-	function Login(LoginService,SocialLoginService,$scope) {
+	function Login(LoginService,SocialLoginService,$scope,$location) {
 		/*jshint validthis: true */
 		var vm = this;
 		vm.title = "Hello, angular-app!";
@@ -37,7 +37,7 @@
 
 		  LoginService.Login(auth, function(result) {
                 if (result == 'referer') {
-
+                	$location.path('refferal');
                 }
                else if (result == 'vendor') {
 

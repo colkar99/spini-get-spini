@@ -10,8 +10,7 @@
 	*/
 
 	angular.module('angular-app')
-		.factory('homeService', homeService)
-		.factory('facebookService', facebookService);
+		.factory('homeService', homeService);
 
 	homeService.$inject = ['$http'];
 
@@ -40,59 +39,6 @@
 
 	};
 
-    function facebookService($q, $rootScope) {
-        return {
-            getMyLastName: function() {
-                var deferred = $q.defer();
-                FB.api('/me', {
-                    fields: 'last_name'
-                }, function(response) {
-                    if (!response || response.error) {
-                        deferred.reject('Error occured');
-                    } else {
-                        deferred.resolve(response);
-                    }
-                });
-                return deferred.promise;
-            },
-            getUserInfo: function() {
-                var _self = this;
-                FB.api('/me', {
-                    fields: 'email'
-                }, function(res) {
-                    $rootScope.$apply(function() {
-                        console.log(res);
-                        $rootScope.user = _self.user = res;
-                    });
-                });
-            },
-            watchLoginChange: function() {
-                var _self = this;
-                FB.Event.subscribe('auth.authResponseChange', function(res) {
-                    if (res.status === 'connected') {
-                        /*
-                         The user is already logged,
-                         is possible retrieve his personal info
-                        */
-                        console.log('FB Logged In');
-                        console.log(res);
-                        _self.getUserInfo();
-                        /*
-                         This is also the point where you should create a
-                         session for the current user.
-                         For this purpose you can use the data inside the
-                         res.authResponse object.
-                        */
-                    } else {
-                        /*
-                         The user is not logged to the app, or into Facebook:
-                         destroy the session on the server.
-                        */
-                    }
-                });
-            }
-        }
-    };
 
 
 

@@ -26,7 +26,7 @@
 	<section id="wrapper" scroll-to>
 		<div class="view-slide-in" ui-view>
 
-<div ng-controller="HomeCtrl as vm">
+<div>
 			<!-- slider code -->
 <section class="main-slider">
   <div class="container">
@@ -81,9 +81,9 @@
 </section>
 
 
-<section class="offers-grid">
+<section class="offers-grid" ng-init="vm.getOffers()">
   <div class="container">
-    <div class="col-md-4">
+    <div class="col-md-4" ng-repeat="(key, value) in vm.offers">
       <div class="offer-container">
         <img src="/app/assets/images/sample_cream_fudge.jpg" alt="offer-image">
         <div class="offer-details">
@@ -107,126 +107,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="offer-container">
-        <img src="/app/assets/images/sample_cream_fudge.jpg" alt="offer-image">
-        <div class="offer-details">
-          <button ng-click="getloginpopup()">GET CODE!</button>
-          <h3>Flat 15% Off</h3>
-          <div class="offer-location">
-            <b>At Cream & Fudge at - </b><span>T.Nagar</span>
-          </div>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-          <div class="offer-share">
-            <label>SHARE & EARN</label>
-            <ul>
-              <li class="offer-share-max"><a href="#"></a></li>
-              <li class="offer-share-fb"><a href="#"></a></li>
-              <li class="offer-share-twitter"><a href="#"></a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="offer-spini-treashure">
-          <a href="#">SPINI TREASURE</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="offer-container">
-        <img src="/app/assets/images/sample_cream_fudge.jpg" alt="offer-image">
-        <div class="offer-details">
-          <button ng-click="getloginpopup()">GET CODE!</button>
-          <h3>Flat 15% Off</h3>
-          <div class="offer-location">
-            <b>At Cream & Fudge at - </b><span>T.Nagar</span>
-          </div>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-          <div class="offer-share">
-            <label>SHARE & EARN</label>
-            <ul>
-              <li class="offer-share-max"><a href="#"></a></li>
-              <li class="offer-share-fb"><a href="#"></a></li>
-              <li class="offer-share-twitter"><a href="#"></a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="offer-spini-treashure">
-          <a href="#">SPINI TREASURE</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="offer-container">
-        <img src="/app/assets/images/sample_cream_fudge.jpg" alt="offer-image">
-        <div class="offer-details">
-          <button ng-click="getloginpopup()">GET CODE!</button>
-          <h3>Flat 15% Off</h3>
-          <div class="offer-location">
-            <b>At Cream & Fudge at - </b><span>T.Nagar</span>
-          </div>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-          <div class="offer-share">
-            <label>SHARE & EARN</label>
-            <ul>
-              <li class="offer-share-max"><a href="#"></a></li>
-              <li class="offer-share-fb"><a href="#"></a></li>
-              <li class="offer-share-twitter"><a href="#"></a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="offer-spini-treashure">
-          <a href="#">SPINI TREASURE</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="offer-container">
-        <img src="/app/assets/images/sample_cream_fudge.jpg" alt="offer-image">
-        <div class="offer-details">
-          <button ng-click="getloginpopup()">GET CODE!</button>
-          <h3>Flat 15% Off</h3>
-          <div class="offer-location">
-            <b>At Cream & Fudge at - </b><span>T.Nagar</span>
-          </div>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-          <div class="offer-share">
-            <label>SHARE & EARN</label>
-            <ul>
-              <li class="offer-share-max"><a href="#"></a></li>
-              <li class="offer-share-fb"><a href="#"></a></li>
-              <li class="offer-share-twitter"><a href="#"></a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="offer-spini-treashure">
-          <a href="#">SPINI TREASURE</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="offer-container">
-        <img src="/app/assets/images/sample_cream_fudge.jpg" alt="offer-image">
-        <div class="offer-details">
-          <button ng-click="getloginpopup()">GET CODE!</button>
-          <h3>Flat 15% Off</h3>
-          <div class="offer-location">
-            <b>At Cream & Fudge at - </b><span>T.Nagar</span>
-          </div>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-          <div class="offer-share">
-            <label>SHARE & EARN</label>
-            <ul>
-              <li class="offer-share-max"><a href="#"></a></li>
-              <li class="offer-share-fb"><a href="#"></a></li>
-              <li class="offer-share-twitter"><a href="#"></a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="offer-spini-treashure">
-          <a href="#">SPINI TREASURE</a>
-        </div>
-      </div>
-    </div>
+
   </div>
   <!-- login POPUP -->
 

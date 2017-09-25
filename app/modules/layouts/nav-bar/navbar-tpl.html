@@ -14,18 +14,31 @@
       <div class="col-md-2 main-header-partner">
         <button>Become our partner</button>
       </div>
-      <div class="col-md-2 main-header-signin" ng-controller="HomeCtrl as vm">
-        <a href="#" ng-click="vm.open = true">Sign In <img src="/app/assets/images/header/UserIcon@2x.png"></a>
-        <div class="manage-account" ng-show="vm.open">
-          <i class="glyphicon glyphicon-remove-circle" ng-click="vm.open = false"></i>
+      <div class="col-md-2 main-header-signin" ng-controller="HomeCtrl as menu">
+        <a  ng-click="menu.open = true" ng-hide="menu.isReferral()">Sign In <img src="/app/assets/images/header/UserIcon@2x.png"></a>
+        <a  ng-click="menu.open = true" ng-show="menu.isReferral()">MyAccount <img src="/app/assets/images/header/UserIcon@2x.png"></a>
+        <div class="manage-account" ng-show="menu.open"  ng-hide="menu.isReferral()">
+          <i class="glyphicon glyphicon-remove-circle" ng-click="menu.open = false"></i>
           <b>Your Account</b>
           <p>Access account and manage offers</p>
-          <button ng-click="vm.signupPOP(); vm.open = false">SIGN UP</button>
-          <button ng-click="vm.getofferspopup(); vm.open = false">LOGIN</button>
+          <button ng-click="menu.signupPOP(); menu.open = false">SIGN UP</button>
+          <button ng-click="menu.getofferspopup(); menu.open = false">LOGIN</button>
+
+
+        </div>
+
+          <div class="manage-account" ng-show="menu.open" ng-show="menu.isReferral()">
+          <i class="glyphicon glyphicon-remove-circle" ng-click="menu.open = false"></i>
+          <b>Your Account</b>
+          <p>Access account and manage offers</p>
+          <button ng-click="menu.open = false;menu.goProfile()" >Profile</button>
+          <button ng-click="menu.open = false;menu.Logout()" >Logout</button>
 
 
         </div>
       </div>
+
+
     </div>
   </div>
   <hr>

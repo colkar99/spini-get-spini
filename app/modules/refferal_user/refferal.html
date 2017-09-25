@@ -6,9 +6,9 @@
           <div class="side_nav_refferal" >
             <img  src="/app/assets/images/ProfileSection/Left-Nav/02Icn-ProfileDetails-Over@2x.png" class="img-thumbnail" alt="Cinque Terre" width="200" height="150">
             <div class="col-sm-11">
-              <label> Name:</label>
-              <label class="text-muted">9876543210</label>
-              <label><i class=" glyphicon glyphicon-map-marker">Location</i></label>
+              <label class="text-center" style="    margin-top: 20px;">{{vm.user.name}} </label>
+              <label class="text-muted">{{vm.user.mobile}}</label>
+              <!-- <label><i class=" glyphicon glyphicon-map-marker">Location</i></label> -->
             </div>
             </div>
           </div>
@@ -30,7 +30,7 @@
                   <ul class="nav navbar-nav">
                     <li  style="font-size: 18px;">
                       <a class="text-center" href="#">
-                        <i class="glyphicon glyphicon-stats pull-left" aria-hidden="true"></i> 
+                        <i class="glyphicon glyphicon-stats pull-left" aria-hidden="true"></i>
                         <span>Dashboard</span>
                       </a>
                     </li>
@@ -130,7 +130,7 @@
     border: 1px solid #f7f7f7;
 }
 
-/* make sidebar nav vertical */ 
+/* make sidebar nav vertical */
 @media (min-width: 768px) {
   .sidebar-nav .navbar .navbar-collapse {
     padding: 0;

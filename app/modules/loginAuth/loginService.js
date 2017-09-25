@@ -8,14 +8,51 @@
      * Service of the app
      */
     angular.module('angular-app').service('LoginService', LoginService).service('SocialLoginService', SocialLoginService);
-    LoginService.$inject = ['$http', '$cookies', 'apiBaseURL'];
+    LoginService.$inject = ['$http', '$cookies','apiBaseURL'];
     SocialLoginService.$inject = ['$q', '$rootScope', '$window'];
 
-    function LoginService($http, $cookies, apiBaseURL) {
+    function LoginService($http, $cookies,apiBaseURL) {
         var service = {};
         service.Login = Login;
         service.Logout = Logout;
+        service.isReferral = isReferral;
+        service.authToken = authToken;
+        service.getProfileInfo = getProfileInfo;
+
         return service;
+
+        function isReferral() {
+            if ($cookies.get('role')) {
+                if ($cookies.get('role') == 'referer') {
+                    return true
+                }
+            }
+            return false;
+        }
+
+        function authToken() {
+            if ($cookies.get('token')) {
+                return $cookies.get('token');
+            }
+            return false;
+        }
+
+         function getProfileInfo(callback) {
+            $http.get(apiBaseURL + '/profile').then(function(response) {
+                var response = response.data.data;
+
+                // login successful if there's a token in the response
+                if (response.attributes) {
+                    callback(response.attributes);
+                } else {
+                    // execute callback with false to indicate failed login
+                    callback(false);
+                }
+            });
+        }
+
+
+
 
         function Login(auth, callback) {
             $http.post(apiBaseURL + '/facebook_user_token', {
@@ -40,10 +77,11 @@
         }
 
         function Logout() {
-            // remove user from local storage and clear http auth header
-            angular.forEach($cookies, function(v, k) {
-                $cookieStore.remove(k);
-            });
+
+        	          $cookies.remove('role');
+                    $cookies.remove('name');
+                    $cookies.remove('token');
+
             $http.defaults.headers.common.Authorization = '';
         }
     };
@@ -79,27 +117,46 @@
                     "authData": res
                 });
             },
-            facebookWatchLoginChange: function() {
-                var _self = this;
-                FB.Event.subscribe('auth.authResponseChange', function(res) {
-                    if (res.status === 'connected') {
+            facebookgetLoginStatus: function() {
+                FB.getLoginStatus(function(response) {
+                    if (response.status === 'connected') {
+                        // the user is logged in and has authenticated your
+                        // app, and response.authResponse supplies
+                        // the user's ID, a valid access token, a signed
+                        // request, and the time the access token
+                        // and signed request each expire
                         $rootScope.$broadcast("FBLoginComplete", {
-                            "authData": res
+                            "authData": response
                         });
-                        // _self.facebookGetUserInfo();
-                        /*
-                         This is also the point where you should create a
-                         session for the current user.
-                         For this purpose you can use the data inside the
-                         res.authResponse object.
-                        */
+                        // var uid = response.authResponse.userID;
+                        // var accessToken = response.authResponse.accessToken;
+                    } else if (response.status === 'not_authorized') {
+                        // the user is logged in to Facebook,
+                        // but has not authenticated your app
                     } else {
-                        /*
-                         The user is not logged to the app, or into Facebook:
-                         destroy the session on the server.
-                        */
+                        // the user isn't logged in to Facebook.
                     }
                 });
+            },
+            facebookWatchLoginChange: function() {
+                // var _self = this;
+                // FB.Event.subscribe('auth.authResponseChange', function(res) {
+                //     if (res.status === 'connected') {
+                //         $rootScope.$broadcast("FBLoginComplete", {
+                //             "authData": res
+                //         });
+                //         // _self.facebookGetUserInfo();
+                //          This is also the point where you should create a
+                //          session for the current user.
+                //          For this purpose you can use the data inside the
+                //          res.authResponse object.
+                //     } else {
+                //         /*
+                //          The user is not logged to the app, or into Facebook:
+                //          destroy the session on the server.
+                //         */
+                //     }
+                // });
             },
             googleLogin: function() {
                 var myParams = {
@@ -114,14 +171,32 @@
             facebookLogin: function() {
                 var _self = this;
                 FB.init({
-                    appId: '533881410299209',
+                    appId: '131797584045674',
                     status: true,
                     cookie: true,
                     xfbml: true,
                     version: 'v2.4'
                 });
                 FB.login();
-                this.facebookWatchLoginChange();
+                FB.getLoginStatus(function(response) {
+                    if (response.status === 'connected') {
+                        // the user is logged in and has authenticated your
+                        // app, and response.authResponse supplies
+                        // the user's ID, a valid access token, a signed
+                        // request, and the time the access token
+                        // and signed request each expire
+                        $rootScope.$broadcast("FBLoginComplete", {
+                            "authData": response
+                        });
+                        // var uid = response.authResponse.userID;
+                        // var accessToken = response.authResponse.accessToken;
+                    } else if (response.status === 'not_authorized') {
+                        // the user is logged in to Facebook,
+                        // but has not authenticated your app
+                    } else {
+                        // the user isn't logged in to Facebook.
+                    }
+                });
             }
         };
     };

@@ -13,7 +13,7 @@
 		.module('refferal')
 		.controller('refferalCtrl', Refferal);
 
-	Refferal.$inject = ['refferalService'];
+	Refferal.$inject = ['refferalService','LoginService','$http','$location'];
 
 	/*
 	* recommend
@@ -21,12 +21,25 @@
 	* and bindable members up top.
 	*/
 
-	function Refferal(refferalService) {
+	function Refferal(refferalService,LoginService,$http,$location) {
 		/*jshint validthis: true */
 		var vm = this;
 		vm.title = "Hello, angular-app!";
 		vm.version = "1.0.0";
 		vm.listFeatures = refferalService.getFeaturesList();
+
+		if(LoginService.isReferral())
+		{
+		$http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
+		 LoginService.getProfileInfo(function(data)
+		{
+			vm.user = data;
+		})
+		}
+		else
+		{
+			$location.path('/')
+		}
 
 	}
 

@@ -13,7 +13,7 @@
 		.module('angular-app')
 		.controller('HomeCtrl', Home);
 
-	Home.$inject = ['homeService','$window','facebookService'];
+	Home.$inject = ['homeService','$window','apiBaseURL','$http','LoginService','$location'];
 
 	/*
 	* recommend
@@ -21,7 +21,7 @@
 	* and bindable members up top.
 	*/
 
-	function Home(homeService,$window,facebookService) {
+	function Home(homeService,$window,apiBaseURL,$http,LoginService,$location) {
 		/*jshint validthis: true */
 		var vm = this;
 		vm.title = "Hello, angular-app!";
@@ -78,9 +78,32 @@
 			}
 
 
+          vm.offers = [];
 
+          vm.getOffers = function ()
+          {
+           $http.get(apiBaseURL + '/home/offers').then(function(response) {
+                var response = response.data.data;
 
+                // login successful if there's a token in the response
+                if (response) {
+                    vm.offers = response;
 
+                }
+            });
+           }
+
+           vm.isReferral = LoginService.isReferral;
+
+             vm.goProfile = function() {
+        $location.path('/refferal');
+          };
+
+                 vm.Logout = function() {
+       LoginService.Logout();
+       $location.path('/')
+
+          };
 
 	}
 
