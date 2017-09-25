@@ -24,7 +24,9 @@
 		'refferal',
 		'redeemcoupon',
 		'loginModule',
-		'signupModule'
+		'signupModule',
+		'720kb.socialshare',
+
 	]);
 
 })();
