@@ -258,15 +258,29 @@
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
+
+
+
+
+    <li data-target="#myCarousel"
+
+     ng-repeat="item in vm.getItems() track by $index"
+
+ ng-class="$index == 0 ? 'active' : ''"
+
+     data-slide-to="{{$index}}"></li>
+
   </ol>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
-    <div class="item active">
-        <div class="row ">
+    <div class="item " ng-repeat="item in vm.getItems() track by $index"
+
+ ng-class="$index == 0 ? 'active' : ''"
+    >
+
+
+        <div class="row " >
     <div class="col-md-10 row col-md-offset-1 white pad10">
         <div class="col-md-5 nopad">
             <!-- <div class="carousel slide" data-ride="carousel" id="carousel-example-generic"> -->

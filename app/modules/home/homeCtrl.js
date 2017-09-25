@@ -25,9 +25,8 @@
         }
 
 
-
         vm.getSlidepopup = function(campaign_id) {
-            debugger
+
             vm.campaign_id = campaign_id;
             console.log(campaign_id);
             document.getElementById("offer-popup").style.width = "100%";
@@ -72,7 +71,7 @@
                 vm.compaigns = [];
                 vm.offers = response;
                 vm.compaigns = _.uniqBy(response, function(e) {
-                    debugger
+
                     return e.attributes.campaign_id;
                 });
             }
@@ -88,15 +87,22 @@
             $location.path('/')
         };
 
+           window.SelectedCampOffers =[];
+        vm.getItems = function()
+        {
+            return window.SelectedCampOffers;
+        }
          vm.getSelectedCampaignOffers = function() {
-            debugger
+
            vm.SelectedCampOffers = [];
            angular.forEach(vm.offers, function(value, key) {
-            debugger
+
                if (value.attributes.campaign_id == vm.campaign_id) {
                    vm.SelectedCampOffers.push(value);
                }
            });
+           window.SelectedCampOffers =[];
+           window.SelectedCampOffers = vm.SelectedCampOffers;
            return vm.SelectedCampOffers;
        }
     }
