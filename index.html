@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-toast/2.0.0/ngToast.min.css"/>
 
 </head>
-<body>
+<body ng-clock>
 
 	<div ng-include="'app/modules/layouts/nav-bar/navbar.html'"></div>
 	<!--Beginning-->
@@ -92,12 +92,11 @@
         <div class="offer-details">
 
           <button ng-click="vm.getloginpopup(offer.id)">GET CODE!</button>
-          <h3 style="    font-size: 14px;"> {{offer.attributes.name}} </h3>
 
-<!--           <h3>Flat 15% Off</h3>
+          <h3>{{offer.attributes.name}}</h3>
           <div class="offer-location">
             <b>At Cream & Fudge at - </b><span>T.Nagar</span>
-          </div> -->
+          </div>
 
           <p>
 {{offer.attributes.description | limitTo: 130}}
@@ -125,55 +124,22 @@
 
 </div>
 
+
 		</div>
+
+
+    <div ng-include="'app/modules/pop-ups/popup.html'" ng-controller="HomeCtrl as vm"></div>
+
 	</section>
 	<!--End-->
 
 
-    <div ng-include="'app/modules/pop-ups/popup.html'"></div>
-
 	<footer><p>© 2017 All Rights Reserved</p></footer>
 
 <!-- injector:js -->
-<script src="/src/bower_components/jquery/dist/jquery.js"></script>
-<script src="/src/bower_components/es5-shim/es5-shim.js"></script>
-<script src="/src/bower_components/json3/lib/json3.min.js"></script>
-<script src="/src/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-<script src="/src/bower_components/angular/angular.js"></script>
-<script src="/src/bower_components/angular-touch/angular-touch.js"></script>
-<script src="/src/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<script src="/src/bower_components/angular-aria/angular-aria.js"></script>
-<script src="/src/bower_components/angular-mocks/angular-mocks.js"></script>
-<script src="/src/bower_components/angular-cookies/angular-cookies.js"></script>
-<script src="/src/bower_components/angular-animate/angular-animate.js"></script>
-<script src="/src/bower_components/angular-sanitize/angular-sanitize.js"></script>
-<script src="/src/bower_components/angular-resource/angular-resource.js"></script>
-<script src="/src/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-<script src="/app/app.js"></script>
-<script src="/app/app.config.js"></script>
-<script src="/app/modules/home/homeModule.js"></script>
-<script src="/app/modules/loginAuth/loginModule.js"></script>
-<script src="/app/modules/redeem_coupon/redeem_couponModule.js"></script>
-<script src="/app/modules/refferal_user/refferalModule.js"></script>
-<script src="/app/modules/signup/signupModule.js"></script>
-<script src="/app/modules/home/homeRoute.js"></script>
-<script src="/app/modules/loginAuth/loginRoute.js"></script>
-<script src="/app/modules/redeem_coupon/redeem_couponRoute.js"></script>
-<script src="/app/modules/refferal_user/refferalRoute.js"></script>
-<script src="/app/modules/signup/signupRoute.js"></script>
-<script src="/app/modules/home/homeCtrl.js"></script>
-<script src="/app/modules/layouts/nav-bar/navBarCtrl.js"></script>
-<script src="/app/modules/loginAuth/loginCtrl.js"></script>
-<script src="/app/modules/redeem_coupon/redeem_couponCtrl.js"></script>
-<script src="/app/modules/refferal_user/refferalCtrl.js"></script>
-<script src="/app/modules/signup/signupCtrl.js"></script>
-<script src="/app/modules/home/homeService.js"></script>
-<script src="/app/modules/layouts/nav-bar/navbarService.js"></script>
-<script src="/app/modules/loginAuth/loginService.js"></script>
-<script src="/app/modules/redeem_coupon/redeem_couponService.js"></script>
-<script src="/app/modules/refferal_user/refferalService.js"></script>
-<script src="/app/modules/signup/signupService.js"></script>
-<script src="/app/modules/layouts/nav-bar/navbarDirective.js"></script>
+<script src="/app/assets/js/angular-app-angularbundle.js"></script>
+<script src="/app/assets/js/angular-app-appbundle.js"></script>
+<script src="/app/assets/js/templates.js"></script>
 <!-- endinjector -->
 
 <script src="//use.fontawesome.com/9a830e8669.js"></script>

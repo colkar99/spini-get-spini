@@ -29,6 +29,7 @@
                     document.getElementById("login-popup").style.width = "0%";
                     document.getElementById("login-signup").style.width = "0%";
                    	  $timeout(function() {
+                        ngToast.dismiss();
       ngToast.create({
         content:'<strong>Spini</strong>: Welcome to S Treasure!',
         dismissOnTimeout: false,

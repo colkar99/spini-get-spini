@@ -18,12 +18,19 @@
         /*jshint validthis: true */
         var vm = this;
 
+
+        vm.closeLoginPopup = function() {
+            document.getElementById("login-popup").style.width = "0%";
+        }
+        vm.openLoginPopup = function() {
+            document.getElementById("login-popup").style.width = "100%";
+        }
+
+
         vm.getofferspopup = function() {
-            // closeNav()
             document.getElementById("login-popup").style.width = "100%";
         }
         vm.closepopup = function() {
-            // openNav()
             document.getElementById("login-popup").style.width = "0%";
         }
         vm.signupPOP = function() {

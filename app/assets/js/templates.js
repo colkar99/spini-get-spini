@@ -17,16 +17,16 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "      <div class=\"carousel-inner\">\n" +
     "\n" +
     "        <div class=\"item active\">\n" +
-    "          <img src=\"/app/assets/images/03Banner/01Banner - 1166w - complete.png\" alt=\"Los Angeles\" style=\"width:100%;\">\n" +
     "\n" +
+    "          <img src=\"/app/assets/images/03Banner/cream_fudge.png\" alt=\"Los Angeles\" style=\"width:100%;\">\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"item\">\n" +
-    "          <img src=\"/app/assets/images/03Banner/01Banner - 1166w - complete.png\" alt=\"Chicago\" style=\"width:100%;\">\n" +
+    "          <img src=\"/app/assets/images/03Banner/naturals.png\" alt=\"Chicago\" style=\"width:100%;\">\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"item\">\n" +
-    "          <img src=\"/app/assets/images/03Banner/01Banner - 1166w - complete.png\" alt=\"New York\" style=\"width:100%;\">\n" +
+    "          <img src=\"/app/assets/images/03Banner/ak.png\" alt=\"New York\" style=\"width:100%;\">\n" +
     "          <!-- <div class=\"carousel-caption\">\n" +
     "            <h3>New York</h3>\n" +
     "            <p>We love the Big Apple!</p>\n" +
@@ -237,10 +237,46 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "</div>\n" +
     "\n" +
+    "<!-- end login code -->\n" +
     "\n" +
-    "<script>\n" +
     "\n" +
-    "</script>\n" +
+    "<!-- login POPUP -->\n" +
+    "\n" +
+    "<div id=\"login-signup\" class=\"overlay\" ng-controller=\"signupCtrl as vm\">\n" +
+    "  <a href=\"javascript:void(0)\" class=\"closebtn\" ng-click=\"vm.signupPOPClose()\">&times;</a>\n" +
+    "  <div class=\"overlay-content\">\n" +
+    "    <div class=\"row \">\n" +
+    "<div class=\"col-md-4 row col-md-offset-4 white nopad\">\n" +
+    "<div class=\"text-center bg-grey nopad pad-bot-10\">\n" +
+    "  <img class=\"poplogo\" src=\"/app/assets/images/header/Logo@2x.png\">\n" +
+    "\n" +
+    "\n" +
+    "<h3> SIGN UP WITH SPINI </h3>\n" +
+    "<br/>\n" +
+    "<h5> Share & Earn Spini Treasure..!!!</h5>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"text-center temp\">\n" +
+    "\n" +
+    "   <button class=\"btn btn-block fbbutton \" ng-click=\"vm.FbRegister('facebook')\">\n" +
+    "    <span class=\"fa fa-facebook left falign\"></span> Sign UP with Facebook\n" +
+    "  </button>\n" +
+    "\n" +
+    "     <button g-login class=\"btn btn-block gbutton\" ng-click=\"vm.GoogleRegister('google')\">\n" +
+    "    <span class=\"fa fa-google left falign\" ></span> Sign UP with Google\n" +
+    "  </button>\n" +
+    "\n" +
+    "</div>\n" +
+    "<div>\n" +
+    "\n" +
+    "</div>\n" +
+    "  </div>\n" +
+    "</div>\n" +
+    "</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "<!-- end login code -->\n" +
     "\n" +
     "\n" +
@@ -583,7 +619,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "  <div class=\"container\">\n" +
     "    <div class=\"row main-header\">\n" +
     "      <div class=\"col-md-2 main-header-logo\">\n" +
-    "        <a href=\"#\">\n" +
+    "        <a href=\"/\">\n" +
     "          <img src=\"/app/assets/images/header/Logo@2x.png\" alt=\"spini-logo\">\n" +
     "        </a>\n" +
     "      </div>\n" +
@@ -594,16 +630,31 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "      <div class=\"col-md-2 main-header-partner\">\n" +
     "        <button>Become our partner</button>\n" +
     "      </div>\n" +
-    "      <div class=\"col-md-2 main-header-signin\" ng-controller=\"HomeCtrl as vm\">\n" +
-    "        <a href=\"#\" ng-click=\"vm.open = true\">Sign In <img src=\"/app/assets/images/header/UserIcon@2x.png\"></a>\n" +
-    "        <div class=\"manage-account\" ng-show=\"vm.open\">\n" +
-    "          <i class=\"glyphicon glyphicon-remove-circle\" ng-click=\"vm.open = false\"></i>\n" +
+    "      <div class=\"col-md-2 main-header-signin\" ng-controller=\"HomeCtrl as menu\" >\n" +
+    "        <a  ng-click=\"menu.open = true\" ng-hide=\"menu.isReferral()\">Sign In <img src=\"/app/assets/images/header/UserIcon@2x.png\"></a>\n" +
+    "        <a  ng-click=\"menu.open = true\" ng-show=\"menu.isReferral()\">MyAccount <img src=\"/app/assets/images/header/UserIcon@2x.png\"></a>\n" +
+    "\n" +
+    "        <div class=\"manage-account\" ng-if=\"menu.open ==  true && menu.isReferral() == false\">\n" +
+    "          <i class=\"glyphicon glyphicon-remove-circle\" ng-click=\"menu.open = false\"></i>\n" +
     "          <b>Your Account</b>\n" +
     "          <p>Access account and manage offers</p>\n" +
-    "          <button ng-click=\"vm.getofferspopup(); vm.open = false\">SIGN UP</button>\n" +
-    "          <button ng-click=\"vm.getofferspopup(); vm.open = false\">LOGIN</button>\n" +
+    "          <button ng-click=\"menu.open = false;menu.signupPOP();\">SIGN UP</button>\n" +
+    "          <button ng-click=\"menu.open = false;menu.openLoginPopup();\">LOGIN</button>\n" +
+    "\n" +
+    "        </div>\n" +
+    "\n" +
+    "          <div class=\"manage-account\" ng-if=\"menu.open == true && menu.isReferral() == true\">\n" +
+    "          <i class=\"glyphicon glyphicon-remove-circle\" ng-click=\"menu.open = false\"></i>\n" +
+    "          <b>Your Account</b>\n" +
+    "          <p>Access account and manage offers</p>\n" +
+    "          <button ng-click=\"menu.open = false;menu.goProfile()\" >Profile</button>\n" +
+    "          <button ng-click=\"menu.open = false;menu.Logout()\" >Logout</button>\n" +
+    "\n" +
+    "\n" +
     "        </div>\n" +
     "      </div>\n" +
+    "\n" +
+    "\n" +
     "    </div>\n" +
     "  </div>\n" +
     "  <hr>\n" +
@@ -708,33 +759,384 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('app/modules/redeem_coupon/redeem_coupon.html',
+  $templateCache.put('app/modules/pop-ups/popup.html',
     "\n" +
-    "<!-- header for coupon redeem console section -->\n" +
-    "<header>\n" +
-    "  <div class=\"container coupon-redeem-header\">\n" +
-    "    <div class=\"row\">\n" +
-    "      <div class=\"col-md-6 col-sm-6 col-xs-6\">\n" +
-    "        <div class=\"coupon-redeem-header-logo\">\n" +
-    "          <a href=\"#\">\n" +
-    "            <img src=\"app/assets/images/header/logo.png\" alt=\"spini-logo\">\n" +
-    "          </a>\n" +
-    "          <span>Coupon Redeem Console</span>\n" +
+    " <toast></toast>\n" +
+    "\n" +
+    "<!-- login POPUP -->\n" +
+    "\n" +
+    "<div id=\"login-popup\" class=\"overlay\" >\n" +
+    "  <a href=\"javascript:void(0)\" class=\"closebtn\" ng-click=\"vm.closepopup()\">&times;</a>\n" +
+    "  <div class=\"overlay-content\">\n" +
+    "    <div class=\"row \">\n" +
+    "<div class=\"col-md-4 row col-md-offset-4 white nopad\">\n" +
+    "<div class=\"text-center bg-grey nopad pad-bot-10\">\n" +
+    "  <img class=\"poplogo\" src=\"/app/assets/images/header/Logo@2x.png\">\n" +
+    "\n" +
+    "\n" +
+    "<h3> SPINI SIGN IN </h3>\n" +
+    "<br/>\n" +
+    "<h5> Share & Earn Spini Treasure..!!!</h5>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"text-center temp\" ng-controller=\"LoginCtrl as vm\">\n" +
+    "   <button class=\"btn btn-block fbbutton \" ng-click=\"vm.FbLogin('facebook')\">\n" +
+    "    <span class=\"fa fa-facebook left falign\"></span> Sign in with Facebook\n" +
+    "  </button>\n" +
+    "\n" +
+    "     <button g-login class=\"btn btn-block gbutton\" ng-click=\"vm.GoogleLogin('google')\">\n" +
+    "    <span class=\"fa fa-google left falign\" ></span> Sign in with Google\n" +
+    "  </button>\n" +
+    "\n" +
+    "</div>\n" +
+    "<div>\n" +
+    "\n" +
+    "</div>\n" +
+    "  </div>\n" +
+    "</div>\n" +
+    "</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<!-- end login code -->\n" +
+    "\n" +
+    "\n" +
+    "<!-- login POPUP -->\n" +
+    "\n" +
+    "<div id=\"login-signup\" class=\"overlay\" >\n" +
+    "  <a href=\"javascript:void(0)\" class=\"closebtn\" ng-click=\"vm.signupPOPClose()\">&times;</a>\n" +
+    "  <div class=\"overlay-content\">\n" +
+    "    <div class=\"row \">\n" +
+    "<div class=\"col-md-4 row col-md-offset-4 white nopad\">\n" +
+    "<div class=\"text-center bg-grey nopad pad-bot-10\">\n" +
+    "  <img class=\"poplogo\" src=\"/app/assets/images/header/Logo@2x.png\">\n" +
+    "\n" +
+    "\n" +
+    "<h3> SIGN UP WITH SPINI </h3>\n" +
+    "<br/>\n" +
+    "<h5> Share & Earn Spini Treasure..!!!</h5>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"text-center temp\" ng-controller=\"signupCtrl as vm\">\n" +
+    "\n" +
+    "   <button class=\"btn btn-block fbbutton \" ng-click=\"vm.FbRegister('facebook')\">\n" +
+    "    <span class=\"fa fa-facebook left falign\"></span> Sign UP with Facebook\n" +
+    "  </button>\n" +
+    "\n" +
+    "     <button g-login class=\"btn btn-block gbutton\" ng-click=\"vm.GoogleRegister('google')\">\n" +
+    "    <span class=\"fa fa-google left falign\" ></span> Sign UP with Google\n" +
+    "  </button>\n" +
+    "\n" +
+    "</div>\n" +
+    "<div>\n" +
+    "\n" +
+    "</div>\n" +
+    "  </div>\n" +
+    "</div>\n" +
+    "</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "<!-- end login code -->\n" +
+    "\n" +
+    "\n" +
+    "<!-- Get Code POPUP -->\n" +
+    "\n" +
+    "<div id=\"confirm-code-popup\" class=\"overlay\">\n" +
+    "  <a href=\"javascript:void(0)\" class=\"closebtn\" onclick=\"closegetcodepopup()\">&times;</a>\n" +
+    "  <div class=\"overlay-content\">\n" +
+    "    <div class=\"row \">\n" +
+    "<div class=\"col-md-8 row col-md-offset-2 white pad-bot0 pad10 \">\n" +
+    "      <div class=\"row mar20bt\">\n" +
+    "          <div class=\"col-md-1 nopad\">\n" +
+    "\n" +
+    "\n" +
+    "        <i class=\"fa fa-arrow-left offer-logo-40px mar10\" ng-click=\"closegetcodepopup()\" aria-hidden=\"true\"></i>\n" +
+    "\n" +
+    "        </div>       <div class=\"col-md-3 nopad text-left\">\n" +
+    "\n" +
+    "\n" +
+    "          <h4 class=\"mar10\"> <b>Flat 15% Off</b></h4>\n" +
+    "               <div class=\"offer-location\">\n" +
+    "            <b>At Cream & Fudge at - </b><span>T.Nagar</span>\n" +
+    "          </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                  <div class=\"col-md-8 text-right nopad\">\n" +
+    "        <img class=\"offer-logo-set1\" src=\"/app/assets/images/05Cards/Card-Logo-CnF.png\">\n" +
+    "        </div>\n" +
+    "        <hr>\n" +
+    "      </div>\n" +
+    "\n" +
+    "      <div class=\"row backcls mar-10px text-left\">\n" +
+    "        <div class=\"form-group popupcenter padtop40 \">\n" +
+    "          <div class=\"col-md-12 nopad text-center\">\n" +
+    "            <h4 class=\"marbt20\"> Hi Kalidass </h4>\n" +
+    "            <h4 class=\"marbt20\">Availing this offer will add Rs.200 to your Spini Wallet! </h4>\n" +
+    "            <h4 class=\"marbt20\"> Offer code will be send to your registered mobile No - 9524609638 </h4>\n" +
+    "\n" +
+    "\n" +
+    "    <button type=\"button\" class=\"btn min40 btnwid50 nbr\">SEND CODE!</button>\n" +
+    "    </div>\n" +
+    " <div class=\"col-md-12 nopad gpad text-center\">\n" +
+    "             <span class=\"offer-spini\">\n" +
+    "           <i class=\"fa fa-share-alt-square link-icon\" aria-hidden=\"true\"></i>  SHARE & EARN\n" +
+    "          </span>\n" +
+    "\n" +
+    "        </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "</div>\n" +
+    "      </div>\n" +
+    "       <div class=\"row backcls mar-10px text-left dotted\">\n" +
+    "      <div class=\"col-md-12 nopad mar45\">\n" +
+    "        <div class=\"col-md-8\">\n" +
+    "\n" +
+    "          <p class=\"font15px popupfoot1  \">\n" +
+    "          <b>Further more sharing this code will earn you </b>\n" +
+    "          <br/>\n" +
+    "\n" +
+    "          <b >Rs.200 each time it's availed</b>\n" +
+    "\n" +
+    "        </p>\n" +
+    "\n" +
+    "       <div class=\"social pad-bot10 padtop30 popupfoot1\">\n" +
+    "  <a class=\"fa fa-twitter twitter\" title=\"\" target=\"_blank\" href=\"#\"></a>\n" +
+    "  <a class=\"fa fa-facebook fb\" title=\"\" target=\"_blank\" href=\"#\"></a>\n" +
+    "  <a class=\"fa fa-clone clone\" title=\"\" target=\"_blank\" href=\"#\"></a>\n" +
+    "</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"col-md-4 text-center\">\n" +
+    "\n" +
+    "<h1 class=\"b\">Rs.200</h1>\n" +
+    "\n" +
+    "<p>\n" +
+    "  Earn real cash while you enjoy Spini offers!!\n" +
+    "</p>\n" +
+    "          </div>\n" +
+    "        </div>\n" +
+    "</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "</div>\n" +
+    "  </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<!-- end get code -->\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "<!-- Get Code POPUP mobile no-->\n" +
+    "\n" +
+    "<div id=\"get-code-popup\" class=\"overlay\">\n" +
+    "  <a href=\"javascript:void(0)\" class=\"closebtn\" onclick=\"closegetcodepopup()\">&times;</a>\n" +
+    "  <div class=\"overlay-content\">\n" +
+    "    <div class=\"row \">\n" +
+    "<div class=\"col-md-8 row col-md-offset-2 white pad-bot0 pad10 \">\n" +
+    "      <div class=\"row mar20bt\">\n" +
+    "          <div class=\"col-md-1 nopad\">\n" +
+    "\n" +
+    "\n" +
+    "        <i class=\"fa fa-arrow-left offer-logo-40px mar10\" ng-click=\"vm.closegetcodepopup()\" aria-hidden=\"true\"></i>\n" +
+    "\n" +
+    "        </div>       <div class=\"col-md-3 nopad text-left\">\n" +
+    "\n" +
+    "\n" +
+    "          <h4 class=\"mar10\"> <b>Flat 15% Off</b></h4>\n" +
+    "               <div class=\"offer-location\">\n" +
+    "            <b>At Cream & Fudge at - </b><span>T.Nagar</span>\n" +
+    "          </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                  <div class=\"col-md-8 text-right nopad\">\n" +
+    "        <img class=\"offer-logo-set1\" src=\"/app/assets/images/05Cards/Card-Logo-CnF.png\">\n" +
+    "        </div>\n" +
+    "        <hr>\n" +
+    "      </div>\n" +
+    "\n" +
+    "      <div class=\"row backcls mar-10px text-left\">\n" +
+    "        <div class=\"form-group popupcenter \">\n" +
+    "          <div class=\"col-md-8 nopad\">\n" +
+    "<label for=\"usr\">Enter your mobile No. to get Code</label>\n" +
+    "  <input type=\"text\" placeholder=\"Mobile no\" class=\"form-control nbr min40\" id=\"usr\">\n" +
+    "\n" +
+    "           </div>\n" +
+    "           <div class=\"col-md-4 nopad mar25x\">\n" +
+    "    <button type=\"button\" class=\"btn min40 width100 nbr\">SEND CODE!</button>\n" +
+    "    </div>\n" +
+    "\n" +
+    "\n" +
+    "  <div class=\"col-md-12 nopad mar40\">\n" +
+    "             <span class=\"offer-spini\">\n" +
+    "           <i class=\"fa fa-gift link-icon fagift\" aria-hidden=\"true\"></i>  SPINI TREASURE\n" +
+    "          </span>\n" +
+    "\n" +
+    "        </div>\n" +
+    "\n" +
+    "\n" +
+    "</div>\n" +
+    "      </div>\n" +
+    "       <div class=\"row backcls mar-10px text-left dotted\">\n" +
+    "      <div class=\"col-md-12 nopad mar40\">\n" +
+    "          <p class=\"font15px popupfoot pad-bot \">\n" +
+    "          Psst...! <br/>\n" +
+    "          Signup to become a Spini referral and earn Rs.200 with this offer!<br/>\n" +
+    "          Sparsh earned Rs.2000 begin a Spini Referral!<br/>\n" +
+    "        </p>\n" +
+    "\n" +
+    "        <p class=\"fbblue font15px popupfoot pad-bot\">\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "             <i class=\"fa fa-facebook link-icon\" aria-hidden=\"true\"></i>  SIGN UP WITH FACEBOOK<br/>\n" +
+    "          </p>\n" +
+    "        </div>\n" +
+    "</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "</div>\n" +
+    "  </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<!-- end get code -->\n" +
+    "\n" +
+    "\n" +
+    "<!-- OFFERS POPUP 1st-->\n" +
+    "\n" +
+    "<div id=\"offer-popup\" class=\"overlay\">\n" +
+    "  <a href=\"javascript:void(0)\" class=\"closebtn\" ng-click=\"vm.closeNav()\">&times;</a>\n" +
+    "  <div class=\"overlay-content\">\n" +
+    "    <div class=\"row \">\n" +
+    "\n" +
+    "\n" +
+    "    <div class=\"col-md-8 row col-md-offset-2 white pad10\">\n" +
+    "\n" +
+    "\n" +
+    "<div class=\"col-md-5 nopad\">\n" +
+    "\n" +
+    "<div id=\"carousel-example-generic\" class=\"carousel slide\" data-ride=\"carousel\">\n" +
+    "  <ol class=\"carousel-indicators\">\n" +
+    "    <!-- <li data-target=\"#carousel-example-generic\" data-slide-to=\"0\" class=\"active\"></li>\n" +
+    "    <li data-target=\"#carousel-example-generic\" data-slide-to=\"1\"></li>\n" +
+    "    <li data-target=\"#carousel-example-generic\" data-slide-to=\"2\"></li> -->\n" +
+    "  </ol>\n" +
+    "\n" +
+    "  <div class=\"carousel-inner\">\n" +
+    "    <div class=\"active item\">\n" +
+    "      <img  class=\"fixed-height\" src=\"/app/assets/images/sample_cream_fudge.jpg\" alt=\"...\">\n" +
+    "\n" +
+    "    </div>\n" +
+    " <!--    <div class=\"item\">\n" +
+    "      <img class=\"fixed-height\" src=\"http://placehold.it/1200x400\" alt=\"...\">\n" +
+    "\n" +
+    "    </div>\n" +
+    "    <div class=\"item\">\n" +
+    "      <img class=\"fixed-height\" src=\"http://placehold.it/1200x400\" alt=\"...\">\n" +
+    "\n" +
+    "    </div> -->\n" +
+    "  </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"col-md-12 nopad mr10px\">\n" +
+    "<div class=\"col-md-6 text-left nopad\">\n" +
+    "<i class=\"fa fa-arrow-circle-o-left ft25px grey\" aria-hidden=\"true\"></i>\n" +
+    "</div>\n" +
+    "<div class=\"col-md-6 text-right nopad\">\n" +
+    "<i class=\"fa fa-arrow-circle-o-right  ft25px grey\" aria-hidden=\"true\"></i>\n" +
+    "</div>\n" +
+    "</div>\n" +
+    "  </div>\n" +
+    "\n" +
+    "  <div class=\"col-md-7 nopad\">\n" +
+    "      <div class=\"pad-top-none offer-details text-left\">\n" +
+    "\n" +
+    "            <div class=\"row\">\n" +
+    "          <div class=\"col-md-4\">\n" +
+    "          <h3 class=\"tm\">Flat 15% Off</h3>\n" +
+    "\n" +
+    "        </div>\n" +
+    "\n" +
+    "                  <div class=\"col-md-8 text-right \">\n" +
+    "        <img class=\"offer-logo-set\" src=\"/app/assets/images/05Cards/Card-Logo-CnF.png\">\n" +
     "        </div>\n" +
     "      </div>\n" +
-    "      <div class=\"col-md-6 col-sm-6 col-xs-6\">\n" +
-    "        <a href=\"#\" class=\"coupon-redeem-header-login-info\">\n" +
-    "          <div>\n" +
-    "            <b>Sathish Kumar</b>\n" +
-    "            <label>Billing Team</label>\n" +
+    "          <div class=\"ts offer-location\">\n" +
+    "            <b>At Cream & Fudge at - </b><span>T.Nagar</span>\n" +
     "          </div>\n" +
-    "          <img src=\"app/assets/images/header/UserIcon@2x.png\">\n" +
-    "        </a>\n" +
-    "      </div>\n" +
-    "    </div>\n" +
+    "\n" +
+    "            <div class=\"row space-div\">\n" +
+    "          <div class=\"col-md-4\">\n" +
+    "                  <button ng-click=\"vm.getcodepopup()\">GET CODE!</button>\n" +
+    "                </div>\n" +
+    "                   <div class=\"col-md-6\">\n" +
+    "                  <span class=\"offer-spini\">\n" +
+    "           <i class=\"fa fa-gift link-icon fagift\" aria-hidden=\"true\"></i>  Spini Treasure <b>$200</b>\n" +
+    "          </span>\n" +
+    "          </div>\n" +
+    "\n" +
+    "                <div class=\"col-md-2 \">\n" +
+    "                  <span class=\"offer-count\">\n" +
+    "           <i class=\"fa fa-star-o link-icon \" aria-hidden=\"true\"></i>   54      </span>\n" +
+    "          </div>\n" +
+    "          </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "          <p class=\"\">Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>\n" +
+    "\n" +
+    "           <p class=\"offer-wrap-text space-div\">Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>\n" +
+    "\n" +
+    "\n" +
+    "          <div class=\"offer-share col-md-6\">\n" +
+    "            <label>SHARE & EARN</label>\n" +
+    "            <ul>\n" +
+    "              <li class=\"offer-share-max\"><a href=\"#\"></a></li>\n" +
+    "              <li class=\"offer-share-fb\"><a href=\"#\"></a></li>\n" +
+    "              <li class=\"offer-share-twitter\"><a href=\"#\"></a></li>\n" +
+    "            </ul>\n" +
+    "          </div>\n" +
+    "            <div class=\"offer-share col-md-6\">\n" +
+    "            <label class=\"right\">OFFERS END IN</label>\n" +
+    "            <p class=\"right timers\">\n" +
+    "              01:04:05\n" +
+    "            </p>\n" +
+    "          </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "</div>\n" +
+    "\n" +
+    "\n" +
+    "<span class=\"tes\">\n" +
+    "  <img class=\"roate-270\" src=\"/app/assets/images/icons8-Expand%20Arrow-64.png\">\n" +
+    "</span>\n" +
+    "\n" +
+    "\n" +
+    "<!-- <span class=\"tes1\">\n" +
+    "  <img class=\"roate-90\" src=\"/app/assets/images/icons8-Expand%20Arrow-64.png\">\n" +
+    "</span> -->\n" +
+    "\n" +
+    "\n" +
+    "</div>\n" +
+    "</div>\n" +
     "  </div>\n" +
-    "  <hr class=\"coupon-redeem-header-border\">\n" +
-    "</header>\n" +
+    "</div>\n" +
+    "<!-- end OFFERS POPUP -->\n"
+  );
+
+
+  $templateCache.put('app/modules/redeem_coupon/redeem_coupon.html',
+    "<!-- -->\n" +
     "<!-- container for coupon redeem console -->\n" +
     "<section class=\"coupon-redeem-entry\">\n" +
     "  <h3>Enter Offer Price & Coupon Code</h3>\n" +
@@ -803,9 +1205,9 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "          <div class=\"side_nav_refferal\" >\n" +
     "            <img  src=\"/app/assets/images/ProfileSection/Left-Nav/02Icn-ProfileDetails-Over@2x.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"200\" height=\"150\">\n" +
     "            <div class=\"col-sm-11\">\n" +
-    "              <label> Name:</label>\n" +
-    "              <label class=\"text-muted\">9876543210</label>\n" +
-    "              <label><i class=\" glyphicon glyphicon-map-marker\">Location</i></label>\n" +
+    "              <label class=\"text-center\" style=\"    margin-top: 20px;\">{{vm.user.name}} </label>\n" +
+    "              <label class=\"text-muted\">{{vm.user.mobile}}</label>\n" +
+    "              <!-- <label><i class=\" glyphicon glyphicon-map-marker\">Location</i></label> -->\n" +
     "            </div>\n" +
     "            </div>\n" +
     "          </div>\n" +
@@ -827,7 +1229,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                  <ul class=\"nav navbar-nav\">\n" +
     "                    <li  style=\"font-size: 18px;\">\n" +
     "                      <a class=\"text-center\" href=\"#\">\n" +
-    "                        <i class=\"glyphicon glyphicon-stats pull-left\" aria-hidden=\"true\"></i> \n" +
+    "                        <i class=\"glyphicon glyphicon-stats pull-left\" aria-hidden=\"true\"></i>\n" +
     "                        <span>Dashboard</span>\n" +
     "                      </a>\n" +
     "                    </li>\n" +
@@ -927,7 +1329,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    border: 1px solid #f7f7f7;\n" +
     "}\n" +
     "\n" +
-    "/* make sidebar nav vertical */ \n" +
+    "/* make sidebar nav vertical */\n" +
     "@media (min-width: 768px) {\n" +
     "  .sidebar-nav .navbar .navbar-collapse {\n" +
     "    padding: 0;\n" +
@@ -960,7 +1362,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    margin: 2px;\n" +
     "    background-color: #fff;\n" +
     "}\n" +
-    "</style>"
+    "</style>\n"
   );
 
 

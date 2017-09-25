@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-09-24. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-09-25. 
 * @author Kathik
 */
 (function() {
@@ -23,6 +23,7 @@
 		'ngTouch',
 		'ngSanitize',
 		'ui.router',
+		'ngToast',
 		'home',
 		'refferal',
 		'redeemcoupon',
@@ -47,7 +48,7 @@
     configure.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
 
     function configure($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-        $locationProvider.hashPrefix('!');
+        //$locationProvider.html5Mode(true).hashPrefix('!');
         // This is required for Browser Sync to work poperly
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         $urlRouterProvider.otherwise('/');
@@ -193,14 +194,14 @@
 angular.module('angular-app')
 	.config(['$stateProvider', function ($stateProvider) {
 		$stateProvider
-			
+
 			.state('home', {
 				url: '/',
-				templateUrl: 'app/modules/home/home.html',
+				// templateUrl: 'app/modules/home/home.html',
 				controller: 'HomeCtrl',
-				controllerAs: 'vm'
+				 controllerAs: 'vm'
 			});
-			
+
 	}]);
 
 'use strict';
@@ -295,80 +296,91 @@ angular.module('signupModule')
 			
 	}]);
 
-(function () {
-	'use strict';
-
-	/**
-	* @ngdoc function
-	* @name app.controller:HomeCtrl
-	* @description
-	* # HomeCtrl
-	* Controller of the app
-	*/
-
-	angular
-		.module('angular-app')
-		.controller('HomeCtrl', Home);
-
-	Home.$inject = ['homeService','$window','facebookService'];
-
-	/*
-	* recommend
-	* Using function declarations
-	* and bindable members up top.
-	*/
-
-	function Home(homeService,$window,facebookService) {
-		/*jshint validthis: true */
-		var vm = this;
-		vm.title = "Hello, angular-app!";
-		vm.version = "1.0.0";
-		vm.listFeatures = homeService.getFeaturesList();
-		vm.someValue ;
+(function() {
+    'use strict';
+    /**
+     * @ngdoc function
+     * @name app.controller:HomeCtrl
+     * @description
+     * # HomeCtrl
+     * Controller of the app
+     */
+    angular.module('angular-app').controller('HomeCtrl', Home);
+    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location'];
+    /*
+     * recommend
+     * Using function declarations
+     * and bindable members up top.
+     */
+    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location) {
+        /*jshint validthis: true */
+        var vm = this;
 
 
-		 vm.getofferspopup = function() {
-		    // closeNav()
-		    document.getElementById("login-popup").style.width = "100%";
-		}
-
-		vm.closepopup = function()  {
-
-		   // openNav()
-		    document.getElementById("login-popup").style.width = "0%";
-		}
+        vm.closeLoginPopup = function() {
+            document.getElementById("login-popup").style.width = "0%";
+        }
+        vm.openLoginPopup = function() {
+            document.getElementById("login-popup").style.width = "100%";
+        }
 
 
-		vm.getloginpopup = function(id) {
-			debugger
-    		// closeNav()
-    		vm.someValue= id;
-    		 document.getElementById("offer-popup").style.width = "100%";
-			}
-		vm.closeNav = function() {
-    		document.getElementById("offer-popup").style.width = "0%";
-			}
-		vm.getcodepopup = function(someValue) {
-    // closeNav()
-    		document.getElementById("get-code-popup").style.width = "100%";
-    		document.getElementById("offer-popup").style.width = "0%";
-			}
-		vm.closegetcodepopup = function() {
+        vm.getofferspopup = function() {
+            document.getElementById("login-popup").style.width = "100%";
+        }
+        vm.closepopup = function() {
+            document.getElementById("login-popup").style.width = "0%";
+        }
+        vm.signupPOP = function() {
+            // closeNav()
+            document.getElementById("login-signup").style.width = "100%";
+        }
+        vm.signupPOPClose = function() {
+            // openNav()
+            document.getElementById("login-signup").style.width = "0%";
+        }
+        vm.getloginpopup = function(id) {
+            vm.someValue = id;
+            document.getElementById("offer-popup").style.width = "100%";
+        }
+        vm.closeNav = function() {
+            document.getElementById("offer-popup").style.width = "0%";
+        }
+        vm.getcodepopup = function() {
+            console.log('data');
+            // closeNav()
+            document.getElementById("get-code-popup").style.width = "100%";
+            document.getElementById("offer-popup").style.width = "0%";
+        }
+        vm.closegetcodepopup = function() {
+            // openNav()
+            document.getElementById("get-code-popup").style.width = "0%";
+            document.getElementById("offer-popup").style.width = "100%";
+        }
 
-   // openNav()
-    		document.getElementById("get-code-popup").style.width = "0%";
-    		document.getElementById("offer-popup").style.width = "100%";
-			}
 
+        vm.offers = [];
+        vm.getOffers = function() {
+            $http.get(apiBaseURL + '/home/offers').then(function(response) {
+                var response = response.data.data;
+                // login successful if there's a token in the response
+                if (response) {
+                    vm.offers = response;
+                }
+            });
+        }
+        vm.open = false;
 
-
-
-
-
-	}
-
+        vm.isReferral = LoginService.isReferral;
+        vm.goProfile = function() {
+            $location.path('/refferal');
+        };
+        vm.Logout = function() {
+            LoginService.Logout();
+            $location.path('/')
+        };
+    }
 })();
-
 
 (function () {
 	'use strict';
@@ -405,82 +417,63 @@ angular.module('signupModule')
 
 })();
 
-(function () {
-	'use strict';
-
-	/**
-	* @ngdoc function
-	* @name app.controller:HomeCtrl
-	* @description
-	* # HomeCtrl
-	* Controller of the app
-	*/
-
-	angular
-		.module('loginModule')
-		.controller('LoginCtrl', Login);
-
-	Login.$inject = ['LoginService','SocialLoginService','$scope'];
-
-	/*
-	* recommend
-	* Using function declarations
-	* and bindable members up top.
-	*/
-
-	function Login(LoginService,SocialLoginService,$scope) {
-		/*jshint validthis: true */
-		var vm = this;
-		vm.title = "Hello, angular-app!";
-		vm.version = "1.0.0";
-		// vm.listFeatures = LoginService.getFeaturesList();
-
-
-		$scope.$on("FBLoginComplete",function (event, args) {
-
-			var auth = {};
-			auth.access_token = args.authData.authResponse.accessToken;
-			auth.role = 'referer';
-
-		  LoginService.Login(auth, function(result) {
+(function() {
+    'use strict';
+    /**
+     * @ngdoc function
+     * @name app.controller:HomeCtrl
+     * @description
+     * # HomeCtrl
+     * Controller of the app
+     */
+    angular.module('loginModule').controller('LoginCtrl', Login);
+    Login.$inject = ['LoginService', 'SocialLoginService', '$scope', '$location', 'ngToast', '$timeout'];
+    /*
+     * recommend
+     * Using function declarations
+     * and bindable members up top.
+     */
+    function Login(LoginService, SocialLoginService, $scope, $location, ngToast, $timeout) {
+        /*jshint validthis: true */
+        var vm = this;
+        vm.title = "Hello, angular-app!";
+        vm.version = "1.0.0";
+        // vm.listFeatures = LoginService.getFeaturesList();
+        $scope.$on("FBLoginComplete", function(event, args) {
+            var auth = {};
+            auth.access_token = args.authData.authResponse.accessToken;
+            auth.role = 'referer';
+            LoginService.Login(auth, function(result) {
                 if (result == 'referer') {
-
+                    document.getElementById("login-popup").style.width = "0%";
+                    document.getElementById("login-signup").style.width = "0%";
+                   	  $timeout(function() {
+                        ngToast.dismiss();
+      ngToast.create({
+        content:'<strong>Spini</strong>: Welcome to S Treasure!',
+        dismissOnTimeout: false,
+        dismissButton: true,
+        dismissOnClick: false
+      });
+    }, 1000)
+                } else if (result == 'vendor') {} else {
+                    console.log('not logged in');
                 }
-               else if (result == 'vendor') {
-
-                }
-                else {
-                	console.log('not logged in');
-                }
-        	});
-
-			console.log('my event FBLoginComplete');
-			console.log(args)
-		} );
-
-
-
-		$scope.$on("GoogleLoginComplete",function (event, args) {
-			console.log('my event GoogleLoginComplete');
-			console.log(args)
-
-		} );
-
-		vm.FbLogin = function()
-		 {
-		 	SocialLoginService.facebookLogin();
-
-		 }
-
-
-
-		vm.GoogleLogin = function()
-		 {
-		 	SocialLoginService.googleLogin();
-
-		 }
-	}
-
+            });
+            console.log('my event FBLoginComplete');
+            console.log(args)
+        });
+        $scope.$on("GoogleLoginComplete", function(event, args) {
+            console.log('my event GoogleLoginComplete');
+            console.log(args)
+        });
+        vm.FbLogin = function() {
+            SocialLoginService.facebookLogin();
+        }
+        vm.GoogleLogin = function() {
+            SocialLoginService.googleLogin();
+        }
+    }
 })();
 
 (function () {
@@ -532,7 +525,7 @@ angular.module('signupModule')
 		.module('refferal')
 		.controller('refferalCtrl', Refferal);
 
-	Refferal.$inject = ['refferalService'];
+	Refferal.$inject = ['refferalService','LoginService','$http','$location'];
 
 	/*
 	* recommend
@@ -540,74 +533,66 @@ angular.module('signupModule')
 	* and bindable members up top.
 	*/
 
-	function Refferal(refferalService) {
+	function Refferal(refferalService,LoginService,$http,$location) {
 		/*jshint validthis: true */
 		var vm = this;
 		vm.title = "Hello, angular-app!";
 		vm.version = "1.0.0";
 		vm.listFeatures = refferalService.getFeaturesList();
 
+		if(LoginService.isReferral())
+		{
+		$http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
+		 LoginService.getProfileInfo(function(data)
+		{
+			vm.user = data;
+		})
+		}
+		else
+		{
+			$location.path('/')
+		}
+
 	}
 
 })();
 
-(function () {
-	'use strict';
+(function() {
+    'use strict';
+    /**
+     * @ngdoc function
+     * @name app.controller:HomeCtrl
+     * @description
+     * # HomeCtrl
+     * Controller of the app
+     */
+    angular.module('signupModule').controller('signupCtrl', signup);
+    signup.$inject = ['signupService','SocialLoginService','$scope'];
+    /*
+     * recommend
+     * Using function declarations
+     * and bindable members up top.
+     */
+    function signup(signupService,SocialLoginService,$scope) {
+        /*jshint validthis: true */
+        var vm = this;
+        vm.data = 'data';
+        $scope.$on("FBLoginComplete", function(event, args) {
+            console.log('my event FBLoginComplete');
+            console.log(args)
+        });
+        $scope.$on("GoogleLoginComplete", function(event, args) {
+            console.log('my event GoogleLoginComplete');
+            console.log(args)
+        });
 
-	/**
-	* @ngdoc function
-	* @name app.controller:HomeCtrl
-	* @description
-	* # HomeCtrl
-	* Controller of the app
-	*/
-
-	angular
-		.module('signupModule')
-		.controller('signupCtrl', signup);
-
-	signup.$inject = ['signupService'];
-
-	/*
-	* recommend
-	* Using function declarations
-	* and bindable members up top.
-	*/
-
-	function signup(signupService) {
-		/*jshint validthis: true */
-		var vm = this;
-		vm.title = "Hello, angular-app!";
-		vm.version = "1.0.0";
-		vm.listFeatures = signupService.getFeaturesList();
-
-
-		$scope.$on("FBLoginComplete",function (event, args) {
-			console.log('my event FBLoginComplete');
-			console.log(args)
-		} );
-
-		$scope.$on("GoogleLoginComplete",function (event, args) {
-			console.log('my event GoogleLoginComplete');
-			console.log(args)
-
-		} );
-
-		vm.FbRegister = function()
-		 {
-		 	SocialLoginService.facebookLogin();
-
-		 }
-
-
-
-		vm.GoogleRegister= function()
-		 {
-		 	SocialLoginService.googleLogin();
-
-		 }
-	}
-
+        vm.FbRegister = function() {
+            SocialLoginService.facebookLogin();
+        }
+        vm.GoogleRegister = function() {
+            SocialLoginService.googleLogin();
+        }
+    }
 })();
 
 (function () {
@@ -622,8 +607,7 @@ angular.module('signupModule')
 	*/
 
 	angular.module('angular-app')
-		.factory('homeService', homeService)
-		.factory('facebookService', facebookService);
+		.factory('homeService', homeService);
 
 	homeService.$inject = ['$http'];
 
@@ -652,59 +636,6 @@ angular.module('signupModule')
 
 	};
 
-    function facebookService($q, $rootScope) {
-        return {
-            getMyLastName: function() {
-                var deferred = $q.defer();
-                FB.api('/me', {
-                    fields: 'last_name'
-                }, function(response) {
-                    if (!response || response.error) {
-                        deferred.reject('Error occured');
-                    } else {
-                        deferred.resolve(response);
-                    }
-                });
-                return deferred.promise;
-            },
-            getUserInfo: function() {
-                var _self = this;
-                FB.api('/me', {
-                    fields: 'email'
-                }, function(res) {
-                    $rootScope.$apply(function() {
-                        console.log(res);
-                        $rootScope.user = _self.user = res;
-                    });
-                });
-            },
-            watchLoginChange: function() {
-                var _self = this;
-                FB.Event.subscribe('auth.authResponseChange', function(res) {
-                    if (res.status === 'connected') {
-                        /*
-                         The user is already logged,
-                         is possible retrieve his personal info
-                        */
-                        console.log('FB Logged In');
-                        console.log(res);
-                        _self.getUserInfo();
-                        /*
-                         This is also the point where you should create a
-                         session for the current user.
-                         For this purpose you can use the data inside the
-                         res.authResponse object.
-                        */
-                    } else {
-                        /*
-                         The user is not logged to the app, or into Facebook:
-                         destroy the session on the server.
-                        */
-                    }
-                });
-            }
-        }
-    };
 
 
 
@@ -761,29 +692,63 @@ angular.module('signupModule')
      * Service of the app
      */
     angular.module('angular-app').service('LoginService', LoginService).service('SocialLoginService', SocialLoginService);
-    LoginService.$inject = ['$http','$cookies', 'apiBaseURL'];
+    LoginService.$inject = ['$http', '$cookies','apiBaseURL'];
     SocialLoginService.$inject = ['$q', '$rootScope', '$window'];
 
-    function LoginService($http,$cookies, apiBaseURL) {
-
-
-    	var service = {};
+    function LoginService($http, $cookies,apiBaseURL) {
+        var service = {};
         service.Login = Login;
         service.Logout = Logout;
+        service.isReferral = isReferral;
+        service.authToken = authToken;
+        service.getProfileInfo = getProfileInfo;
+
         return service;
+
+        function isReferral() {
+            if ($cookies.get('role')) {
+                if ($cookies.get('role') == 'referer') {
+                    return true
+                }
+            }
+            return false;
+        }
+
+        function authToken() {
+            if ($cookies.get('token')) {
+                return $cookies.get('token');
+            }
+            return false;
+        }
+
+         function getProfileInfo(callback) {
+            $http.get(apiBaseURL + '/profile').then(function(response) {
+                var response = response.data.data;
+
+                // login successful if there's a token in the response
+                if (response.attributes) {
+                    callback(response.attributes);
+                } else {
+                    // execute callback with false to indicate failed login
+                    callback(false);
+                }
+            });
+        }
+
+
+
 
         function Login(auth, callback) {
             $http.post(apiBaseURL + '/facebook_user_token', {
                 auth: auth
             }).then(function(response) {
-            	var response = response.data;
+                var response = response.data;
                 // login successful if there's a token in the response
                 if (response.jwt) {
                     // store username and token in cookies storage to keep user logged in between page refreshes
-                    $cookies.put('role',response.role);
-                    $cookies.put('name',response.name);
-                    $cookies.put('token',response.jwt);
-
+                    $cookies.put('role', response.role);
+                    $cookies.put('name', response.name);
+                    $cookies.put('token', response.jwt);
                     // add jwt token to auth header for all requests made by the $http service
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.jwt;
                     // execute callback with true to indicate successful login
@@ -796,10 +761,12 @@ angular.module('signupModule')
         }
 
         function Logout() {
-            // remove user from local storage and clear http auth header
-            angular.forEach($cookies, function (v, k) {
-    $cookieStore.remove(k);
-});            $http.defaults.headers.common.Authorization = '';
+
+        	          $cookies.remove('role');
+                    $cookies.remove('name');
+                    $cookies.remove('token');
+
+            $http.defaults.headers.common.Authorization = '';
         }
     };
 
@@ -834,27 +801,46 @@ angular.module('signupModule')
                     "authData": res
                 });
             },
-            facebookWatchLoginChange: function() {
-                var _self = this;
-                FB.Event.subscribe('auth.authResponseChange', function(res) {
-                    if (res.status === 'connected') {
+            facebookgetLoginStatus: function() {
+                FB.getLoginStatus(function(response) {
+                    if (response.status === 'connected') {
+                        // the user is logged in and has authenticated your
+                        // app, and response.authResponse supplies
+                        // the user's ID, a valid access token, a signed
+                        // request, and the time the access token
+                        // and signed request each expire
                         $rootScope.$broadcast("FBLoginComplete", {
-                            "authData": res
+                            "authData": response
                         });
-                        // _self.facebookGetUserInfo();
-                        /*
-                         This is also the point where you should create a
-                         session for the current user.
-                         For this purpose you can use the data inside the
-                         res.authResponse object.
-                        */
+                        // var uid = response.authResponse.userID;
+                        // var accessToken = response.authResponse.accessToken;
+                    } else if (response.status === 'not_authorized') {
+                        // the user is logged in to Facebook,
+                        // but has not authenticated your app
                     } else {
-                        /*
-                         The user is not logged to the app, or into Facebook:
-                         destroy the session on the server.
-                        */
+                        // the user isn't logged in to Facebook.
                     }
                 });
+            },
+            facebookWatchLoginChange: function() {
+                // var _self = this;
+                // FB.Event.subscribe('auth.authResponseChange', function(res) {
+                //     if (res.status === 'connected') {
+                //         $rootScope.$broadcast("FBLoginComplete", {
+                //             "authData": res
+                //         });
+                //         // _self.facebookGetUserInfo();
+                //          This is also the point where you should create a
+                //          session for the current user.
+                //          For this purpose you can use the data inside the
+                //          res.authResponse object.
+                //     } else {
+                //         /*
+                //          The user is not logged to the app, or into Facebook:
+                //          destroy the session on the server.
+                //         */
+                //     }
+                // });
             },
             googleLogin: function() {
                 var myParams = {
@@ -876,7 +862,25 @@ angular.module('signupModule')
                     version: 'v2.4'
                 });
                 FB.login();
-                this.facebookWatchLoginChange();
+                FB.getLoginStatus(function(response) {
+                    if (response.status === 'connected') {
+                        // the user is logged in and has authenticated your
+                        // app, and response.authResponse supplies
+                        // the user's ID, a valid access token, a signed
+                        // request, and the time the access token
+                        // and signed request each expire
+                        $rootScope.$broadcast("FBLoginComplete", {
+                            "authData": response
+                        });
+                        // var uid = response.authResponse.userID;
+                        // var accessToken = response.authResponse.accessToken;
+                    } else if (response.status === 'not_authorized') {
+                        // the user is logged in to Facebook,
+                        // but has not authenticated your app
+                    } else {
+                        // the user isn't logged in to Facebook.
+                    }
+                });
             }
         };
     };
