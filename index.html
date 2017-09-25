@@ -88,7 +88,7 @@
   <div class="container">
     <div class="col-md-4" ng-repeat="offer in vm.offers track by $index">
       <div class="offer-container">
-        <img ng-src="{{offer.attributes.avatar}}" alt="offer-image">
+        <img ng-src="{{offer.attributes.avatar_thumb}}" alt="offer-image">
         <div class="offer-details">
 
           <button ng-click="vm.getloginpopup(offer.id)">GET CODE!</button>
@@ -99,11 +99,13 @@
           </div>
 
           <p>
-{{offer.attributes.description | limitTo: 130}}
-{{offer.attributes.description.length > 130 ? '...' : ''}}
+{{offer.attributes.description | limitTo: 65}}
+{{offer.attributes.description.length > 65 ? '...' : ''}}
 
           </p>
-          <div class="offer-share">
+          <div class="offer-share" style="    margin: 0px;
+    padding: 0px;
+    padding-top: 10px;">
             <label>SHARE & EARN</label>
             <ul>
               <li class="offer-share-max"><a href="#"></a></li>
@@ -133,19 +135,7 @@
 	</section>
 	<!--End-->
 
-<a
-socialshare
-socialshare-provider="twitter"
-socialshare-text="720kb AngularJS Socialshare"
-socialshare-hashtags="angularjs, angular-socialshare"
-socialshare-url="http://720kb.net">
-Share me
-</a>
 
-<button class="btn btn-medium center-content color-black radius3 bg-white" socialshare=""
-socialshare-provider="facebook" socialshare-url="http://demo.com/#!/">
-             <i class="fa fa-facebook"></i> Facebook
-           </button>
 
 
 	<footer><p>© 2017 All Rights Reserved</p></footer>
