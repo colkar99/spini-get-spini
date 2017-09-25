@@ -19,6 +19,7 @@
 		'ngTouch',
 		'ngSanitize',
 		'ui.router',
+		'ngToast',
 		'home',
 		'refferal',
 		'redeemcoupon',
