@@ -10,7 +10,18 @@
 	*/
 
 	angular.module('angular-app')
-		.factory('homeService', homeService);
+		.factory('homeService', homeService)
+		.factory('_', LodashFactory)
+		;
+
+
+function LodashFactory($window) {
+  if(!$window._){
+  }
+  return $window._;
+}
+// Define dependencies
+LodashFactory.$inject = ['$window'];
 
 	homeService.$inject = ['$http'];
 
