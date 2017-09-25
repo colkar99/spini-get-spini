@@ -599,8 +599,8 @@ display: block;
 .offer-logo-set
 {
       height: 100px !important;
-    width: 50%;
-    margin-top: -22px;
+/*    width: 50%;
+    margin-top: -22px;*/
 }
 
 .offer-logo-set1 {
@@ -792,6 +792,9 @@ display: block;
     padding-bottom: 10px;
 }
 
+.pad5 {
+        padding-top: 5px;
+}
 .poplogo
 {
         height: 50px;
