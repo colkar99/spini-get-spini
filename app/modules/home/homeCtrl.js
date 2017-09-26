@@ -17,6 +17,16 @@
     function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _) {
         /*jshint validthis: true */
         var vm = this;
+        vm.offer_id;
+        var headers = {
+          "Accept": "application/json",
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods' : '*',
+          'Access-Control-Allow-Headers' : 'Content-Type',
+          "Content-Type": 'application/json',
+          // 'Access-Token' : $rootScope.current_user.authentication_token
+          // 'Access-Token' : "$2a$10$Z1QJ46AB.9Qx/IDCIWqnTO20HogZNyOl7ztRDwqzl75nFaCbORNSW",
+        }
         vm.closeLoginPopup = function() {
             document.getElementById("login-popup").style.width = "0%";
         }
@@ -50,14 +60,32 @@
         vm.closeNav = function() {
             document.getElementById("offer-popup").style.width = "0%";
         }
-        vm.getcodepopup = function() {
-            console.log('data');
+        vm.getcodepopup = function(offer_id) {
+             
+            console.log('Offer_id');
             // closeNav()
             document.getElementById("get-code-popup").style.width = "100%";
             document.getElementById("offer-popup").style.width = "0%";
+            vm.offer_id = offer_id ;
+
         }
         vm.closegetcodepopup = function() {
+           
             // openNav()
+            document.getElementById("confirm-code-popup").style.width = "0%";
+            document.getElementById("get-code-popup").style.width = "100%";
+        }
+        vm.closeGetNoPopup = function(){
+            
+            document.getElementById("get-code-popup").style.width = "0%";
+            document.getElementById("offer-popup").style.width = "100%";
+        }
+        vm.openConformPopup = function(){
+            
+            document.getElementById("get-code-popup").style.width = "0%";
+              document.getElementById("confirm-code-popup").style.width = "100%";
+        }
+        vm.closegetMobilepopup = function(){
             document.getElementById("get-code-popup").style.width = "0%";
             document.getElementById("offer-popup").style.width = "100%";
         }
@@ -105,5 +133,25 @@
            window.SelectedCampOffers = vm.SelectedCampOffers;
            return vm.SelectedCampOffers;
        }
+       vm.sentMobileNo = function(mobile){
+        
+        vm.mobile_no = mobile.toString();
+        vm.offer_id;
+        vm.post = {"coupon_code":{"mobile":vm.mobile_no , "offer_id": vm.offer_id}}
+        
+        $http({
+            method : "POST",
+            headers : headers,
+            url : apiBaseURL + '/coupon_codes',
+            data : vm.post
+          }).then(function mySuccess(response) {
+            
+            vm.openConformPopup();
+            }, function myError(response) {
+              $scope.myWelcome = response.statusText;
+          });
+         }
     }
 })();
+
+

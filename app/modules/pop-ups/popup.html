@@ -174,7 +174,7 @@
 <!-- Get Code POPUP mobile no-->
 
 <div id="get-code-popup" class="overlay">
-  <a href="javascript:void(0)" class="closebtn" ng-click="vm.closegetcodepopup()">&times;</a>
+  <a href="javascript:void(0)" class="closebtn" ng-click="vm.closegetMobilepopup()">&times;</a>
   <div class="overlay-content">
     <div class="row ">
 <div class="col-md-8 row col-md-offset-2 white pad-bot0 pad10 ">
@@ -182,7 +182,7 @@
           <div class="col-md-1 nopad">
 
 
-        <i class="fa fa-arrow-left offer-logo-40px mar10" ng-click="vm.closegetcodepopup()" aria-hidden="true"></i>
+        <i class="fa fa-arrow-left offer-logo-40px mar10" ng-click="vm.closeGetNoPopup()" aria-hidden="true"></i>
 
         </div>       <div class="col-md-3 nopad text-left">
 
@@ -203,25 +203,48 @@
 
       <div class="row backcls mar-10px text-left">
         <div class="form-group popupcenter ">
+        <form name="get_coupen" ng-submit="vm.sentMobileNo(mobile)">
           <div class="col-md-8 nopad">
-<label for="usr">Enter your mobile No. to get Code</label>
-  <input type="text" placeholder="Mobile no" class="form-control nbr min40" id="usr">
-
+              <label for="usr">Enter your mobile No. to get Code</label>
+              <input name="mobile" type="number" placeholder="Mobile no" class="form-control nbr min40" id="usr" ng-model="mobile"  maxlength="10" minlength="10" ng-pattern="/^[0-9]+$/" required>
+              <span style="color: red" style="color: red" ng-show="(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.minlength">Minimum 10 digits required.</span>
+               <span style="color: red" style="color: red" ng-show="(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.maxlength">Maximum 13 digits only allowed.</span>
            </div>
            <div class="col-md-4 nopad mar25x">
-    <button type="button" class="btn min40 width100 nbr">SEND CODE!</button>
-    </div>
+              <button type="submit" class="btn min40 width100 nbr" >SEND CODE!</button>
+          </div>
+          
+          </form>
 
 
-  <div class="col-md-12 nopad mar40">
-             <span class="offer-spini">
-           <i class="fa fa-gift link-icon fagift" aria-hidden="true"></i>  SPINI TREASURE
-          </span>
+          <div class="col-md-12 nopad mar40">
+            <span class="offer-spini">
+             <i class="fa fa-gift link-icon fagift" aria-hidden="true"></i>  SPINI TREASURE
+            </span>
+          </div>
 
-        </div>
+          </div>
+          <div class="form-group popupcenter" ng-hide="true">
+        <form name="get_coupen" ng-click="vm.sentMobileNo(mobile)">
+          <div class="col-md-8 nopad">
+              <div class="row">
+                
+              </div>
+           </div>
+           <div class="col-md-4 nopad mar25x">
+              <button type="submit" class="btn min40 width100 nbr" >SEND CODE!</button>
+          </div>
+          
+          </form>
 
 
-</div>
+          <div class="col-md-12 nopad mar40">
+            <span class="offer-spini">
+             <i class="fa fa-gift link-icon fagift" aria-hidden="true"></i>  SPINI TREASURE
+            </span>
+          </div>
+
+          </div>
       </div>
        <div class="row backcls mar-10px text-left dotted">
       <div class="col-md-12 nopad mar40">
@@ -244,6 +267,7 @@
 
 
 </div>
+
   </div>
 </div>
 
@@ -313,7 +337,7 @@
                 </div>
                 <div class="row space-div">
                     <div class="col-md-4">
-                        <button ng-click="vm.getcodepopup()">
+                        <button ng-click="vm.getcodepopup(item.id)">
                             GET CODE!
                         </button>
                     </div>
