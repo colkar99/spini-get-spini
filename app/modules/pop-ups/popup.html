@@ -203,7 +203,7 @@
 
       <div class="row backcls mar-10px text-left">
         <div class="form-group popupcenter ">
-        <form name="get_coupen" ng-submit="vm.sentMobileNo(mobile)">
+        <form name="get_coupen" ng-submit="vm.sentMobileNo(mobile)" novalidate>
           <div class="col-md-8 nopad">
               <label for="usr">Enter your mobile No. to get Code</label>
               <input name="mobile" type="number" placeholder="Mobile no" class="form-control nbr min40" id="usr" ng-model="mobile"  maxlength="10" minlength="10" ng-pattern="/^[0-9]+$/" required>
@@ -211,7 +211,7 @@
                <span style="color: red" style="color: red" ng-show="(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.maxlength">Maximum 13 digits only allowed.</span>
            </div>
            <div class="col-md-4 nopad mar25x">
-              <button type="submit" class="btn min40 width100 nbr" >SEND CODE!</button>
+              <button type="submit" class="btn min40 width100 nbr" ng-disabled="get_coupen.$invalid">SEND CODE!</button>
           </div>
           
           </form>
@@ -224,27 +224,7 @@
           </div>
 
           </div>
-          <div class="form-group popupcenter" ng-hide="true">
-        <form name="get_coupen" ng-click="vm.sentMobileNo(mobile)">
-          <div class="col-md-8 nopad">
-              <div class="row">
-                
-              </div>
-           </div>
-           <div class="col-md-4 nopad mar25x">
-              <button type="submit" class="btn min40 width100 nbr" >SEND CODE!</button>
-          </div>
           
-          </form>
-
-
-          <div class="col-md-12 nopad mar40">
-            <span class="offer-spini">
-             <i class="fa fa-gift link-icon fagift" aria-hidden="true"></i>  SPINI TREASURE
-            </span>
-          </div>
-
-          </div>
       </div>
        <div class="row backcls mar-10px text-left dotted">
       <div class="col-md-12 nopad mar40">
