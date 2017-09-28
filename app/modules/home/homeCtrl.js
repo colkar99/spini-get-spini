@@ -7,17 +7,21 @@
      * # HomeCtrl
      * Controller of the app
      */
-    angular.module('angular-app').controller('HomeCtrl', Home);
-    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_'];
+    angular.module('angular-app')
+    .controller('HomeCtrl', Home);
+    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_','$scope'];
     /*
      * recommend
      * Using function declarations
      * and bindable members up top.
      */
-    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _) {
+    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _,$scope) {
         /*jshint validthis: true */
         var vm = this;
         vm.offer_id;
+        $scope.filter_items = new Array();
+         vm.compaigns = [];
+         vm.overall_compaigns = [];
         var headers = {
           "Accept": "application/json",
           'Access-Control-Allow-Origin' : '*',
@@ -92,16 +96,20 @@
 
         vm.getOffers = function() {
             $http.get(apiBaseURL + '/home/offers').then(function(response) {
+              
                 if(response)
                 {
                 var response = response.data.data;
+                $scope.filter_items.push(response);
                 vm.offers = [];
-                vm.compaigns = [];
+               vm.compaigns = [];
                 vm.offers = response;
+                vm.overall_compaigns = response;
                 vm.compaigns = _.uniqBy(response, function(e) {
 
                     return e.attributes.campaign_id;
                 });
+                vm.overall_compaigns = vm.compaigns;
             }
             });
         }
@@ -151,6 +159,61 @@
               $scope.myWelcome = response.statusText;
           });
          }
+         vm.filter_by_food = function(some){
+          vm.filter_items = some;
+          vm.compaigns = [];
+          
+          for (var i=0;i <= vm.filter_items.length; i++)
+              { 
+                if(vm.filter_items[i].attributes.offer_category_id == 1 )
+                {
+                 
+                 vm.compaigns.push(vm.filter_items[i]);
+                 console.log(vm.compaigns);
+
+                } 
+             }
+            
+            return vm.compaigns;
+         };
+         vm.filter_by_beauty = function(some){
+          
+          vm.filter_items = some;
+          vm.compaigns = [];
+          
+          for (var i=0;i <= vm.filter_items.length; i++)
+              { 
+                if(vm.filter_items[i].attributes.offer_category_id == 2 )
+                {
+                 
+                 
+                 vm.compaigns.push(vm.filter_items[i]);
+                 console.log(vm.compaigns);
+
+                } 
+             }
+            
+            return vm.compaigns;
+         };
+         vm.filter_by_personal_need = function(some){
+          
+          vm.filter_items = some;
+          vm.compaigns = [];
+          
+          for (var i=0;i <= vm.filter_items.length; i++)
+              { 
+                if(vm.filter_items[i].attributes.offer_category_id == 4 )
+                {
+                 
+                 
+                 vm.compaigns.push(vm.filter_items[i]);
+                 console.log(vm.compaigns);
+
+                } 
+             }
+            
+            return vm.compaigns;
+         };
     }
 })();
 

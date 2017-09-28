@@ -30,6 +30,37 @@
 		<div class="view-slide-in" ui-view>
 
 <div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <nav class="main-header-navigation">
+          <ul>
+            <li class="main-nav-education"><a href="#" ng-click="vm.getOffers()">All</a></li>
+            <li class="main-nav-food" ><a href="#" ng-click="vm.filter_by_food(vm.overall_compaigns)" >Food</a></li>
+            <!-- <li class="main-nav-education"><a href="#" >Education</a></li> -->
+            <li class="main-nav-beauty"><a href="#" ng-click="vm.filter_by_beauty(vm.overall_compaigns)">Beauty</a></li>
+            <li class="main-nav-travel"><a href="#">Travel</a></li>
+            <li class="main-nav-personal_needs"><a href="#" ng-click="vm.filter_by_personal_need(vm.overall_compaigns)">Personal needs</a></li>
+            <li class="main-nav-gadgets"><a href="#">Gadgets</a></li>
+            <li class="main-nav-clothing"><a href="#">Clothing</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-md-2 main-header-location">
+        <i class="glyphicon glyphicon-map-marker"></i>
+        <div class="dropdown">
+          <span class="dropdown-toggle" type="button" data-toggle="dropdown">Chennai
+          </span><span class="caret"></span>
+          <ul class="dropdown-menu">
+            <li><a href="#">Chennai</a></li>
+            <li><a href="#">Madurai</a></li>
+            <li><a href="#">Pondy</a></li>
+            <li><a href="#">kanchepuram</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 			<!-- slider code -->
 <section class="main-slider">
   <div class="container">
@@ -86,7 +117,7 @@
 
 <section class="offers-grid" ng-init="vm.getOffers()">
   <div class="container">
-    <div class="col-md-4" ng-repeat="offer in vm.compaigns track by $index">
+    <div class="col-md-4" ng-repeat="offer in vm.compaigns track by $index ">
       <div class="offer-container">
         <img ng-src="{{offer.attributes.avatar_thumb}}" alt="offer-image">
         <div class="offer-details">

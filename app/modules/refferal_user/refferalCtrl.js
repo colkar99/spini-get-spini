@@ -27,7 +27,9 @@
 		vm.title = "Hello, angular-app!";
 		vm.version = "1.0.0";
 		vm.listFeatures = refferalService.getFeaturesList();
-
+		vm.required = function(){
+			alert("This will move to your wallet once redeemed") 
+		};
 		if(LoginService.isReferral())
 		{
 		$http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();

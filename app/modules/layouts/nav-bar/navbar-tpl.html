@@ -1,5 +1,5 @@
 <!-- header section -->
-<header>
+<header ng-controller="HomeCtrl as menu" >
   <div class="container">
     <div class="row main-header">
       <div class="col-md-2 main-header-logo">
@@ -14,7 +14,7 @@
       <div class="col-md-2 main-header-partner">
         <button>Become our partner</button>
       </div>
-      <div class="col-md-2 main-header-signin" ng-controller="HomeCtrl as menu" >
+      <div class="col-md-2 main-header-signin" >
         <a  ng-click="menu.open = true" ng-hide="menu.isReferral()">Sign In <img src="/app/assets/images/header/UserIcon@2x.png"></a>
         <a  ng-click="menu.open = true" ng-show="menu.isReferral()">MyAccount <img src="/app/assets/images/header/UserIcon@2x.png"></a>
 
@@ -42,36 +42,6 @@
     </div>
   </div>
   <hr>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-10">
-        <nav class="main-header-navigation">
-          <ul>
-            <li class="main-nav-food"><a href="#">Food</a></li>
-            <li class="main-nav-education"><a href="#">Education</a></li>
-            <li class="main-nav-beauty"><a href="#">Beauty</a></li>
-            <li class="main-nav-travel"><a href="#">Travel</a></li>
-            <li class="main-nav-personal_needs"><a href="#">Personal needs</a></li>
-            <li class="main-nav-gadgets"><a href="#">Gadgets</a></li>
-            <li class="main-nav-clothing"><a href="#">Clothing</a></li>
-          </ul>
-        </nav>
-      </div>
-      <div class="col-md-2 main-header-location">
-        <i class="glyphicon glyphicon-map-marker"></i>
-        <div class="dropdown">
-          <span class="dropdown-toggle" type="button" data-toggle="dropdown">Chennai
-          </span><span class="caret"></span>
-          <ul class="dropdown-menu">
-            <li><a href="#">Chennai</a></li>
-            <li><a href="#">Madurai</a></li>
-            <li><a href="#">Pondy</a></li>
-            <li><a href="#">kanchepuram</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
 </header>
 <style type="text/css">
   .manage-account{
