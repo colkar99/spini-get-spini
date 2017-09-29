@@ -30,6 +30,17 @@
             return false;
         }
 
+
+        function isVendor() {
+            if ($cookies.get('role')) {
+                if ($cookies.get('role') == 'vendor') {
+                    return true
+                }
+            }
+            return false;
+        }
+
+
         function authToken() {
             if ($cookies.get('token')) {
                 return $cookies.get('token');
@@ -65,6 +76,10 @@
                     $cookies.put('role', response.role);
                     $cookies.put('name', response.name);
                     $cookies.put('token', response.jwt);
+                    if(response.mobile)
+                    {
+                    $cookies.put('mobile', response.mobile);
+                    }
                     // add jwt token to auth header for all requests made by the $http service
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.jwt;
                     // execute callback with true to indicate successful login
@@ -168,6 +183,39 @@
                 };
                 gapi.auth.signIn(myParams);
             },
+
+             vendorFacebookLogin: function() {
+                var _self = this;
+                FB.init({
+                    appId: '131797584045674',
+                    status: true,
+                    cookie: true,
+                    xfbml: true,
+                    version: 'v2.4'
+                });
+                FB.login();
+                FB.getLoginStatus(function(response) {
+                    if (response.status === 'connected') {
+                        // the user is logged in and has authenticated your
+                        // app, and response.authResponse supplies
+                        // the user's ID, a valid access token, a signed
+                        // request, and the time the access token
+                        // and signed request each expire
+                        $rootScope.$broadcast("FBLoginCompleteVendor", {
+                            "authData": response
+                        });
+                        // var uid = response.authResponse.userID;
+                        // var accessToken = response.authResponse.accessToken;
+                    } else if (response.status === 'not_authorized') {
+                        // the user is logged in to Facebook,
+                        // but has not authenticated your app
+                    } else {
+                        // the user isn't logged in to Facebook.
+                    }
+                });
+            }
+            ,
+
             facebookLogin: function() {
                 var _self = this;
                 FB.init({

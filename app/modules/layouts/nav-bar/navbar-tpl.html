@@ -12,7 +12,7 @@
         <button></button>
       </div>
       <div class="col-md-2 main-header-partner">
-        <button>Become our partner</button>
+        <button ng-click="menu.signupPOP('vendor');">Become our partner</button>
       </div>
       <div class="col-md-2 main-header-signin" >
         <a  ng-click="menu.open = true" ng-hide="menu.isReferral()">Sign In <img src="/app/assets/images/header/UserIcon@2x.png"></a>
@@ -22,8 +22,8 @@
           <i class="glyphicon glyphicon-remove-circle" ng-click="menu.open = false"></i>
           <b>Your Account</b>
           <p>Access account and manage offers</p>
-          <button ng-click="menu.open = false;menu.signupPOP();">SIGN UP</button>
-          <button ng-click="menu.open = false;menu.openLoginPopup();">LOGIN</button>
+          <button ng-click="menu.open = false;menu.signupPOP('referral');">SIGN UP</button>
+          <button ng-click="menu.open = false;menu.openLoginPopup('referral');">LOGIN</button>
 
         </div>
 

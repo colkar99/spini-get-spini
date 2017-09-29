@@ -19,6 +19,7 @@
         /*jshint validthis: true */
         var vm = this;
         vm.offer_id;
+        window.loginRole = 'vendor';
         $scope.filter_items = new Array();
          vm.compaigns = [];
          vm.overall_compaigns = [];
@@ -34,7 +35,9 @@
         vm.closeLoginPopup = function() {
             document.getElementById("login-popup").style.width = "0%";
         }
-        vm.openLoginPopup = function() {
+        vm.openLoginPopup = function(data) {
+
+            window.loginRole = data;
             document.getElementById("login-popup").style.width = "100%";
         }
 
@@ -49,8 +52,9 @@
         vm.closeSlidepopup = function() {
             document.getElementById("offer-popup").style.width = "0%";
         }
-        vm.signupPOP = function() {
+        vm.signupPOP = function(data) {
             // closeNav()
+            window.loginRole = data;
             document.getElementById("login-signup").style.width = "100%";
         }
         vm.signupPOPClose = function() {
