@@ -25,6 +25,7 @@
 		'redeemcoupon',
 		'loginModule',
 		'signupModule',
+		'timer',
 		'720kb.socialshare',
 
 	]);

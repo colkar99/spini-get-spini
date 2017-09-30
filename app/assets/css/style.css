@@ -922,3 +922,12 @@ background: white;
     font-weight: 200;
     padding-top: 5px;
 }
+
+.carousel-indicators {
+  
+    z-index: 1;
+    }
+
+.overlay-content .carousel-indicators {
+    display: none;
+}

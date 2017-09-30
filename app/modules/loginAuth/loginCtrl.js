@@ -77,6 +77,8 @@
             console.log(args)
         });
         vm.FbLogin = function() {
+
+            console.log(window.loginRole)
             if (window.loginRole == 'vendor') {
               console.log('vendor')
                 SocialLoginService.vendorFacebookLogin();

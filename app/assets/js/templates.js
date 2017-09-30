@@ -819,7 +819,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "            <div class=\"col-md-8 row col-md-offset-2 white pad-bot0 pad10 \">\n" +
     "                <div class=\"row mar20bt\">\n" +
     "                    <div class=\"col-md-1 nopad ico\">\n" +
-    "                        <i aria-hidden=\"true\" class=\"fa fa-arrow-left offer-logo-40px mar10\" ng-click=\"vm.closeGetNoPopup()\">\n" +
+    "                        <i aria-hidden=\"true\" class=\"fa fa-arrow-left offer-logo-40px mar10\" ng-click=\"vm.closegetcodepopup()\">\n" +
     "                        </i>\n" +
     "                    </div>\n" +
     "\n" +
@@ -1044,7 +1044,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                <!-- </ol> -->\n" +
     "                                <!-- <div class=\"carousel-inner\"> -->\n" +
     "                                <!-- <div class=\"active item\"> -->\n" +
-    "                                <img \"=\"\" alt=\"...\" class=\"fixed-height\" src=\"{{item.attributes.avatar_thumb}}\" style=\"width: 100% !important;\">\n" +
+    "                                <img \"=\"\" alt=\"...\" class=\"fixed-height\" src=\"{{item.attributes.avatar}}\" style=\"width: 100% !important;\">\n" +
     "                                    <!-- </div> -->\n" +
     "                                    <!--    <div class=\"item\">\n" +
     "              <img class=\"fixed-height\" src=\"http://placehold.it/1200x400\" alt=\"...\">\n" +
@@ -1143,15 +1143,22 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                            OFFERS END IN\n" +
     "                                        </label>\n" +
     "                                        <p class=\"right timers\">\n" +
-    "                                            {{item.attributes.end_date | date:'medium'}}\n" +
+    "\n" +
+    "                                            <timer \n" +
+    " end-time=\"vm.unixtime(item.attributes.end_date)\" max-time-unit=\"'day'\" interval=\"1000\"\n" +
+    "\n" +
+    "                                            >{{days}} days, {{hhours}}:{{mminutes}}:{{sseconds}}</timer>\n" +
+    "\n" +
+    "\n" +
+    "                                         \n" +
     "                                        </p>\n" +
     "                                    </div>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
-    "                            <span class=\"tes\">\n" +
+    "                        <!--     <span class=\"tes\">\n" +
     "                                <img class=\"roate-270\" src=\"/app/assets/images/icons8-Expand%20Arrow-64.png\">\n" +
     "                                \n" +
-    "                            </span>\n" +
+    "                            </span> -->\n" +
     "                            <!-- <span class=\"tes1\">\n" +
     "  <img class=\"roate-90\" src=\"/app/assets/images/icons8-Expand%20Arrow-64.png\">\n" +
     "</span> -->\n" +

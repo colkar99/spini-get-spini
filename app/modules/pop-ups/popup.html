@@ -311,7 +311,7 @@
                                 <!-- </ol> -->
                                 <!-- <div class="carousel-inner"> -->
                                 <!-- <div class="active item"> -->
-                                <img "="" alt="..." class="fixed-height" src="{{item.attributes.avatar_thumb}}" style="width: 100% !important;">
+                                <img "="" alt="..." class="fixed-height" src="{{item.attributes.avatar}}" style="width: 100% !important;">
                                     <!-- </div> -->
                                     <!--    <div class="item">
               <img class="fixed-height" src="http://placehold.it/1200x400" alt="...">
@@ -410,15 +410,22 @@
                                             OFFERS END IN
                                         </label>
                                         <p class="right timers">
-                                            {{item.attributes.end_date | date:'medium'}}
+
+                                            <timer 
+ end-time="vm.unixtime(item.attributes.end_date)" max-time-unit="'day'" interval="1000"
+
+                                            >{{days}} days, {{hhours}}:{{mminutes}}:{{sseconds}}</timer>
+
+
+                                         
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <span class="tes">
+                        <!--     <span class="tes">
                                 <img class="roate-270" src="/app/assets/images/icons8-Expand%20Arrow-64.png">
                                 
-                            </span>
+                            </span> -->
                             <!-- <span class="tes1">
   <img class="roate-90" src="/app/assets/images/icons8-Expand%20Arrow-64.png">
 </span> -->

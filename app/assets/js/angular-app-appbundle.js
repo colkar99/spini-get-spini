@@ -29,6 +29,7 @@
 		'redeemcoupon',
 		'loginModule',
 		'signupModule',
+		'timer',
 		'720kb.socialshare',
 
 	]);
@@ -50,7 +51,7 @@
     configure.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
 
     function configure($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-        //$locationProvider.html5Mode(true).hashPrefix('!');
+        $locationProvider.html5Mode(true).hashPrefix('!');
         // This is required for Browser Sync to work poperly
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         $urlRouterProvider.otherwise('/');
@@ -318,7 +319,7 @@ angular.module('signupModule')
         /*jshint validthis: true */
         var vm = this;
         vm.offer_id;
-        window.loginRole = 'vendor';
+        window.loginRole = 'refferal';
         $scope.filter_items = new Array();
         vm.compaigns = [];
         vm.overall_compaigns = [];
@@ -517,6 +518,16 @@ angular.module('signupModule')
                 }
             }
             return vm.compaigns;
+        };      
+
+        vm.unixtime = function(date) {
+
+         var dateSplitted = date.split('-'); // date must be in DD-MM-YYYY format
+    var formattedDate = dateSplitted[0]+'/'+dateSplitted[1]+'/'+dateSplitted[2];
+
+   
+    return new Date(formattedDate).getTime();
+
         };
     }
 })();
@@ -634,6 +645,8 @@ angular.module('signupModule')
             console.log(args)
         });
         vm.FbLogin = function() {
+
+            console.log(window.loginRole)
             if (window.loginRole == 'vendor') {
               console.log('vendor')
                 SocialLoginService.vendorFacebookLogin();

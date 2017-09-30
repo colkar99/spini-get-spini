@@ -217,6 +217,16 @@
                 }
             }
             return vm.compaigns;
+        };      
+
+        vm.unixtime = function(date) {
+
+         var dateSplitted = date.split('-'); // date must be in DD-MM-YYYY format
+    var formattedDate = dateSplitted[0]+'/'+dateSplitted[1]+'/'+dateSplitted[2];
+
+   
+    return new Date(formattedDate).getTime();
+
         };
     }
 })();
