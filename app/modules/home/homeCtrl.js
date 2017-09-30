@@ -18,7 +18,7 @@
         /*jshint validthis: true */
         var vm = this;
         vm.offer_id;
-        window.loginRole = 'vendor';
+        window.loginRole = 'refferal';
         $scope.filter_items = new Array();
         vm.compaigns = [];
         vm.overall_compaigns = [];
