@@ -818,7 +818,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "  <div class=\"row \"  ng-repeat=\"item in vm.getSelectedOfferData()\">\n" +
     "            <div class=\"col-md-8 row col-md-offset-2 white pad-bot0 pad10 \">\n" +
     "                <div class=\"row mar20bt\">\n" +
-    "                    <div class=\"col-md-1 nopad\">\n" +
+    "                    <div class=\"col-md-1 nopad ico\">\n" +
     "                        <i aria-hidden=\"true\" class=\"fa fa-arrow-left offer-logo-40px mar10\" ng-click=\"vm.closeGetNoPopup()\">\n" +
     "                        </i>\n" +
     "                    </div>\n" +
@@ -940,7 +940,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "        <div class=\"row \"  ng-repeat=\"item in vm.getSelectedOfferData()\">\n" +
     "            <div class=\"col-md-8 row col-md-offset-2 white pad-bot0 pad10 \">\n" +
     "                <div class=\"row mar20bt\">\n" +
-    "                    <div class=\"col-md-1 nopad\">\n" +
+    "                    <div class=\"col-md-1 nopad ico\">\n" +
     "                        <i aria-hidden=\"true\" class=\"fa fa-arrow-left offer-logo-40px mar10\" ng-click=\"vm.closeGetNoPopup()\">\n" +
     "                        </i>\n" +
     "                    </div>\n" +
