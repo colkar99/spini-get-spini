@@ -128,6 +128,9 @@ module.exports = function (grunt) {
 			production: {
 				files: {
 					'index.html': [
+									'bower.json',
+						'app/app.js',
+						'app/app.config.js',
 						'app/assets/css/**/*.css',
 						'app/assets/js/*.js'
 					]
