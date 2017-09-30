@@ -2,6 +2,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
   'use strict';
 
   $templateCache.put('app/modules/home/home.html',
+    "\n" +
     "<!-- slider code -->\n" +
     "<section class=\"main-slider\">\n" +
     "  <div class=\"container\">\n" +
@@ -615,7 +616,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('app/modules/layouts/nav-bar/navbar-tpl.html',
     "<!-- header section -->\n" +
-    "<header>\n" +
+    "<header ng-controller=\"HomeCtrl as menu\" >\n" +
     "  <div class=\"container\">\n" +
     "    <div class=\"row main-header\">\n" +
     "      <div class=\"col-md-2 main-header-logo\">\n" +
@@ -628,9 +629,9 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "        <button></button>\n" +
     "      </div>\n" +
     "      <div class=\"col-md-2 main-header-partner\">\n" +
-    "        <button>Become our partner</button>\n" +
+    "        <button ng-click=\"menu.signupPOP('vendor');\">Become our partner</button>\n" +
     "      </div>\n" +
-    "      <div class=\"col-md-2 main-header-signin\" ng-controller=\"HomeCtrl as menu\" >\n" +
+    "      <div class=\"col-md-2 main-header-signin\" >\n" +
     "        <a  ng-click=\"menu.open = true\" ng-hide=\"menu.isReferral()\">Sign In <img src=\"/app/assets/images/header/UserIcon@2x.png\"></a>\n" +
     "        <a  ng-click=\"menu.open = true\" ng-show=\"menu.isReferral()\">MyAccount <img src=\"/app/assets/images/header/UserIcon@2x.png\"></a>\n" +
     "\n" +
@@ -638,8 +639,8 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "          <i class=\"glyphicon glyphicon-remove-circle\" ng-click=\"menu.open = false\"></i>\n" +
     "          <b>Your Account</b>\n" +
     "          <p>Access account and manage offers</p>\n" +
-    "          <button ng-click=\"menu.open = false;menu.signupPOP();\">SIGN UP</button>\n" +
-    "          <button ng-click=\"menu.open = false;menu.openLoginPopup();\">LOGIN</button>\n" +
+    "          <button ng-click=\"menu.open = false;menu.signupPOP('referral');\">SIGN UP</button>\n" +
+    "          <button ng-click=\"menu.open = false;menu.openLoginPopup('referral');\">LOGIN</button>\n" +
     "\n" +
     "        </div>\n" +
     "\n" +
@@ -658,36 +659,6 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    </div>\n" +
     "  </div>\n" +
     "  <hr>\n" +
-    "  <div class=\"container\">\n" +
-    "    <div class=\"row\">\n" +
-    "      <div class=\"col-md-10\">\n" +
-    "        <nav class=\"main-header-navigation\">\n" +
-    "          <ul>\n" +
-    "            <li class=\"main-nav-food\"><a href=\"#\">Food</a></li>\n" +
-    "            <li class=\"main-nav-education\"><a href=\"#\">Education</a></li>\n" +
-    "            <li class=\"main-nav-beauty\"><a href=\"#\">Beauty</a></li>\n" +
-    "            <li class=\"main-nav-travel\"><a href=\"#\">Travel</a></li>\n" +
-    "            <li class=\"main-nav-personal_needs\"><a href=\"#\">Personal needs</a></li>\n" +
-    "            <li class=\"main-nav-gadgets\"><a href=\"#\">Gadgets</a></li>\n" +
-    "            <li class=\"main-nav-clothing\"><a href=\"#\">Clothing</a></li>\n" +
-    "          </ul>\n" +
-    "        </nav>\n" +
-    "      </div>\n" +
-    "      <div class=\"col-md-2 main-header-location\">\n" +
-    "        <i class=\"glyphicon glyphicon-map-marker\"></i>\n" +
-    "        <div class=\"dropdown\">\n" +
-    "          <span class=\"dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">Chennai\n" +
-    "          </span><span class=\"caret\"></span>\n" +
-    "          <ul class=\"dropdown-menu\">\n" +
-    "            <li><a href=\"#\">Chennai</a></li>\n" +
-    "            <li><a href=\"#\">Madurai</a></li>\n" +
-    "            <li><a href=\"#\">Pondy</a></li>\n" +
-    "            <li><a href=\"#\">kanchepuram</a></li>\n" +
-    "          </ul>\n" +
-    "        </div>\n" +
-    "      </div>\n" +
-    "    </div>\n" +
-    "  </div>\n" +
     "</header>\n" +
     "<style type=\"text/css\">\n" +
     "  .manage-account{\n" +
@@ -760,389 +731,458 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('app/modules/pop-ups/popup.html',
-    "\n" +
-    " <toast></toast>\n" +
-    "\n" +
+    "<toast>\n" +
+    "</toast>\n" +
     "<!-- login POPUP -->\n" +
-    "\n" +
-    "<div id=\"login-popup\" class=\"overlay\" >\n" +
-    "  <a href=\"javascript:void(0)\" class=\"closebtn\" ng-click=\"vm.closepopup()\">&times;</a>\n" +
-    "  <div class=\"overlay-content\">\n" +
-    "    <div class=\"row \">\n" +
-    "<div class=\"col-md-4 row col-md-offset-4 white nopad\">\n" +
-    "<div class=\"text-center bg-grey nopad pad-bot-10\">\n" +
-    "  <img class=\"poplogo\" src=\"/app/assets/images/header/Logo@2x.png\">\n" +
-    "\n" +
-    "\n" +
-    "<h3> SPINI SIGN IN </h3>\n" +
-    "<br/>\n" +
-    "<h5> Share & Earn Spini Treasure..!!!</h5>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"text-center temp\" ng-controller=\"LoginCtrl as vm\">\n" +
-    "   <button class=\"btn btn-block fbbutton \" ng-click=\"vm.FbLogin('facebook')\">\n" +
-    "    <span class=\"fa fa-facebook left falign\"></span> Sign in with Facebook\n" +
-    "  </button>\n" +
-    "\n" +
-    "     <button g-login class=\"btn btn-block gbutton\" ng-click=\"vm.GoogleLogin('google')\">\n" +
-    "    <span class=\"fa fa-google left falign\" ></span> Sign in with Google\n" +
-    "  </button>\n" +
-    "\n" +
-    "</div>\n" +
-    "<div>\n" +
-    "\n" +
-    "</div>\n" +
-    "  </div>\n" +
-    "</div>\n" +
-    "</div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<!-- end login code -->\n" +
-    "\n" +
-    "\n" +
-    "<!-- login POPUP -->\n" +
-    "\n" +
-    "<div id=\"login-signup\" class=\"overlay\" >\n" +
-    "  <a href=\"javascript:void(0)\" class=\"closebtn\" ng-click=\"vm.signupPOPClose()\">&times;</a>\n" +
-    "  <div class=\"overlay-content\">\n" +
-    "    <div class=\"row \">\n" +
-    "<div class=\"col-md-4 row col-md-offset-4 white nopad\">\n" +
-    "<div class=\"text-center bg-grey nopad pad-bot-10\">\n" +
-    "  <img class=\"poplogo\" src=\"/app/assets/images/header/Logo@2x.png\">\n" +
-    "\n" +
-    "\n" +
-    "<h3> SIGN UP WITH SPINI </h3>\n" +
-    "<br/>\n" +
-    "<h5> Share & Earn Spini Treasure..!!!</h5>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"text-center temp\" ng-controller=\"signupCtrl as vm\">\n" +
-    "\n" +
-    "   <button class=\"btn btn-block fbbutton \" ng-click=\"vm.FbRegister('facebook')\">\n" +
-    "    <span class=\"fa fa-facebook left falign\"></span> Sign UP with Facebook\n" +
-    "  </button>\n" +
-    "\n" +
-    "     <button g-login class=\"btn btn-block gbutton\" ng-click=\"vm.GoogleRegister('google')\">\n" +
-    "    <span class=\"fa fa-google left falign\" ></span> Sign UP with Google\n" +
-    "  </button>\n" +
-    "\n" +
-    "</div>\n" +
-    "<div>\n" +
-    "\n" +
-    "</div>\n" +
-    "  </div>\n" +
-    "</div>\n" +
-    "</div>\n" +
-    "</div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "<!-- end login code -->\n" +
-    "\n" +
-    "\n" +
-    "<!-- Get Code POPUP -->\n" +
-    "\n" +
-    "<div id=\"confirm-code-popup\" class=\"overlay\">\n" +
-    "  <a href=\"javascript:void(0)\" class=\"closebtn\" onclick=\"closegetcodepopup()\">&times;</a>\n" +
-    "  <div class=\"overlay-content\">\n" +
-    "    <div class=\"row \">\n" +
-    "<div class=\"col-md-8 row col-md-offset-2 white pad-bot0 pad10 \">\n" +
-    "      <div class=\"row mar20bt\">\n" +
-    "          <div class=\"col-md-1 nopad\">\n" +
-    "\n" +
-    "\n" +
-    "        <i class=\"fa fa-arrow-left offer-logo-40px mar10\" ng-click=\"closegetcodepopup()\" aria-hidden=\"true\"></i>\n" +
-    "\n" +
-    "        </div>       <div class=\"col-md-3 nopad text-left\">\n" +
-    "\n" +
-    "\n" +
-    "          <h4 class=\"mar10\"> <b>Flat 15% Off</b></h4>\n" +
-    "               <div class=\"offer-location\">\n" +
-    "            <b>At Cream & Fudge at - </b><span>T.Nagar</span>\n" +
-    "          </div>\n" +
-    "        </div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "                  <div class=\"col-md-8 text-right nopad\">\n" +
-    "        <img class=\"offer-logo-set1\" src=\"/app/assets/images/05Cards/Card-Logo-CnF.png\">\n" +
-    "        </div>\n" +
-    "        <hr>\n" +
-    "      </div>\n" +
-    "\n" +
-    "      <div class=\"row backcls mar-10px text-left\">\n" +
-    "        <div class=\"form-group popupcenter padtop40 \">\n" +
-    "          <div class=\"col-md-12 nopad text-center\">\n" +
-    "            <h4 class=\"marbt20\"> Hi Kalidass </h4>\n" +
-    "            <h4 class=\"marbt20\">Availing this offer will add Rs.200 to your Spini Wallet! </h4>\n" +
-    "            <h4 class=\"marbt20\"> Offer code will be send to your registered mobile No - 9524609638 </h4>\n" +
-    "\n" +
-    "\n" +
-    "    <button type=\"button\" class=\"btn min40 btnwid50 nbr\">SEND CODE!</button>\n" +
-    "    </div>\n" +
-    " <div class=\"col-md-12 nopad gpad text-center\">\n" +
-    "             <span class=\"offer-spini\">\n" +
-    "           <i class=\"fa fa-share-alt-square link-icon\" aria-hidden=\"true\"></i>  SHARE & EARN\n" +
-    "          </span>\n" +
-    "\n" +
-    "        </div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "</div>\n" +
-    "      </div>\n" +
-    "       <div class=\"row backcls mar-10px text-left dotted\">\n" +
-    "      <div class=\"col-md-12 nopad mar45\">\n" +
-    "        <div class=\"col-md-8\">\n" +
-    "\n" +
-    "          <p class=\"font15px popupfoot1  \">\n" +
-    "          <b>Further more sharing this code will earn you </b>\n" +
-    "          <br/>\n" +
-    "\n" +
-    "          <b >Rs.200 each time it's availed</b>\n" +
-    "\n" +
-    "        </p>\n" +
-    "\n" +
-    "       <div class=\"social pad-bot10 padtop30 popupfoot1\">\n" +
-    "  <a class=\"fa fa-twitter twitter\" title=\"\" target=\"_blank\" href=\"#\"></a>\n" +
-    "  <a class=\"fa fa-facebook fb\" title=\"\" target=\"_blank\" href=\"#\"></a>\n" +
-    "  <a class=\"fa fa-clone clone\" title=\"\" target=\"_blank\" href=\"#\"></a>\n" +
-    "</div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"col-md-4 text-center\">\n" +
-    "\n" +
-    "<h1 class=\"b\">Rs.200</h1>\n" +
-    "\n" +
-    "<p>\n" +
-    "  Earn real cash while you enjoy Spini offers!!\n" +
-    "</p>\n" +
-    "          </div>\n" +
-    "        </div>\n" +
-    "</div>\n" +
-    "</div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "</div>\n" +
-    "  </div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<!-- end get code -->\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "<!-- Get Code POPUP mobile no-->\n" +
-    "\n" +
-    "<div id=\"get-code-popup\" class=\"overlay\">\n" +
-    "  <a href=\"javascript:void(0)\" class=\"closebtn\" onclick=\"closegetcodepopup()\">&times;</a>\n" +
-    "  <div class=\"overlay-content\">\n" +
-    "    <div class=\"row \">\n" +
-    "<div class=\"col-md-8 row col-md-offset-2 white pad-bot0 pad10 \">\n" +
-    "      <div class=\"row mar20bt\">\n" +
-    "          <div class=\"col-md-1 nopad\">\n" +
-    "\n" +
-    "\n" +
-    "        <i class=\"fa fa-arrow-left offer-logo-40px mar10\" ng-click=\"vm.closegetcodepopup()\" aria-hidden=\"true\"></i>\n" +
-    "\n" +
-    "        </div>       <div class=\"col-md-3 nopad text-left\">\n" +
-    "\n" +
-    "\n" +
-    "          <h4 class=\"mar10\"> <b>Flat 15% Off</b></h4>\n" +
-    "               <div class=\"offer-location\">\n" +
-    "            <b>At Cream & Fudge at - </b><span>T.Nagar</span>\n" +
-    "          </div>\n" +
-    "        </div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "                  <div class=\"col-md-8 text-right nopad\">\n" +
-    "        <img class=\"offer-logo-set1\" src=\"/app/assets/images/05Cards/Card-Logo-CnF.png\">\n" +
-    "        </div>\n" +
-    "        <hr>\n" +
-    "      </div>\n" +
-    "\n" +
-    "      <div class=\"row backcls mar-10px text-left\">\n" +
-    "        <div class=\"form-group popupcenter \">\n" +
-    "          <div class=\"col-md-8 nopad\">\n" +
-    "<label for=\"usr\">Enter your mobile No. to get Code</label>\n" +
-    "  <input type=\"text\" placeholder=\"Mobile no\" class=\"form-control nbr min40\" id=\"usr\">\n" +
-    "\n" +
-    "           </div>\n" +
-    "           <div class=\"col-md-4 nopad mar25x\">\n" +
-    "    <button type=\"button\" class=\"btn min40 width100 nbr\">SEND CODE!</button>\n" +
-    "    </div>\n" +
-    "\n" +
-    "\n" +
-    "  <div class=\"col-md-12 nopad mar40\">\n" +
-    "             <span class=\"offer-spini\">\n" +
-    "           <i class=\"fa fa-gift link-icon fagift\" aria-hidden=\"true\"></i>  SPINI TREASURE\n" +
-    "          </span>\n" +
-    "\n" +
-    "        </div>\n" +
-    "\n" +
-    "\n" +
-    "</div>\n" +
-    "      </div>\n" +
-    "       <div class=\"row backcls mar-10px text-left dotted\">\n" +
-    "      <div class=\"col-md-12 nopad mar40\">\n" +
-    "          <p class=\"font15px popupfoot pad-bot \">\n" +
-    "          Psst...! <br/>\n" +
-    "          Signup to become a Spini referral and earn Rs.200 with this offer!<br/>\n" +
-    "          Sparsh earned Rs.2000 begin a Spini Referral!<br/>\n" +
-    "        </p>\n" +
-    "\n" +
-    "        <p class=\"fbblue font15px popupfoot pad-bot\">\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "             <i class=\"fa fa-facebook link-icon\" aria-hidden=\"true\"></i>  SIGN UP WITH FACEBOOK<br/>\n" +
-    "          </p>\n" +
-    "        </div>\n" +
-    "</div>\n" +
-    "</div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "</div>\n" +
-    "  </div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<!-- end get code -->\n" +
-    "\n" +
-    "\n" +
-    "<!-- OFFERS POPUP 1st-->\n" +
-    "\n" +
-    "<div id=\"offer-popup\" class=\"overlay\">\n" +
-    "  <a href=\"javascript:void(0)\" class=\"closebtn\" ng-click=\"vm.closeNav()\">&times;</a>\n" +
-    "  <div class=\"overlay-content\">\n" +
-    "    <div class=\"row \">\n" +
-    "\n" +
-    "\n" +
-    "    <div class=\"col-md-8 row col-md-offset-2 white pad10\">\n" +
-    "\n" +
-    "\n" +
-    "<div class=\"col-md-5 nopad\">\n" +
-    "\n" +
-    "<div id=\"carousel-example-generic\" class=\"carousel slide\" data-ride=\"carousel\">\n" +
-    "  <ol class=\"carousel-indicators\">\n" +
-    "    <!-- <li data-target=\"#carousel-example-generic\" data-slide-to=\"0\" class=\"active\"></li>\n" +
-    "    <li data-target=\"#carousel-example-generic\" data-slide-to=\"1\"></li>\n" +
-    "    <li data-target=\"#carousel-example-generic\" data-slide-to=\"2\"></li> -->\n" +
-    "  </ol>\n" +
-    "\n" +
-    "  <div class=\"carousel-inner\">\n" +
-    "    <div class=\"active item\">\n" +
-    "      <img  class=\"fixed-height\" src=\"/app/assets/images/sample_cream_fudge.jpg\" alt=\"...\">\n" +
-    "\n" +
-    "    </div>\n" +
-    " <!--    <div class=\"item\">\n" +
-    "      <img class=\"fixed-height\" src=\"http://placehold.it/1200x400\" alt=\"...\">\n" +
-    "\n" +
-    "    </div>\n" +
-    "    <div class=\"item\">\n" +
-    "      <img class=\"fixed-height\" src=\"http://placehold.it/1200x400\" alt=\"...\">\n" +
-    "\n" +
-    "    </div> -->\n" +
-    "  </div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"col-md-12 nopad mr10px\">\n" +
-    "<div class=\"col-md-6 text-left nopad\">\n" +
-    "<i class=\"fa fa-arrow-circle-o-left ft25px grey\" aria-hidden=\"true\"></i>\n" +
-    "</div>\n" +
-    "<div class=\"col-md-6 text-right nopad\">\n" +
-    "<i class=\"fa fa-arrow-circle-o-right  ft25px grey\" aria-hidden=\"true\"></i>\n" +
-    "</div>\n" +
-    "</div>\n" +
-    "  </div>\n" +
-    "\n" +
-    "  <div class=\"col-md-7 nopad\">\n" +
-    "      <div class=\"pad-top-none offer-details text-left\">\n" +
-    "\n" +
-    "            <div class=\"row\">\n" +
-    "          <div class=\"col-md-4\">\n" +
-    "          <h3 class=\"tm\">Flat 15% Off</h3>\n" +
-    "\n" +
-    "        </div>\n" +
-    "\n" +
-    "                  <div class=\"col-md-8 text-right \">\n" +
-    "        <img class=\"offer-logo-set\" src=\"/app/assets/images/05Cards/Card-Logo-CnF.png\">\n" +
-    "        </div>\n" +
-    "      </div>\n" +
-    "          <div class=\"ts offer-location\">\n" +
-    "            <b>At Cream & Fudge at - </b><span>T.Nagar</span>\n" +
-    "          </div>\n" +
-    "\n" +
-    "            <div class=\"row space-div\">\n" +
-    "          <div class=\"col-md-4\">\n" +
-    "                  <button ng-click=\"vm.getcodepopup()\">GET CODE!</button>\n" +
+    "<div class=\"overlay\" id=\"login-popup\">\n" +
+    "    <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closeLoginPopup()\">\n" +
+    "        ×\n" +
+    "    </a>\n" +
+    "    <div class=\"overlay-content\">\n" +
+    "        <div class=\"row \">\n" +
+    "            <div class=\"col-md-4 row col-md-offset-4 white nopad\">\n" +
+    "                <div class=\"text-center bg-grey nopad pad-bot-10\">\n" +
+    "                    <img class=\"poplogo\" src=\"/app/assets/images/header/Logo@2x.png\">\n" +
+    "                        <h3>\n" +
+    "                            SPINI SIGN IN\n" +
+    "                        </h3>\n" +
+    "                        <br/>\n" +
+    "                        <h5>\n" +
+    "                            Share & Earn Spini Treasure..!!!\n" +
+    "                        </h5>\n" +
+    "                    \n" +
     "                </div>\n" +
-    "                   <div class=\"col-md-6\">\n" +
-    "                  <span class=\"offer-spini\">\n" +
-    "           <i class=\"fa fa-gift link-icon fagift\" aria-hidden=\"true\"></i>  Spini Treasure <b>$200</b>\n" +
-    "          </span>\n" +
-    "          </div>\n" +
-    "\n" +
-    "                <div class=\"col-md-2 \">\n" +
-    "                  <span class=\"offer-count\">\n" +
-    "           <i class=\"fa fa-star-o link-icon \" aria-hidden=\"true\"></i>   54      </span>\n" +
-    "          </div>\n" +
-    "          </div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "          <p class=\"\">Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>\n" +
-    "\n" +
-    "           <p class=\"offer-wrap-text space-div\">Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>\n" +
-    "\n" +
-    "\n" +
-    "          <div class=\"offer-share col-md-6\">\n" +
-    "            <label>SHARE & EARN</label>\n" +
-    "            <ul>\n" +
-    "              <li class=\"offer-share-max\"><a href=\"#\"></a></li>\n" +
-    "              <li class=\"offer-share-fb\"><a href=\"#\"></a></li>\n" +
-    "              <li class=\"offer-share-twitter\"><a href=\"#\"></a></li>\n" +
-    "            </ul>\n" +
-    "          </div>\n" +
-    "            <div class=\"offer-share col-md-6\">\n" +
-    "            <label class=\"right\">OFFERS END IN</label>\n" +
-    "            <p class=\"right timers\">\n" +
-    "              01:04:05\n" +
-    "            </p>\n" +
-    "          </div>\n" +
+    "                <div class=\"text-center temp\" ng-controller=\"LoginCtrl as vm\">\n" +
+    "                    <button class=\"btn btn-block fbbutton \" ng-click=\"vm.FbLogin()\">\n" +
+    "                        <span class=\"fa fa-facebook left falign\">\n" +
+    "                        </span>\n" +
+    "                        Sign in with Facebook\n" +
+    "                    </button>\n" +
+    "                    <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
+    "                        <span class=\"fa fa-google left falign\">\n" +
+    "                        </span>\n" +
+    "                        Sign in with Google\n" +
+    "                    </button>\n" +
+    "                </div>\n" +
+    "                <div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
     "        </div>\n" +
-    "\n" +
+    "    </div>\n" +
     "</div>\n" +
+    "<!-- end login code -->\n" +
+    "<!-- login POPUP -->\n" +
+    "<div class=\"overlay\" id=\"login-signup\">\n" +
+    "    <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.signupPOPClose()\">\n" +
+    "        ×\n" +
+    "    </a>\n" +
+    "    <div class=\"overlay-content\">\n" +
+    "        <div class=\"row \">\n" +
+    "            <div class=\"col-md-4 row col-md-offset-4 white nopad\">\n" +
+    "                <div class=\"text-center bg-grey nopad pad-bot-10\">\n" +
+    "                    <img class=\"poplogo\" src=\"/app/assets/images/header/Logo@2x.png\">\n" +
+    "                        <h3>\n" +
+    "                            SIGN UP WITH SPINI\n" +
+    "                        </h3>\n" +
+    "                        <br/>\n" +
+    "                        <h5>\n" +
+    "                            Share & Earn Spini Treasure..!!!\n" +
+    "                        </h5>\n" +
+    "                    \n" +
+    "                </div>\n" +
+    "                <div class=\"text-center temp\" ng-controller=\"LoginCtrl as vm\">\n" +
+    "                    <button class=\"btn btn-block fbbutton \" ng-click=\"vm.FbLogin('facebook')\">\n" +
+    "                        <span class=\"fa fa-facebook left falign\">\n" +
+    "                        </span>\n" +
+    "                        Sign UP with Facebook\n" +
+    "                    </button>\n" +
+    "                    <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
+    "                        <span class=\"fa fa-google left falign\">\n" +
+    "                        </span>\n" +
+    "                        Sign UP with Google\n" +
+    "                    </button>\n" +
+    "                </div>\n" +
+    "                <div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<!-- end login code -->\n" +
+    "<!-- Get Code POPUP -->\n" +
+    "<div class=\"overlay\" id=\"confirm-code-popup\">\n" +
+    "    <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closegetcodepopup()\">\n" +
+    "        ×\n" +
+    "    </a>\n" +
+    "    <div class=\"overlay-content\">\n" +
+    "  <div class=\"row \"  ng-repeat=\"item in vm.getSelectedOfferData()\">\n" +
+    "            <div class=\"col-md-8 row col-md-offset-2 white pad-bot0 pad10 \">\n" +
+    "                <div class=\"row mar20bt\">\n" +
+    "                    <div class=\"col-md-1 nopad\">\n" +
+    "                        <i aria-hidden=\"true\" class=\"fa fa-arrow-left offer-logo-40px mar10\" ng-click=\"vm.closeGetNoPopup()\">\n" +
+    "                        </i>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "           \n" +
+    "\n" +
+    " <div class=\"col-md-3 nopad text-left\">\n" +
+    "                        <h4 class=\"mar10\">\n" +
+    "                            <b>\n" +
+    "                                  {{item.attributes.name}}\n" +
+    "                            </b>\n" +
+    "                        </h4>\n" +
+    "                        <div class=\"offer-location\">\n" +
+    "                            <b>\n" +
+    "                                At {{item.attributes.business_name}} -\n" +
+    "                            </b>\n" +
+    "                            <span>\n" +
+    "                                {{item.attributes.place}}\n" +
+    "                            </span>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-md-8 text-right\">\n" +
+    "                        <img class=\"offer-logo-set\" ng-src=\"    {{item.attributes.avatar_medium}}\">\n" +
+    "                        \n" +
+    "                    </div>\n" +
+    "                    <hr>\n" +
+    "                    </hr>\n" +
+    "                </div>\n" +
+    "                <div class=\"row backcls mar-10px text-left\">\n" +
+    "                    <div class=\"form-group popupcenter padtop40 \">\n" +
+    "                        <div class=\"col-md-12 nopad text-center\" ng-if=\"vm.user.name\">\n" +
+    "                            <h4 class=\"marbt20\">\n" +
+    "                                Hi  {{vm.user.name ? vm.user.name : 'Guest'}}\n" +
+    "                            </h4>\n" +
+    "                            <h4 class=\"marbt20\">\n" +
+    "                                Availing this offer will add Rs.200 to your Spini Wallet!\n" +
+    "                            </h4>\n" +
+    "                            <h4 class=\"marbt20\">\n" +
+    "                                Offer code will be send to your registered mobile No - \n" +
     "\n" +
     "\n" +
-    "<span class=\"tes\">\n" +
-    "  <img class=\"roate-270\" src=\"/app/assets/images/icons8-Expand%20Arrow-64.png\">\n" +
-    "</span>\n" +
     "\n" +
+    "                  {{vm.user.mobile ? vm.user.mobile : vm.mobie()}}\n" +
+    "                            </h4>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"col-md-12 nopad text-center\" ng-if=\"vm.user.name == null\">\n" +
+    "                            <h4 class=\"marbt20\">\n" +
+    "                                Hi  {{vm.user.name ? vm.user.name : 'Guest'}}\n" +
+    "                            </h4>\n" +
+    "                            <h4 class=\"marbt20\">\n" +
+    "                                Availing this offer will add Rs.200 to your Spini Wallet!\n" +
+    "                            </h4>\n" +
+    "                            <h4 class=\"marbt20\">\n" +
+    "                                Offer code will be send to your registered mobile No - \n" +
     "\n" +
-    "<!-- <span class=\"tes1\">\n" +
+    "                  {{vm.mobile()}}\n" +
+    "                            </h4>\n" +
+    "                       \n" +
+    "                        </div>\n" +
+    "                        <div class=\"col-md-12 nopad gpad text-center\"ng-if=\"vm.user.name\" >\n" +
+    "                            <span class=\"offer-spini\" >\n" +
+    "                                <i aria-hidden=\"true\" class=\"fa fa-share-alt-square link-icon\">\n" +
+    "                                </i>\n" +
+    "                                SHARE & EARN\n" +
+    "                            </span>\n" +
+    "                        </div>\n" +
+    "\n" +
+    "                             <div class=\"col-md-12 nopad gpad text-center\" ng-if=\"vm.user.name == null\">\n" +
+    "                            <span class=\"offer-spini\"  ng-click=\"vm.openLoginPopup('referral','confirm-code-popup')\">\n" +
+    "                                <i aria-hidden=\"true\" class=\"fa fa-share-alt-square link-icon\">\n" +
+    "                                </i>\n" +
+    "                                SIGN UP & SHARE & EARN\n" +
+    "                            </span>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"row backcls mar-10px text-left dotted\">\n" +
+    "                    <div class=\"col-md-12 nopad mar45\">\n" +
+    "                        <div class=\"col-md-8\">\n" +
+    "                            <p class=\"font15px popupfoot1 \">\n" +
+    "                                <b>\n" +
+    "                                    Further more sharing this code will earn you\n" +
+    "                                </b>\n" +
+    "                                <br/>\n" +
+    "                                <b>\n" +
+    "                                    Rs.200 each time it's availed\n" +
+    "                                </b>\n" +
+    "                            </p>\n" +
+    "                            <div class=\"social pad-bot10 padtop30 popupfoot1\">\n" +
+    "                                <a class=\"fa fa-twitter twitter\" href=\"#\" target=\"_blank\" title=\"\">\n" +
+    "                                </a>\n" +
+    "                                <a class=\"fa fa-facebook fb\" href=\"#\" target=\"_blank\" title=\"\">\n" +
+    "                                </a>\n" +
+    "                                <a class=\"fa fa-clone clone\" href=\"#\" target=\"_blank\" title=\"\">\n" +
+    "                                </a>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"col-md-4 text-center\">\n" +
+    "                            <h1 class=\"b\">\n" +
+    "                                Rs.200\n" +
+    "                            </h1>\n" +
+    "                            <p>\n" +
+    "                                Earn real cash while you enjoy Spini offers!!\n" +
+    "                            </p>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<!-- end get code -->\n" +
+    "<!-- Get Code POPUP mobile no-->\n" +
+    "<div class=\"overlay\" id=\"get-code-popup\">\n" +
+    "    <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closegetMobilepopup()\">\n" +
+    "        ×\n" +
+    "    </a>\n" +
+    "    <div class=\"overlay-content\">\n" +
+    "        <div class=\"row \"  ng-repeat=\"item in vm.getSelectedOfferData()\">\n" +
+    "            <div class=\"col-md-8 row col-md-offset-2 white pad-bot0 pad10 \">\n" +
+    "                <div class=\"row mar20bt\">\n" +
+    "                    <div class=\"col-md-1 nopad\">\n" +
+    "                        <i aria-hidden=\"true\" class=\"fa fa-arrow-left offer-logo-40px mar10\" ng-click=\"vm.closeGetNoPopup()\">\n" +
+    "                        </i>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "           \n" +
+    "\n" +
+    " <div class=\"col-md-3 nopad text-left\">\n" +
+    "                        <h4 class=\"mar10\">\n" +
+    "                            <b>\n" +
+    "                                  {{item.attributes.name}}\n" +
+    "                            </b>\n" +
+    "                        </h4>\n" +
+    "                        <div class=\"offer-location\">\n" +
+    "                            <b>\n" +
+    "                                At {{item.attributes.business_name}} -\n" +
+    "                            </b>\n" +
+    "                            <span>\n" +
+    "                                {{item.attributes.place}}\n" +
+    "                            </span>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-md-8 text-right\">\n" +
+    "                        <img class=\"offer-logo-set\" ng-src=\"    {{item.attributes.avatar_medium}}\">\n" +
+    "                        \n" +
+    "                    </div>\n" +
+    "                    <hr>\n" +
+    "                    </hr>\n" +
+    "                </div>\n" +
+    "                <div class=\"row backcls mar-10px text-left\">\n" +
+    "                    <div class=\"form-group popupcenter \">\n" +
+    "                        <form name=\"get_coupen\" ng-submit=\"vm.sentMobileNo(mobile)\" novalidate=\"\">\n" +
+    "                            <div class=\"col-md-8 nopad\">\n" +
+    "                                <label for=\"usr\">\n" +
+    "                                    Enter your mobile No. to get Code\n" +
+    "                                </label>\n" +
+    "                                <input class=\"form-control nbr min40\" id=\"usr\" maxlength=\"10\" minlength=\"10\" name=\"mobile\" ng-model=\"mobile\" ng-pattern=\"/^[0-9]+$/\" placeholder=\"Mobile no\" required=\"\" type=\"number\">\n" +
+    "                                    <span ng-show=\"(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.minlength\" style=\"color: red\">\n" +
+    "                                        Minimum 10 digits required.\n" +
+    "                                    </span>\n" +
+    "                                    <span ng-show=\"(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.maxlength\" style=\"color: red\">\n" +
+    "                                        Maximum 13 digits only allowed.\n" +
+    "                                    </span>\n" +
+    "                                </input>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"col-md-4 nopad mar25x\">\n" +
+    "                                <button class=\"btn min40 width100 nbr\" ng-disabled=\"get_coupen.$invalid\" type=\"submit\">\n" +
+    "                                    SEND CODE!\n" +
+    "                                </button>\n" +
+    "                            </div>\n" +
+    "                        </form>\n" +
+    "                        <div class=\"col-md-12 nopad mar40\">\n" +
+    "                            <span class=\"offer-spini\">\n" +
+    "                                <i aria-hidden=\"true\" class=\"fa fa-gift link-icon fagift\">\n" +
+    "                                </i>\n" +
+    "                                SPINI TREASURE\n" +
+    "                            </span>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"row backcls mar-10px text-left dotted\">\n" +
+    "                    <div class=\"col-md-12 nopad mar40\">\n" +
+    "                        <p class=\"font15px popupfoot pad-bot \">\n" +
+    "                            Psst...!\n" +
+    "                            <br/>\n" +
+    "                            Signup to become a Spini referral and earn Rs.200 with this offer!\n" +
+    "                            <br/>\n" +
+    "                            Sparsh earned Rs.2000 begin a Spini Referral!\n" +
+    "                            <br/>\n" +
+    "                        </p>\n" +
+    "                        <p class=\"fbblue font15px popupfoot pad-bot\" ng-click=\"vm.openLoginPopup('referral','get-code-popup')\">\n" +
+    "                            <i aria-hidden=\"true\" class=\"fa fa-facebook link-icon\">\n" +
+    "                            </i>\n" +
+    "                            SIGN UP WITH FACEBOOK\n" +
+    "                            <br/>\n" +
+    "                        </p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<!-- end get code -->\n" +
+    "<!-- OFFERS POPUP 1st-->\n" +
+    "<div class=\"overlay\" id=\"offer-popup\">\n" +
+    "    <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closeSlidepopup()\">\n" +
+    "        ×\n" +
+    "    </a>\n" +
+    "    <div class=\"overlay-content\">\n" +
+    "        <div style=\"height: 305px\">\n" +
+    "            <div active=\"active\" interval=\"myInterval\" no-wrap=\"noWrapSlides\" uib-carousel=\"\">\n" +
+    "                <div index=\"$index\" ng-repeat=\"item in vm.getItems() track by $index\" uib-slide=\"\">\n" +
+    "                    <!-- <img ng-src=\"{{item.business_avatar}}\" style=\"margin:auto;\">{{item}} -->\n" +
+    "                    <div class=\"row \">\n" +
+    "                        <div class=\"col-md-10 row col-md-offset-1 white pad10\">\n" +
+    "                            <div class=\"col-md-5 nopad\">\n" +
+    "                                <!-- <div class=\"carousel slide\" data-ride=\"carousel\" id=\"carousel-example-generic\"> -->\n" +
+    "                                <!-- <ol class=\"carousel-indicators\"> -->\n" +
+    "                                <!-- <li data-target=\"#carousel-example-generic\" data-slide-to=\"0\" class=\"active\"></li>\n" +
+    "            <li data-target=\"#carousel-example-generic\" data-slide-to=\"1\"></li>\n" +
+    "            <li data-target=\"#carousel-example-generic\" data-slide-to=\"2\"></li> -->\n" +
+    "                                <!-- </ol> -->\n" +
+    "                                <!-- <div class=\"carousel-inner\"> -->\n" +
+    "                                <!-- <div class=\"active item\"> -->\n" +
+    "                                <img \"=\"\" alt=\"...\" class=\"fixed-height\" src=\"{{item.attributes.avatar_thumb}}\" style=\"width: 100% !important;\">\n" +
+    "                                    <!-- </div> -->\n" +
+    "                                    <!--    <div class=\"item\">\n" +
+    "              <img class=\"fixed-height\" src=\"http://placehold.it/1200x400\" alt=\"...\">\n" +
+    "            </div>\n" +
+    "            <div class=\"item\">\n" +
+    "              <img class=\"fixed-height\" src=\"http://placehold.it/1200x400\" alt=\"...\">\n" +
+    "            </div> -->\n" +
+    "                                    <!-- </div> -->\n" +
+    "                                    <!-- </div> -->\n" +
+    "                                    <!-- <div class=\"col-md-12 nopad mr10px\">\n" +
+    "                <div class=\"col-md-6 text-left nopad\">\n" +
+    "                    <i aria-hidden=\"true\" class=\"fa fa-arrow-circle-o-left ft25px grey\">\n" +
+    "                    </i>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-md-6 text-right nopad\">\n" +
+    "                    <i aria-hidden=\"true\" class=\"fa fa-arrow-circle-o-right ft25px grey\">\n" +
+    "                    </i>\n" +
+    "                </div>\n" +
+    "            </div> -->\n" +
+    "                                \n" +
+    "                            </div>\n" +
+    "                            <div class=\"col-md-7 nopad\">\n" +
+    "                                <div class=\"pad-top-none offer-details text-left\">\n" +
+    "                                    <div class=\"row\">\n" +
+    "                                        <div class=\"col-md-8\">\n" +
+    "                                            <h3 class=\"tm\">\n" +
+    "                                                {{item.attributes.name}}\n" +
+    "                                            </h3>\n" +
+    "                                            <div class=\"ts pad5 offer-location\">\n" +
+    "                                                <b>\n" +
+    "                                                    At {{item.attributes.business_name}} at -\n" +
+    "                                                </b>\n" +
+    "                                                <span>\n" +
+    "                                                    {{item.attributes.place}}\n" +
+    "                                                </span>\n" +
+    "                                            </div>\n" +
+    "                                        </div>\n" +
+    "                                        <div class=\"col-md-4 text-right \">\n" +
+    "                                            <img class=\"offer-logo-set\" src=\"{{item.attributes.avatar_medium}}\">\n" +
+    "                                            \n" +
+    "                                        </div>\n" +
+    "                                    </div>\n" +
+    "                                    <div class=\"row space-div\">\n" +
+    "                                        <div class=\"col-md-4\">\n" +
+    "                                            <button ng-click=\"vm.getcodepopup(item.id)\">\n" +
+    "                                                GET CODE!\n" +
+    "                                            </button>\n" +
+    "                                        </div>\n" +
+    "                                        <div class=\"col-md-6\">\n" +
+    "                                            <span class=\"offer-spini\">\n" +
+    "                                                <i aria-hidden=\"true\" class=\"fa fa-gift link-icon fagift\">\n" +
+    "                                                </i>\n" +
+    "                                                Spini Treasure\n" +
+    "                                                <b>\n" +
+    "                                                    $200\n" +
+    "                                                </b>\n" +
+    "                                            </span>\n" +
+    "                                        </div>\n" +
+    "                                        <div class=\"col-md-2 \">\n" +
+    "                                            <span class=\"offer-count\">\n" +
+    "                                                <i aria-hidden=\"true\" class=\"fa fa-star-o link-icon \">\n" +
+    "                                                </i>\n" +
+    "                                                54\n" +
+    "                                            </span>\n" +
+    "                                        </div>\n" +
+    "                                    </div>\n" +
+    "                                    <div class=\"min-height160px\">\n" +
+    "                                        <p class=\"\">\n" +
+    "                                            {{item.attributes.description}}\n" +
+    "                                        </p>\n" +
+    "                                        <p class=\"offer-wrap-text space-div\">\n" +
+    "                                            **OFFER VALID TILL {{item.attributes.end_date | date:'medium'}} only at {{item.attributes.business_name}} @ {{item.attributes.place}}\n" +
+    "                                        </p>\n" +
+    "                                    </div>\n" +
+    "                                    <div class=\"offer-share col-md-6\">\n" +
+    "                                        <label>\n" +
+    "                                            SHARE & EARN\n" +
+    "                                        </label>\n" +
+    "                                        <ul>\n" +
+    "                                            <li class=\"offer-share-max\">\n" +
+    "                                                <a href=\"#\">\n" +
+    "                                                </a>\n" +
+    "                                            </li>\n" +
+    "                                            <li class=\"offer-share-fb\">\n" +
+    "                                                <a href=\"#\">\n" +
+    "                                                </a>\n" +
+    "                                            </li>\n" +
+    "                                            <li class=\"offer-share-twitter\">\n" +
+    "                                                <a href=\"#\">\n" +
+    "                                                </a>\n" +
+    "                                            </li>\n" +
+    "                                        </ul>\n" +
+    "                                    </div>\n" +
+    "                                    <div class=\"offer-share col-md-6\">\n" +
+    "                                        <label class=\"right\">\n" +
+    "                                            OFFERS END IN\n" +
+    "                                        </label>\n" +
+    "                                        <p class=\"right timers\">\n" +
+    "                                            {{item.attributes.end_date | date:'medium'}}\n" +
+    "                                        </p>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                            <span class=\"tes\">\n" +
+    "                                <img class=\"roate-270\" src=\"/app/assets/images/icons8-Expand%20Arrow-64.png\">\n" +
+    "                                \n" +
+    "                            </span>\n" +
+    "                            <!-- <span class=\"tes1\">\n" +
     "  <img class=\"roate-90\" src=\"/app/assets/images/icons8-Expand%20Arrow-64.png\">\n" +
     "</span> -->\n" +
-    "\n" +
-    "\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <!-- <div class=\"carousel-caption\">\n" +
+    "          <h4>item {{item.id}}</h4>\n" +
+    "          <p>{{item.text}}</p>\n" +
+    "        </div> -->\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "</div>\n" +
-    "</div>\n" +
-    "  </div>\n" +
-    "</div>\n" +
-    "<!-- end OFFERS POPUP -->\n"
+    "<!-- end OFFERS POPUP -->\n" +
+    "<style type=\"text/css\">\n" +
+    "    .offer-carousel-r1{\n" +
+    "    width: 4%;\n" +
+    "  }\n" +
+    "</style>\n"
   );
 
 
   $templateCache.put('app/modules/redeem_coupon/redeem_coupon.html',
-    "<!-- -->\n" +
+    "\n" +
     "<!-- container for coupon redeem console -->\n" +
     "<section class=\"coupon-redeem-entry\">\n" +
     "  <h3>Enter Offer Price & Coupon Code</h3>\n" +
-    "  <input type=\"number\" placeholder=\"Enter Price\" class=\"price-entry\">\n" +
-    "  <input type=\"text\" placeholder=\"Enter Coupon Code\" class=\"coupon-entry\">\n" +
-    "  <button>SUBMIT</button>\n" +
+    "  <input type=\"number\" placeholder=\"Enter Price\" class=\"price-entry\" ng-model=\"vm.amount\">\n" +
+    "  <input type=\"text\" placeholder=\"Enter Coupon Code\" class=\"coupon-entry\" ng-model=\"vm.coupon_code\">\n" +
+    "  <button ng-click=\"vm.validatecode()\">SUBMIT</button>\n" +
     "  <div class=\"pull-right\">\n" +
     "    <a href=\"#\">FAQ </a>\n" +
     "    <a href=\"#\">Troubleshoot</a>\n" +
@@ -1158,9 +1198,9 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "          <td>OFFER ID</td>\n" +
     "          <td>DATE</td>\n" +
     "          <td>TIME</td>\n" +
-    "          <td>COUPON CODE</td>\n" +
+    "          <td>COUNT</td>\n" +
     "          <td>LOCATION</td>\n" +
-    "          <td>PRICE (INR)</td>\n" +
+    "\n" +
     "        </tr>\n" +
     "      </thead>\n" +
     "      <tbody>\n" +
@@ -1170,7 +1210,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "          <td>12.15.32</td>\n" +
     "          <td>893212</td>\n" +
     "          <td>T.NAGAR</td>\n" +
-    "          <td>1,000</td>\n" +
+    "\n" +
     "        </tr>\n" +
     "        <tr>\n" +
     "          <td>ABX123</td>\n" +
@@ -1178,7 +1218,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "          <td>12.15.32</td>\n" +
     "          <td>893212</td>\n" +
     "          <td>T.NAGAR</td>\n" +
-    "          <td>1,000</td>\n" +
+    "\n" +
     "        </tr>\n" +
     "        <tr>\n" +
     "          <td>ABX123</td>\n" +
@@ -1186,7 +1226,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "          <td>12.15.32</td>\n" +
     "          <td>893212</td>\n" +
     "          <td>T.NAGAR</td>\n" +
-    "          <td>1,000</td>\n" +
+    "\n" +
     "        </tr>\n" +
     "      </tbody>\n" +
     "    </table>\n" +
@@ -1265,9 +1305,10 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "        </div>\n" +
     "      </div>\n" +
     "      <div class=\"row content-refferal\" >\n" +
-    "        <div class=\"col-sm-4\" style=\"border-right: 1px dashed #dcdcdc;\">\n" +
+    "        <div class=\"col-sm-3\" style=\"border-right: 1px dashed #dcdcdc;\">\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
-    "            <img src=\"/app/assets/images/ProfileSection/Icn-WalletMoney@2x.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"background-color: #f7f7f7;\">\n" +
+    "            <!-- <img src=\"/app/assets/images/ProfileSection/Icn-WalletMoney@2x.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"background-color: #f7f7f7;\"> -->\n" +
+    "            <i class=\"fa fa-money\" aria-hidden=\"true\" style=\"font-size: 80px;\"></i>\n" +
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\">\n" +
     "            <label class=\"text-muted\">Wallet Money</label>\n" +
@@ -1277,36 +1318,53 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "            <label>1000</label>\n" +
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
-    "            <button class=\"btn btn-default\" style=\"border: 1px solid #bfe7fe;color:#bfe7fe\">Transfer to paytm wallet</button>\n" +
+    "            <button class=\"btn btn-default\" style=\"border: 1px solid #bfe7fe;color:#bfe7fe\" ng-disabled=\"true\">Transfer to paytm wallet</button>\n" +
     "          </div>\n" +
     "        </div>\n" +
-    "        <div class=\"col-sm-4\" style=\"border-right: 1px dashed #dcdcdc;\">\n" +
+    "        <div class=\"col-sm-3\" style=\"border-right: 1px dashed #dcdcdc;\">\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
-    "            <img src=\"/app/assets/images/ProfileSection/Icn-ApproveMoney.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"height: 80px;    background-color: #f7f7f7;\">\n" +
+    "            <!-- <img src=\"/app/assets/images/ProfileSection/Icn-ApproveMoney.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"height: 80px;    background-color: #f7f7f7;\"> -->\n" +
+    "            <i class=\"fa fa-gift\" aria-hidden=\"true\" style=\"font-size: 80px;\"></i>\n" +
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\">\n" +
-    "            <label class=\"text-muted\">Money to be approved</label>\n" +
+    "            <label class=\"text-muted\">Treasure Value</label>\n" +
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
     "            <i class=\"fa fa-inr\" aria-hidden=\"true\"></i>\n" +
     "            <label>1000</label>\n" +
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
-    "            <button class=\"btn btn-default\" style=\"border: 1px solid #fce7b7; color:#fce7b7; \">Required approval status</button>\n" +
+    "            <button class=\"btn btn-default\" style=\"border: 1px solid #fce7b7; color:#fce7b7; \" ng-click=\"vm.required()\">Required approval status</button>\n" +
     "          </div>\n" +
     "        </div>\n" +
-    "        <div class=\"col-sm-4\">\n" +
+    "        <div class=\"col-sm-3\">\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
-    "            <img src=\"/app/assets/images/ProfileSection/Icn-OffersShared@2x.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"background-color: #f7f7f7;\">\n" +
+    "            <!-- <img src=\"/app/assets/images/ProfileSection/Icn-OffersShared@2x.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"background-color: #f7f7f7;\"> -->\n" +
+    "            <i class=\"fa fa-hand-paper-o\" aria-hidden=\"true\" style=\"font-size: 80px;\"></i>\n" +
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\">\n" +
-    "            <label class=\"text-muted\">Shared offer</label>\n" +
+    "            <label class=\"text-muted\">No of Code Generated</label>\n" +
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
     "            <label>1000</label>\n" +
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
-    "            <button class=\"btn btn-default\"  style=\"border: 1px solid #b6f3d1; color:#b6f3d1;\">Get more offers</button>\n" +
+    "            <!-- <button class=\"btn btn-default\"  style=\"border: 1px solid #b6f3d1; color:#b6f3d1;\">Get more offers</button> -->\n" +
+    "          </div>\n" +
+    "        </div>\n" +
+    "         <div class=\"col-sm-3\">\n" +
+    "          <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
+    "            <!-- <img src=\"/app/assets/images/ProfileSection/Icn-OffersShared@2x.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"background-color: #f7f7f7;\"> -->\n" +
+    "            <i class=\"fa fa-handshake-o\" aria-hidden=\"true\" style=\" font-size: 80px;\"></i>\n" +
+    "          </div>\n" +
+    "          <div class=\"col-sm-12 text-center\">\n" +
+    "            <label class=\"text-muted\"> No of Code Redeemed</label>\n" +
+    "          </div>\n" +
+    "          <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
+    "            <label>1000</label>\n" +
+    "          </div>\n" +
+    "          <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
+    "            <!-- <button class=\"btn btn-default\"  style=\"border: 1px solid #b6f3d1; color:#b6f3d1;\">Get more offers</button> -->\n" +
     "          </div>\n" +
     "        </div>\n" +
     "      </div>\n" +

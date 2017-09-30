@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-09-25. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-09-30. 
 * @author Kathik
 */
 (function() {
@@ -28,7 +28,9 @@
 		'refferal',
 		'redeemcoupon',
 		'loginModule',
-		'signupModule'
+		'signupModule',
+		'720kb.socialshare',
+
 	]);
 
 })();
@@ -240,14 +242,14 @@ angular.module('angular-app')
 angular.module('redeemcoupon')
 	.config(['$stateProvider', function ($stateProvider) {
 		$stateProvider
-			
+
 			.state('redeemcoupon', {
 				url: '/redeemcoupon',
 				templateUrl: 'app/modules/redeem_coupon/redeem_coupon.html',
-				controller: 'refferalCtrl',
+				controller: 'redeemcouponCtrl',
 				controllerAs: 'vm'
 			});
-			
+
 	}]);
 
 'use strict';
@@ -306,33 +308,51 @@ angular.module('signupModule')
      * Controller of the app
      */
     angular.module('angular-app').controller('HomeCtrl', Home);
-    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location'];
+    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope'];
     /*
      * recommend
      * Using function declarations
      * and bindable members up top.
      */
-    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location) {
+    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _, $scope) {
         /*jshint validthis: true */
         var vm = this;
-
-
+        vm.offer_id;
+        window.loginRole = 'vendor';
+        $scope.filter_items = new Array();
+        vm.compaigns = [];
+        vm.overall_compaigns = [];
+        var headers = {
+            "Accept": "application/json",
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': '*',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            "Content-Type": 'application/json',
+            // 'Access-Token' : $rootScope.current_user.authentication_token
+            // 'Access-Token' : "$2a$10$Z1QJ46AB.9Qx/IDCIWqnTO20HogZNyOl7ztRDwqzl75nFaCbORNSW",
+        }
         vm.closeLoginPopup = function() {
             document.getElementById("login-popup").style.width = "0%";
         }
-        vm.openLoginPopup = function() {
+        vm.openLoginPopup = function(data, id) {
             document.getElementById("login-popup").style.width = "100%";
+            console.log(id)
+            if (id) {
+                document.getElementById(id).style.width = "0%";
+            }
         }
-
-
-        vm.getofferspopup = function() {
-            document.getElementById("login-popup").style.width = "100%";
+        vm.getSlidepopup = function(campaign_id) {
+            vm.campaign_id = campaign_id;
+            console.log(campaign_id);
+            document.getElementById("offer-popup").style.width = "100%";
+            vm.getSelectedCampaignOffers();
         }
-        vm.closepopup = function() {
-            document.getElementById("login-popup").style.width = "0%";
+        vm.closeSlidepopup = function() {
+            document.getElementById("offer-popup").style.width = "0%";
         }
-        vm.signupPOP = function() {
+        vm.signupPOP = function(data) {
             // closeNav()
+            window.loginRole = data;
             document.getElementById("login-signup").style.width = "100%";
         }
         vm.signupPOPClose = function() {
@@ -346,31 +366,64 @@ angular.module('signupModule')
         vm.closeNav = function() {
             document.getElementById("offer-popup").style.width = "0%";
         }
-        vm.getcodepopup = function() {
-            console.log('data');
-            // closeNav()
-            document.getElementById("get-code-popup").style.width = "100%";
+        vm.getcodepopup = function(offer_id) {
+            // console.log('Offer_id');
+            // // closeNav()
             document.getElementById("offer-popup").style.width = "0%";
+            vm.offer_id = offer_id;
+            if (vm.isReferral()) {
+                $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
+                console.log('already logged in');
+                // document.getElementById("get-code-popup").style.width = "100%";
+                LoginService.getProfileInfo(function(data) {
+                    if (data.mobile) {
+                        vm.sentMobileNo(data.mobile)
+                        vm.user = data;
+                        document.getElementById("confirm-code-popup").style.width = "100%";
+                    } else {
+                        document.getElementById("get-code-popup").style.width = "100%";
+                    }
+                })
+            } else {
+                console.log('not logged in');
+                document.getElementById("get-code-popup").style.width = "100%";
+            }
         }
         vm.closegetcodepopup = function() {
             // openNav()
+            document.getElementById("confirm-code-popup").style.width = "0%";
+            document.getElementById("offer-popup").style.width = "100%";
+            // document.getElementById("get-code-popup").style.width = "100%";
+        }
+        vm.closeGetNoPopup = function() {
             document.getElementById("get-code-popup").style.width = "0%";
             document.getElementById("offer-popup").style.width = "100%";
         }
-
-
-        vm.offers = [];
+        vm.openConformPopup = function() {
+            document.getElementById("get-code-popup").style.width = "0%";
+            document.getElementById("confirm-code-popup").style.width = "100%";
+        }
+        vm.closegetMobilepopup = function() {
+            document.getElementById("get-code-popup").style.width = "0%";
+            document.getElementById("offer-popup").style.width = "100%";
+        }
         vm.getOffers = function() {
             $http.get(apiBaseURL + '/home/offers').then(function(response) {
-                var response = response.data.data;
-                // login successful if there's a token in the response
                 if (response) {
+                    var response = response.data.data;
+                    $scope.filter_items.push(response);
+                    vm.offers = [];
+                    vm.compaigns = [];
                     vm.offers = response;
+                    vm.overall_compaigns = response;
+                    vm.compaigns = _.uniqBy(response, function(e) {
+                        return e.attributes.campaign_id;
+                    });
+                    vm.overall_compaigns = vm.compaigns;
                 }
             });
         }
         vm.open = false;
-
         vm.isReferral = LoginService.isReferral;
         vm.goProfile = function() {
             $location.path('/refferal');
@@ -379,9 +432,94 @@ angular.module('signupModule')
             LoginService.Logout();
             $location.path('/')
         };
+        window.SelectedCampOffers = [];
+        vm.getItems = function() {
+            return window.SelectedCampOffers;
+        }
+        vm.getSelectedOfferData = function() {
+            window.SelectedOffer = [];
+            var data = [];
+            data = window.SelectedCampOffers;
+            if (vm.offer_id) {
+                angular.forEach(data, function(value, key) {
+                    if (value.id == vm.offer_id) {
+                        window.SelectedOffer.push(value);
+                    }
+                });
+            }
+            return window.SelectedOffer;
+        }
+        vm.getSelectedCampaignOffers = function() {
+            vm.SelectedCampOffers = [];
+            angular.forEach(vm.offers, function(value, key) {
+                if (value.attributes.campaign_id == vm.campaign_id) {
+                    vm.SelectedCampOffers.push(value);
+                }
+            });
+            window.SelectedCampOffers = [];
+            window.SelectedCampOffers = vm.SelectedCampOffers;
+            return vm.SelectedCampOffers;
+        }
+
+        vm.mobile = function()
+        {
+                return vm.mobile_no;
+        }
+        vm.sentMobileNo = function(mobile) {
+            vm.mobile_no = mobile.toString();
+            vm.offer_id;
+            vm.post = {
+                "coupon_code": {
+                    "mobile": vm.mobile_no,
+                    "offer_id": vm.offer_id
+                }
+            }
+            $http({
+                method: "POST",
+                headers: headers,
+                url: apiBaseURL + '/coupon_codes',
+                data: vm.post
+            }).then(function mySuccess(response) {
+                vm.openConformPopup();
+            }, function myError(response) {
+                $scope.myWelcome = response.statusText;
+            });
+        }
+        vm.filter_by_food = function(some) {
+            vm.filter_items = some;
+            vm.compaigns = [];
+            for (var i = 0; i <= vm.filter_items.length; i++) {
+                if (vm.filter_items[i].attributes.offer_category_id == 1) {
+                    vm.compaigns.push(vm.filter_items[i]);
+                    console.log(vm.compaigns);
+                }
+            }
+            return vm.compaigns;
+        };
+        vm.filter_by_beauty = function(some) {
+            vm.filter_items = some;
+            vm.compaigns = [];
+            for (var i = 0; i <= vm.filter_items.length; i++) {
+                if (vm.filter_items[i].attributes.offer_category_id == 2) {
+                    vm.compaigns.push(vm.filter_items[i]);
+                    console.log(vm.compaigns);
+                }
+            }
+            return vm.compaigns;
+        };
+        vm.filter_by_personal_need = function(some) {
+            vm.filter_items = some;
+            vm.compaigns = [];
+            for (var i = 0; i <= vm.filter_items.length; i++) {
+                if (vm.filter_items[i].attributes.offer_category_id == 4) {
+                    vm.compaigns.push(vm.filter_items[i]);
+                    console.log(vm.compaigns);
+                }
+            }
+            return vm.compaigns;
+        };
     }
 })();
-
 (function () {
 	'use strict';
 
@@ -447,15 +585,15 @@ angular.module('signupModule')
                 if (result == 'referer') {
                     document.getElementById("login-popup").style.width = "0%";
                     document.getElementById("login-signup").style.width = "0%";
-                   	  $timeout(function() {
+                    $timeout(function() {
                         ngToast.dismiss();
-      ngToast.create({
-        content:'<strong>Spini</strong>: Welcome to S Treasure!',
-        dismissOnTimeout: false,
-        dismissButton: true,
-        dismissOnClick: false
-      });
-    }, 1000)
+                        ngToast.create({
+                            content: '<strong>Spini</strong>: Welcome to S Treasure!',
+                            dismissOnTimeout: false,
+                            dismissButton: true,
+                            dismissOnClick: false
+                        });
+                    }, 1000)
                 } else if (result == 'vendor') {} else {
                     console.log('not logged in');
                 }
@@ -463,19 +601,51 @@ angular.module('signupModule')
             console.log('my event FBLoginComplete');
             console.log(args)
         });
+        $scope.$on("FBLoginCompleteVendor", function(event, args) {
+            var auth = {};
+            auth.access_token = args.authData.authResponse.accessToken;
+            auth.role = 'vendor';
+            LoginService.Login(auth, function(result) {
+                if (result == 'vendor') {
+                    document.getElementById("login-popup").style.width = "0%";
+                    document.getElementById("login-signup").style.width = "0%";
+
+                    //get the mobile no
+
+                      
+                    $timeout(function() {
+                        ngToast.dismiss();
+                        ngToast.create({
+                            content: '<strong>Spini</strong>: Welcome to S Treasure!',
+                            dismissOnTimeout: false,
+                            dismissButton: true,
+                            dismissOnClick: false
+                        });
+                    }, 1000)
+                } else if (result == 'vendor') {} else {
+                    console.log('not logged in');
+                }
+            });
+            console.log('my event FBLoginCompleteVendor');
+            console.log(args)
+        });
         $scope.$on("GoogleLoginComplete", function(event, args) {
             console.log('my event GoogleLoginComplete');
             console.log(args)
         });
         vm.FbLogin = function() {
-            SocialLoginService.facebookLogin();
+            if (window.loginRole == 'vendor') {
+              console.log('vendor')
+                SocialLoginService.vendorFacebookLogin();
+            } else {
+                SocialLoginService.facebookLogin();
+            }
         }
         vm.GoogleLogin = function() {
             SocialLoginService.googleLogin();
         }
     }
 })();
-
 (function () {
 	'use strict';
 
@@ -491,7 +661,7 @@ angular.module('signupModule')
 		.module('redeemcoupon')
 		.controller('redeemcouponCtrl', RedeemCoupon);
 
-	RedeemCoupon.$inject = ['redeemcouponService'];
+	RedeemCoupon.$inject = ['redeemcouponService', '$http'];
 
 	/*
 	* recommend
@@ -499,11 +669,23 @@ angular.module('signupModule')
 	* and bindable members up top.
 	*/
 
-	function RedeemCoupon(redeemcouponService) {
+	function RedeemCoupon(redeemcouponService, $http) {
 		/*jshint validthis: true */
 		var vm = this;
-		vm.title = "Hello, angular-app!";
-		vm.version = "1.0.0";
+		vm.validatecode = function(){
+			debugger
+			var output = [];
+			vm.redemption = [];
+			vm.redemption.amount = vm.amount;
+			vm.redemption.coupon_code = vm.coupon_code;
+			vm.redemption.business_id = 1;
+			output.redemption = vm.redemption;
+			console.log(output);
+			$http.post('https://api.spini.co/v1/redemptions',{"redemption":{"coupon_code":"7ABE9B", "business_id": "1", "amount": "1000"}}, {
+				  headers: { 'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDY2MDM1MTksInN1YiI6MTB9.yUwqTPfXKbU5gsHT7mnOcx2StTsmLd1F5KmyCowhYq4' }
+				  // params: { bookId: 42 }
+				});
+		}
 		vm.listFeatures = redeemcouponService.getFeaturesList();
 
 	}
@@ -539,7 +721,9 @@ angular.module('signupModule')
 		vm.title = "Hello, angular-app!";
 		vm.version = "1.0.0";
 		vm.listFeatures = refferalService.getFeaturesList();
-
+		vm.required = function(){
+			alert("This will move to your wallet once redeemed") 
+		};
 		if(LoginService.isReferral())
 		{
 		$http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
@@ -557,44 +741,99 @@ angular.module('signupModule')
 
 })();
 
-(function() {
-    'use strict';
-    /**
-     * @ngdoc function
-     * @name app.controller:HomeCtrl
-     * @description
-     * # HomeCtrl
-     * Controller of the app
-     */
-    angular.module('signupModule').controller('signupCtrl', signup);
-    signup.$inject = ['signupService','SocialLoginService','$scope'];
-    /*
-     * recommend
-     * Using function declarations
-     * and bindable members up top.
-     */
-    function signup(signupService,SocialLoginService,$scope) {
-        /*jshint validthis: true */
-        var vm = this;
-        vm.data = 'data';
-        $scope.$on("FBLoginComplete", function(event, args) {
-            console.log('my event FBLoginComplete');
-            console.log(args)
-        });
-        $scope.$on("GoogleLoginComplete", function(event, args) {
-            console.log('my event GoogleLoginComplete');
-            console.log(args)
-        });
+// (function() {
+//     'use strict';
+//     /**
+//      * @ngdoc function
+//      * @name app.controller:HomeCtrl
+//      * @description
+//      * # HomeCtrl
+//      * Controller of the app
+//      */
+//     angular.module('loginModule').controller('signupCtrl', signup );
+//     signup.$inject = ['LoginService', 'SocialLoginService', '$scope', '$location', 'ngToast', '$timeout'];
+//     /*
+//      * recommend
+//      * Using function declarations
+//      * and bindable members up top.
+//      */
+//     function signup   (LoginService, SocialLoginService, $scope, $location, ngToast, $timeout) {
+//         /*jshint validthis: true */
+//         var vm = this;
 
-        vm.FbRegister = function() {
-            SocialLoginService.facebookLogin();
-        }
-        vm.GoogleRegister = function() {
-            SocialLoginService.googleLogin();
-        }
-    }
-})();
 
+//         // vm.listFeatures = LoginService.getFeaturesList();
+//         $scope.$on("FBLoginComplete", function(event, args) {
+//             var auth = {};
+//             auth.access_token = args.authData.authResponse.accessToken;
+//             auth.role = 'referer';
+//             LoginService.Login(auth, function(result) {
+//                 if (result == 'referer') {
+//                     document.getElementById("login-popup").style.width = "0%";
+//                     document.getElementById("login-signup").style.width = "0%";
+//                     $timeout(function() {
+//                         ngToast.dismiss();
+//                         ngToast.create({
+//                             content: '<strong>Spini</strong>: Welcome to S Treasure!',
+//                             dismissOnTimeout: false,
+//                             dismissButton: true,
+//                             dismissOnClick: false
+//                         });
+//                     }, 1000)
+//                 } else if (result == 'vendor') {} else {
+//                     console.log('not logged in');
+//                 }
+//             });
+//             console.log('my event FBLoginComplete');
+//             console.log(args)
+//         });
+//         $scope.$on("FBLoginCompleteVendor", function(event, args) {
+//             var auth = {};
+//             auth.access_token = args.authData.authResponse.accessToken;
+//             auth.role = 'vendor';
+//             LoginService.Login(auth, function(result) {
+//                 if (result == 'vendor') {
+//                     document.getElementById("login-popup").style.width = "0%";
+//                     document.getElementById("login-signup").style.width = "0%";
+
+//                     //get the mobile no
+
+                      
+//                     $timeout(function() {
+//                         ngToast.dismiss();
+//                         ngToast.create({
+//                             content: '<strong>Spini</strong>: Welcome to S Treasure!',
+//                             dismissOnTimeout: false,
+//                             dismissButton: true,
+//                             dismissOnClick: false
+//                         });
+//                     }, 1000)
+//                 } else if (result == 'vendor') {} else {
+//                     console.log('not logged in');
+//                 }
+//             });
+//             console.log('my event FBLoginCompleteVendor');
+//             console.log(args)
+//         });
+//         $scope.$on("GoogleLoginComplete", function(event, args) {
+//             console.log('my event GoogleLoginComplete');
+//             console.log(args)
+//         });
+//         vm.FbRe = function() {
+
+//              console.log('login')
+//             if (window.loginRole == 'vendor') {
+             
+//                 SocialLoginService.vendorFacebookLogin();
+//             } else {
+//                 SocialLoginService.facebookLogin();
+//             }
+//         }
+//         vm.GoogleLogin = function() {
+//             SocialLoginService.googleLogin();
+//         }
+//     }
+// })();
 (function () {
 	'use strict';
 
@@ -607,7 +846,18 @@ angular.module('signupModule')
 	*/
 
 	angular.module('angular-app')
-		.factory('homeService', homeService);
+		.factory('homeService', homeService)
+		.factory('_', LodashFactory)
+		;
+
+
+function LodashFactory($window) {
+  if(!$window._){
+  }
+  return $window._;
+}
+// Define dependencies
+LodashFactory.$inject = ['$window'];
 
 	homeService.$inject = ['$http'];
 
@@ -714,6 +964,17 @@ angular.module('signupModule')
             return false;
         }
 
+
+        function isVendor() {
+            if ($cookies.get('role')) {
+                if ($cookies.get('role') == 'vendor') {
+                    return true
+                }
+            }
+            return false;
+        }
+
+
         function authToken() {
             if ($cookies.get('token')) {
                 return $cookies.get('token');
@@ -749,6 +1010,10 @@ angular.module('signupModule')
                     $cookies.put('role', response.role);
                     $cookies.put('name', response.name);
                     $cookies.put('token', response.jwt);
+                    if(response.mobile)
+                    {
+                    $cookies.put('mobile', response.mobile);
+                    }
                     // add jwt token to auth header for all requests made by the $http service
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.jwt;
                     // execute callback with true to indicate successful login
@@ -852,6 +1117,39 @@ angular.module('signupModule')
                 };
                 gapi.auth.signIn(myParams);
             },
+
+             vendorFacebookLogin: function() {
+                var _self = this;
+                FB.init({
+                    appId: '131797584045674',
+                    status: true,
+                    cookie: true,
+                    xfbml: true,
+                    version: 'v2.4'
+                });
+                FB.login();
+                FB.getLoginStatus(function(response) {
+                    if (response.status === 'connected') {
+                        // the user is logged in and has authenticated your
+                        // app, and response.authResponse supplies
+                        // the user's ID, a valid access token, a signed
+                        // request, and the time the access token
+                        // and signed request each expire
+                        $rootScope.$broadcast("FBLoginCompleteVendor", {
+                            "authData": response
+                        });
+                        // var uid = response.authResponse.userID;
+                        // var accessToken = response.authResponse.accessToken;
+                    } else if (response.status === 'not_authorized') {
+                        // the user is logged in to Facebook,
+                        // but has not authenticated your app
+                    } else {
+                        // the user isn't logged in to Facebook.
+                    }
+                });
+            }
+            ,
+
             facebookLogin: function() {
                 var _self = this;
                 FB.init({

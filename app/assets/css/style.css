@@ -503,7 +503,7 @@ bottom: -52px;
     }
 
 .fixed-height {
-    min-height: 400px;
+    height: 400px;
 }
 
 .text-left
@@ -903,4 +903,14 @@ footer p{
     color: white;
     background-color: #ce2422;
     border-color: #d6e9c6;
+}
+.min-height160px
+{
+    min-height: 160px;
+}
+
+.backwhite
+{
+
+background: white;
 }
