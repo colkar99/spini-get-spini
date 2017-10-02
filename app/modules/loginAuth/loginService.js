@@ -16,6 +16,7 @@
         service.Login = Login;
         service.Logout = Logout;
         service.isReferral = isReferral;
+        service.isVendor = isVendor;
         service.authToken = authToken;
         service.getProfileInfo = getProfileInfo;
 

@@ -125,6 +125,7 @@
         }
         vm.open = false;
         vm.isReferral = LoginService.isReferral;
+        vm.isVendor = LoginService.isVendor;
         vm.goProfile = function() {
             $location.path('/refferal');
         };

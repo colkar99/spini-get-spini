@@ -11,10 +11,10 @@
         <input type="text" placeholder="Search Offers">
         <button></button>
       </div>
-      <div class="col-md-2 main-header-partner">
+      <div class="col-md-2 main-header-partner" ng-hide="menu.isVendor()">
         <button ng-click="menu.signupPOP('vendor');">Become our partner</button>
       </div>
-      <div class="col-md-2 main-header-signin" >
+      <div class="col-md-2 main-header-signin" ng-hide="menu.isVendor()">
         <a  ng-click="menu.open = true" ng-hide="menu.isReferral()">Sign In <img src="/app/assets/images/header/UserIcon@2x.png"></a>
         <a  ng-click="menu.open = true" ng-show="menu.isReferral()">MyAccount <img src="/app/assets/images/header/UserIcon@2x.png"></a>
 
@@ -36,6 +36,11 @@
 
 
         </div>
+      </div>
+
+      <div class="col-md-2 main-header-signin" ng-show="menu.isVendor()">
+
+     <button ng-click="menu.open = false;menu.Logout()" >Logout</button>
       </div>
 
 
