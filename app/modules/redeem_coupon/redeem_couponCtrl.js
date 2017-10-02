@@ -25,7 +25,6 @@
 		/*jshint validthis: true */
 		var vm = this;
 		vm.validatecode = function(){
-			debugger
 			var output = [];
 			vm.redemption = [];
 			vm.redemption.amount = vm.amount;
