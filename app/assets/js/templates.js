@@ -628,10 +628,10 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "        <input type=\"text\" placeholder=\"Search Offers\">\n" +
     "        <button></button>\n" +
     "      </div>\n" +
-    "      <div class=\"col-md-2 main-header-partner\">\n" +
+    "      <div class=\"col-md-2 main-header-partner\" ng-hide=\"menu.isVendor()\">\n" +
     "        <button ng-click=\"menu.signupPOP('vendor');\">Become our partner</button>\n" +
     "      </div>\n" +
-    "      <div class=\"col-md-2 main-header-signin\" >\n" +
+    "      <div class=\"col-md-2 main-header-signin\" ng-hide=\"menu.isVendor()\">\n" +
     "        <a  ng-click=\"menu.open = true\" ng-hide=\"menu.isReferral()\">Sign In <img src=\"/app/assets/images/header/UserIcon@2x.png\"></a>\n" +
     "        <a  ng-click=\"menu.open = true\" ng-show=\"menu.isReferral()\">MyAccount <img src=\"/app/assets/images/header/UserIcon@2x.png\"></a>\n" +
     "\n" +
@@ -653,6 +653,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "\n" +
     "        </div>\n" +
+    "      </div>\n" +
+    "\n" +
+    "      <div class=\"col-md-2 main-header-signin\" ng-show=\"menu.isVendor()\">\n" +
+    "\n" +
+    "     <button ng-click=\"menu.open = false;menu.Logout()\" >Logout</button>\n" +
     "      </div>\n" +
     "\n" +
     "\n" +

@@ -426,6 +426,7 @@ angular.module('signupModule')
         }
         vm.open = false;
         vm.isReferral = LoginService.isReferral;
+        vm.isVendor = LoginService.isVendor;
         vm.goProfile = function() {
             $location.path('/refferal');
         };
@@ -617,22 +618,20 @@ angular.module('signupModule')
             auth.access_token = args.authData.authResponse.accessToken;
             auth.role = 'vendor';
             LoginService.Login(auth, function(result) {
+                $location.path('redeemcoupon');
                 if (result == 'vendor') {
                     document.getElementById("login-popup").style.width = "0%";
                     document.getElementById("login-signup").style.width = "0%";
-
                     //get the mobile no
-
-                      
-                    $timeout(function() {
-                        ngToast.dismiss();
-                        ngToast.create({
-                            content: '<strong>Spini</strong>: Welcome to S Treasure!',
-                            dismissOnTimeout: false,
-                            dismissButton: true,
-                            dismissOnClick: false
-                        });
-                    }, 1000)
+                    // $timeout(function() {
+                    //     ngToast.dismiss();
+                    //     ngToast.create({
+                    //         content: '<strong>Spini</strong>: Welcome to S Treasure!',
+                    //         dismissOnTimeout: false,
+                    //         dismissButton: true,
+                    //         dismissOnClick: false
+                    //     });
+                    // }, 1000)
                 } else if (result == 'vendor') {} else {
                     console.log('not logged in');
                 }
@@ -645,10 +644,9 @@ angular.module('signupModule')
             console.log(args)
         });
         vm.FbLogin = function() {
-
             console.log(window.loginRole)
             if (window.loginRole == 'vendor') {
-              console.log('vendor')
+                console.log('vendor')
                 SocialLoginService.vendorFacebookLogin();
             } else {
                 SocialLoginService.facebookLogin();
@@ -686,7 +684,6 @@ angular.module('signupModule')
 		/*jshint validthis: true */
 		var vm = this;
 		vm.validatecode = function(){
-			debugger
 			var output = [];
 			vm.redemption = [];
 			vm.redemption.amount = vm.amount;
@@ -963,6 +960,7 @@ LodashFactory.$inject = ['$window'];
         service.Login = Login;
         service.Logout = Logout;
         service.isReferral = isReferral;
+        service.isVendor = isVendor;
         service.authToken = authToken;
         service.getProfileInfo = getProfileInfo;
 
