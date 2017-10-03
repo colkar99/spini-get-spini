@@ -8,10 +8,10 @@
      * Service of the app
      */
     angular.module('angular-app').service('LoginService', LoginService).service('SocialLoginService', SocialLoginService);
-    LoginService.$inject = ['$http', '$cookies','apiBaseURL'];
+    LoginService.$inject = ['$http', '$cookies', 'apiBaseURL'];
     SocialLoginService.$inject = ['$q', '$rootScope', '$window'];
 
-    function LoginService($http, $cookies,apiBaseURL) {
+    function LoginService($http, $cookies, apiBaseURL) {
         var service = {};
         service.Login = Login;
         service.Logout = Logout;
@@ -19,7 +19,6 @@
         service.isVendor = isVendor;
         service.authToken = authToken;
         service.getProfileInfo = getProfileInfo;
-
         return service;
 
         function isReferral() {
@@ -31,7 +30,6 @@
             return false;
         }
 
-
         function isVendor() {
             if ($cookies.get('role')) {
                 if ($cookies.get('role') == 'vendor') {
@@ -41,7 +39,6 @@
             return false;
         }
 
-
         function authToken() {
             if ($cookies.get('token')) {
                 return $cookies.get('token');
@@ -49,10 +46,9 @@
             return false;
         }
 
-         function getProfileInfo(callback) {
+        function getProfileInfo(callback) {
             $http.get(apiBaseURL + '/profile').then(function(response) {
                 var response = response.data.data;
-
                 // login successful if there's a token in the response
                 if (response.attributes) {
                     callback(response.attributes);
@@ -62,9 +58,6 @@
                 }
             });
         }
-
-
-
 
         function Login(auth, callback) {
             $http.post(apiBaseURL + '/facebook_user_token', {
@@ -77,9 +70,8 @@
                     $cookies.put('role', response.role);
                     $cookies.put('name', response.name);
                     $cookies.put('token', response.jwt);
-                    if(response.mobile)
-                    {
-                    $cookies.put('mobile', response.mobile);
+                    if (response.mobile) {
+                        $cookies.put('mobile', response.mobile);
                     }
                     // add jwt token to auth header for all requests made by the $http service
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.jwt;
@@ -93,11 +85,9 @@
         }
 
         function Logout() {
-
-        	          $cookies.remove('role');
-                    $cookies.remove('name');
-                    $cookies.remove('token');
-
+            $cookies.remove('role');
+            $cookies.remove('name');
+            $cookies.remove('token');
             $http.defaults.headers.common.Authorization = '';
         }
     };
@@ -184,8 +174,7 @@
                 };
                 gapi.auth.signIn(myParams);
             },
-
-             vendorFacebookLogin: function() {
+            vendorFacebookLogin: function() {
                 var _self = this;
                 FB.init({
                     appId: '131797584045674',
@@ -194,7 +183,11 @@
                     xfbml: true,
                     version: 'v2.4'
                 });
-                FB.login();
+                FB.login(function(response) {
+                    console.log(response);
+                }, {
+                    scope: 'email' // to make sure the email access from fb
+                });
                 FB.getLoginStatus(function(response) {
                     if (response.status === 'connected') {
                         // the user is logged in and has authenticated your
@@ -214,9 +207,7 @@
                         // the user isn't logged in to Facebook.
                     }
                 });
-            }
-            ,
-
+            },
             facebookLogin: function() {
                 var _self = this;
                 FB.init({

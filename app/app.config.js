@@ -13,7 +13,7 @@
     configure.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
 
     function configure($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-        // $locationProvider.html5Mode(true).hashPrefix('!');
+        $locationProvider.html5Mode(true).hashPrefix('!');
         // This is required for Browser Sync to work poperly
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         $urlRouterProvider.otherwise('/');
@@ -29,7 +29,7 @@
         js = d.createElement('script');
         js.id = id;
         js.async = true;
-        js.src = "http://connect.facebook.net/en_US/all.js";
+        js.src = "//connect.facebook.net/en_US/all.js";
         ref.parentNode.insertBefore(js, ref);
     }(document));
 
@@ -37,7 +37,7 @@
         var po = document.createElement('script');
         po.type = 'text/javascript';
         po.async = true;
-        po.src = 'https://apis.google.com/js/client.js?onload=onLoadCallback';
+        po.src = '//apis.google.com/js/client.js?onload=onLoadCallback';
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(po, s);
     })();

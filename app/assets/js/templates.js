@@ -655,9 +655,15 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "        </div>\n" +
     "      </div>\n" +
     "\n" +
+    "\n" +
+    "    <div class=\"col-md-2 main-header-partner\" ng-show=\"menu.isVendor()\">\n" +
+    "        <button ng-click=\"menu.goVendorProfile()\">Dashboard</button>\n" +
+    "      </div>\n" +
+    "\n" +
+    "\n" +
     "      <div class=\"col-md-2 main-header-signin\" ng-show=\"menu.isVendor()\">\n" +
     "\n" +
-    "     <button ng-click=\"menu.open = false;menu.Logout()\" >Logout</button>\n" +
+    "     <button ng-click=\"menu.Logout()\" >Logout</button>\n" +
     "      </div>\n" +
     "\n" +
     "\n" +

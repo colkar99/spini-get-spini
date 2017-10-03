@@ -129,6 +129,12 @@
         vm.goProfile = function() {
             $location.path('/refferal');
         };
+
+        vm.goVendorProfile = function() {
+            $location.path('/redeemcoupon');
+        };
+
+
         vm.Logout = function() {
             LoginService.Logout();
             $location.path('/')

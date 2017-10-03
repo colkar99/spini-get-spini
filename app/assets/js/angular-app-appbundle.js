@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-10-02. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-10-03. 
 * @author Kathik
 */
 (function() {
@@ -51,7 +51,7 @@
     configure.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
 
     function configure($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-        // $locationProvider.html5Mode(true).hashPrefix('!');
+        $locationProvider.html5Mode(true).hashPrefix('!');
         // This is required for Browser Sync to work poperly
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         $urlRouterProvider.otherwise('/');
@@ -67,7 +67,7 @@
         js = d.createElement('script');
         js.id = id;
         js.async = true;
-        js.src = "http://connect.facebook.net/en_US/all.js";
+        js.src = "//connect.facebook.net/en_US/all.js";
         ref.parentNode.insertBefore(js, ref);
     }(document));
 
@@ -75,7 +75,7 @@
         var po = document.createElement('script');
         po.type = 'text/javascript';
         po.async = true;
-        po.src = 'https://apis.google.com/js/client.js?onload=onLoadCallback';
+        po.src = '//apis.google.com/js/client.js?onload=onLoadCallback';
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(po, s);
     })();
@@ -430,6 +430,12 @@ angular.module('signupModule')
         vm.goProfile = function() {
             $location.path('/refferal');
         };
+
+        vm.goVendorProfile = function() {
+            $location.path('/redeemcoupon');
+        };
+
+
         vm.Logout = function() {
             LoginService.Logout();
             $location.path('/')
@@ -952,10 +958,10 @@ LodashFactory.$inject = ['$window'];
      * Service of the app
      */
     angular.module('angular-app').service('LoginService', LoginService).service('SocialLoginService', SocialLoginService);
-    LoginService.$inject = ['$http', '$cookies','apiBaseURL'];
+    LoginService.$inject = ['$http', '$cookies', 'apiBaseURL'];
     SocialLoginService.$inject = ['$q', '$rootScope', '$window'];
 
-    function LoginService($http, $cookies,apiBaseURL) {
+    function LoginService($http, $cookies, apiBaseURL) {
         var service = {};
         service.Login = Login;
         service.Logout = Logout;
@@ -963,7 +969,6 @@ LodashFactory.$inject = ['$window'];
         service.isVendor = isVendor;
         service.authToken = authToken;
         service.getProfileInfo = getProfileInfo;
-
         return service;
 
         function isReferral() {
@@ -975,7 +980,6 @@ LodashFactory.$inject = ['$window'];
             return false;
         }
 
-
         function isVendor() {
             if ($cookies.get('role')) {
                 if ($cookies.get('role') == 'vendor') {
@@ -985,7 +989,6 @@ LodashFactory.$inject = ['$window'];
             return false;
         }
 
-
         function authToken() {
             if ($cookies.get('token')) {
                 return $cookies.get('token');
@@ -993,10 +996,9 @@ LodashFactory.$inject = ['$window'];
             return false;
         }
 
-         function getProfileInfo(callback) {
+        function getProfileInfo(callback) {
             $http.get(apiBaseURL + '/profile').then(function(response) {
                 var response = response.data.data;
-
                 // login successful if there's a token in the response
                 if (response.attributes) {
                     callback(response.attributes);
@@ -1006,9 +1008,6 @@ LodashFactory.$inject = ['$window'];
                 }
             });
         }
-
-
-
 
         function Login(auth, callback) {
             $http.post(apiBaseURL + '/facebook_user_token', {
@@ -1021,9 +1020,8 @@ LodashFactory.$inject = ['$window'];
                     $cookies.put('role', response.role);
                     $cookies.put('name', response.name);
                     $cookies.put('token', response.jwt);
-                    if(response.mobile)
-                    {
-                    $cookies.put('mobile', response.mobile);
+                    if (response.mobile) {
+                        $cookies.put('mobile', response.mobile);
                     }
                     // add jwt token to auth header for all requests made by the $http service
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.jwt;
@@ -1037,11 +1035,9 @@ LodashFactory.$inject = ['$window'];
         }
 
         function Logout() {
-
-        	          $cookies.remove('role');
-                    $cookies.remove('name');
-                    $cookies.remove('token');
-
+            $cookies.remove('role');
+            $cookies.remove('name');
+            $cookies.remove('token');
             $http.defaults.headers.common.Authorization = '';
         }
     };
@@ -1128,8 +1124,7 @@ LodashFactory.$inject = ['$window'];
                 };
                 gapi.auth.signIn(myParams);
             },
-
-             vendorFacebookLogin: function() {
+            vendorFacebookLogin: function() {
                 var _self = this;
                 FB.init({
                     appId: '131797584045674',
@@ -1138,7 +1133,11 @@ LodashFactory.$inject = ['$window'];
                     xfbml: true,
                     version: 'v2.4'
                 });
-                FB.login();
+                FB.login(function(response) {
+                    console.log(response);
+                }, {
+                    scope: 'email' // to make sure the email access from fb
+                });
                 FB.getLoginStatus(function(response) {
                     if (response.status === 'connected') {
                         // the user is logged in and has authenticated your
@@ -1158,9 +1157,7 @@ LodashFactory.$inject = ['$window'];
                         // the user isn't logged in to Facebook.
                     }
                 });
-            }
-            ,
-
+            },
             facebookLogin: function() {
                 var _self = this;
                 FB.init({
@@ -1194,7 +1191,6 @@ LodashFactory.$inject = ['$window'];
         };
     };
 })();
-
 (function () {
 	'use strict';
 

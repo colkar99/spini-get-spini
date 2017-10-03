@@ -38,9 +38,15 @@
         </div>
       </div>
 
+
+    <div class="col-md-2 main-header-partner" ng-show="menu.isVendor()">
+        <button ng-click="menu.goVendorProfile()">Dashboard</button>
+      </div>
+
+
       <div class="col-md-2 main-header-signin" ng-show="menu.isVendor()">
 
-     <button ng-click="menu.open = false;menu.Logout()" >Logout</button>
+     <button ng-click="menu.Logout()" >Logout</button>
       </div>
 
 
