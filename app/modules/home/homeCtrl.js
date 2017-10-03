@@ -8,13 +8,13 @@
      * Controller of the app
      */
     angular.module('angular-app').controller('HomeCtrl', Home);
-    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope'];
+    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope','$timeout','ngToast'];
     /*
      * recommend
      * Using function declarations
      * and bindable members up top.
      */
-    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _, $scope) {
+    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _, $scope, $timeout,ngToast) {
         /*jshint validthis: true */
         var vm = this;
         vm.offer_id;
@@ -77,9 +77,9 @@
                 // document.getElementById("get-code-popup").style.width = "100%";
                 LoginService.getProfileInfo(function(data) {
                     if (data.mobile) {
-                        vm.sentMobileNo(data.mobile)
+                        vm.sentMobileNo(data.mobile,'toast')
                         vm.user = data;
-                        document.getElementById("confirm-code-popup").style.width = "100%";
+                      //  document.getElementById("confirm-code-popup").style.width = "100%";
                     } else {
                         document.getElementById("get-code-popup").style.width = "100%";
                     }
@@ -172,7 +172,9 @@
         {
                 return vm.mobile_no;
         }
-        vm.sentMobileNo = function(mobile) {
+        vm.sentMobileNo = function(mobile,type) {
+            var type = type || 0;
+
             vm.mobile_no = mobile.toString();
             vm.offer_id;
             vm.post = {
@@ -189,6 +191,20 @@
             }).then(function mySuccess(response) {
                 vm.openConformPopup();
             }, function myError(response) {
+
+                console.log(type);
+
+              $timeout(function() {
+                        ngToast.dismiss();
+                        ngToast.create({
+                            content: '<strong>Spini</strong>: Code already sent',
+                            dismissOnTimeout: false,
+                            dismissButton: true,
+                            dismissOnClick: false
+                        });
+                    }, 0)
+
+
                 $scope.myWelcome = response.statusText;
             });
         }
@@ -235,5 +251,14 @@
     return new Date(formattedDate).getTime();
 
         };
+
+
+        if(LoginService.isReferral())
+        {
+        $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
+    
+        }
+
+
     }
 })();

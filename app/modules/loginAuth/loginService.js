@@ -8,10 +8,10 @@
      * Service of the app
      */
     angular.module('angular-app').service('LoginService', LoginService).service('SocialLoginService', SocialLoginService);
-    LoginService.$inject = ['$http', '$cookies', 'apiBaseURL'];
+    LoginService.$inject = ['$http', '$cookies', 'apiBaseURL','$state'];
     SocialLoginService.$inject = ['$q', '$rootScope', '$window'];
 
-    function LoginService($http, $cookies, apiBaseURL) {
+    function LoginService($http, $cookies, apiBaseURL,$state) {
         var service = {};
         service.Login = Login;
         service.Logout = Logout;
@@ -89,6 +89,7 @@
             $cookies.remove('name');
             $cookies.remove('token');
             $http.defaults.headers.common.Authorization = '';
+             $state.reload();  
         }
     };
 

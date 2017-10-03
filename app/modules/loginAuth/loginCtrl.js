@@ -8,13 +8,13 @@
      * Controller of the app
      */
     angular.module('loginModule').controller('LoginCtrl', Login);
-    Login.$inject = ['LoginService', 'SocialLoginService', '$scope', '$location', 'ngToast', '$timeout'];
+    Login.$inject = ['LoginService', 'SocialLoginService', '$scope', '$location', 'ngToast', '$timeout','$state'];
     /*
      * recommend
      * Using function declarations
      * and bindable members up top.
      */
-    function Login(LoginService, SocialLoginService, $scope, $location, ngToast, $timeout) {
+    function Login(LoginService, SocialLoginService, $scope, $location, ngToast, $timeout,$state) {
         /*jshint validthis: true */
         var vm = this;
         vm.title = "Hello, angular-app!";
@@ -26,6 +26,8 @@
             auth.role = 'referer';
             LoginService.Login(auth, function(result) {
                 if (result == 'referer') {
+
+
                     document.getElementById("login-popup").style.width = "0%";
                     document.getElementById("login-signup").style.width = "0%";
                     $timeout(function() {
@@ -36,7 +38,8 @@
                             dismissButton: true,
                             dismissOnClick: false
                         });
-                    }, 1000)
+                    }, 1000);
+                     $state.reload();   
                 } else if (result == 'vendor') {} else {
                     console.log('not logged in');
                 }
@@ -49,10 +52,12 @@
             auth.access_token = args.authData.authResponse.accessToken;
             auth.role = 'vendor';
             LoginService.Login(auth, function(result) {
-                $location.path('redeemcoupon');
+               
                 if (result == 'vendor') {
                     document.getElementById("login-popup").style.width = "0%";
                     document.getElementById("login-signup").style.width = "0%";
+
+                     $location.path('redeemcoupon');
                     //get the mobile no
                     // $timeout(function() {
                     //     ngToast.dismiss();
@@ -64,6 +69,23 @@
                     //     });
                     // }, 1000)
                 } else if (result == 'vendor') {} else {
+
+                 document.getElementById("login-popup").style.width = "0%";
+                    document.getElementById("login-signup").style.width = "0%";
+
+
+                       
+                    $timeout(function() {
+                        ngToast.dismiss();
+                        ngToast.create({
+                            content: 'Something went wrong',
+                            dismissOnTimeout: false,
+                            dismissButton: true,
+                            dismissOnClick: false
+                        });
+                    }, 1000)
+
+
                     console.log('not logged in');
                 }
             });
