@@ -51,7 +51,7 @@
     configure.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
 
     function configure($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-        $locationProvider.html5Mode(true).hashPrefix('!');
+        //$locationProvider.html5Mode(true).hashPrefix('!');
         // This is required for Browser Sync to work poperly
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         $urlRouterProvider.otherwise('/');
@@ -309,13 +309,13 @@ angular.module('signupModule')
      * Controller of the app
      */
     angular.module('angular-app').controller('HomeCtrl', Home);
-    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope'];
+    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope','$timeout','ngToast'];
     /*
      * recommend
      * Using function declarations
      * and bindable members up top.
      */
-    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _, $scope) {
+    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _, $scope, $timeout,ngToast) {
         /*jshint validthis: true */
         var vm = this;
         vm.offer_id;
@@ -378,9 +378,9 @@ angular.module('signupModule')
                 // document.getElementById("get-code-popup").style.width = "100%";
                 LoginService.getProfileInfo(function(data) {
                     if (data.mobile) {
-                        vm.sentMobileNo(data.mobile)
+                        vm.sentMobileNo(data.mobile,'toast')
                         vm.user = data;
-                        document.getElementById("confirm-code-popup").style.width = "100%";
+                      //  document.getElementById("confirm-code-popup").style.width = "100%";
                     } else {
                         document.getElementById("get-code-popup").style.width = "100%";
                     }
@@ -473,7 +473,9 @@ angular.module('signupModule')
         {
                 return vm.mobile_no;
         }
-        vm.sentMobileNo = function(mobile) {
+        vm.sentMobileNo = function(mobile,type) {
+            var type = type || 0;
+
             vm.mobile_no = mobile.toString();
             vm.offer_id;
             vm.post = {
@@ -490,6 +492,20 @@ angular.module('signupModule')
             }).then(function mySuccess(response) {
                 vm.openConformPopup();
             }, function myError(response) {
+
+                console.log(type);
+
+              $timeout(function() {
+                        ngToast.dismiss();
+                        ngToast.create({
+                            content: '<strong>Spini</strong>: Code already sent',
+                            dismissOnTimeout: false,
+                            dismissButton: true,
+                            dismissOnClick: false
+                        });
+                    }, 0)
+
+
                 $scope.myWelcome = response.statusText;
             });
         }
@@ -536,6 +552,15 @@ angular.module('signupModule')
     return new Date(formattedDate).getTime();
 
         };
+
+
+        if(LoginService.isReferral())
+        {
+        $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
+    
+        }
+
+
     }
 })();
 (function () {
@@ -583,13 +608,13 @@ angular.module('signupModule')
      * Controller of the app
      */
     angular.module('loginModule').controller('LoginCtrl', Login);
-    Login.$inject = ['LoginService', 'SocialLoginService', '$scope', '$location', 'ngToast', '$timeout'];
+    Login.$inject = ['LoginService', 'SocialLoginService', '$scope', '$location', 'ngToast', '$timeout', '$state'];
     /*
      * recommend
      * Using function declarations
      * and bindable members up top.
      */
-    function Login(LoginService, SocialLoginService, $scope, $location, ngToast, $timeout) {
+    function Login(LoginService, SocialLoginService, $scope, $location, ngToast, $timeout, $state) {
         /*jshint validthis: true */
         var vm = this;
         vm.title = "Hello, angular-app!";
@@ -611,34 +636,38 @@ angular.module('signupModule')
                             dismissButton: true,
                             dismissOnClick: false
                         });
-                    }, 1000)
-                } else if (result == 'vendor') {} else {
+                    }, 1000);
+                    $state.reload();
+                } else if (result == 'vendor') {
+                    document.getElementById("login-popup").style.width = "0%";
+                    document.getElementById("login-signup").style.width = "0%";
+                } else {
                     console.log('not logged in');
                 }
             });
-            console.log('my event FBLoginComplete');
-            console.log(args)
         });
         $scope.$on("FBLoginCompleteVendor", function(event, args) {
             var auth = {};
             auth.access_token = args.authData.authResponse.accessToken;
             auth.role = 'vendor';
             LoginService.Login(auth, function(result) {
-                $location.path('redeemcoupon');
                 if (result == 'vendor') {
                     document.getElementById("login-popup").style.width = "0%";
                     document.getElementById("login-signup").style.width = "0%";
-                    //get the mobile no
-                    // $timeout(function() {
-                    //     ngToast.dismiss();
-                    //     ngToast.create({
-                    //         content: '<strong>Spini</strong>: Welcome to S Treasure!',
-                    //         dismissOnTimeout: false,
-                    //         dismissButton: true,
-                    //         dismissOnClick: false
-                    //     });
-                    // }, 1000)
-                } else if (result == 'vendor') {} else {
+                    $location.path('redeemcoupon');
+        
+                }else {
+                    document.getElementById("login-popup").style.width = "0%";
+                    document.getElementById("login-signup").style.width = "0%";
+                    $timeout(function() {
+                        ngToast.dismiss();
+                        ngToast.create({
+                            content: 'Something went wrong',
+                            dismissOnTimeout: false,
+                            dismissButton: true,
+                            dismissOnClick: false
+                        });
+                    }, 1000)
                     console.log('not logged in');
                 }
             });
@@ -663,51 +692,75 @@ angular.module('signupModule')
         }
     }
 })();
-(function () {
-	'use strict';
+(function() {
+    'use strict';
+    /**
+     * @ngdoc function
+     * @name app.controller:HomeCtrl
+     * @description
+     * # HomeCtrl
+     * Controller of the app
+     */
+    angular.module('redeemcoupon').controller('redeemcouponCtrl', RedeemCoupon);
+    RedeemCoupon.$inject = ['redeemcouponService', '$http', 'LoginService', '$location'];
+    /*
+     * recommend
+     * Using function declarations
+     * and bindable members up top.
+     */
+    function RedeemCoupon(redeemcouponService, $http, LoginService, $location) {
+        /*jshint validthis: true */
+        var vm = this;
+    
+        vm.checkCode = function() {
 
-	/**
-	* @ngdoc function
-	* @name app.controller:HomeCtrl
-	* @description
-	* # HomeCtrl
-	* Controller of the app
-	*/
+            console.log('de');
+            $http.post('https://api.spini.co/v1/redemptions/verify_coupon', {
+                "redemption": {
+                    "coupon_code": vm.coupon_code,
+                    "business_id": vm.business_id,
+                    "amount": vm.amount
+                }
+            }).then(function(response) {
 
-	angular
-		.module('redeemcoupon')
-		.controller('redeemcouponCtrl', RedeemCoupon);
+                if(response.data.code){
 
-	RedeemCoupon.$inject = ['redeemcouponService', '$http'];
+                    vm.showInfo = response.data;
 
-	/*
-	* recommend
-	* Using function declarations
-	* and bindable members up top.
-	*/
+                    alert('amount to pay '+response.data.amount_to_pay)
+                }
 
-	function RedeemCoupon(redeemcouponService, $http) {
-		/*jshint validthis: true */
-		var vm = this;
-		vm.validatecode = function(){
-			var output = [];
-			vm.redemption = [];
-			vm.redemption.amount = vm.amount;
-			vm.redemption.coupon_code = vm.coupon_code;
-			vm.redemption.business_id = 1;
-			output.redemption = vm.redemption;
-			console.log(output);
-			$http.post('https://api.spini.co/v1/redemptions',{"redemption":{"coupon_code":"7ABE9B", "business_id": "1", "amount": "1000"}}, {
-				  headers: { 'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDY2MDM1MTksInN1YiI6MTB9.yUwqTPfXKbU5gsHT7mnOcx2StTsmLd1F5KmyCowhYq4' }
-				  // params: { bookId: 42 }
-				});
-		}
-		vm.listFeatures = redeemcouponService.getFeaturesList();
-
-	}
-
+                
+            });
+        }
+        vm.validatecode = function() {
+            $http.post('https://api.spini.co/v1/redemptions/verify_coupon', {
+                "redemption": {
+                    "coupon_code": vm.coupon_code,
+                    "business_id": vm.business_id,
+                    "amount": vm.amount
+                }
+            });
+     
+        }
+        if (LoginService.isVendor()) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
+            LoginService.getVendorProfileInfo(function(data) {
+                vm.vendor = data;
+                if (vm.vendor.businesses) {
+                    if (vm.vendor.businesses.length > 0) {
+                        vm.business_id = vm.vendor.businesses[0].id; // select first items
+                    }
+                }
+            });
+            // LoginService.getVendorDataList(function(data) {
+            //     vm.vendorDataList = data;
+            // });
+        } else {
+            $location.path('/')
+        }
+    }
 })();
-
 (function () {
 	'use strict';
 
@@ -958,14 +1011,15 @@ LodashFactory.$inject = ['$window'];
      * Service of the app
      */
     angular.module('angular-app').service('LoginService', LoginService).service('SocialLoginService', SocialLoginService);
-    LoginService.$inject = ['$http', '$cookies', 'apiBaseURL'];
+    LoginService.$inject = ['$http', '$cookies', 'apiBaseURL', '$state'];
     SocialLoginService.$inject = ['$q', '$rootScope', '$window'];
 
-    function LoginService($http, $cookies, apiBaseURL) {
+    function LoginService($http, $cookies, apiBaseURL, $state) {
         var service = {};
         service.Login = Login;
         service.Logout = Logout;
         service.isReferral = isReferral;
+        service.getVendorProfileInfo = getVendorProfileInfo;
         service.isVendor = isVendor;
         service.authToken = authToken;
         service.getProfileInfo = getProfileInfo;
@@ -1009,6 +1063,32 @@ LodashFactory.$inject = ['$window'];
             });
         }
 
+        function getVendorProfileInfo(callback) {
+            $http.get(apiBaseURL + '/profile').then(function(response) {
+                var response = response.data.data;
+                // login successful if there's a token in the response
+                if (response.attributes) {
+                    callback(response.attributes);
+                } else {
+                    // execute callback with false to indicate failed login
+                    callback(false);
+                }
+            });
+        }
+
+        function getVendorDataList(callback) {
+            $http.get(apiBaseURL + '/profile').then(function(response) {
+                var response = response.data.data;
+                // login successful if there's a token in the response
+                if (response.attributes) {
+                    callback(response.attributes);
+                } else {
+                    // execute callback with false to indicate failed login
+                    callback(false);
+                }
+            });
+        }
+
         function Login(auth, callback) {
             $http.post(apiBaseURL + '/facebook_user_token', {
                 auth: auth
@@ -1039,6 +1119,7 @@ LodashFactory.$inject = ['$window'];
             $cookies.remove('name');
             $cookies.remove('token');
             $http.defaults.headers.common.Authorization = '';
+            $state.reload();
         }
     };
 
@@ -1073,47 +1154,6 @@ LodashFactory.$inject = ['$window'];
                     "authData": res
                 });
             },
-            facebookgetLoginStatus: function() {
-                FB.getLoginStatus(function(response) {
-                    if (response.status === 'connected') {
-                        // the user is logged in and has authenticated your
-                        // app, and response.authResponse supplies
-                        // the user's ID, a valid access token, a signed
-                        // request, and the time the access token
-                        // and signed request each expire
-                        $rootScope.$broadcast("FBLoginComplete", {
-                            "authData": response
-                        });
-                        // var uid = response.authResponse.userID;
-                        // var accessToken = response.authResponse.accessToken;
-                    } else if (response.status === 'not_authorized') {
-                        // the user is logged in to Facebook,
-                        // but has not authenticated your app
-                    } else {
-                        // the user isn't logged in to Facebook.
-                    }
-                });
-            },
-            facebookWatchLoginChange: function() {
-                // var _self = this;
-                // FB.Event.subscribe('auth.authResponseChange', function(res) {
-                //     if (res.status === 'connected') {
-                //         $rootScope.$broadcast("FBLoginComplete", {
-                //             "authData": res
-                //         });
-                //         // _self.facebookGetUserInfo();
-                //          This is also the point where you should create a
-                //          session for the current user.
-                //          For this purpose you can use the data inside the
-                //          res.authResponse object.
-                //     } else {
-                //         /*
-                //          The user is not logged to the app, or into Facebook:
-                //          destroy the session on the server.
-                //         */
-                //     }
-                // });
-            },
             googleLogin: function() {
                 var myParams = {
                     'clientid': '405658344932-5ot4r5m9vs424c8b4j6htt3dg1p8qfpd.apps.googleusercontent.com', //You need to set client id
@@ -1135,28 +1175,15 @@ LodashFactory.$inject = ['$window'];
                 });
                 FB.login(function(response) {
                     console.log(response);
-                }, {
-                    scope: 'email' // to make sure the email access from fb
-                });
-                FB.getLoginStatus(function(response) {
                     if (response.status === 'connected') {
-                        // the user is logged in and has authenticated your
-                        // app, and response.authResponse supplies
-                        // the user's ID, a valid access token, a signed
-                        // request, and the time the access token
-                        // and signed request each expire
                         $rootScope.$broadcast("FBLoginCompleteVendor", {
                             "authData": response
                         });
-                        // var uid = response.authResponse.userID;
-                        // var accessToken = response.authResponse.accessToken;
-                    } else if (response.status === 'not_authorized') {
-                        // the user is logged in to Facebook,
-                        // but has not authenticated your app
-                    } else {
-                        // the user isn't logged in to Facebook.
-                    }
+                    } else if (response.status === 'not_authorized') {} else {}
+                }, {
+                    scope: 'email' // to make sure the email access from fb
                 });
+  
             },
             facebookLogin: function() {
                 var _self = this;
@@ -1167,26 +1194,18 @@ LodashFactory.$inject = ['$window'];
                     xfbml: true,
                     version: 'v2.4'
                 });
-                FB.login();
-                FB.getLoginStatus(function(response) {
+                FB.login(function(response) {
                     if (response.status === 'connected') {
-                        // the user is logged in and has authenticated your
-                        // app, and response.authResponse supplies
-                        // the user's ID, a valid access token, a signed
-                        // request, and the time the access token
-                        // and signed request each expire
                         $rootScope.$broadcast("FBLoginComplete", {
                             "authData": response
                         });
-                        // var uid = response.authResponse.userID;
-                        // var accessToken = response.authResponse.accessToken;
-                    } else if (response.status === 'not_authorized') {
-                        // the user is logged in to Facebook,
-                        // but has not authenticated your app
-                    } else {
+                    } else if (response.status === 'not_authorized') {} else {
                         // the user isn't logged in to Facebook.
                     }
+                }, {
+                    scope: 'email' // to make sure the email access from fb
                 });
+               
             }
         };
     };

@@ -1,57 +1,104 @@
-
 <!-- container for coupon redeem console -->
 <section class="coupon-redeem-entry">
-  <h3>Enter Offer Price & Coupon Code</h3>
-  <input type="number" placeholder="Enter Price" class="price-entry" ng-model="vm.amount">
-  <input type="text" placeholder="Enter Coupon Code" class="coupon-entry" ng-model="vm.coupon_code">
-  <button ng-click="vm.validatecode()">SUBMIT</button>
-  <div class="pull-right">
-    <a href="#">FAQ </a>
-    <a href="#">Troubleshoot</a>
-  </div>
+    <h3>
+        Enter Offer Price & Coupon Code
+    </h3>
+    <input class="price-entry" ng-model="vm.amount" placeholder="Enter Price" type="number" />
+        <input class="coupon-entry" min="1" ng-disabled="vm.amount==null" ng-model="vm.coupon_code" placeholder="Enter Coupon Code" type="text" />
+            <select class="sle" ng-model="vm.business_id" ng-options="item.id as item.name for item in vm.vendor.businesses">
+            </select>
+            <button ng-click="vm.checkCode()">
+                SUBMIT
+            </button>
+            <div class="pull-right">
+                <a>
+                    FAQ
+                </a>
+                <a>
+                    Troubleshoot
+                </a>
+            </div>
+  
 </section>
+
+
 
 <!-- coupon table -->
 <section>
-  <div class="container">
-    <table class="coupon-redeem-table col-md-12">
-      <thead>
-        <tr>
-          <td>OFFER ID</td>
-          <td>DATE</td>
-          <td>TIME</td>
-          <td>COUNT</td>
-          <td>LOCATION</td>
-
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>ABX123</td>
-          <td>14-11-2017</td>
-          <td>12.15.32</td>
-          <td>893212</td>
-          <td>T.NAGAR</td>
-
-        </tr>
-        <tr>
-          <td>ABX123</td>
-          <td>14-11-2017</td>
-          <td>12.15.32</td>
-          <td>893212</td>
-          <td>T.NAGAR</td>
-
-        </tr>
-        <tr>
-          <td>ABX123</td>
-          <td>14-11-2017</td>
-          <td>12.15.32</td>
-          <td>893212</td>
-          <td>T.NAGAR</td>
-
-        </tr>
-      </tbody>
-    </table>
-</div>
+    <div class="container">
+        <table class="coupon-redeem-table col-md-12">
+            <thead>
+                <tr>
+                    <td>
+                        OFFER ID
+                    </td>
+                    <td>
+                        DATE
+                    </td>
+                    <td>
+                        TIME
+                    </td>
+                    <td>
+                        COUNT
+                    </td>
+                    <td>
+                        LOCATION
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        ABX123
+                    </td>
+                    <td>
+                        14-11-2017
+                    </td>
+                    <td>
+                        12.15.32
+                    </td>
+                    <td>
+                        893212
+                    </td>
+                    <td>
+                        T.NAGAR
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ABX123
+                    </td>
+                    <td>
+                        14-11-2017
+                    </td>
+                    <td>
+                        12.15.32
+                    </td>
+                    <td>
+                        893212
+                    </td>
+                    <td>
+                        T.NAGAR
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ABX123
+                    </td>
+                    <td>
+                        14-11-2017
+                    </td>
+                    <td>
+                        12.15.32
+                    </td>
+                    <td>
+                        893212
+                    </td>
+                    <td>
+                        T.NAGAR
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </section>
-

@@ -865,10 +865,10 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                Hi  {{vm.user.name ? vm.user.name : 'Guest'}}\n" +
     "                            </h4>\n" +
     "                            <h4 class=\"marbt20\">\n" +
-    "                                Availing this offer will add Rs.200 to your Spini Wallet!\n" +
+    "                                Availing this offer will add  Rs.{{item.attributes.treasure_value}} to your Spini Wallet!\n" +
     "                            </h4>\n" +
     "                            <h4 class=\"marbt20\">\n" +
-    "                                Offer code will be send to your registered mobile No - \n" +
+    "                                Offer code sent to your registered mobile No - \n" +
     "\n" +
     "\n" +
     "\n" +
@@ -879,11 +879,9 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                            <h4 class=\"marbt20\">\n" +
     "                                Hi  {{vm.user.name ? vm.user.name : 'Guest'}}\n" +
     "                            </h4>\n" +
+    "               \n" +
     "                            <h4 class=\"marbt20\">\n" +
-    "                                Availing this offer will add Rs.200 to your Spini Wallet!\n" +
-    "                            </h4>\n" +
-    "                            <h4 class=\"marbt20\">\n" +
-    "                                Offer code will be send to your registered mobile No - \n" +
+    "                                Offer code sent to your registered mobile No - \n" +
     "\n" +
     "                  {{vm.mobile()}}\n" +
     "                            </h4>\n" +
@@ -1055,7 +1053,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                <!-- </ol> -->\n" +
     "                                <!-- <div class=\"carousel-inner\"> -->\n" +
     "                                <!-- <div class=\"active item\"> -->\n" +
-    "                                <img \"=\"\" alt=\"...\" class=\"fixed-height\" src=\"{{item.attributes.avatar}}\" style=\"width: 100% !important;\">\n" +
+    "                                <img \"=\"\" alt=\"...\" class=\"fixed-height\" ng-src=\"{{item.attributes.avatar}}\" style=\"width: 100% !important;\">\n" +
     "                                    <!-- </div> -->\n" +
     "                                    <!--    <div class=\"item\">\n" +
     "              <img class=\"fixed-height\" src=\"http://placehold.it/1200x400\" alt=\"...\">\n" +
@@ -1094,7 +1092,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                            </div>\n" +
     "                                        </div>\n" +
     "                                        <div class=\"col-md-4 text-right \">\n" +
-    "                                            <img class=\"offer-logo-set\" src=\"{{item.attributes.avatar_medium}}\">\n" +
+    "                                            <img class=\"offer-logo-set\" ng-src=\"{{item.attributes.avatar_medium}}\">\n" +
     "                                            \n" +
     "                                        </div>\n" +
     "                                    </div>\n" +
@@ -1105,13 +1103,13 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                            </button>\n" +
     "                                        </div>\n" +
     "                                        <div class=\"col-md-6\">\n" +
-    "                                            <span class=\"offer-spini\">\n" +
+    "                                            <span class=\"offer-spini\" ng-show=\" {{item.attributes.treasure_value}}\">\n" +
     "                                                <i aria-hidden=\"true\" class=\"fa fa-gift link-icon fagift\">\n" +
     "                                                </i>\n" +
     "                                                Spini Treasure\n" +
-    "                                                <b>\n" +
-    "                                                    $200\n" +
-    "                                                </b>\n" +
+    "                                               \n" +
+    "                                                 ₹ {{item.attributes.treasure_value}}\n" +
+    "                                               \n" +
     "                                            </span>\n" +
     "                                        </div>\n" +
     "                                        <div class=\"col-md-2 \">\n" +
@@ -1194,63 +1192,110 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('app/modules/redeem_coupon/redeem_coupon.html',
-    "\n" +
     "<!-- container for coupon redeem console -->\n" +
     "<section class=\"coupon-redeem-entry\">\n" +
-    "  <h3>Enter Offer Price & Coupon Code</h3>\n" +
-    "  <input type=\"number\" placeholder=\"Enter Price\" class=\"price-entry\" ng-model=\"vm.amount\">\n" +
-    "  <input type=\"text\" placeholder=\"Enter Coupon Code\" class=\"coupon-entry\" ng-model=\"vm.coupon_code\">\n" +
-    "  <button ng-click=\"vm.validatecode()\">SUBMIT</button>\n" +
-    "  <div class=\"pull-right\">\n" +
-    "    <a href=\"#\">FAQ </a>\n" +
-    "    <a href=\"#\">Troubleshoot</a>\n" +
-    "  </div>\n" +
+    "    <h3>\n" +
+    "        Enter Offer Price & Coupon Code\n" +
+    "    </h3>\n" +
+    "    <input class=\"price-entry\" ng-model=\"vm.amount\" placeholder=\"Enter Price\" type=\"number\" />\n" +
+    "        <input class=\"coupon-entry\" min=\"1\" ng-disabled=\"vm.amount==null\" ng-model=\"vm.coupon_code\" placeholder=\"Enter Coupon Code\" type=\"text\" />\n" +
+    "            <select class=\"sle\" ng-model=\"vm.business_id\" ng-options=\"item.id as item.name for item in vm.vendor.businesses\">\n" +
+    "            </select>\n" +
+    "            <button ng-click=\"vm.checkCode()\">\n" +
+    "                SUBMIT\n" +
+    "            </button>\n" +
+    "            <div class=\"pull-right\">\n" +
+    "                <a>\n" +
+    "                    FAQ\n" +
+    "                </a>\n" +
+    "                <a>\n" +
+    "                    Troubleshoot\n" +
+    "                </a>\n" +
+    "            </div>\n" +
+    "  \n" +
     "</section>\n" +
+    "\n" +
+    "\n" +
     "\n" +
     "<!-- coupon table -->\n" +
     "<section>\n" +
-    "  <div class=\"container\">\n" +
-    "    <table class=\"coupon-redeem-table col-md-12\">\n" +
-    "      <thead>\n" +
-    "        <tr>\n" +
-    "          <td>OFFER ID</td>\n" +
-    "          <td>DATE</td>\n" +
-    "          <td>TIME</td>\n" +
-    "          <td>COUNT</td>\n" +
-    "          <td>LOCATION</td>\n" +
-    "\n" +
-    "        </tr>\n" +
-    "      </thead>\n" +
-    "      <tbody>\n" +
-    "        <tr>\n" +
-    "          <td>ABX123</td>\n" +
-    "          <td>14-11-2017</td>\n" +
-    "          <td>12.15.32</td>\n" +
-    "          <td>893212</td>\n" +
-    "          <td>T.NAGAR</td>\n" +
-    "\n" +
-    "        </tr>\n" +
-    "        <tr>\n" +
-    "          <td>ABX123</td>\n" +
-    "          <td>14-11-2017</td>\n" +
-    "          <td>12.15.32</td>\n" +
-    "          <td>893212</td>\n" +
-    "          <td>T.NAGAR</td>\n" +
-    "\n" +
-    "        </tr>\n" +
-    "        <tr>\n" +
-    "          <td>ABX123</td>\n" +
-    "          <td>14-11-2017</td>\n" +
-    "          <td>12.15.32</td>\n" +
-    "          <td>893212</td>\n" +
-    "          <td>T.NAGAR</td>\n" +
-    "\n" +
-    "        </tr>\n" +
-    "      </tbody>\n" +
-    "    </table>\n" +
-    "</div>\n" +
-    "</section>\n" +
-    "\n"
+    "    <div class=\"container\">\n" +
+    "        <table class=\"coupon-redeem-table col-md-12\">\n" +
+    "            <thead>\n" +
+    "                <tr>\n" +
+    "                    <td>\n" +
+    "                        OFFER ID\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        DATE\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        TIME\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        COUNT\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        LOCATION\n" +
+    "                    </td>\n" +
+    "                </tr>\n" +
+    "            </thead>\n" +
+    "            <tbody>\n" +
+    "                <tr>\n" +
+    "                    <td>\n" +
+    "                        ABX123\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        14-11-2017\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        12.15.32\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        893212\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        T.NAGAR\n" +
+    "                    </td>\n" +
+    "                </tr>\n" +
+    "                <tr>\n" +
+    "                    <td>\n" +
+    "                        ABX123\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        14-11-2017\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        12.15.32\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        893212\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        T.NAGAR\n" +
+    "                    </td>\n" +
+    "                </tr>\n" +
+    "                <tr>\n" +
+    "                    <td>\n" +
+    "                        ABX123\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        14-11-2017\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        12.15.32\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        893212\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        T.NAGAR\n" +
+    "                    </td>\n" +
+    "                </tr>\n" +
+    "            </tbody>\n" +
+    "        </table>\n" +
+    "    </div>\n" +
+    "</section>\n"
   );
 
 
@@ -1364,7 +1409,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "            <label class=\"text-muted\">No of Code Generated</label>\n" +
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
-    "            <label>1000</label>\n" +
+    "            <label>{{vm.user.coupons_generated.self}}</label>\n" +
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
     "            <!-- <button class=\"btn btn-default\"  style=\"border: 1px solid #b6f3d1; color:#b6f3d1;\">Get more offers</button> -->\n" +

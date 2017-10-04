@@ -8,14 +8,15 @@
      * Service of the app
      */
     angular.module('angular-app').service('LoginService', LoginService).service('SocialLoginService', SocialLoginService);
-    LoginService.$inject = ['$http', '$cookies', 'apiBaseURL','$state'];
+    LoginService.$inject = ['$http', '$cookies', 'apiBaseURL', '$state'];
     SocialLoginService.$inject = ['$q', '$rootScope', '$window'];
 
-    function LoginService($http, $cookies, apiBaseURL,$state) {
+    function LoginService($http, $cookies, apiBaseURL, $state) {
         var service = {};
         service.Login = Login;
         service.Logout = Logout;
         service.isReferral = isReferral;
+        service.getVendorProfileInfo = getVendorProfileInfo;
         service.isVendor = isVendor;
         service.authToken = authToken;
         service.getProfileInfo = getProfileInfo;
@@ -59,6 +60,32 @@
             });
         }
 
+        function getVendorProfileInfo(callback) {
+            $http.get(apiBaseURL + '/profile').then(function(response) {
+                var response = response.data.data;
+                // login successful if there's a token in the response
+                if (response.attributes) {
+                    callback(response.attributes);
+                } else {
+                    // execute callback with false to indicate failed login
+                    callback(false);
+                }
+            });
+        }
+
+        function getVendorDataList(callback) {
+            $http.get(apiBaseURL + '/profile').then(function(response) {
+                var response = response.data.data;
+                // login successful if there's a token in the response
+                if (response.attributes) {
+                    callback(response.attributes);
+                } else {
+                    // execute callback with false to indicate failed login
+                    callback(false);
+                }
+            });
+        }
+
         function Login(auth, callback) {
             $http.post(apiBaseURL + '/facebook_user_token', {
                 auth: auth
@@ -89,7 +116,7 @@
             $cookies.remove('name');
             $cookies.remove('token');
             $http.defaults.headers.common.Authorization = '';
-             $state.reload();  
+            $state.reload();
         }
     };
 
@@ -124,47 +151,6 @@
                     "authData": res
                 });
             },
-            facebookgetLoginStatus: function() {
-                FB.getLoginStatus(function(response) {
-                    if (response.status === 'connected') {
-                        // the user is logged in and has authenticated your
-                        // app, and response.authResponse supplies
-                        // the user's ID, a valid access token, a signed
-                        // request, and the time the access token
-                        // and signed request each expire
-                        $rootScope.$broadcast("FBLoginComplete", {
-                            "authData": response
-                        });
-                        // var uid = response.authResponse.userID;
-                        // var accessToken = response.authResponse.accessToken;
-                    } else if (response.status === 'not_authorized') {
-                        // the user is logged in to Facebook,
-                        // but has not authenticated your app
-                    } else {
-                        // the user isn't logged in to Facebook.
-                    }
-                });
-            },
-            facebookWatchLoginChange: function() {
-                // var _self = this;
-                // FB.Event.subscribe('auth.authResponseChange', function(res) {
-                //     if (res.status === 'connected') {
-                //         $rootScope.$broadcast("FBLoginComplete", {
-                //             "authData": res
-                //         });
-                //         // _self.facebookGetUserInfo();
-                //          This is also the point where you should create a
-                //          session for the current user.
-                //          For this purpose you can use the data inside the
-                //          res.authResponse object.
-                //     } else {
-                //         /*
-                //          The user is not logged to the app, or into Facebook:
-                //          destroy the session on the server.
-                //         */
-                //     }
-                // });
-            },
             googleLogin: function() {
                 var myParams = {
                     'clientid': '405658344932-5ot4r5m9vs424c8b4j6htt3dg1p8qfpd.apps.googleusercontent.com', //You need to set client id
@@ -186,28 +172,15 @@
                 });
                 FB.login(function(response) {
                     console.log(response);
-                }, {
-                    scope: 'email' // to make sure the email access from fb
-                });
-                FB.getLoginStatus(function(response) {
                     if (response.status === 'connected') {
-                        // the user is logged in and has authenticated your
-                        // app, and response.authResponse supplies
-                        // the user's ID, a valid access token, a signed
-                        // request, and the time the access token
-                        // and signed request each expire
                         $rootScope.$broadcast("FBLoginCompleteVendor", {
                             "authData": response
                         });
-                        // var uid = response.authResponse.userID;
-                        // var accessToken = response.authResponse.accessToken;
-                    } else if (response.status === 'not_authorized') {
-                        // the user is logged in to Facebook,
-                        // but has not authenticated your app
-                    } else {
-                        // the user isn't logged in to Facebook.
-                    }
+                    } else if (response.status === 'not_authorized') {} else {}
+                }, {
+                    scope: 'email' // to make sure the email access from fb
                 });
+  
             },
             facebookLogin: function() {
                 var _self = this;
@@ -218,26 +191,18 @@
                     xfbml: true,
                     version: 'v2.4'
                 });
-                FB.login();
-                FB.getLoginStatus(function(response) {
+                FB.login(function(response) {
                     if (response.status === 'connected') {
-                        // the user is logged in and has authenticated your
-                        // app, and response.authResponse supplies
-                        // the user's ID, a valid access token, a signed
-                        // request, and the time the access token
-                        // and signed request each expire
                         $rootScope.$broadcast("FBLoginComplete", {
                             "authData": response
                         });
-                        // var uid = response.authResponse.userID;
-                        // var accessToken = response.authResponse.accessToken;
-                    } else if (response.status === 'not_authorized') {
-                        // the user is logged in to Facebook,
-                        // but has not authenticated your app
-                    } else {
+                    } else if (response.status === 'not_authorized') {} else {
                         // the user isn't logged in to Facebook.
                     }
+                }, {
+                    scope: 'email' // to make sure the email access from fb
                 });
+               
             }
         };
     };

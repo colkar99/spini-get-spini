@@ -1007,3 +1007,15 @@ footer p {
     display: inline;
     /* CHANGE IF FOR BLOCK ELEMENTS */
 }
+
+.sle
+{
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px 10px;
+    font-weight: 400;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background: none;
+}

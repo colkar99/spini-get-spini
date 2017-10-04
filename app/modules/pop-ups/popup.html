@@ -121,10 +121,10 @@
                                 Hi  {{vm.user.name ? vm.user.name : 'Guest'}}
                             </h4>
                             <h4 class="marbt20">
-                                Availing this offer will add Rs.200 to your Spini Wallet!
+                                Availing this offer will add  Rs.{{item.attributes.treasure_value}} to your Spini Wallet!
                             </h4>
                             <h4 class="marbt20">
-                                Offer code will be send to your registered mobile No - 
+                                Offer code sent to your registered mobile No - 
 
 
 
@@ -135,11 +135,9 @@
                             <h4 class="marbt20">
                                 Hi  {{vm.user.name ? vm.user.name : 'Guest'}}
                             </h4>
+               
                             <h4 class="marbt20">
-                                Availing this offer will add Rs.200 to your Spini Wallet!
-                            </h4>
-                            <h4 class="marbt20">
-                                Offer code will be send to your registered mobile No - 
+                                Offer code sent to your registered mobile No - 
 
                   {{vm.mobile()}}
                             </h4>
@@ -311,7 +309,7 @@
                                 <!-- </ol> -->
                                 <!-- <div class="carousel-inner"> -->
                                 <!-- <div class="active item"> -->
-                                <img "="" alt="..." class="fixed-height" src="{{item.attributes.avatar}}" style="width: 100% !important;">
+                                <img "="" alt="..." class="fixed-height" ng-src="{{item.attributes.avatar}}" style="width: 100% !important;">
                                     <!-- </div> -->
                                     <!--    <div class="item">
               <img class="fixed-height" src="http://placehold.it/1200x400" alt="...">
@@ -350,7 +348,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4 text-right ">
-                                            <img class="offer-logo-set" src="{{item.attributes.avatar_medium}}">
+                                            <img class="offer-logo-set" ng-src="{{item.attributes.avatar_medium}}">
                                             
                                         </div>
                                     </div>

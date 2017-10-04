@@ -1,44 +1,69 @@
-(function () {
-	'use strict';
+(function() {
+    'use strict';
+    /**
+     * @ngdoc function
+     * @name app.controller:HomeCtrl
+     * @description
+     * # HomeCtrl
+     * Controller of the app
+     */
+    angular.module('redeemcoupon').controller('redeemcouponCtrl', RedeemCoupon);
+    RedeemCoupon.$inject = ['redeemcouponService', '$http', 'LoginService', '$location'];
+    /*
+     * recommend
+     * Using function declarations
+     * and bindable members up top.
+     */
+    function RedeemCoupon(redeemcouponService, $http, LoginService, $location) {
+        /*jshint validthis: true */
+        var vm = this;
+    
+        vm.checkCode = function() {
 
-	/**
-	* @ngdoc function
-	* @name app.controller:HomeCtrl
-	* @description
-	* # HomeCtrl
-	* Controller of the app
-	*/
+            console.log('de');
+            $http.post('https://api.spini.co/v1/redemptions/verify_coupon', {
+                "redemption": {
+                    "coupon_code": vm.coupon_code,
+                    "business_id": vm.business_id,
+                    "amount": vm.amount
+                }
+            }).then(function(response) {
 
-	angular
-		.module('redeemcoupon')
-		.controller('redeemcouponCtrl', RedeemCoupon);
+                if(response.data.code){
 
-	RedeemCoupon.$inject = ['redeemcouponService', '$http'];
+                    vm.showInfo = response.data;
 
-	/*
-	* recommend
-	* Using function declarations
-	* and bindable members up top.
-	*/
+                    alert('amount to pay '+response.data.amount_to_pay)
+                }
 
-	function RedeemCoupon(redeemcouponService, $http) {
-		/*jshint validthis: true */
-		var vm = this;
-		vm.validatecode = function(){
-			var output = [];
-			vm.redemption = [];
-			vm.redemption.amount = vm.amount;
-			vm.redemption.coupon_code = vm.coupon_code;
-			vm.redemption.business_id = 1;
-			output.redemption = vm.redemption;
-			console.log(output);
-			$http.post('https://api.spini.co/v1/redemptions',{"redemption":{"coupon_code":"7ABE9B", "business_id": "1", "amount": "1000"}}, {
-				  headers: { 'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDY2MDM1MTksInN1YiI6MTB9.yUwqTPfXKbU5gsHT7mnOcx2StTsmLd1F5KmyCowhYq4' }
-				  // params: { bookId: 42 }
-				});
-		}
-		vm.listFeatures = redeemcouponService.getFeaturesList();
-
-	}
-
+                
+            });
+        }
+        vm.validatecode = function() {
+            $http.post('https://api.spini.co/v1/redemptions/verify_coupon', {
+                "redemption": {
+                    "coupon_code": vm.coupon_code,
+                    "business_id": vm.business_id,
+                    "amount": vm.amount
+                }
+            });
+     
+        }
+        if (LoginService.isVendor()) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
+            LoginService.getVendorProfileInfo(function(data) {
+                vm.vendor = data;
+                if (vm.vendor.businesses) {
+                    if (vm.vendor.businesses.length > 0) {
+                        vm.business_id = vm.vendor.businesses[0].id; // select first items
+                    }
+                }
+            });
+            // LoginService.getVendorDataList(function(data) {
+            //     vm.vendorDataList = data;
+            // });
+        } else {
+            $location.path('/')
+        }
+    }
 })();
