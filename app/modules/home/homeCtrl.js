@@ -8,13 +8,13 @@
      * Controller of the app
      */
     angular.module('angular-app').controller('HomeCtrl', Home);
-    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope','$timeout','ngToast'];
+    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope', '$timeout', 'ngToast'];
     /*
      * recommend
      * Using function declarations
      * and bindable members up top.
      */
-    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _, $scope, $timeout,ngToast) {
+    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _, $scope, $timeout, ngToast) {
         /*jshint validthis: true */
         var vm = this;
         vm.offer_id;
@@ -34,6 +34,82 @@
         vm.closeLoginPopup = function() {
             document.getElementById("login-popup").style.width = "0%";
         }
+        vm.CreateVendor = function() {
+            vm.Vendor.role = "vendor";
+            LoginService.VendorCreate(vm.Vendor, function(result) {
+                if (result) {
+                    var loginAuth = {};
+                    loginAuth.email = vm.Vendor.email;
+                    loginAuth.password = vm.Vendor.password;
+                    LoginService.VendorAuth(loginAuth, function(result) {
+                        
+                        if(result)
+                        {
+                 document.getElementById("login-popup").style.width = "0%";
+                    document.getElementById("login-signup").style.width = "0%";
+                      document.getElementById("vendor-popup").style.width = "0%";
+                    $location.path('redeemcoupon');
+                        }
+                    })
+                }
+                console.log(result);
+            });
+        }
+        vm.VendorContactUs = function() {
+            document.getElementById("vendor-popup").style.width = "100%";
+        }
+        vm.closeVendorRegister = function() {
+            document.getElementById("vendor-popup").style.width = "0%";
+        }
+
+        vm.VendorLogin = function()
+        {
+
+
+                    var loginAuth = {};
+                    loginAuth.email = vm.Vendor.email;
+                    loginAuth.password = vm.Vendor.password;
+                    LoginService.VendorAuth(loginAuth, function(result) {
+                        
+                        if(result)
+                        {
+                 document.getElementById("login-popup").style.width = "0%";
+                    document.getElementById("login-signup").style.width = "0%";
+                      document.getElementById("vendor-popup").style.width = "0%";
+                      document.getElementById("vendor-popup-login").style.width = "0%";
+                    $location.path('redeemcoupon');
+                        }
+                    })
+                
+
+
+        };
+
+
+
+        vm.SocialShareUpdate = function(url,type)
+        {
+
+                    LoginService.UpdateSocialShare(url,type, function(result) {
+                        
+              
+                    })
+                
+
+        };
+
+
+    
+
+        vm.VendorLoginPopup = function() {
+  document.getElementById("vendor-popup").style.width = "0%";
+            document.getElementById("vendor-popup-login").style.width = "100%";
+        }
+        vm.closeVendorLoginPopup = function() {
+            document.getElementById("vendor-popup-login").style.width = "0%";
+        }
+
+
         vm.openLoginPopup = function(data, id) {
             document.getElementById("login-popup").style.width = "100%";
             console.log(id)
@@ -53,6 +129,7 @@
         vm.signupPOP = function(data) {
             // closeNav()
             window.loginRole = data;
+            document.getElementById("offer-popup").style.width = "0%";
             document.getElementById("login-signup").style.width = "100%";
         }
         vm.signupPOPClose = function() {
@@ -66,12 +143,10 @@
         vm.closeNav = function() {
             document.getElementById("offer-popup").style.width = "0%";
         }
-        vm.getcodepopup = function(offer_id,OPTION) {
-
+        vm.getcodepopup = function(offer_id, OPTION) {
             var OPTION = OPTION || 0;
             console.log(offer_id);
-            if(OPTION)
-            {
+            if (OPTION) {
                 window.offer_id = offer_id;
             }
             // / closeNav()
@@ -83,9 +158,9 @@
                 // document.getElementById("get-code-popup").style.width = "100%";
                 LoginService.getProfileInfo(function(data) {
                     if (data.mobile) {
-                        vm.sentMobileNo(data.mobile,'toast')
+                        vm.sentMobileNo(data.mobile, 'toast')
                         vm.user = data;
-                      //  document.getElementById("confirm-code-popup").style.width = "100%";
+                        //  document.getElementById("confirm-code-popup").style.width = "100%";
                     } else {
                         document.getElementById("get-code-popup").style.width = "100%";
                     }
@@ -135,12 +210,9 @@
         vm.goProfile = function() {
             $location.path('/refferal');
         };
-
         vm.goVendorProfile = function() {
             $location.path('/redeemcoupon');
         };
-
-
         vm.Logout = function() {
             LoginService.Logout();
             $location.path('/')
@@ -150,7 +222,6 @@
             return window.SelectedCampOffers;
         }
         vm.getSelectedOfferData = function() {
-
             window.SelectedOffer = [];
             var data = [];
             data = window.SelectedCampOffers;
@@ -160,18 +231,13 @@
                         window.SelectedOffer.push(value);
                     }
                 });
-            }
-            else if (window.offer_id) {
+            } else if (window.offer_id) {
                 angular.forEach(data, function(value, key) {
                     if (value.id == window.offer_id) {
                         window.SelectedOffer.push(value);
                     }
                 });
-            }
-            else
-            {
-
-            }
+            } else {}
             return window.SelectedOffer;
         }
         vm.getSelectedCampaignOffers = function() {
@@ -185,49 +251,35 @@
             window.SelectedCampOffers = vm.SelectedCampOffers;
             return vm.SelectedCampOffers;
         }
-
-
-          vm.goHome = function() {
-
+        vm.goHome = function() {
             window.location = window.location.origin;
-        } 
-
+        }
         vm.onCopySuccess = function() {
-
-                  $timeout(function() {
-                        ngToast.dismiss();
-                        ngToast.create({
-                            content: '<strong>Spini</strong>: Link Copied',
-                            dismissOnTimeout: false,
-                            dismissButton: true,
-                            dismissOnClick: false
-                        });
-                    }, 0)
+            $timeout(function() {
+                ngToast.dismiss();
+                ngToast.create({
+                    content: '<strong>Spini</strong>: Link Copied',
+                    dismissOnTimeout: false,
+                    dismissButton: true,
+                    dismissOnClick: false
+                });
+            }, 0)
         }
-
-
-
-        vm.OfferLink = function(offer) {
-
-   
-
-            return 'https://spini.co/offers/'+offer+'/';
+        vm.OfferLink = function(offer,tracking_id) {
+            return 'https://www.spini.co/offers/' + offer + '/?tracking_id='+tracking_id;
         }
-
-
-        vm.mobile = function()
-        {
-                return vm.mobile_no;
+        vm.mobile = function() {
+            return vm.mobile_no;
         }
-        vm.sentMobileNo = function(mobile,type) {
+        vm.sentMobileNo = function(mobile, type) {
             var type = type || 0;
-
             vm.mobile_no = mobile.toString();
             vm.offer_id;
             vm.post = {
                 "coupon_code": {
                     "mobile": vm.mobile_no,
-                    "offer_id": vm.offer_id
+                    "offer_id": vm.offer_id,
+                    "tracking_code": LoginService.TrackingCode()
                 }
             }
             $http({
@@ -238,20 +290,16 @@
             }).then(function mySuccess(response) {
                 vm.openConformPopup();
             }, function myError(response) {
-
                 console.log(type);
-
-              $timeout(function() {
-                        ngToast.dismiss();
-                        ngToast.create({
-                            content: '<strong>Spini</strong>: Code already sent',
-                            dismissOnTimeout: false,
-                            dismissButton: true,
-                            dismissOnClick: false
-                        });
-                    }, 0)
-
-
+                $timeout(function() {
+                    ngToast.dismiss();
+                    ngToast.create({
+                        content: '<strong>Spini</strong>: Code already sent',
+                        dismissOnTimeout: false,
+                        dismissButton: true,
+                        dismissOnClick: false
+                    });
+                }, 0)
                 $scope.myWelcome = response.statusText;
             });
         }
@@ -287,25 +335,14 @@
                 }
             }
             return vm.compaigns;
-        };      
-
-        vm.unixtime = function(date) {
-
-         var dateSplitted = date.split('-'); // date must be in DD-MM-YYYY format
-    var formattedDate = dateSplitted[0]+'/'+dateSplitted[1]+'/'+dateSplitted[2];
-
-   
-    return new Date(formattedDate).getTime();
-
         };
-
-
-        if(LoginService.isReferral())
-        {
-        $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
-    
+        vm.unixtime = function(date) {
+            var dateSplitted = date.split('-'); // date must be in DD-MM-YYYY format
+            var formattedDate = dateSplitted[0] + '/' + dateSplitted[1] + '/' + dateSplitted[2];
+            return new Date(formattedDate).getTime();
+        };
+        if (LoginService.isReferral()) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
         }
-
-
     }
 })();

@@ -112,6 +112,8 @@
         }
         if (LoginService.isVendor()) {
             $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
+
+
             LoginService.getVendorProfileInfo(function(data) {
                 vm.vendor = data;
                 if (vm.vendor.businesses) {
@@ -124,6 +126,8 @@
                     vm.openPopup(); 
                 }
             });
+
+            
             // LoginService.getVendorDataList(function(data) {
             //     vm.vendorDataList = data;
             // });

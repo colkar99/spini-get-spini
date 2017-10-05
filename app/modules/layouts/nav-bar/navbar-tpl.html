@@ -11,8 +11,12 @@
         <input type="text" placeholder="Search Offers">
         <button></button>
       </div>
-      <div class="col-md-2 main-header-partner" ng-hide="menu.isVendor()">
+   <!--    <div class="col-md-2 main-header-partner" ng-hide="menu.isVendor()">
         <button ng-click="menu.signupPOP('vendor');">Become our partner</button>
+      </div> -->
+
+         <div class="col-md-2 main-header-partner" ng-hide="menu.isVendor()">
+        <button ng-click="menu.VendorContactUs();">Become our partner</button>
       </div>
       <div class="col-md-2 main-header-signin" ng-hide="menu.isVendor()">
         <a  ng-click="menu.open = true" ng-hide="menu.isReferral()">Sign In <img src="/app/assets/images/header/UserIcon@2x.png"></a>

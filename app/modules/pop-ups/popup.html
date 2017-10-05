@@ -369,11 +369,11 @@
                                             </span>
                                         </div>
                                         <div class="col-md-2 ">
-                                            <span class="offer-count">
+                                      <!--       <span class="offer-count">
                                                 <i aria-hidden="true" class="fa fa-star-o link-icon ">
                                                 </i>
                                                 54
-                                            </span>
+                                            </span> -->
                                         </div>
                                     </div>
                                     <div class="min-height160px">
@@ -388,18 +388,20 @@
                                         <label>
                                             SHARE & EARN
                                         </label>
-                                        <ul>
+                              
+
+                <ul ng-show=" {{item.attributes.treasure_value}}">
                                             <li class="offer-share-max">
-                                                <a ngclipboard data-clipboard-text="{{vm.OfferLink(item.attributes.seo_url)}}" ngclipboard-success="vm.onCopySuccess(e);">
+                                                <a ngclipboard data-clipboard-text="{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}" ngclipboard-success="vm.onCopySuccess(e);">
                                                 </a>
                                             </li>
                                             <li class="offer-share-fb" 
 
 
                                             >
-                                                <a socialshare socialshare-url="{{vm.OfferLink(item.attributes.seo_url)}}" socialshare-provider="facebook"
+                                                <a socialshare socialshare-url="{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.facebook)}}" socialshare-provider="facebook"
 
-
+                                                ng-click="vm.SocialShareUpdate(item.attributes.seo_url,'facebook')"
 
                                                 >
                                                 </a>
@@ -409,8 +411,10 @@
 
                                              >
                                                 <a socialshare 
-                                                socialshare-url="{{vm.OfferLink(item.attributes.seo_url)}}"
+                                                socialshare-url="{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}"
                                                 socialshare-provider="twitter"
+
+                                                  ng-click="vm.SocialShareUpdate(item.attributes.seo_url,'twitter')"
                                                 
 socialshare-text="{{item.attributes.seo_description}} {{item.attributes.seo_keywords}}"
 socialshare-hashtags="{item.attributes.seo_keywords}}"
@@ -419,9 +423,37 @@ socialshare-hashtags="{item.attributes.seo_keywords}}"
                                                 </a>
                                             </li>
                                         </ul>
+
+
+
+                                             <ul ng-hide=" {{item.attributes.treasure_value}}" ng-click="vm.signupPOP('referral')">
+                                            <li class="offer-share-max">
+                                                <a >
+                                                </a>
+                                            </li>
+                                            <li class="offer-share-fb" 
+
+
+                                            >
+                                                <a 
+                                                >
+                                                </a>
+                                            </li>
+                                            <li class="offer-share-twitter"
+
+
+                                             >
+                                                <a  
+                                  
+
+>
+                                                </a>
+                                            </li>
+                                        </ul>
+
                                     </div>
                                     <div class="offer-share col-md-6">
-                                        <label class="right">
+                            <!--             <label class="right">
                                             OFFERS END IN
                                         </label>
                                         <p class="right timers">
@@ -433,7 +465,7 @@ socialshare-hashtags="{item.attributes.seo_keywords}}"
 
 
                                          
-                                        </p>
+                                        </p> -->
                                     </div>
                                 </div>
                             </div>
@@ -466,3 +498,223 @@ socialshare-hashtags="{item.attributes.seo_keywords}}"
 
 
 
+
+
+
+
+
+
+<!-- Get  Register for vendor-->
+<div class="overlay" id="vendor-popup">
+
+    <a class="closebtn" href="javascript:void(0)" ng-click="vm.closeVendorRegister()">
+        ×
+    </a>
+
+
+    <div class="overlay-content">
+        <div class="row" >
+            <div class="col-md-8 row col-md-offset-2  pad-bot0 pad10 ">
+
+                <div class="row backcls mar-10px text-left">
+                    <div class="form-group  ">
+                        <form name="vendorReg" ng-submit="vm.CreateVendor(mobile)" novalidate="">
+
+<div class="col-md-12 nopad">
+
+    <h4 class="text-center">Vendor Sign UP</h4>
+
+                                <div class="col-md-8 row col-md-offset-2  filedmat ">
+                                <label for="usr">
+                                    Enter your name
+                                </label>
+                                <input class="form-control nbr min40" id="usr"  name="name" ng-model="vm.Vendor.name"  placeholder="Name" required="" type="tex">
+                                  
+                                  <span ng-show="(vendorReg.name.$touched || submitted) && vendorReg.name.$error.required" style="color: red">
+
+
+                                    Please enter your name !
+                                     </span>
+
+                                </input>
+                            </div>
+
+
+                            <div class="col-md-8 row col-md-offset-2  filedmat">
+                                <label for="usr">
+                                    Enter your mobile
+                                </label>
+                                <input class="form-control nbr min40" id="usr" maxlength="10" minlength="10" name="mobile" ng-model="vm.Vendor.mobile" ng-pattern="/^[0-9]+$/" placeholder="Mobile no" required="" type="number">
+                                    <span ng-show="(vendorReg.mobile.$touched || submitted) && vendorReg.mobile.$error.minlength" style="color: red">
+                                        Minimum 10 digits required.
+                                    </span>
+                                    <span ng-show="(vendorReg.mobile.$touched || submitted) && vendorReg.mobile.$error.maxlength" style="color: red">
+                                        Maximum 10 digits only allowed.
+                                    </span>
+                                </input>
+                            </div>
+
+                                 <div class="col-md-8 row col-md-offset-2  filedmat">
+                                <label for="usr">
+                                    Enter your email
+                                </label>
+
+
+                                  
+         
+
+
+                                <input class="form-control nbr min40" id="usr"  name="email" ng-model="vm.Vendor.email"  placeholder="Email" required="" type="email">
+
+
+                                     <span ng-show="(vendorReg.email.$touched || submitted) && vendorReg.email.$error.required" style="color: red">
+
+
+                                    Please enter your email !
+                                     </span>
+                                  
+                                </input>
+                            </div>
+
+                                             <div class="col-md-8 row col-md-offset-2  filedmat">
+                                <label for="usr">
+                                    Enter your password (Min 8 characters)
+                                </label> 
+                                <input class="form-control nbr min40" id="usr" min="8"  max="8" name="password" ng-model="vm.Vendor.password" 
+                                 placeholder="Password" required="" type="password">
+
+
+                                       <span ng-show="(vendorReg.password.$touched || submitted) && vendorReg.password.$error.minlength" style="color: red">
+                                        Minimum 3 character  required.
+                                    </span>
+
+
+                                    <span ng-show="(vendorReg.password.$touched || submitted) && vendorReg.password.$error.required" style="color: red">
+
+
+                                    Please enter your password !
+                                     </span>
+                                  
+                                </input>
+
+
+                               <div  ng-click="vm.VendorLoginPopup()" class="mar20">
+
+                                Already have an account? Log in
+</div>
+                            </div>
+
+
+
+
+                                </div>
+
+
+
+                            <div class="col-md-4 row col-md-offset-4 mar25x slven">
+                                <button class="btn min40 width100 nbr" ng-disabled="vendorReg.$invalid" type="submit">
+                                    Create Vendor Account
+                                </button>
+                            </div>
+
+
+                       
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end get code -->
+
+
+
+
+<!-- Vendor Login-->
+<div class="overlay" id="vendor-popup-login">
+
+    <a class="closebtn" href="javascript:void(0)" ng-click="vm.closeVendorLoginPopup()">
+        ×
+    </a>
+
+
+    <div class="overlay-content">
+        <div class="row" >
+            <div class="col-md-8 row col-md-offset-2  pad-bot0 pad10 ">
+
+                <div class="row backcls mar-10px text-left">
+                    <div class="form-group  ">
+                        <form name="VendorData" ng-submit="vm.VendorLogin()" novalidate="">
+
+<div class="col-md-12 nopad">
+
+    <h4 class="text-center">Vendor Sign In</h4>
+
+         
+                                 <div class="col-md-8 row col-md-offset-2  filedmat">
+                                <label for="usr">
+                                    Enter your email
+                                </label>
+
+
+                                  
+         
+
+
+                                <input class="form-control nbr min40" id="usr"  name="email" ng-model="vm.Vendor.email"  placeholder="Email" required="" type="email">
+
+
+                                     <span ng-show="(VendorData.email.$touched || submitted) && VendorData.email.$error.required" style="color: red">
+
+
+                                    Please enter your email !
+                                     </span>
+                                  
+                                </input>
+                            </div>
+
+                                             <div class="col-md-8 row col-md-offset-2  filedmat">
+                                <label for="usr">
+                                    Enter your password (Min 8 characters)
+                                </label> 
+                                <input class="form-control nbr min40" id="usr" min="8"  max="8" name="password" ng-model="vm.Vendor.password" 
+                                 placeholder="Password" required="" type="password">
+
+
+                                       <span ng-show="(VendorData.password.$touched || submitted) && VendorData.password.$error.minlength" style="color: red">
+                                        Minimum 3 character  required.
+                                    </span>
+
+
+                                    <span ng-show="(VendorData.password.$touched || submitted) && VendorData.password.$error.required" style="color: red">
+
+
+                                    Please enter your password !
+                                     </span>
+                                  
+                                </input>
+                            </div>
+
+                                </div>
+
+                            <div class="col-md-4 row col-md-offset-4 mar25x slven">
+                                <button class="btn min40 width100 nbr" ng-disabled="VendorData.$invalid" type="submit">
+                                   Login
+                                </button>
+                            </div>
+
+
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end get code -->
