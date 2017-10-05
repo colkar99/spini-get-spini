@@ -35,3 +35,44 @@
             </div>
   
 </section>
+
+
+
+<!-- Get  mobile no for vendor-->
+<div class="overlay" id="get-vendor-mobile-no-popup">
+
+    <div class="overlay-content">
+        <div class="row" >
+            <div class="col-md-8 row col-md-offset-2  pad-bot0 pad10 ">
+
+                <div class="row backcls mar-10px text-left">
+                    <div class="form-group popupcenter ">
+                        <form name="get_coupen" ng-submit="vm.UpdateMobile(mobile)" novalidate="">
+                            <div class="col-md-8 nopad">
+                                <label for="usr">
+                                    Enter your mobile No. to get Code
+                                </label>
+                                <input class="form-control nbr min40" id="usr" maxlength="10" minlength="10" name="mobile" ng-model="mobile" ng-pattern="/^[0-9]+$/" placeholder="Mobile no" required="" type="number">
+                                    <span ng-show="(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.minlength" style="color: red">
+                                        Minimum 10 digits required.
+                                    </span>
+                                    <span ng-show="(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.maxlength" style="color: red">
+                                        Maximum 13 digits only allowed.
+                                    </span>
+                                </input>
+                            </div>
+                            <div class="col-md-4 nopad mar25x">
+                                <button class="btn min40 width100 nbr" ng-disabled="get_coupen.$invalid" type="submit">
+                                    UPDATE MOBILE NO
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end get code -->

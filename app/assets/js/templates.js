@@ -1204,7 +1204,12 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    .offer-carousel-r1{\n" +
     "    width: 4%;\n" +
     "  }\n" +
-    "</style>\n"
+    "</style>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n"
   );
 
 
@@ -1245,7 +1250,48 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                </a>\n" +
     "            </div>\n" +
     "  \n" +
-    "</section>\n"
+    "</section>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "<!-- Get  mobile no for vendor-->\n" +
+    "<div class=\"overlay\" id=\"get-vendor-mobile-no-popup\">\n" +
+    "\n" +
+    "    <div class=\"overlay-content\">\n" +
+    "        <div class=\"row\" >\n" +
+    "            <div class=\"col-md-8 row col-md-offset-2  pad-bot0 pad10 \">\n" +
+    "\n" +
+    "                <div class=\"row backcls mar-10px text-left\">\n" +
+    "                    <div class=\"form-group popupcenter \">\n" +
+    "                        <form name=\"get_coupen\" ng-submit=\"vm.UpdateMobile(mobile)\" novalidate=\"\">\n" +
+    "                            <div class=\"col-md-8 nopad\">\n" +
+    "                                <label for=\"usr\">\n" +
+    "                                    Enter your mobile No. to get Code\n" +
+    "                                </label>\n" +
+    "                                <input class=\"form-control nbr min40\" id=\"usr\" maxlength=\"10\" minlength=\"10\" name=\"mobile\" ng-model=\"mobile\" ng-pattern=\"/^[0-9]+$/\" placeholder=\"Mobile no\" required=\"\" type=\"number\">\n" +
+    "                                    <span ng-show=\"(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.minlength\" style=\"color: red\">\n" +
+    "                                        Minimum 10 digits required.\n" +
+    "                                    </span>\n" +
+    "                                    <span ng-show=\"(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.maxlength\" style=\"color: red\">\n" +
+    "                                        Maximum 13 digits only allowed.\n" +
+    "                                    </span>\n" +
+    "                                </input>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"col-md-4 nopad mar25x\">\n" +
+    "                                <button class=\"btn min40 width100 nbr\" ng-disabled=\"get_coupen.$invalid\" type=\"submit\">\n" +
+    "                                    UPDATE MOBILE NO\n" +
+    "                                </button>\n" +
+    "                            </div>\n" +
+    "                        </form>\n" +
+    "\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<!-- end get code -->"
   );
 
 
@@ -1328,7 +1374,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
     "            <i class=\"fa fa-inr\" aria-hidden=\"true\"></i>\n" +
-    "            <label>1000</label>\n" +
+    "            <label>{{vm.user.wallet_money}}</label>\n" +
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
     "            <button class=\"btn btn-default\" style=\"border: 1px solid #bfe7fe;color:#bfe7fe\" ng-disabled=\"true\">Transfer to paytm wallet</button>\n" +

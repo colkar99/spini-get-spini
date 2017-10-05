@@ -47,14 +47,68 @@
                                 dismissButton: true,
                                 dismissOnClick: false
                             });
-
-                            vm.coupon_code='';
-                            vm.amount='';
-                            vm.showInfo='';
+                            //   vm.coupon_code='';
+                            // vm.amount='';
+                            //vm.showInfo='';
+                        }).catch(function(response) {
+                            ngToast.dismiss();
+                            ngToast.create({
+                                content: response.data.errors[0].detail,
+                                dismissOnTimeout: false,
+                                dismissButton: true,
+                                dismissOnClick: false
+                            });
                         });
                     }
                 }
+            }).catch(function(response) {
+                ngToast.dismiss();
+                ngToast.create({
+                    content: response.data.errors[0].detail,
+                    dismissOnTimeout: false,
+                    dismissButton: true,
+                    dismissOnClick: false
+                });
+            });;
+        }
+        vm.closePopup = function() {
+            document.getElementById("get-vendor-mobile-no-popup").style.width = "0%";
+        }
+        vm.openPopup = function(data, id) {
+            document.getElementById("get-vendor-mobile-no-popup").style.width = "100%";
+
+        }
+
+        vm.UpdateMobile = function(mobile)
+        {
+            console.log(mobile);
+
+
+              $http.put('https://api.spini.co/v1/profile', {
+                "user": {
+                    "mobile": mobile,
+                }
+            }).then(function(response) {
+
+                 vm.closePopup();
+
+
+            })
+            .catch(function(response) {
+
+
+                ngToast.dismiss();
+                ngToast.create({
+                    content: response.data.errors[0].detail,
+                    dismissOnTimeout: false,
+                    dismissButton: true,
+                    dismissOnClick: false
+                });
+
             });
+
+           
+
         }
         if (LoginService.isVendor()) {
             $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
@@ -64,6 +118,10 @@
                     if (vm.vendor.businesses.length > 0) {
                         vm.business_id = vm.vendor.businesses[0].id; // select first items
                     }
+                }
+               // vm.vendor.mobile = null;
+                if (!vm.vendor.mobile) {
+                    vm.openPopup(); 
                 }
             });
             // LoginService.getVendorDataList(function(data) {
