@@ -628,8 +628,12 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "        <input type=\"text\" placeholder=\"Search Offers\">\n" +
     "        <button></button>\n" +
     "      </div>\n" +
-    "      <div class=\"col-md-2 main-header-partner\" ng-hide=\"menu.isVendor()\">\n" +
+    "   <!--    <div class=\"col-md-2 main-header-partner\" ng-hide=\"menu.isVendor()\">\n" +
     "        <button ng-click=\"menu.signupPOP('vendor');\">Become our partner</button>\n" +
+    "      </div> -->\n" +
+    "\n" +
+    "         <div class=\"col-md-2 main-header-partner\" ng-hide=\"menu.isVendor()\">\n" +
+    "        <button ng-click=\"menu.VendorContactUs();\">Become our partner</button>\n" +
     "      </div>\n" +
     "      <div class=\"col-md-2 main-header-signin\" ng-hide=\"menu.isVendor()\">\n" +
     "        <a  ng-click=\"menu.open = true\" ng-hide=\"menu.isReferral()\">Sign In <img src=\"/app/assets/images/header/UserIcon@2x.png\"></a>\n" +
@@ -1113,11 +1117,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                            </span>\n" +
     "                                        </div>\n" +
     "                                        <div class=\"col-md-2 \">\n" +
-    "                                            <span class=\"offer-count\">\n" +
+    "                                      <!--       <span class=\"offer-count\">\n" +
     "                                                <i aria-hidden=\"true\" class=\"fa fa-star-o link-icon \">\n" +
     "                                                </i>\n" +
     "                                                54\n" +
-    "                                            </span>\n" +
+    "                                            </span> -->\n" +
     "                                        </div>\n" +
     "                                    </div>\n" +
     "                                    <div class=\"min-height160px\">\n" +
@@ -1132,18 +1136,20 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                        <label>\n" +
     "                                            SHARE & EARN\n" +
     "                                        </label>\n" +
-    "                                        <ul>\n" +
+    "                              \n" +
+    "\n" +
+    "                <ul ng-show=\" {{item.attributes.treasure_value}}\">\n" +
     "                                            <li class=\"offer-share-max\">\n" +
-    "                                                <a ngclipboard data-clipboard-text=\"{{vm.OfferLink(item.attributes.seo_url)}}\" ngclipboard-success=\"vm.onCopySuccess(e);\">\n" +
+    "                                                <a ngclipboard data-clipboard-text=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}\" ngclipboard-success=\"vm.onCopySuccess(e);\">\n" +
     "                                                </a>\n" +
     "                                            </li>\n" +
     "                                            <li class=\"offer-share-fb\" \n" +
     "\n" +
     "\n" +
     "                                            >\n" +
-    "                                                <a socialshare socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url)}}\" socialshare-provider=\"facebook\"\n" +
+    "                                                <a socialshare socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.facebook)}}\" socialshare-provider=\"facebook\"\n" +
     "\n" +
-    "\n" +
+    "                                                ng-click=\"vm.SocialShareUpdate(item.attributes.seo_url,'facebook')\"\n" +
     "\n" +
     "                                                >\n" +
     "                                                </a>\n" +
@@ -1153,8 +1159,10 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "                                             >\n" +
     "                                                <a socialshare \n" +
-    "                                                socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url)}}\"\n" +
+    "                                                socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}\"\n" +
     "                                                socialshare-provider=\"twitter\"\n" +
+    "\n" +
+    "                                                  ng-click=\"vm.SocialShareUpdate(item.attributes.seo_url,'twitter')\"\n" +
     "                                                \n" +
     "socialshare-text=\"{{item.attributes.seo_description}} {{item.attributes.seo_keywords}}\"\n" +
     "socialshare-hashtags=\"{item.attributes.seo_keywords}}\"\n" +
@@ -1163,9 +1171,37 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                                </a>\n" +
     "                                            </li>\n" +
     "                                        </ul>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                                             <ul ng-hide=\" {{item.attributes.treasure_value}}\" ng-click=\"vm.signupPOP('referral')\">\n" +
+    "                                            <li class=\"offer-share-max\">\n" +
+    "                                                <a >\n" +
+    "                                                </a>\n" +
+    "                                            </li>\n" +
+    "                                            <li class=\"offer-share-fb\" \n" +
+    "\n" +
+    "\n" +
+    "                                            >\n" +
+    "                                                <a \n" +
+    "                                                >\n" +
+    "                                                </a>\n" +
+    "                                            </li>\n" +
+    "                                            <li class=\"offer-share-twitter\"\n" +
+    "\n" +
+    "\n" +
+    "                                             >\n" +
+    "                                                <a  \n" +
+    "                                  \n" +
+    "\n" +
+    ">\n" +
+    "                                                </a>\n" +
+    "                                            </li>\n" +
+    "                                        </ul>\n" +
+    "\n" +
     "                                    </div>\n" +
     "                                    <div class=\"offer-share col-md-6\">\n" +
-    "                                        <label class=\"right\">\n" +
+    "                            <!--             <label class=\"right\">\n" +
     "                                            OFFERS END IN\n" +
     "                                        </label>\n" +
     "                                        <p class=\"right timers\">\n" +
@@ -1177,7 +1213,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "\n" +
     "                                         \n" +
-    "                                        </p>\n" +
+    "                                        </p> -->\n" +
     "                                    </div>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
@@ -1209,7 +1245,227 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "\n" +
     "\n" +
-    "\n"
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "<!-- Get  Register for vendor-->\n" +
+    "<div class=\"overlay\" id=\"vendor-popup\">\n" +
+    "\n" +
+    "    <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closeVendorRegister()\">\n" +
+    "        ×\n" +
+    "    </a>\n" +
+    "\n" +
+    "\n" +
+    "    <div class=\"overlay-content\">\n" +
+    "        <div class=\"row\" >\n" +
+    "            <div class=\"col-md-8 row col-md-offset-2  pad-bot0 pad10 \">\n" +
+    "\n" +
+    "                <div class=\"row backcls mar-10px text-left\">\n" +
+    "                    <div class=\"form-group  \">\n" +
+    "                        <form name=\"vendorReg\" ng-submit=\"vm.CreateVendor(mobile)\" novalidate=\"\">\n" +
+    "\n" +
+    "<div class=\"col-md-12 nopad\">\n" +
+    "\n" +
+    "    <h4 class=\"text-center\">Vendor Sign UP</h4>\n" +
+    "\n" +
+    "                                <div class=\"col-md-8 row col-md-offset-2  filedmat \">\n" +
+    "                                <label for=\"usr\">\n" +
+    "                                    Enter your name\n" +
+    "                                </label>\n" +
+    "                                <input class=\"form-control nbr min40\" id=\"usr\"  name=\"name\" ng-model=\"vm.Vendor.name\"  placeholder=\"Name\" required=\"\" type=\"tex\">\n" +
+    "                                  \n" +
+    "                                  <span ng-show=\"(vendorReg.name.$touched || submitted) && vendorReg.name.$error.required\" style=\"color: red\">\n" +
+    "\n" +
+    "\n" +
+    "                                    Please enter your name !\n" +
+    "                                     </span>\n" +
+    "\n" +
+    "                                </input>\n" +
+    "                            </div>\n" +
+    "\n" +
+    "\n" +
+    "                            <div class=\"col-md-8 row col-md-offset-2  filedmat\">\n" +
+    "                                <label for=\"usr\">\n" +
+    "                                    Enter your mobile\n" +
+    "                                </label>\n" +
+    "                                <input class=\"form-control nbr min40\" id=\"usr\" maxlength=\"10\" minlength=\"10\" name=\"mobile\" ng-model=\"vm.Vendor.mobile\" ng-pattern=\"/^[0-9]+$/\" placeholder=\"Mobile no\" required=\"\" type=\"number\">\n" +
+    "                                    <span ng-show=\"(vendorReg.mobile.$touched || submitted) && vendorReg.mobile.$error.minlength\" style=\"color: red\">\n" +
+    "                                        Minimum 10 digits required.\n" +
+    "                                    </span>\n" +
+    "                                    <span ng-show=\"(vendorReg.mobile.$touched || submitted) && vendorReg.mobile.$error.maxlength\" style=\"color: red\">\n" +
+    "                                        Maximum 10 digits only allowed.\n" +
+    "                                    </span>\n" +
+    "                                </input>\n" +
+    "                            </div>\n" +
+    "\n" +
+    "                                 <div class=\"col-md-8 row col-md-offset-2  filedmat\">\n" +
+    "                                <label for=\"usr\">\n" +
+    "                                    Enter your email\n" +
+    "                                </label>\n" +
+    "\n" +
+    "\n" +
+    "                                  \n" +
+    "         \n" +
+    "\n" +
+    "\n" +
+    "                                <input class=\"form-control nbr min40\" id=\"usr\"  name=\"email\" ng-model=\"vm.Vendor.email\"  placeholder=\"Email\" required=\"\" type=\"email\">\n" +
+    "\n" +
+    "\n" +
+    "                                     <span ng-show=\"(vendorReg.email.$touched || submitted) && vendorReg.email.$error.required\" style=\"color: red\">\n" +
+    "\n" +
+    "\n" +
+    "                                    Please enter your email !\n" +
+    "                                     </span>\n" +
+    "                                  \n" +
+    "                                </input>\n" +
+    "                            </div>\n" +
+    "\n" +
+    "                                             <div class=\"col-md-8 row col-md-offset-2  filedmat\">\n" +
+    "                                <label for=\"usr\">\n" +
+    "                                    Enter your password (Min 8 characters)\n" +
+    "                                </label> \n" +
+    "                                <input class=\"form-control nbr min40\" id=\"usr\" min=\"8\"  max=\"8\" name=\"password\" ng-model=\"vm.Vendor.password\" \n" +
+    "                                 placeholder=\"Password\" required=\"\" type=\"password\">\n" +
+    "\n" +
+    "\n" +
+    "                                       <span ng-show=\"(vendorReg.password.$touched || submitted) && vendorReg.password.$error.minlength\" style=\"color: red\">\n" +
+    "                                        Minimum 3 character  required.\n" +
+    "                                    </span>\n" +
+    "\n" +
+    "\n" +
+    "                                    <span ng-show=\"(vendorReg.password.$touched || submitted) && vendorReg.password.$error.required\" style=\"color: red\">\n" +
+    "\n" +
+    "\n" +
+    "                                    Please enter your password !\n" +
+    "                                     </span>\n" +
+    "                                  \n" +
+    "                                </input>\n" +
+    "\n" +
+    "\n" +
+    "                               <div  ng-click=\"vm.VendorLoginPopup()\" class=\"mar20\">\n" +
+    "\n" +
+    "                                Already have an account? Log in\n" +
+    "</div>\n" +
+    "                            </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                                </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                            <div class=\"col-md-4 row col-md-offset-4 mar25x slven\">\n" +
+    "                                <button class=\"btn min40 width100 nbr\" ng-disabled=\"vendorReg.$invalid\" type=\"submit\">\n" +
+    "                                    Create Vendor Account\n" +
+    "                                </button>\n" +
+    "                            </div>\n" +
+    "\n" +
+    "\n" +
+    "                       \n" +
+    "                        </form>\n" +
+    "\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<!-- end get code -->\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "<!-- Vendor Login-->\n" +
+    "<div class=\"overlay\" id=\"vendor-popup-login\">\n" +
+    "\n" +
+    "    <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closeVendorLoginPopup()\">\n" +
+    "        ×\n" +
+    "    </a>\n" +
+    "\n" +
+    "\n" +
+    "    <div class=\"overlay-content\">\n" +
+    "        <div class=\"row\" >\n" +
+    "            <div class=\"col-md-8 row col-md-offset-2  pad-bot0 pad10 \">\n" +
+    "\n" +
+    "                <div class=\"row backcls mar-10px text-left\">\n" +
+    "                    <div class=\"form-group  \">\n" +
+    "                        <form name=\"VendorData\" ng-submit=\"vm.VendorLogin()\" novalidate=\"\">\n" +
+    "\n" +
+    "<div class=\"col-md-12 nopad\">\n" +
+    "\n" +
+    "    <h4 class=\"text-center\">Vendor Sign In</h4>\n" +
+    "\n" +
+    "         \n" +
+    "                                 <div class=\"col-md-8 row col-md-offset-2  filedmat\">\n" +
+    "                                <label for=\"usr\">\n" +
+    "                                    Enter your email\n" +
+    "                                </label>\n" +
+    "\n" +
+    "\n" +
+    "                                  \n" +
+    "         \n" +
+    "\n" +
+    "\n" +
+    "                                <input class=\"form-control nbr min40\" id=\"usr\"  name=\"email\" ng-model=\"vm.Vendor.email\"  placeholder=\"Email\" required=\"\" type=\"email\">\n" +
+    "\n" +
+    "\n" +
+    "                                     <span ng-show=\"(VendorData.email.$touched || submitted) && VendorData.email.$error.required\" style=\"color: red\">\n" +
+    "\n" +
+    "\n" +
+    "                                    Please enter your email !\n" +
+    "                                     </span>\n" +
+    "                                  \n" +
+    "                                </input>\n" +
+    "                            </div>\n" +
+    "\n" +
+    "                                             <div class=\"col-md-8 row col-md-offset-2  filedmat\">\n" +
+    "                                <label for=\"usr\">\n" +
+    "                                    Enter your password (Min 8 characters)\n" +
+    "                                </label> \n" +
+    "                                <input class=\"form-control nbr min40\" id=\"usr\" min=\"8\"  max=\"8\" name=\"password\" ng-model=\"vm.Vendor.password\" \n" +
+    "                                 placeholder=\"Password\" required=\"\" type=\"password\">\n" +
+    "\n" +
+    "\n" +
+    "                                       <span ng-show=\"(VendorData.password.$touched || submitted) && VendorData.password.$error.minlength\" style=\"color: red\">\n" +
+    "                                        Minimum 3 character  required.\n" +
+    "                                    </span>\n" +
+    "\n" +
+    "\n" +
+    "                                    <span ng-show=\"(VendorData.password.$touched || submitted) && VendorData.password.$error.required\" style=\"color: red\">\n" +
+    "\n" +
+    "\n" +
+    "                                    Please enter your password !\n" +
+    "                                     </span>\n" +
+    "                                  \n" +
+    "                                </input>\n" +
+    "                            </div>\n" +
+    "\n" +
+    "                                </div>\n" +
+    "\n" +
+    "                            <div class=\"col-md-4 row col-md-offset-4 mar25x slven\">\n" +
+    "                                <button class=\"btn min40 width100 nbr\" ng-disabled=\"VendorData.$invalid\" type=\"submit\">\n" +
+    "                                   Login\n" +
+    "                                </button>\n" +
+    "                            </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                        </form>\n" +
+    "\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<!-- end get code -->"
   );
 
 
@@ -1376,8 +1632,16 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "            <i class=\"fa fa-inr\" aria-hidden=\"true\"></i>\n" +
     "            <label>{{vm.user.wallet_money}}</label>\n" +
     "          </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
-    "            <button class=\"btn btn-default\" style=\"border: 1px solid #bfe7fe;color:#bfe7fe\" ng-disabled=\"true\">Transfer to paytm wallet</button>\n" +
+    "\n" +
+    "            <button class=\"btn btn-default field-tip\" style=\"border: 1px solid #bfe7fe;color:#bfe7fe\" ng-disabled=\"true\">\n" +
+    " <span class=\"tip-content\">Earn minimum Rs.500/- to make a transfer</span>\n" +
+    "            Transfer to paytm wallet</button>\n" +
+    "\n" +
     "          </div>\n" +
     "        </div>\n" +
     "        <div class=\"col-sm-3\" style=\"border-right: 1px dashed #dcdcdc;\">\n" +
@@ -1385,6 +1649,8 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "            <!-- <img src=\"/app/assets/images/ProfileSection/Icn-ApproveMoney.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"height: 80px;    background-color: #f7f7f7;\"> -->\n" +
     "            <i class=\"fa fa-gift\" aria-hidden=\"true\" style=\"font-size: 80px;\"></i>\n" +
     "          </div>\n" +
+    "        \n" +
+    "\n" +
     "          <div class=\"col-sm-12 text-center\">\n" +
     "            <label class=\"text-muted\">Treasure Value</label>\n" +
     "          </div>\n" +
@@ -1392,35 +1658,57 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "            <i class=\"fa fa-inr\" aria-hidden=\"true\"></i>\n" +
     "            <label>1000</label>\n" +
     "          </div>\n" +
-    "          <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "     <!--      <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
     "            <button class=\"btn btn-default\" style=\"border: 1px solid #fce7b7; color:#fce7b7; \" ng-click=\"vm.required()\">Required approval status</button>\n" +
-    "          </div>\n" +
+    "          </div> -->\n" +
     "        </div>\n" +
     "        <div class=\"col-sm-3\">\n" +
-    "          <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
-    "            <!-- <img src=\"/app/assets/images/ProfileSection/Icn-OffersShared@2x.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"background-color: #f7f7f7;\"> -->\n" +
+    "    <!--       <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
+    "            <img src=\"/app/assets/images/ProfileSection/Icn-OffersShared@2x.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"background-color: #f7f7f7;\">\n" +
     "            <i class=\"fa fa-hand-paper-o\" aria-hidden=\"true\" style=\"font-size: 80px;\"></i>\n" +
-    "          </div>\n" +
-    "          <div class=\"col-sm-12 text-center\">\n" +
+    "          </div> -->\n" +
+    "    <!--       <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
     "            <label class=\"text-muted\">No of Code Generated</label>\n" +
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
     "            <label>{{vm.user.coupons_generated.self}}</label>\n" +
+    "          </div> -->\n" +
+    "\n" +
+    "\n" +
+    "          <div class=\"col-sm-12 text-center\" style=\"    padding-top: 30%;border-right: 1px dashed #dcdcdc;\">\n" +
+    "            <label class=\"text-muted\"> No of Code Generated</label>\n" +
+    "          </div>\n" +
+    "          <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
+    "            <label>{{vm.user.coupons_generated.self}}</label>\n" +
+    "          </div>\n" +
+    "\n" +
+    "\n" +
+    "               <div class=\"col-sm-12 text-center\" style=\"    padding-top: 30%;border-right: 1px dashed #dcdcdc;\">\n" +
+    "            <label class=\"text-muted\"> No of Code Redeemed</label>\n" +
+    "          </div>\n" +
+    "          <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
+    "            <label>1000</label>\n" +
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
     "            <!-- <button class=\"btn btn-default\"  style=\"border: 1px solid #b6f3d1; color:#b6f3d1;\">Get more offers</button> -->\n" +
     "          </div>\n" +
     "        </div>\n" +
-    "         <div class=\"col-sm-3\">\n" +
-    "          <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
-    "            <!-- <img src=\"/app/assets/images/ProfileSection/Icn-OffersShared@2x.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"background-color: #f7f7f7;\"> -->\n" +
+    "         <div class=\"col-sm-3\"  style=\" border-right: 1px dashed #dcdcdc;\">\n" +
+    "       <!--    <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
+    "            <img src=\"/app/assets/images/ProfileSection/Icn-OffersShared@2x.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"background-color: #f7f7f7;\">\n" +
     "            <i class=\"fa fa-handshake-o\" aria-hidden=\"true\" style=\" font-size: 80px;\"></i>\n" +
+    "          </div> -->\n" +
+    "          <div class=\"col-sm-12 text-center\" style=\"padding-top: 35px;\">\n" +
+    "            <label class=\"text-muted\"> Code Share Count</label>\n" +
     "          </div>\n" +
-    "          <div class=\"col-sm-12 text-center\">\n" +
-    "            <label class=\"text-muted\"> No of Code Redeemed</label>\n" +
-    "          </div>\n" +
-    "          <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
-    "            <label>1000</label>\n" +
+    "\n" +
+    "\n" +
+    "          <div class=\"col-sm-12 text-center\" style=\"font-size: 16px;\" ng-repeat=\"item in vm.user.social_sharing \">\n" +
+    "            <label class=\"text-capitalize\" style=\"    margin-top: 30px;\">{{item.social_media}} : {{item.total_shares}}</label>\n" +
+    "     \n" +
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
     "            <!-- <button class=\"btn btn-default\"  style=\"border: 1px solid #b6f3d1; color:#b6f3d1;\">Get more offers</button> -->\n" +

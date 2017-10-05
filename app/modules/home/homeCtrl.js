@@ -16,6 +16,7 @@
      */
     function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _, $scope, $timeout, ngToast) {
         /*jshint validthis: true */
+
         var vm = this;
         vm.offer_id;
         window.loginRole = 'refferal';
@@ -98,8 +99,16 @@
 
         };
 
+        vm.SetCookie = function()
+        {
+            if($location.search().tracking_id)
+            {
+                LoginService.SetTrackingCode($location.search().tracking_id);
+            }
+        }
 
-    
+
+        vm.SetCookie();
 
         vm.VendorLoginPopup = function() {
   document.getElementById("vendor-popup").style.width = "0%";
