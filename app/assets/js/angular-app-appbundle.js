@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-10-03. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-10-05. 
 * @author Kathik
 */
 (function() {
@@ -31,6 +31,7 @@
 		'signupModule',
 		'timer',
 		'720kb.socialshare',
+		'ngclipboard'
 
 	]);
 
@@ -367,9 +368,15 @@ angular.module('signupModule')
         vm.closeNav = function() {
             document.getElementById("offer-popup").style.width = "0%";
         }
-        vm.getcodepopup = function(offer_id) {
-            // console.log('Offer_id');
-            // // closeNav()
+        vm.getcodepopup = function(offer_id,OPTION) {
+
+            var OPTION = OPTION || 0;
+            console.log(offer_id);
+            if(OPTION)
+            {
+                window.offer_id = offer_id;
+            }
+            // / closeNav()
             document.getElementById("offer-popup").style.width = "0%";
             vm.offer_id = offer_id;
             if (vm.isReferral()) {
@@ -445,6 +452,7 @@ angular.module('signupModule')
             return window.SelectedCampOffers;
         }
         vm.getSelectedOfferData = function() {
+
             window.SelectedOffer = [];
             var data = [];
             data = window.SelectedCampOffers;
@@ -454,6 +462,17 @@ angular.module('signupModule')
                         window.SelectedOffer.push(value);
                     }
                 });
+            }
+            else if (window.offer_id) {
+                angular.forEach(data, function(value, key) {
+                    if (value.id == window.offer_id) {
+                        window.SelectedOffer.push(value);
+                    }
+                });
+            }
+            else
+            {
+
             }
             return window.SelectedOffer;
         }
@@ -468,6 +487,35 @@ angular.module('signupModule')
             window.SelectedCampOffers = vm.SelectedCampOffers;
             return vm.SelectedCampOffers;
         }
+
+
+          vm.goHome = function() {
+
+            window.location = window.location.origin;
+        } 
+
+        vm.onCopySuccess = function() {
+
+                  $timeout(function() {
+                        ngToast.dismiss();
+                        ngToast.create({
+                            content: '<strong>Spini</strong>: Link Copied',
+                            dismissOnTimeout: false,
+                            dismissButton: true,
+                            dismissOnClick: false
+                        });
+                    }, 0)
+        }
+
+
+
+        vm.OfferLink = function(offer) {
+
+   
+
+            return 'https://spini.co/offers/'+offer+'/';
+        }
+
 
         vm.mobile = function()
         {
@@ -702,18 +750,16 @@ angular.module('signupModule')
      * Controller of the app
      */
     angular.module('redeemcoupon').controller('redeemcouponCtrl', RedeemCoupon);
-    RedeemCoupon.$inject = ['redeemcouponService', '$http', 'LoginService', '$location'];
+    RedeemCoupon.$inject = ['redeemcouponService', '$http', 'LoginService', '$location', 'ngToast'];
     /*
      * recommend
      * Using function declarations
      * and bindable members up top.
      */
-    function RedeemCoupon(redeemcouponService, $http, LoginService, $location) {
+    function RedeemCoupon(redeemcouponService, $http, LoginService, $location, ngToast) {
         /*jshint validthis: true */
         var vm = this;
-    
         vm.checkCode = function() {
-
             console.log('de');
             $http.post('https://api.spini.co/v1/redemptions/verify_coupon', {
                 "redemption": {
@@ -722,26 +768,35 @@ angular.module('signupModule')
                     "amount": vm.amount
                 }
             }).then(function(response) {
-
-                if(response.data.code){
-
+                if (response.data.code) {
                     vm.showInfo = response.data;
+                    if (response.data.amount_to_pay) {
+                        $http.post('https://api.spini.co/v1/redemptions', {
+                            "redemption": {
+                                "coupon_code": vm.coupon_code,
+                                "business_id": vm.business_id,
+                                "amount": vm.amount,
+                                'savings': vm.showInfo.savings,
+                                'savings_type': vm.showInfo.savings_type,
+                                'deductions': vm.showInfo.offer_amount,
+                                'amount_paid': vm.showInfo.amount_to_pay
+                            }
+                        }).then(function() {
+                            ngToast.dismiss();
+                            ngToast.create({
+                                content: '<strong>Spini</strong>: Code Redemptions complete',
+                                dismissOnTimeout: false,
+                                dismissButton: true,
+                                dismissOnClick: false
+                            });
 
-                    alert('amount to pay '+response.data.amount_to_pay)
-                }
-
-                
-            });
-        }
-        vm.validatecode = function() {
-            $http.post('https://api.spini.co/v1/redemptions/verify_coupon', {
-                "redemption": {
-                    "coupon_code": vm.coupon_code,
-                    "business_id": vm.business_id,
-                    "amount": vm.amount
+                            vm.coupon_code='';
+                            vm.amount='';
+                            vm.showInfo='';
+                        });
+                    }
                 }
             });
-     
         }
         if (LoginService.isVendor()) {
             $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();

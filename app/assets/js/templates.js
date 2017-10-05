@@ -1134,15 +1134,32 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                        </label>\n" +
     "                                        <ul>\n" +
     "                                            <li class=\"offer-share-max\">\n" +
-    "                                                <a href=\"#\">\n" +
+    "                                                <a ngclipboard data-clipboard-text=\"{{vm.OfferLink(item.attributes.seo_url)}}\" ngclipboard-success=\"vm.onCopySuccess(e);\">\n" +
     "                                                </a>\n" +
     "                                            </li>\n" +
-    "                                            <li class=\"offer-share-fb\">\n" +
-    "                                                <a href=\"#\">\n" +
+    "                                            <li class=\"offer-share-fb\" \n" +
+    "\n" +
+    "\n" +
+    "                                            >\n" +
+    "                                                <a socialshare socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url)}}\" socialshare-provider=\"facebook\"\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                                                >\n" +
     "                                                </a>\n" +
     "                                            </li>\n" +
-    "                                            <li class=\"offer-share-twitter\">\n" +
-    "                                                <a href=\"#\">\n" +
+    "                                            <li class=\"offer-share-twitter\"\n" +
+    "\n" +
+    "\n" +
+    "                                             >\n" +
+    "                                                <a socialshare \n" +
+    "                                                socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url)}}\"\n" +
+    "                                                socialshare-provider=\"twitter\"\n" +
+    "                                                \n" +
+    "socialshare-text=\"{{item.attributes.seo_description}} {{item.attributes.seo_keywords}}\"\n" +
+    "socialshare-hashtags=\"{item.attributes.seo_keywords}}\"\n" +
+    "\n" +
+    ">\n" +
     "                                                </a>\n" +
     "                                            </li>\n" +
     "                                        </ul>\n" +
@@ -1201,9 +1218,24 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "        <input class=\"coupon-entry\" min=\"1\" ng-disabled=\"vm.amount==null\" ng-model=\"vm.coupon_code\" placeholder=\"Enter Coupon Code\" type=\"text\" />\n" +
     "            <select class=\"sle\" ng-model=\"vm.business_id\" ng-options=\"item.id as item.name for item in vm.vendor.businesses\">\n" +
     "            </select>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "            <button ng-click=\"vm.checkCode()\">\n" +
     "                SUBMIT\n" +
     "            </button>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "            <div ng-show=\"vm.showInfo\">\n" +
+    "                \n" +
+    "\n" +
+    "                <h5> Offer Applied {{vm.showInfo.savings}} {{vm.showInfo.savings_type}} </h5>\n" +
+    "                <h5> Price : Rs.{{vm.showInfo.price}} </h5>\n" +
+    "                <h5> Offer Amount: Rs.{{vm.showInfo.offer_amount}} </h5>\n" +
+    "                <h4>Amount to Pay: Rs.{{vm.showInfo.amount_to_pay}}</h4>\n" +
+    "\n" +
+    "            </div>\n" +
     "            <div class=\"pull-right\">\n" +
     "                <a>\n" +
     "                    FAQ\n" +
@@ -1213,88 +1245,6 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                </a>\n" +
     "            </div>\n" +
     "  \n" +
-    "</section>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "<!-- coupon table -->\n" +
-    "<section>\n" +
-    "    <div class=\"container\">\n" +
-    "        <table class=\"coupon-redeem-table col-md-12\">\n" +
-    "            <thead>\n" +
-    "                <tr>\n" +
-    "                    <td>\n" +
-    "                        OFFER ID\n" +
-    "                    </td>\n" +
-    "                    <td>\n" +
-    "                        DATE\n" +
-    "                    </td>\n" +
-    "                    <td>\n" +
-    "                        TIME\n" +
-    "                    </td>\n" +
-    "                    <td>\n" +
-    "                        COUNT\n" +
-    "                    </td>\n" +
-    "                    <td>\n" +
-    "                        LOCATION\n" +
-    "                    </td>\n" +
-    "                </tr>\n" +
-    "            </thead>\n" +
-    "            <tbody>\n" +
-    "                <tr>\n" +
-    "                    <td>\n" +
-    "                        ABX123\n" +
-    "                    </td>\n" +
-    "                    <td>\n" +
-    "                        14-11-2017\n" +
-    "                    </td>\n" +
-    "                    <td>\n" +
-    "                        12.15.32\n" +
-    "                    </td>\n" +
-    "                    <td>\n" +
-    "                        893212\n" +
-    "                    </td>\n" +
-    "                    <td>\n" +
-    "                        T.NAGAR\n" +
-    "                    </td>\n" +
-    "                </tr>\n" +
-    "                <tr>\n" +
-    "                    <td>\n" +
-    "                        ABX123\n" +
-    "                    </td>\n" +
-    "                    <td>\n" +
-    "                        14-11-2017\n" +
-    "                    </td>\n" +
-    "                    <td>\n" +
-    "                        12.15.32\n" +
-    "                    </td>\n" +
-    "                    <td>\n" +
-    "                        893212\n" +
-    "                    </td>\n" +
-    "                    <td>\n" +
-    "                        T.NAGAR\n" +
-    "                    </td>\n" +
-    "                </tr>\n" +
-    "                <tr>\n" +
-    "                    <td>\n" +
-    "                        ABX123\n" +
-    "                    </td>\n" +
-    "                    <td>\n" +
-    "                        14-11-2017\n" +
-    "                    </td>\n" +
-    "                    <td>\n" +
-    "                        12.15.32\n" +
-    "                    </td>\n" +
-    "                    <td>\n" +
-    "                        893212\n" +
-    "                    </td>\n" +
-    "                    <td>\n" +
-    "                        T.NAGAR\n" +
-    "                    </td>\n" +
-    "                </tr>\n" +
-    "            </tbody>\n" +
-    "        </table>\n" +
-    "    </div>\n" +
     "</section>\n"
   );
 

@@ -27,6 +27,7 @@
 		'signupModule',
 		'timer',
 		'720kb.socialshare',
+		'ngclipboard'
 
 	]);
 

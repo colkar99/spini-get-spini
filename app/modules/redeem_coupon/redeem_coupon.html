@@ -7,9 +7,24 @@
         <input class="coupon-entry" min="1" ng-disabled="vm.amount==null" ng-model="vm.coupon_code" placeholder="Enter Coupon Code" type="text" />
             <select class="sle" ng-model="vm.business_id" ng-options="item.id as item.name for item in vm.vendor.businesses">
             </select>
+
+
+
             <button ng-click="vm.checkCode()">
                 SUBMIT
             </button>
+
+
+
+            <div ng-show="vm.showInfo">
+                
+
+                <h5> Offer Applied {{vm.showInfo.savings}} {{vm.showInfo.savings_type}} </h5>
+                <h5> Price : Rs.{{vm.showInfo.price}} </h5>
+                <h5> Offer Amount: Rs.{{vm.showInfo.offer_amount}} </h5>
+                <h4>Amount to Pay: Rs.{{vm.showInfo.amount_to_pay}}</h4>
+
+            </div>
             <div class="pull-right">
                 <a>
                     FAQ
@@ -19,86 +34,4 @@
                 </a>
             </div>
   
-</section>
-
-
-
-<!-- coupon table -->
-<section>
-    <div class="container">
-        <table class="coupon-redeem-table col-md-12">
-            <thead>
-                <tr>
-                    <td>
-                        OFFER ID
-                    </td>
-                    <td>
-                        DATE
-                    </td>
-                    <td>
-                        TIME
-                    </td>
-                    <td>
-                        COUNT
-                    </td>
-                    <td>
-                        LOCATION
-                    </td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        ABX123
-                    </td>
-                    <td>
-                        14-11-2017
-                    </td>
-                    <td>
-                        12.15.32
-                    </td>
-                    <td>
-                        893212
-                    </td>
-                    <td>
-                        T.NAGAR
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        ABX123
-                    </td>
-                    <td>
-                        14-11-2017
-                    </td>
-                    <td>
-                        12.15.32
-                    </td>
-                    <td>
-                        893212
-                    </td>
-                    <td>
-                        T.NAGAR
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        ABX123
-                    </td>
-                    <td>
-                        14-11-2017
-                    </td>
-                    <td>
-                        12.15.32
-                    </td>
-                    <td>
-                        893212
-                    </td>
-                    <td>
-                        T.NAGAR
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 </section>

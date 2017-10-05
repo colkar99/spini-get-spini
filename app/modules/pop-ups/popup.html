@@ -390,15 +390,32 @@
                                         </label>
                                         <ul>
                                             <li class="offer-share-max">
-                                                <a href="#">
+                                                <a ngclipboard data-clipboard-text="{{vm.OfferLink(item.attributes.seo_url)}}" ngclipboard-success="vm.onCopySuccess(e);">
                                                 </a>
                                             </li>
-                                            <li class="offer-share-fb">
-                                                <a href="#">
+                                            <li class="offer-share-fb" 
+
+
+                                            >
+                                                <a socialshare socialshare-url="{{vm.OfferLink(item.attributes.seo_url)}}" socialshare-provider="facebook"
+
+
+
+                                                >
                                                 </a>
                                             </li>
-                                            <li class="offer-share-twitter">
-                                                <a href="#">
+                                            <li class="offer-share-twitter"
+
+
+                                             >
+                                                <a socialshare 
+                                                socialshare-url="{{vm.OfferLink(item.attributes.seo_url)}}"
+                                                socialshare-provider="twitter"
+                                                
+socialshare-text="{{item.attributes.seo_description}} {{item.attributes.seo_keywords}}"
+socialshare-hashtags="{item.attributes.seo_keywords}}"
+
+>
                                                 </a>
                                             </li>
                                         </ul>

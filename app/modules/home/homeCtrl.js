@@ -66,9 +66,15 @@
         vm.closeNav = function() {
             document.getElementById("offer-popup").style.width = "0%";
         }
-        vm.getcodepopup = function(offer_id) {
-            // console.log('Offer_id');
-            // // closeNav()
+        vm.getcodepopup = function(offer_id,OPTION) {
+
+            var OPTION = OPTION || 0;
+            console.log(offer_id);
+            if(OPTION)
+            {
+                window.offer_id = offer_id;
+            }
+            // / closeNav()
             document.getElementById("offer-popup").style.width = "0%";
             vm.offer_id = offer_id;
             if (vm.isReferral()) {
@@ -144,6 +150,7 @@
             return window.SelectedCampOffers;
         }
         vm.getSelectedOfferData = function() {
+
             window.SelectedOffer = [];
             var data = [];
             data = window.SelectedCampOffers;
@@ -153,6 +160,17 @@
                         window.SelectedOffer.push(value);
                     }
                 });
+            }
+            else if (window.offer_id) {
+                angular.forEach(data, function(value, key) {
+                    if (value.id == window.offer_id) {
+                        window.SelectedOffer.push(value);
+                    }
+                });
+            }
+            else
+            {
+
             }
             return window.SelectedOffer;
         }
@@ -167,6 +185,35 @@
             window.SelectedCampOffers = vm.SelectedCampOffers;
             return vm.SelectedCampOffers;
         }
+
+
+          vm.goHome = function() {
+
+            window.location = window.location.origin;
+        } 
+
+        vm.onCopySuccess = function() {
+
+                  $timeout(function() {
+                        ngToast.dismiss();
+                        ngToast.create({
+                            content: '<strong>Spini</strong>: Link Copied',
+                            dismissOnTimeout: false,
+                            dismissButton: true,
+                            dismissOnClick: false
+                        });
+                    }, 0)
+        }
+
+
+
+        vm.OfferLink = function(offer) {
+
+   
+
+            return 'https://spini.co/offers/'+offer+'/';
+        }
+
 
         vm.mobile = function()
         {

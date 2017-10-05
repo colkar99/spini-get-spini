@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="angular-app">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<base href="/">
+	<title>angular-app</title>
+	<meta name="description" content="Modular AngularJS with Angm-generator" />
+	<meta name="author" content="" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=yes" />
+	<link rel="shortcut icon" href="app/assets/images/favicon.ico" />
+	<link rel="apple-touch-icon" href="app/assets/images/apple-touch-icon.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="app/assets/images/apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="app/assets/images/apple-touch-icon-114x114.png" />
+
+	<!-- injector:css -->
+	<link rel="stylesheet" href="/app/assets/css/lib/bootstrap.min.css">
+	<link rel="stylesheet" href="/app/assets/css/style.css">
+	<!-- endinjector -->
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-toast/2.0.0/ngToast.min.css"/>
+
+</head>
+<body ng-clock>
+
+	<div ng-include="'app/modules/layouts/nav-bar/navbar.html'"></div>
+	<!--Beginning-->
+	<section id="wrapper" scroll-to>
+		<div class="view-slide-in" ui-view>
+
+<div>
+  <div class="backwhite">
+    <div class="container">
+      <div class="col-md-10">
+        <nav class="main-header-navigation">
+          <ul>
+            <li class="main-nav-education"><a href="#" ng-click="vm.getOffers()">All</a></li>
+            <li class="main-nav-food" ><a href="#" ng-click="vm.filter_by_food(vm.overall_compaigns)" >Food</a></li>
+            <!-- <li class="main-nav-education"><a href="#" >Education</a></li> -->
+            <li class="main-nav-beauty"><a href="#" ng-click="vm.filter_by_beauty(vm.overall_compaigns)">Beauty</a></li>
+            <li class="main-nav-travel"><a href="#">Travel</a></li>
+            <li class="main-nav-personal_needs"><a href="#" ng-click="vm.filter_by_personal_need(vm.overall_compaigns)">Personal needs</a></li>
+            <li class="main-nav-gadgets"><a href="#">Gadgets</a></li>
+            <li class="main-nav-clothing"><a href="#">Clothing</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-md-2 main-header-location">
+        <i class="glyphicon glyphicon-map-marker"></i>
+        <div class="dropdown">
+          <span class="dropdown-toggle" type="button" data-toggle="dropdown">Chennai
+          </span><span class="caret"></span>
+          <ul class="dropdown-menu">
+            <li><a href="#">Chennai</a></li>
+            <li><a href="#">Madurai</a></li>
+            <li><a href="#">Pondy</a></li>
+            <li><a href="#">kanchepuram</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+	
+
+
+
+<!-- OFFERS POPUP 1st-->
+<div class="overlay" id="offer-popup" style="width: 100%;"  ng-init="vm.getOffers();"> 
+    <a class="closebtn" href="javascript:void(0)" ng-click="vm.goHome()">
+        ×
+    </a>
+    <div class="overlay-content">
+        <div style="height: 305px">
+            <div active="active" interval="myInterval" no-wrap="noWrapSlides" uib-carousel="">
+                <div index="$index"  uib-slide="">
+                 
+                    <div class="row ">
+                        <div class="col-md-10 row col-md-offset-1 white pad10">
+                            <div class="col-md-5 nopad">
+                                <img "="" alt="..." class="fixed-height" ng-src="https://api.spini.co/uploads/offer/image/3/image.jpeg" style="width: 100% !important;">
+      
+                                
+                            </div>
+                            <div class="col-md-7 nopad">
+                                <div class="pad-top-none offer-details text-left">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h3 class="tm">
+
+                                              Flat 15% Off                                             
+                                            </h3>
+                                            <div class="ts pad5 offer-location">
+                                                <b>
+                                                    At   Naturals Lounge at -
+                                                </b>
+                                                <span>
+                                                    T.nagar                                            
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 text-right ">
+                                            <img class="offer-logo-set" ng-src="https://api.spini.co/uploads/offer/image/3/medium_image.jpeg">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row space-div">
+                                        <div class="col-md-4">
+                                            <button ng-click="vm.getSlidepopup(2);vm.getcodepopup(3,true)">
+                                                GET CODE!
+                                            </button>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span class="offer-spini" ng-show="
+
+
+
+                
+
+                                             ">
+                                                <i aria-hidden="true" class="fa fa-gift link-icon fagift">
+                                                </i>
+                                                Spini Treasure
+                                               
+                                                 ₹                                                
+                                            </span>
+                                        </div>
+                                        <div class="col-md-2 ">
+                                            <span class="offer-count">
+                                                <i aria-hidden="true" class="fa fa-star-o link-icon ">
+                                                </i>
+                                                54
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="min-height160px">
+                                        <p class="">
+                                          Flat 15% Off From Naturals Lounge @ T.Nagar  For Bridal Packages Above Rs.7749/-
+Naturals Lounge - Your fairy tale wedding is now a reality! 
+                                         
+                                        </p>
+                                        <p class="offer-wrap-text space-div">
+                                            **OFFER VALID TILL {{item.attributes.end_date | date:'medium'}} only at 
+
+     Naturals Lounge @
+     T.nagar                                        
+                                        </p>
+                                    </div>
+                                    <div class="offer-share col-md-6">
+                                        <label>
+                                            SHARE & EARN
+                                        </label>
+                                        <ul>
+                                            <li class="offer-share-max">
+                                                <a href="#">
+                                                </a>
+                                            </li>
+                                            <li class="offer-share-fb">
+                                                <a href="#">
+                                                </a>
+                                            </li>
+                                            <li class="offer-share-twitter">
+                                                <a href="#">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="offer-share col-md-6">
+                                        <label class="right">
+                                            OFFERS END IN
+                                        </label>
+                                        <p class="right timers">
+
+                                            <timer 
+ end-time="vm.unixtime('2017-11-30')" max-time-unit="'day'" interval="1000"
+
+                                            >{{days}} days, {{hhours}}:{{mminutes}}:{{sseconds}}</timer>
+
+
+                                         
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        <!--     <span class="tes">
+                                <img class="roate-270" src="/app/assets/images/icons8-Expand%20Arrow-64.png">
+                                
+                            </span> -->
+                            <!-- <span class="tes1">
+  <img class="roate-90" src="/app/assets/images/icons8-Expand%20Arrow-64.png">
+</span> -->
+                        </div>
+                    </div>
+                    <!-- <div class="carousel-caption">
+          <h4>item {{item.id}}</h4>
+          <p>{{item.text}}</p>
+        </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end OFFERS POPUP -->
+<style type="text/css">
+    .offer-carousel-r1{
+    width: 4%;
+  }
+</style>
+
+
+</div>
+
+  <div ng-include="'app/modules/pop-ups/popup.html'" ng-controller="HomeCtrl as vm"></div>
+
+	</section>
+	<!--End-->
+
+
+
+
+	<footer><p>© 2017 All Rights Reserved</p></footer>
+
+
+<!-- injector:js -->
+<script src="/src/bower_components/jquery/dist/jquery.js"></script>
+<script src="/src/bower_components/es5-shim/es5-shim.js"></script>
+<script src="/src/bower_components/json3/lib/json3.min.js"></script>
+<script src="/src/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/src/bower_components/angular/angular.js"></script>
+<script src="/src/bower_components/angular-touch/angular-touch.js"></script>
+<script src="/src/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="/src/bower_components/angular-aria/angular-aria.js"></script>
+<script src="/src/bower_components/angular-mocks/angular-mocks.js"></script>
+<script src="/src/bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="/src/bower_components/angular-animate/angular-animate.js"></script>
+<script src="/src/bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="/src/bower_components/angular-resource/angular-resource.js"></script>
+<script src="/src/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="/src/bower_components/lodash/lodash.js"></script>
+<script src="/src/bower_components/moment/moment.js"></script>
+<script src="/src/bower_components/humanize-duration/humanize-duration.js"></script>
+<script src="/src/bower_components/angular-timer/dist/angular-timer.js"></script>
+<script src="/app/app.js"></script>
+<script src="/app/app.config.js"></script>
+<script src="/app/modules/home/homeModule.js"></script>
+<script src="/app/modules/loginAuth/loginModule.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponModule.js"></script>
+<script src="/app/modules/refferal_user/refferalModule.js"></script>
+<script src="/app/modules/signup/signupModule.js"></script>
+<script src="/app/modules/home/homeRoute.js"></script>
+<script src="/app/modules/loginAuth/loginRoute.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponRoute.js"></script>
+<script src="/app/modules/refferal_user/refferalRoute.js"></script>
+<script src="/app/modules/signup/signupRoute.js"></script>
+<script src="/app/modules/home/homeCtrl.js"></script>
+<script src="/app/modules/layouts/nav-bar/navBarCtrl.js"></script>
+<script src="/app/modules/loginAuth/loginCtrl.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponCtrl.js"></script>
+<script src="/app/modules/refferal_user/refferalCtrl.js"></script>
+<script src="/app/modules/signup/signupCtrl.js"></script>
+<script src="/app/modules/home/homeService.js"></script>
+<script src="/app/modules/layouts/nav-bar/navbarService.js"></script>
+<script src="/app/modules/loginAuth/loginService.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponService.js"></script>
+<script src="/app/modules/refferal_user/refferalService.js"></script>
+<script src="/app/modules/signup/signupService.js"></script>
+<script src="/app/modules/layouts/nav-bar/navbarDirective.js"></script>
+<!-- endinjector -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/oclazyload/1.1.0/ocLazyLoad.min.js"></script>
+<script src="//use.fontawesome.com/9a830e8669.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ng-toast/2.0.0/ngToast.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-socialshare/2.3.11/angular-socialshare.min.js"></script>
+
+
+
+
+
+</body>
+</html>

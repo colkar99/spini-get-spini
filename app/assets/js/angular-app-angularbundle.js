@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-10-03. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-10-05. 
 * @author Kathik
 */
 /**
