@@ -8,17 +8,21 @@
         </a>
       </div>
       <div class="col-md-6 main-header-search">
-        <input type="text" placeholder="Search Offers">
-        <button></button>
+        <input type="text" placeholder="Search Offers" class="search_n">
+        <button class="search_n"></button>
       </div>
    <!--    <div class="col-md-2 main-header-partner" ng-hide="menu.isVendor()">
         <button ng-click="menu.signupPOP('vendor');">Become our partner</button>
       </div> -->
 
-         <div class="col-md-2 main-header-partner" ng-hide="menu.isVendor()">
+         <div class="col-md-2 main-header-partner" ng-hide="menu.isVendor() || menu.isReferral()">
         <button ng-click="menu.VendorContactUs();">Become our partner</button>
       </div>
-      <div class="col-md-2 main-header-signin" ng-hide="menu.isVendor()">
+
+
+
+
+      <div ng-class="menu.isReferral() ?'col-md-4':'col-md-2'" class="col-md-4 main-header-signin" ng-hide="menu.isVendor()">
         <a  ng-click="menu.open = true" ng-hide="menu.isReferral()">Sign In <img src="/app/assets/images/header/UserIcon@2x.png"></a>
         <a  ng-click="menu.open = true" ng-show="menu.isReferral()">MyAccount <img src="/app/assets/images/header/UserIcon@2x.png"></a>
 
@@ -69,7 +73,7 @@
     box-shadow: 0px 0px 6px #888;
     border-radius: 3px;
     top: 50px;
-    left: -15px;
+    left: 70px;
   }
   .manage-account i{
     text-align: right;
@@ -81,7 +85,7 @@
   }
   .manage-account p{
     margin: 10px 0px;
-  }
+  }  
   .manage-account button{
     font-weight: 300;
     letter-spacing: 1px;

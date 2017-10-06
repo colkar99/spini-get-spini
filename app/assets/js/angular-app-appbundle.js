@@ -392,9 +392,7 @@ angular.module('signupModule')
         try {
             if (type == 'treasure') {
 
-                console.log('hit');
-                console.log(data);
-            
+      
                 return data.treasure_value;
             }
 
@@ -628,7 +626,7 @@ angular.module('signupModule')
             $http({
                 method: "POST",
                 headers: headers,
-                url: apiBaseURL + '/coupon_codes',
+                url: apiBaseURL + 'coupon_codes',
                 data: vm.post
             }).then(function mySuccess(response) {
                 vm.openConformPopup();
@@ -870,6 +868,7 @@ angular.module('signupModule')
                             //   vm.coupon_code='';
                             // vm.amount='';
                             //vm.showInfo='';
+                            vm.RedemptionsHistory()
                         }).catch(function(response) {
                             ngToast.dismiss();
                             ngToast.create({
@@ -891,32 +890,29 @@ angular.module('signupModule')
                 });
             });;
         }
+        // vm.History = angular.fromJson('[{"id":"2","type":"redemptions","attributes":{"coupon_code":"39610A","coupon_id":3,"business_id":1,"offer_id":1,"created_at":"Oct 05, 2017","place":"T.Nagar","price":"1000.0","amount_paid_by_buyer":"500.0"}}]');
+        // console.log()
+        vm.History = [];
         vm.closePopup = function() {
             document.getElementById("get-vendor-mobile-no-popup").style.width = "0%";
         }
         vm.openPopup = function(data, id) {
             document.getElementById("get-vendor-mobile-no-popup").style.width = "100%";
-
         }
-
-        vm.UpdateMobile = function(mobile)
-        {
+        vm.RedemptionsHistory = function() {
+            $http.get('https://api.spini.co/v1/redemptions?'+vm.business_id).then(function(response) {
+                vm.History = response.data;
+            });
+        }
+        vm.UpdateMobile = function(mobile) {
             console.log(mobile);
-
-
-              $http.put('https://api.spini.co/v1/profile', {
+            $http.put('https://api.spini.co/v1/profile', {
                 "user": {
                     "mobile": mobile,
                 }
             }).then(function(response) {
-
-                 vm.closePopup();
-
-
-            })
-            .catch(function(response) {
-
-
+                vm.closePopup();
+            }).catch(function(response) {
                 ngToast.dismiss();
                 ngToast.create({
                     content: response.data.errors[0].detail,
@@ -924,16 +920,10 @@ angular.module('signupModule')
                     dismissButton: true,
                     dismissOnClick: false
                 });
-
             });
-
-           
-
         }
         if (LoginService.isVendor()) {
             $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
-
-
             LoginService.getVendorProfileInfo(function(data) {
                 vm.vendor = data;
                 if (vm.vendor.businesses) {
@@ -941,13 +931,12 @@ angular.module('signupModule')
                         vm.business_id = vm.vendor.businesses[0].id; // select first items
                     }
                 }
-               // vm.vendor.mobile = null;
+                // vm.vendor.mobile = null;
                 if (!vm.vendor.mobile) {
-                    vm.openPopup(); 
+                    vm.openPopup();
                 }
             });
-
-            
+            vm.RedemptionsHistory();
             // LoginService.getVendorDataList(function(data) {
             //     vm.vendorDataList = data;
             // });

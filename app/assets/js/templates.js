@@ -625,17 +625,21 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "        </a>\n" +
     "      </div>\n" +
     "      <div class=\"col-md-6 main-header-search\">\n" +
-    "        <input type=\"text\" placeholder=\"Search Offers\">\n" +
-    "        <button></button>\n" +
+    "        <input type=\"text\" placeholder=\"Search Offers\" class=\"search_n\">\n" +
+    "        <button class=\"search_n\"></button>\n" +
     "      </div>\n" +
     "   <!--    <div class=\"col-md-2 main-header-partner\" ng-hide=\"menu.isVendor()\">\n" +
     "        <button ng-click=\"menu.signupPOP('vendor');\">Become our partner</button>\n" +
     "      </div> -->\n" +
     "\n" +
-    "         <div class=\"col-md-2 main-header-partner\" ng-hide=\"menu.isVendor()\">\n" +
+    "         <div class=\"col-md-2 main-header-partner\" ng-hide=\"menu.isVendor() || menu.isReferral()\">\n" +
     "        <button ng-click=\"menu.VendorContactUs();\">Become our partner</button>\n" +
     "      </div>\n" +
-    "      <div class=\"col-md-2 main-header-signin\" ng-hide=\"menu.isVendor()\">\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "      <div ng-class=\"menu.isReferral() ?'col-md-4':'col-md-2'\" class=\"col-md-4 main-header-signin\" ng-hide=\"menu.isVendor()\">\n" +
     "        <a  ng-click=\"menu.open = true\" ng-hide=\"menu.isReferral()\">Sign In <img src=\"/app/assets/images/header/UserIcon@2x.png\"></a>\n" +
     "        <a  ng-click=\"menu.open = true\" ng-show=\"menu.isReferral()\">MyAccount <img src=\"/app/assets/images/header/UserIcon@2x.png\"></a>\n" +
     "\n" +
@@ -686,7 +690,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    box-shadow: 0px 0px 6px #888;\n" +
     "    border-radius: 3px;\n" +
     "    top: 50px;\n" +
-    "    left: -15px;\n" +
+    "    left: 70px;\n" +
     "  }\n" +
     "  .manage-account i{\n" +
     "    text-align: right;\n" +
@@ -698,7 +702,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "  }\n" +
     "  .manage-account p{\n" +
     "    margin: 10px 0px;\n" +
-    "  }\n" +
+    "  }  \n" +
     "  .manage-account button{\n" +
     "    font-weight: 300;\n" +
     "    letter-spacing: 1px;\n" +
@@ -1047,7 +1051,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                <div index=\"$index\" ng-repeat=\"item in vm.getItems() track by $index\" uib-slide=\"\">\n" +
     "                    <!-- <img ng-src=\"{{item.business_avatar}}\" style=\"margin:auto;\">{{item}} -->\n" +
     "                    <div class=\"row \">\n" +
-    "                        <div class=\"col-md-10 row col-md-offset-1 white pad10\">\n" +
+    "                        <div class=\"col-md-8 row col-md-offset-2 white pad10\">\n" +
     "                            <div class=\"col-md-5 nopad\">\n" +
     "                                <!-- <div class=\"carousel slide\" data-ride=\"carousel\" id=\"carousel-example-generic\"> -->\n" +
     "                                <!-- <ol class=\"carousel-indicators\"> -->\n" +
@@ -1470,53 +1474,103 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('app/modules/redeem_coupon/redeem_coupon.html',
+    "<div class=\"container\" style=\"margin-top: 5px;\">\n" +
+    "    <label>\n" +
+    "        Buiness :\n" +
+    "    </label>\n" +
+    "    <select ng-model=\"vm.business_id\" ng-options=\"item.id as item.name for item in vm.vendor.businesses\" style=\"    min-width: 130px;\">\n" +
+    "    </select>\n" +
+    "</div>\n" +
     "<!-- container for coupon redeem console -->\n" +
     "<section class=\"coupon-redeem-entry\">\n" +
     "    <h3>\n" +
     "        Enter Offer Price & Coupon Code\n" +
     "    </h3>\n" +
-    "    <input class=\"price-entry\" ng-model=\"vm.amount\" placeholder=\"Enter Price\" type=\"number\" />\n" +
-    "        <input class=\"coupon-entry\" min=\"1\" ng-disabled=\"vm.amount==null\" ng-model=\"vm.coupon_code\" placeholder=\"Enter Coupon Code\" type=\"text\" />\n" +
-    "            <select class=\"sle\" ng-model=\"vm.business_id\" ng-options=\"item.id as item.name for item in vm.vendor.businesses\">\n" +
-    "            </select>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <button ng-click=\"vm.checkCode()\">\n" +
-    "                SUBMIT\n" +
-    "            </button>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <div ng-show=\"vm.showInfo\">\n" +
-    "                \n" +
-    "\n" +
-    "                <h5> Offer Applied {{vm.showInfo.savings}} {{vm.showInfo.savings_type}} </h5>\n" +
-    "                <h5> Price : Rs.{{vm.showInfo.price}} </h5>\n" +
-    "                <h5> Offer Amount: Rs.{{vm.showInfo.offer_amount}} </h5>\n" +
-    "                <h4>Amount to Pay: Rs.{{vm.showInfo.amount_to_pay}}</h4>\n" +
-    "\n" +
-    "            </div>\n" +
-    "            <div class=\"pull-right\">\n" +
+    "    <input class=\"price-entry\" ng-model=\"vm.amount\" placeholder=\"Enter Price\" type=\"number\"/>\n" +
+    "    <input class=\"coupon-entry\" min=\"1\" ng-disabled=\"vm.amount==null\" ng-model=\"vm.coupon_code\" placeholder=\"Enter Coupon Code\" type=\"text\"/>\n" +
+    "    <button ng-click=\"vm.checkCode()\">\n" +
+    "        SUBMIT\n" +
+    "    </button>\n" +
+    "    <div ng-show=\"vm.showInfo\">\n" +
+    "        <h5>\n" +
+    "            Offer Applied {{vm.showInfo.savings}} {{vm.showInfo.savings_type}}\n" +
+    "        </h5>\n" +
+    "        <h5>\n" +
+    "            Price : Rs.{{vm.showInfo.price}}\n" +
+    "        </h5>\n" +
+    "        <h5>\n" +
+    "            Offer Amount: Rs.{{vm.showInfo.offer_amount}}\n" +
+    "        </h5>\n" +
+    "        <h4>\n" +
+    "            Amount to Pay: Rs.{{vm.showInfo.amount_to_pay}}\n" +
+    "        </h4>\n" +
+    "    </div>\n" +
+    "    <!--        <div class=\"pull-right\">\n" +
     "                <a>\n" +
     "                    FAQ\n" +
     "                </a>\n" +
     "                <a>\n" +
     "                    Troubleshoot\n" +
     "                </a>\n" +
-    "            </div>\n" +
-    "  \n" +
+    "            </div> -->\n" +
     "</section>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
+    "<!-- coupon table -->\n" +
+    "<section ng-if=\"vm.History.length > 0\">\n" +
+    "    <div class=\"container\">\n" +
+    "        <table class=\"coupon-redeem-table col-md-12\">\n" +
+    "            <thead>\n" +
+    "                <tr>\n" +
+    "                    <td>\n" +
+    "                        OFFER ID\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        DATE\n" +
+    "                    </td>\n" +
+    "                    <!--     <td>TIME</td> -->\n" +
+    "                    <td>\n" +
+    "                        COUPON CODE\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        LOCATION\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        PRICE (INR)\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        PAID AMOUNT(INR)\n" +
+    "                    </td>\n" +
+    "                </tr>\n" +
+    "            </thead>\n" +
+    "            <tbody>\n" +
+    "                <tr ng-repeat=\"item in vm.History\">\n" +
+    "                    <td>\n" +
+    "                        {{item.attributes.offer_id}}\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        {{item.attributes.created_at}}\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        {{item.attributes.coupon_code}}\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        {{item.attributes.place}}\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        {{item.attributes.price}}\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        {{item.attributes.amount_paid_by_buyer}}\n" +
+    "                    </td>\n" +
+    "                </tr>\n" +
+    "            </tbody>\n" +
+    "        </table>\n" +
+    "    </div>\n" +
+    "</section>\n" +
     "<!-- Get  mobile no for vendor-->\n" +
     "<div class=\"overlay\" id=\"get-vendor-mobile-no-popup\">\n" +
-    "\n" +
     "    <div class=\"overlay-content\">\n" +
-    "        <div class=\"row\" >\n" +
-    "            <div class=\"col-md-8 row col-md-offset-2  pad-bot0 pad10 \">\n" +
-    "\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-md-8 row col-md-offset-2 pad-bot0 pad10 \">\n" +
     "                <div class=\"row backcls mar-10px text-left\">\n" +
     "                    <div class=\"form-group popupcenter \">\n" +
     "                        <form name=\"get_coupen\" ng-submit=\"vm.UpdateMobile(mobile)\" novalidate=\"\">\n" +
@@ -1539,15 +1593,33 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                </button>\n" +
     "                            </div>\n" +
     "                        </form>\n" +
-    "\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "<!-- end get code -->"
+    "<!-- end get code -->\n" +
+    "<style type=\"text/css\">\n" +
+    "    .search_n{\n" +
+    "\n" +
+    "    display: none;\n" +
+    "  }\n" +
+    "\n" +
+    "footer p\n" +
+    "{\n" +
+    "\n" +
+    "    background: #f7f7f7;\n" +
+    "              margin-top: 200px;\n" +
+    "    \n" +
+    "    width: 100%;\n" +
+    "}\n" +
+    "\n" +
+    ".main-header-partner {\n" +
+    "    text-align: center;\n" +
+    "    opacity: 0;\n" +
+    "}\n" +
+    "</style>"
   );
 
 
@@ -1702,7 +1774,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "            <i class=\"fa fa-handshake-o\" aria-hidden=\"true\" style=\" font-size: 80px;\"></i>\n" +
     "          </div> -->\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"padding-top: 35px;\">\n" +
-    "            <label class=\"text-muted\"> Code Share Count</label>\n" +
+    "            <label class=\"text-muted\">Share Count</label>\n" +
     "          </div>\n" +
     "\n" +
     "\n" +

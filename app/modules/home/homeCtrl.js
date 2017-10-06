@@ -324,7 +324,7 @@
             $http({
                 method: "POST",
                 headers: headers,
-                url: apiBaseURL + '/coupon_codes',
+                url: apiBaseURL + 'coupon_codes',
                 data: vm.post
             }).then(function mySuccess(response) {
                 vm.openConformPopup();

@@ -1,50 +1,100 @@
+<div class="container" style="margin-top: 5px;">
+    <label>
+        Buiness :
+    </label>
+    <select ng-model="vm.business_id" ng-options="item.id as item.name for item in vm.vendor.businesses" style="    min-width: 130px;">
+    </select>
+</div>
 <!-- container for coupon redeem console -->
 <section class="coupon-redeem-entry">
     <h3>
         Enter Offer Price & Coupon Code
     </h3>
-    <input class="price-entry" ng-model="vm.amount" placeholder="Enter Price" type="number" />
-        <input class="coupon-entry" min="1" ng-disabled="vm.amount==null" ng-model="vm.coupon_code" placeholder="Enter Coupon Code" type="text" />
-            <select class="sle" ng-model="vm.business_id" ng-options="item.id as item.name for item in vm.vendor.businesses">
-            </select>
-
-
-
-            <button ng-click="vm.checkCode()">
-                SUBMIT
-            </button>
-
-
-
-            <div ng-show="vm.showInfo">
-                
-
-                <h5> Offer Applied {{vm.showInfo.savings}} {{vm.showInfo.savings_type}} </h5>
-                <h5> Price : Rs.{{vm.showInfo.price}} </h5>
-                <h5> Offer Amount: Rs.{{vm.showInfo.offer_amount}} </h5>
-                <h4>Amount to Pay: Rs.{{vm.showInfo.amount_to_pay}}</h4>
-
-            </div>
-            <div class="pull-right">
+    <input class="price-entry" ng-model="vm.amount" placeholder="Enter Price" type="number"/>
+    <input class="coupon-entry" min="1" ng-disabled="vm.amount==null" ng-model="vm.coupon_code" placeholder="Enter Coupon Code" type="text"/>
+    <button ng-click="vm.checkCode()">
+        SUBMIT
+    </button>
+    <div ng-show="vm.showInfo">
+        <h5>
+            Offer Applied {{vm.showInfo.savings}} {{vm.showInfo.savings_type}}
+        </h5>
+        <h5>
+            Price : Rs.{{vm.showInfo.price}}
+        </h5>
+        <h5>
+            Offer Amount: Rs.{{vm.showInfo.offer_amount}}
+        </h5>
+        <h4>
+            Amount to Pay: Rs.{{vm.showInfo.amount_to_pay}}
+        </h4>
+    </div>
+    <!--        <div class="pull-right">
                 <a>
                     FAQ
                 </a>
                 <a>
                     Troubleshoot
                 </a>
-            </div>
-  
+            </div> -->
 </section>
-
-
-
+<!-- coupon table -->
+<section ng-if="vm.History.length > 0">
+    <div class="container">
+        <table class="coupon-redeem-table col-md-12">
+            <thead>
+                <tr>
+                    <td>
+                        OFFER ID
+                    </td>
+                    <td>
+                        DATE
+                    </td>
+                    <!--     <td>TIME</td> -->
+                    <td>
+                        COUPON CODE
+                    </td>
+                    <td>
+                        LOCATION
+                    </td>
+                    <td>
+                        PRICE (INR)
+                    </td>
+                    <td>
+                        PAID AMOUNT(INR)
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in vm.History">
+                    <td>
+                        {{item.attributes.offer_id}}
+                    </td>
+                    <td>
+                        {{item.attributes.created_at}}
+                    </td>
+                    <td>
+                        {{item.attributes.coupon_code}}
+                    </td>
+                    <td>
+                        {{item.attributes.place}}
+                    </td>
+                    <td>
+                        {{item.attributes.price}}
+                    </td>
+                    <td>
+                        {{item.attributes.amount_paid_by_buyer}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
 <!-- Get  mobile no for vendor-->
 <div class="overlay" id="get-vendor-mobile-no-popup">
-
     <div class="overlay-content">
-        <div class="row" >
-            <div class="col-md-8 row col-md-offset-2  pad-bot0 pad10 ">
-
+        <div class="row">
+            <div class="col-md-8 row col-md-offset-2 pad-bot0 pad10 ">
                 <div class="row backcls mar-10px text-left">
                     <div class="form-group popupcenter ">
                         <form name="get_coupen" ng-submit="vm.UpdateMobile(mobile)" novalidate="">
@@ -67,12 +117,30 @@
                                 </button>
                             </div>
                         </form>
-
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
 <!-- end get code -->
+<style type="text/css">
+    .search_n{
+
+    display: none;
+  }
+
+footer p
+{
+
+    background: #f7f7f7;
+              margin-top: 200px;
+    
+    width: 100%;
+}
+
+.main-header-partner {
+    text-align: center;
+    opacity: 0;
+}
+</style>
