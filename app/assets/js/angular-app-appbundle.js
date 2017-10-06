@@ -375,13 +375,30 @@ angular.module('signupModule')
                 }
             })
         };
+
+
+
         vm.SeoHelpSocialShare = function(offer_id, type) {
-            var data;
+            
+            var data = {};
             angular.forEach(vm.offers, function(value, key) {
                 if (value.id == offer_id) {
-                    data = value.attributes;
+
+                   data = value.attributes;
+                
                 }
             });
+
+        try {
+            if (type == 'treasure') {
+
+                console.log('hit');
+                console.log(data);
+            
+                return data.treasure_value;
+            }
+
+
             if (type == 'facebook') {
                 Socialshare.share({
                     'provider': 'facebook',
@@ -403,6 +420,12 @@ angular.module('signupModule')
             if (type == 'copy') {
                 return vm.OfferLink(data.seo_url, data.tracking_code.general)
             }
+        }
+        catch(e)
+        {
+            console.log('error');
+        }
+ 
         }
         vm.SocialShareUpdate = function(url, type) {
             LoginService.UpdateSocialShare(url, type, function(result) {})
