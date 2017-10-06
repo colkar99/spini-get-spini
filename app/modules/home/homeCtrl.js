@@ -8,15 +8,14 @@
      * Controller of the app
      */
     angular.module('angular-app').controller('HomeCtrl', Home);
-    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope', '$timeout', 'ngToast'];
+    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope', '$timeout', 'ngToast', 'Socialshare'];
     /*
      * recommend
      * Using function declarations
      * and bindable members up top.
      */
-    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _, $scope, $timeout, ngToast) {
+    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _, $scope, $timeout, ngToast, Socialshare) {
         /*jshint validthis: true */
-
         var vm = this;
         vm.offer_id;
         window.loginRole = 'refferal';
@@ -43,13 +42,11 @@
                     loginAuth.email = vm.Vendor.email;
                     loginAuth.password = vm.Vendor.password;
                     LoginService.VendorAuth(loginAuth, function(result) {
-                        
-                        if(result)
-                        {
-                 document.getElementById("login-popup").style.width = "0%";
-                    document.getElementById("login-signup").style.width = "0%";
-                      document.getElementById("vendor-popup").style.width = "0%";
-                    $location.path('redeemcoupon');
+                        if (result) {
+                            document.getElementById("login-popup").style.width = "0%";
+                            document.getElementById("login-signup").style.width = "0%";
+                            document.getElementById("vendor-popup").style.width = "0%";
+                            $location.path('redeemcoupon');
                         }
                     })
                 }
@@ -62,63 +59,75 @@
         vm.closeVendorRegister = function() {
             document.getElementById("vendor-popup").style.width = "0%";
         }
-
-        vm.VendorLogin = function()
-        {
-
-
-                    var loginAuth = {};
-                    loginAuth.email = vm.Vendor.email;
-                    loginAuth.password = vm.Vendor.password;
-                    LoginService.VendorAuth(loginAuth, function(result) {
-                        
-                        if(result)
-                        {
-                 document.getElementById("login-popup").style.width = "0%";
+        vm.VendorLogin = function() {
+            var loginAuth = {};
+            loginAuth.email = vm.Vendor.email;
+            loginAuth.password = vm.Vendor.password;
+            LoginService.VendorAuth(loginAuth, function(result) {
+                if (result) {
+                    document.getElementById("login-popup").style.width = "0%";
                     document.getElementById("login-signup").style.width = "0%";
-                      document.getElementById("vendor-popup").style.width = "0%";
-                      document.getElementById("vendor-popup-login").style.width = "0%";
+                    document.getElementById("vendor-popup").style.width = "0%";
+                    document.getElementById("vendor-popup-login").style.width = "0%";
                     $location.path('redeemcoupon');
-                        }
-                    })
-                
-
-
+                }
+            })
         };
-
-
-
-        vm.SocialShareUpdate = function(url,type)
-        {
-
-                    LoginService.UpdateSocialShare(url,type, function(result) {
-                        
-              
-                    })
-                
-
-        };
-
-        vm.SetCookie = function()
-        {
-            if($location.search().tracking_id)
-            {
-                LoginService.SetTrackingCode($location.search().tracking_id);
+        vm.SeoHelpSocialShare = function(offer_id, type) {
+            var data;
+            angular.forEach(vm.offers, function(value, key) {
+                if (value.id == offer_id) {
+                    data = value.attributes;
+                }
+            });
+            if (type == 'facebook') {
+                Socialshare.share({
+                    'provider': 'facebook',
+                    'attrs': {
+                        'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.facebook)
+                    }
+                });
+                LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
+            }
+            if (type == 'twitter') {
+                Socialshare.share({
+                    'provider': 'twitter',
+                    'attrs': {
+                        'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.general)
+                    }
+                });
+                LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
+            }
+            if (type == 'copy') {
+                return vm.OfferLink(data.seo_url, data.tracking_code.general)
             }
         }
+        vm.SocialShareUpdate = function(url, type) {
+            LoginService.UpdateSocialShare(url, type, function(result) {})
+        };
+        vm.SetCookie = function() {
+
+            var track = {};
+            window.location.search.replace(/\?/,'').split('&').map(function(o){ track[o.split('=')[0]]= o.split('=')[1]});
 
 
+            if (track) {
+                if(track.tracking_id)
+                {
+                LoginService.SetTrackingCode(track.tracking_id);
+                }
+            }
+
+
+        }
         vm.SetCookie();
-
         vm.VendorLoginPopup = function() {
-  document.getElementById("vendor-popup").style.width = "0%";
+            document.getElementById("vendor-popup").style.width = "0%";
             document.getElementById("vendor-popup-login").style.width = "100%";
         }
         vm.closeVendorLoginPopup = function() {
             document.getElementById("vendor-popup-login").style.width = "0%";
         }
-
-
         vm.openLoginPopup = function(data, id) {
             document.getElementById("login-popup").style.width = "100%";
             console.log(id)
@@ -274,8 +283,8 @@
                 });
             }, 0)
         }
-        vm.OfferLink = function(offer,tracking_id) {
-            return 'https://www.spini.co/offers/' + offer + '/?tracking_id='+tracking_id;
+        vm.OfferLink = function(offer, tracking_id) {
+            return 'https://www.spini.co/offers/' + offer + '/?tracking_id=' + tracking_id;
         }
         vm.mobile = function() {
             return vm.mobile_no;

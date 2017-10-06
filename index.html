@@ -142,7 +142,7 @@
           <div class="offer-share" style="    margin: 0px;
     padding: 0px;
     padding-top: 10px;">
-            <label>SHARE & EARN</label>
+            <label >SHARE & EARN {{vm.SeoHelpSocialShare(offer.id,'copy')}}</label>
                        <ul ng-show=" {{offer.attributes.treasure_value}}">
                                             <li class="offer-share-max">
                                                 <a ngclipboard data-clipboard-text="{{vm.OfferLink(offer.attributes.seo_url,offer.attributes.tracking_code.general)}}" ngclipboard-success="vm.onCopySuccess(e);">
