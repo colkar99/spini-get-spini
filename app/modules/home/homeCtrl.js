@@ -8,16 +8,18 @@
      * Controller of the app
      */
     angular.module('angular-app').controller('HomeCtrl', Home);
-    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope', '$timeout', 'ngToast', 'Socialshare'];
+    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope', '$timeout', 'ngToast', 'Socialshare', '$anchorScroll', '$rootScope'];
     /*
      * recommend
      * Using function declarations
      * and bindable members up top.
      */
-    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _, $scope, $timeout, ngToast, Socialshare) {
+    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _, $scope, $timeout, ngToast, Socialshare, $anchorScroll, $rootScope) {
         /*jshint validthis: true */
         var vm = this;
         vm.offer_id;
+        vm.gridlength = 9;
+        vm.gridShow = true;
         window.loginRole = 'refferal';
         $scope.filter_items = new Array();
         vm.compaigns = [];
@@ -73,73 +75,55 @@
                 }
             })
         };
-
-
-
         vm.SeoHelpSocialShare = function(offer_id, type) {
-            
             var data = {};
             angular.forEach(vm.offers, function(value, key) {
                 if (value.id == offer_id) {
-
-                   data = value.attributes;
-                
+                    data = value.attributes;
                 }
             });
-
-        try {
-            if (type == 'treasure') {
-
-      
-                return data.treasure_value;
+            try {
+                if (type == 'treasure') {
+                    return data.treasure_value;
+                }
+                if (type == 'facebook') {
+                    Socialshare.share({
+                        'provider': 'facebook',
+                        'attrs': {
+                            'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.facebook)
+                        }
+                    });
+                    LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
+                }
+                if (type == 'twitter') {
+                    Socialshare.share({
+                        'provider': 'twitter',
+                        'attrs': {
+                            'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.twitter)
+                        }
+                    });
+                    LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
+                }
+                if (type == 'copy') {
+                    return vm.OfferLink(data.seo_url, data.tracking_code.general)
+                }
+            } catch (e) {
+                console.log('error');
             }
-
-
-            if (type == 'facebook') {
-                Socialshare.share({
-                    'provider': 'facebook',
-                    'attrs': {
-                        'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.facebook)
-                    }
-                });
-                LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
-            }
-            if (type == 'twitter') {
-                Socialshare.share({
-                    'provider': 'twitter',
-                    'attrs': {
-                        'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.general)
-                    }
-                });
-                LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
-            }
-            if (type == 'copy') {
-                return vm.OfferLink(data.seo_url, data.tracking_code.general)
-            }
-        }
-        catch(e)
-        {
-            console.log('error');
-        }
- 
         }
         vm.SocialShareUpdate = function(url, type) {
             LoginService.UpdateSocialShare(url, type, function(result) {})
         };
         vm.SetCookie = function() {
-
             var track = {};
-            window.location.search.replace(/\?/,'').split('&').map(function(o){ track[o.split('=')[0]]= o.split('=')[1]});
-
-
+            window.location.search.replace(/\?/, '').split('&').map(function(o) {
+                track[o.split('=')[0]] = o.split('=')[1]
+            });
             if (track) {
-                if(track.tracking_id)
-                {
-                LoginService.SetTrackingCode(track.tracking_id);
+                if (track.tracking_id) {
+                    LoginService.SetTrackingCode(track.tracking_id);
                 }
             }
-
-
         }
         vm.SetCookie();
         vm.VendorLoginPopup = function() {
@@ -242,6 +226,46 @@
                     vm.overall_compaigns = vm.compaigns;
                 }
             });
+            vm.gridlength = 9;
+            vm.gridShow = true;
+        }
+        vm.gotoBottom = function() {
+            //document.getElementById('Gridbottom').scrollIntoView(true);
+            $('html,body').animate({
+                scrollTop: $("#Gridbottom").offset().top
+            }, 'slow');
+            //$location.hash('Gridbottom');
+            // $anchorScroll();
+        };
+        $scope.$on("SearchComplete", function(event, args) {
+            var response = args.authData.data.data;
+            $scope.filter_items.push(response);
+            vm.offers = [];
+            vm.compaigns = [];
+            vm.offers = response;
+            vm.compaigns = _.uniqBy(response, function(e) {
+                return e.attributes.campaign_id;
+            });
+            vm.overall_compaigns = vm.compaigns;
+            vm.gridlength = 0;
+            vm.gridShow = false;
+        });
+        vm.searchBox = function(txt) {
+            $http.get(apiBaseURL + '/home/offers?search=' + txt).then(function(response) {
+                if (response) {
+                    $rootScope.$broadcast("SearchComplete", {
+                        "authData": response
+                    });
+                }
+            });
+        }
+        vm.categories = [];
+        vm.getCategories = function() {
+            $http.get(apiBaseURL + 'home/categories').then(function(response) {
+                if (response) {
+                    vm.categories = response.data.data;
+                }
+            });
         }
         vm.open = false;
         vm.isReferral = LoginService.isReferral;
@@ -342,6 +366,21 @@
                 $scope.myWelcome = response.statusText;
             });
         }
+        vm.filter_by_cat = function(id) {
+            vm.filter_items = vm.overall_compaigns;
+            vm.compaigns = [];
+            for (var i = 0; i <= vm.filter_items.length; i++) {
+                if (vm.filter_items[i]) {
+                    if (vm.filter_items[i].attributes.offer_category_id == id) {
+                        vm.compaigns.push(vm.filter_items[i]);
+                        console.log(vm.compaigns);
+                    }
+                }
+            }
+            vm.gridlength = 1;
+            vm.gridShow = false;
+            return vm.compaigns;
+        };
         vm.filter_by_food = function(some) {
             vm.filter_items = some;
             vm.compaigns = [];

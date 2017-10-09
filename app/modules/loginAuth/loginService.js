@@ -21,6 +21,7 @@
         service.VendorAuth = VendorAuth;
         service.authToken = authToken;
         service.VendorCreate = VendorCreate;
+        service.offersClickTrack = offersClickTrack;
         service.getProfileInfo = getProfileInfo;
         service.UpdateSocialShare = UpdateSocialShare;
         service.TrackingCode = TrackingCode;
@@ -45,24 +46,16 @@
             return false;
         }
 
-
         function TrackingCode() {
             if ($cookies.get('TrackingCode')) {
-
                 return $cookies.get('TrackingCode');
-
-    
             }
             return null;
         }
 
-
-
         function SetTrackingCode(code) {
-            $cookies.put('TrackingCode',code);
+            $cookies.put('TrackingCode', code);
         }
-
-
 
         function authToken() {
             if ($cookies.get('token')) {
@@ -84,16 +77,10 @@
             });
         }
 
-
-
-        function VendorCreate(vendor,callback) {
-
-
-            $http.post(apiBaseURL + '/registration',
-                {
-                    "registration": vendor
-
-                }).then(function(response) {
+        function VendorCreate(vendor, callback) {
+            $http.post(apiBaseURL + '/registration', {
+                "registration": vendor
+            }).then(function(response) {
                 var response = response.data.data;
                 // login successful if there's a token in the response
                 if (response.attributes) {
@@ -103,27 +90,19 @@
                     callback(false);
                 }
             });
-
         }
 
-
-        function VendorAuth(loginAuth,callback) {
-
-
-            $http.post(apiBaseURL + '/user_token',
-                {
-                    "auth": loginAuth
-
-                }).then(function(response) {
-
-                    console.log(response);
-
-                 var response = response.data;
+        function VendorAuth(loginAuth, callback) {
+            $http.post(apiBaseURL + '/user_token', {
+                "auth": loginAuth
+            }).then(function(response) {
+                console.log(response);
+                var response = response.data;
                 // login successful if there's a token in the response
                 if (response.jwt) {
                     // store username and token in cookies storage to keep user logged in between page refreshes
                     $cookies.put('role', 'vendor');
-                   // $cookies.put('name', response.name);
+                    // $cookies.put('name', response.name);
                     $cookies.put('token', response.jwt);
                     if (response.mobile) {
                         $cookies.put('mobile', response.mobile);
@@ -131,30 +110,20 @@
                     // add jwt token to auth header for all requests made by the $http service
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.jwt;
                     // execute callback with true to indicate successful login
-
                     callback(true);
                 } else {
                     // execute callback with false to indicate failed login
                     callback(false);
                 }
-
-
             });
-
         }
 
-
-
-
-        function UpdateSocialShare(url,data,callback) {
-
- 
-
-            $http.put(apiBaseURL + '/home/offers/'+url+'/share',
-            {
-                "share" : {"social_media": data}
-            }
-                ).then(function(response) {
+        function UpdateSocialShare(url, data, callback) {
+            $http.put(apiBaseURL + '/home/offers/' + url + '/share', {
+                "share": {
+                    "social_media": data
+                }
+            }).then(function(response) {
                 var response = response.data.data;
                 // login successful if there's a token in the response
                 if (response.attributes) {
@@ -166,8 +135,26 @@
             });
         }
 
+        function offersClickTrack(offer_id, callback) {
+            $http.put(apiBaseURL + 'offer_clicks', {
+                "offer_click": {
+                    "offer_id": offer_id,
+                    "ip_address": document.getElementById("ip").value,
+                    "tracking_code": this.TrackingCode()
+                }
+            }).then(function(response) {
+                var response = response.data.data;
+                // login successful if there's a token in the response
+                if (response.attributes) {
+                    callback(true);
+                } else {
+                    // execute callback with false to indicate failed login
+                    callback(false);
+                }
+            });
+        }
 
-      function getVendorProfileInfo(callback) {
+        function getVendorProfileInfo(callback) {
             $http.get(apiBaseURL + '/profile').then(function(response) {
                 var response = response.data.data;
                 // login successful if there's a token in the response
@@ -194,9 +181,7 @@
         }
 
         function Login(auth, callback) {
-
             auth.tracking_code = this.TrackingCode();
-
             $http.post(apiBaseURL + '/facebook_user_token', {
                 auth: auth
             }).then(function(response) {
@@ -289,9 +274,8 @@
                         });
                     } else if (response.status === 'not_authorized') {} else {}
                 }, {
-                    scope: 'email' // to make sure the email access from fb
+                    scope: 'email,public_profile' // to make sure the email access from fb
                 });
-  
             },
             facebookLogin: function() {
                 var _self = this;
@@ -311,9 +295,8 @@
                         // the user isn't logged in to Facebook.
                     }
                 }, {
-                    scope: 'email' // to make sure the email access from fb
+                    scope: 'email,public_profile' // to make sure the email access from fb
                 });
-               
             }
         };
     };

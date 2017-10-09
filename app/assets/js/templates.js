@@ -616,7 +616,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('app/modules/layouts/nav-bar/navbar-tpl.html',
     "<!-- header section -->\n" +
-    "<header ng-controller=\"HomeCtrl as menu\" >\n" +
+    "<header  >\n" +
     "  <div class=\"container\">\n" +
     "    <div class=\"row main-header\">\n" +
     "      <div class=\"col-md-2 main-header-logo\">\n" +
@@ -625,12 +625,15 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "        </a>\n" +
     "      </div>\n" +
     "      <div class=\"col-md-6 main-header-search\">\n" +
-    "        <input type=\"text\" placeholder=\"Search Offers\" class=\"search_n\">\n" +
-    "        <button class=\"search_n\"></button>\n" +
+    "        <input type=\"text\" placeholder=\"Search Offers\" ng-model=\"vm.search_txt\" class=\"search_n\">\n" +
+    "\n" +
+    "        <button class=\"search_n\" ng-click=\"vm.searchBox(vm.search_txt)\"></button>\n" +
     "      </div>\n" +
     "   <!--    <div class=\"col-md-2 main-header-partner\" ng-hide=\"menu.isVendor()\">\n" +
     "        <button ng-click=\"menu.signupPOP('vendor');\">Become our partner</button>\n" +
     "      </div> -->\n" +
+    "<span ng-controller=\"HomeCtrl as menu\">\n" +
+    "  \n" +
     "\n" +
     "         <div class=\"col-md-2 main-header-partner\" ng-hide=\"menu.isVendor() || menu.isReferral()\">\n" +
     "        <button ng-click=\"menu.VendorContactUs();\">Become our partner</button>\n" +
@@ -677,6 +680,8 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "    </div>\n" +
     "  </div>\n" +
+    "\n" +
+    "</span>\n" +
     "  <hr>\n" +
     "</header>\n" +
     "<style type=\"text/css\">\n" +

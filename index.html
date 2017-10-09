@@ -34,15 +34,23 @@
     <div class="container">
       <div class="col-md-10">
         <nav class="main-header-navigation">
-          <ul>
-            <li class="main-nav-education"><a href="#" ng-click="vm.getOffers()">All</a></li>
-            <li class="main-nav-food" ><a href="#" ng-click="vm.filter_by_food(vm.overall_compaigns)" >Food</a></li>
-            <!-- <li class="main-nav-education"><a href="#" >Education</a></li> -->
-            <li class="main-nav-beauty"><a href="#" ng-click="vm.filter_by_beauty(vm.overall_compaigns)">Beauty</a></li>
-            <li class="main-nav-travel"><a href="#">Travel</a></li>
-            <li class="main-nav-personal_needs"><a href="#" ng-click="vm.filter_by_personal_need(vm.overall_compaigns)">Personal needs</a></li>
-            <li class="main-nav-gadgets"><a href="#">Gadgets</a></li>
-            <li class="main-nav-clothing"><a href="#">Clothing</a></li>
+          <ul ng-init="vm.getCategories()">
+
+            <li class="main-nav-education"  ng-click="vm.getOffers(); vm.gotoBottom();">
+
+              <a >All</a>
+
+            </li>
+
+            <li  ng-repeat="(key, value) in vm.categories" ng-click="vm.filter_by_cat(value.id); vm.gotoBottom();" class="main-nav-education">
+
+                <a  >{{value.attributes.name}}</a>
+
+              </li>
+
+
+         
+
           </ul>
         </nav>
       </div>
@@ -115,7 +123,7 @@
 </section>
 
 
-<section class="offers-grid" ng-init="vm.getOffers()">
+<section class="offers-grid" ng-init="vm.getOffers()" id="Gridbottom">
   <div class="container">
     <div class="col-md-4" ng-repeat="offer in vm.compaigns track by $index ">
       <div class="offer-container">
@@ -248,7 +256,10 @@ socialshare-hashtags="{offer.attributes.seo_keywords}}"
 
 
 
+
+
 	<footer class="tfooter"><p>© 2017 All Rights Reserved</p></footer>
+
 
 
 <!-- injector:js -->

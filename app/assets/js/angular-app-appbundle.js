@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-10-06. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-10-07. 
 * @author Kathik
 */
 (function() {
@@ -310,16 +310,18 @@ angular.module('signupModule')
      * Controller of the app
      */
     angular.module('angular-app').controller('HomeCtrl', Home);
-    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope', '$timeout', 'ngToast', 'Socialshare'];
+    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope', '$timeout', 'ngToast', 'Socialshare','$anchorScroll',];
     /*
      * recommend
      * Using function declarations
      * and bindable members up top.
      */
-    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _, $scope, $timeout, ngToast, Socialshare) {
+    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _, $scope, $timeout, ngToast, Socialshare,$anchorScroll) {
         /*jshint validthis: true */
         var vm = this;
         vm.offer_id;
+        vm.gridlength = 9;
+        vm.gridShow = true;
         window.loginRole = 'refferal';
         $scope.filter_items = new Array();
         vm.compaigns = [];
@@ -410,7 +412,7 @@ angular.module('signupModule')
                 Socialshare.share({
                     'provider': 'twitter',
                     'attrs': {
-                        'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.general)
+                        'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.twitter)
                     }
                 });
                 LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
@@ -544,7 +546,76 @@ angular.module('signupModule')
                     vm.overall_compaigns = vm.compaigns;
                 }
             });
+
+        vm.gridlength = 9;
+        vm.gridShow = true;
         }
+
+
+    vm.gotoBottom = function() {
+
+
+
+//document.getElementById('Gridbottom').scrollIntoView(true);
+
+
+
+    $('html,body').animate({scrollTop: $("#Gridbottom").offset().top},'slow');
+
+       //$location.hash('Gridbottom');
+
+      // $anchorScroll();
+    };
+
+
+        vm.searchBox = function(txt) {
+
+
+            $http.get(apiBaseURL + '/home/offers?search='+txt).then(function(response) {
+                if (response) {
+                    var response = response.data.data;
+
+                    $scope.filter_items.push(response);
+                    
+                    vm.offers = [];
+                    
+                    vm.compaigns = [];
+                    
+                    vm.offers = response;
+                    
+                    
+                    vm.compaigns = _.uniqBy(response, function(e) {
+                        return e.attributes.campaign_id;
+                    });
+
+
+                    vm.overall_compaigns = vm.compaigns;
+                    
+                }
+            });
+                  vm.gridlength = 1;
+        vm.gridShow = false;
+
+
+        }
+
+
+
+
+        vm.categories = [];
+
+        vm.getCategories = function() {
+            $http.get(apiBaseURL + 'home/categories').then(function(response) {
+                
+                if (response) {
+                    vm.categories = response.data.data;
+
+                    
+                }
+            });
+        }
+
+
         vm.open = false;
         vm.isReferral = LoginService.isReferral;
         vm.isVendor = LoginService.isVendor;
@@ -644,6 +715,38 @@ angular.module('signupModule')
                 $scope.myWelcome = response.statusText;
             });
         }
+
+
+        vm.filter_by_cat = function(id) {
+            vm.filter_items = vm.overall_compaigns;
+            
+            vm.compaigns = [];
+
+            for (var i = 0; i <= vm.filter_items.length; i++) {
+
+                if(vm.filter_items[i])
+                {
+
+                if (vm.filter_items[i].attributes.offer_category_id == id) {
+
+                    vm.compaigns.push(vm.filter_items[i]);
+                    
+                    console.log(vm.compaigns);
+             
+                   }
+                }
+
+            }
+
+        
+
+        vm.gridlength = 1;
+        vm.gridShow = false;
+
+            return vm.compaigns;
+        };
+
+
         vm.filter_by_food = function(some) {
             vm.filter_items = some;
             vm.compaigns = [];
@@ -1476,7 +1579,7 @@ LodashFactory.$inject = ['$window'];
                         });
                     } else if (response.status === 'not_authorized') {} else {}
                 }, {
-                    scope: 'email' // to make sure the email access from fb
+                    scope: 'email,public_profile' // to make sure the email access from fb
                 });
   
             },
@@ -1498,7 +1601,7 @@ LodashFactory.$inject = ['$window'];
                         // the user isn't logged in to Facebook.
                     }
                 }, {
-                    scope: 'email' // to make sure the email access from fb
+                    scope: 'email,public_profile' // to make sure the email access from fb
                 });
                
             }

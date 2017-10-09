@@ -1,5 +1,5 @@
 <!-- header section -->
-<header ng-controller="HomeCtrl as menu" >
+<header  >
   <div class="container">
     <div class="row main-header">
       <div class="col-md-2 main-header-logo">
@@ -8,12 +8,15 @@
         </a>
       </div>
       <div class="col-md-6 main-header-search">
-        <input type="text" placeholder="Search Offers" class="search_n">
-        <button class="search_n"></button>
+        <input type="text" placeholder="Search Offers" ng-model="vm.search_txt" class="search_n">
+
+        <button class="search_n" ng-click="vm.searchBox(vm.search_txt)"></button>
       </div>
    <!--    <div class="col-md-2 main-header-partner" ng-hide="menu.isVendor()">
         <button ng-click="menu.signupPOP('vendor');">Become our partner</button>
       </div> -->
+<span ng-controller="HomeCtrl as menu">
+  
 
          <div class="col-md-2 main-header-partner" ng-hide="menu.isVendor() || menu.isReferral()">
         <button ng-click="menu.VendorContactUs();">Become our partner</button>
@@ -60,6 +63,8 @@
 
     </div>
   </div>
+
+</span>
   <hr>
 </header>
 <style type="text/css">
