@@ -22,6 +22,7 @@
         service.authToken = authToken;
         service.VendorCreate = VendorCreate;
         service.offersClickTrack = offersClickTrack;
+        service.offersViewTrack = offersViewTrack;
         service.getProfileInfo = getProfileInfo;
         service.UpdateSocialShare = UpdateSocialShare;
         service.TrackingCode = TrackingCode;
@@ -119,7 +120,7 @@
         }
 
         function UpdateSocialShare(url, data, callback) {
-            $http.put(apiBaseURL + '/home/offers/' + url + '/share', {
+            $http.post(apiBaseURL + '/home/offers/' + url + '/share', {
                 "share": {
                     "social_media": data
                 }
@@ -136,7 +137,14 @@
         }
 
         function offersClickTrack(offer_id, callback) {
-            $http.put(apiBaseURL + 'offer_clicks', {
+
+            var temp_cookie = 'OfferClickcode_' + offer_id;
+            if ($cookies.get(temp_cookie)) {
+                return;
+            }
+
+
+            $http.post(apiBaseURL + 'offer_clicks', {
                 "offer_click": {
                     "offer_id": offer_id,
                     "ip_address": document.getElementById("ip").value,
@@ -144,6 +152,33 @@
                 }
             }).then(function(response) {
                 var response = response.data.data;
+                // login successful if there's a token in the response
+                if (response.attributes) {
+
+                     $cookies.put(temp_cookie, temp_cookie);
+                    callback(true);
+                } else {
+                    // execute callback with false to indicate failed login
+                    callback(false);
+                }
+            });
+        }
+
+        function offersViewTrack(callback) {
+            var temp_cookie = 'code_' + document.getElementById("offer_id").value;
+            if ($cookies.get(temp_cookie)) {
+                return;
+            }
+            $http.put(apiBaseURL + 'page_visits', {
+                "page_visit": {
+                    "url": window.location.href.replace('#!/', ''),
+                    "offer_id": document.getElementById("offer_id").value,
+                    "ip_address": document.getElementById("ip").value,
+                    "tracking_code": document.getElementById("tracking_code").value
+                }
+            }).then(function(response) {
+                var response = response.data.data;
+                $cookies.put(temp_cookie, temp_cookie);
                 // login successful if there's a token in the response
                 if (response.attributes) {
                     callback(true);
@@ -179,6 +214,8 @@
                 }
             });
         }
+
+        function checkOfferCookie(auth, callback) {}
 
         function Login(auth, callback) {
             auth.tracking_code = this.TrackingCode();

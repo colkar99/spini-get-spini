@@ -119,7 +119,6 @@ header hr {
 }
 
 .main-header-signin {
-    
     text-align: right;
     cursor: pointer;
 }
@@ -453,7 +452,6 @@ header hr {
 }
 
 .coupon-redeem-entry input {
-
     width: 100%;
     margin-bottom: 20px;
     padding: 12px 50px;
@@ -466,7 +464,6 @@ header hr {
     background-size: 14px;
     background-position: 18px;
     font-weight: 600;
-
 }
 
 .price-entry {
@@ -534,7 +531,7 @@ header hr {
     background-color: rgb(0, 0, 0);
     background-color: rgba(208, 197, 197, 0.81);
     overflow-x: hidden;
-   /* transition: 0.5s;*/
+    transition: 0.5s;
 }
 
 .overlay-content {
@@ -1053,7 +1050,7 @@ footer p {
     top: -10px;
     /* - top padding */
     right: 9999px;
-  /*  width: 200px;*/
+    /*  width: 200px;*/
     margin-right: -220px;
     /* width + left/right padding */
     padding: 10px;
@@ -1093,60 +1090,58 @@ footer p {
     opacity: 1;
 }
 
-
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important;
+    display: none !important;
 }
 
-
 .spinner {
-  width: 40px;
-  height: 40px;
-
-  position: relative;
-  margin: 100px auto;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    margin: 100px auto;
 }
 
 .double-bounce1, .double-bounce2 {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: #333;
-  opacity: 0.6;
-  position: absolute;
-  top: 0;
-  left: 0;
-  
-  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
-  animation: sk-bounce 2.0s infinite ease-in-out;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #333;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
 }
 
 .double-bounce2 {
-  -webkit-animation-delay: -1.0s;
-  animation-delay: -1.0s;
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
 }
 
 @-webkit-keyframes sk-bounce {
-  0%, 100% { -webkit-transform: scale(0.0) }
-  50% { -webkit-transform: scale(1.0) }
+    0%, 100% {
+        -webkit-transform: scale(0.0)
+    }
+    50% {
+        -webkit-transform: scale(1.0)
+    }
 }
 
 @keyframes sk-bounce {
-  0%, 100% { 
-    transform: scale(0.0);
-    -webkit-transform: scale(0.0);
-  } 50% { 
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
-  }
+    0%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    }
+    50% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
 }
-
-
 
 .active5 {
     background-color: #7f8c8d;
 }
-
 
 .full {
     background-color: #d35400;
@@ -1161,4 +1156,194 @@ footer p {
     overflow: hidden;
     -webkit-transition: background-color 0.6s ease-in-out 0s;
     transition: background-color 0.6s ease-in-out 0s;
+}
+
+.offersBottom {
+    bottom: 0px !important;
+}
+
+.h1Span {
+    font-size: 47px;
+    padding: 50px;
+    display: block;
+}
+
+
+/* Put your css in here */
+
+a.read-more, a.read-less {
+    cursor: pointer;
+    color: blue;
+}
+
+span.more-text {
+    display: none;
+}
+
+span.more-text.show {
+    display: inline !important
+}
+
+.read a {
+    font-size: 14px;
+    display: inline-block;
+}
+
+.offer-details p {
+    line-height: 24px;
+    min-height: 72px;
+}
+
+
+/* responsive fixs */
+
+.main-header-navigation ul li {
+    padding: 10px 15px;
+}
+
+.main-header-navigation ul li a {
+    padding: 0px;
+}
+
+
+/* Custom, iPhone Retina */
+
+@media(max-width:320px) {}
+
+@media only screen and (min-width: 320px) {}
+
+
+/* Extra Small Devices, Phones */
+
+@media only screen and (min-width: 480px) {}
+
+
+/* Small Devices, Tablets */
+
+@media only screen and (min-width: 768px) {}
+
+
+/* Medium Devices, Desktops */
+
+@media only screen and (min-width: 992px) {}
+
+
+/* Large Devices, Wide Screens */
+
+@media only screen and (min-width: 1200px) {}
+
+@media only screen and (max-width: 1200px) {}
+
+@media only screen and (max-width: 979px) {
+    .main-header-logo, .main-header-search {
+        padding-bottom: 15px;
+    }
+    .main-header-search button {
+        width: 55px;
+    }
+    .main-header-search input {
+        width: 80%;
+        background: #f7f7f7;
+    }
+    .main-header-partner {
+        text-align: left;
+        margin-left: 30px;
+    }
+    .manage-account {
+        left: 60%;
+    }
+
+
+}
+
+@media only screen and (max-width: 767px) {
+    .main-header-logo, .main-header-search {
+        padding-bottom: 30px;
+    }
+    .main-header-partner {
+        text-align: left;
+        margin-left: 30px;
+    }
+    .manage-account {
+        left: 60%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .main-header-logo a img {
+        width: 115px;
+    }
+    .main-header {
+        padding: 15px 0;
+    }
+    .main-header-logo, .main-header-search {
+        padding-bottom: 15px;
+    }
+    .main-header-search button {
+        width: 55px;
+    }
+    .main-header-search input {
+        width: 80%;
+        background: #f7f7f7;
+    }
+    .main-header-partner {
+        text-align: left;
+        margin-left: 22px;
+    }
+    .manage-account {
+        left: 15%;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .main-header-logo, .main-header-search {
+        padding-bottom: 10px;
+        margin: 0px;
+        padding: 11px;
+    }
+    .main-header-partner {
+        text-align: left;
+        margin-left: 10px;
+    }
+    .manage-account {
+        left: 4%;
+    }
+    .main-header {
+        padding: 15px 0;
+    }
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+    background: none;
+}
+
+.navbar-toggle {
+    position: relative;
+    float: left;
+    padding: 9px 10px;
+    margin-top: 8px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    background-color: #e83634;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.navbar-toggle .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+    color: #fff;
+    background: white;
+}
+
+.navbar-collapse.in ul li
+{
+    display: block;
 }

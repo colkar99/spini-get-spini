@@ -82,8 +82,8 @@
             document.getElementById("get-vendor-mobile-no-popup").style.width = "100%";
         }
         vm.RedemptionsHistory = function() {
-            $http.get('https://api.spini.co/v1/redemptions?'+vm.business_id).then(function(response) {
-                vm.History = response.data;
+            $http.get('https://api.spini.co/v1/redemptions?business_id='+vm.business_id).then(function(response) {
+                vm.History = response.data.data;
             });
         }
         vm.UpdateMobile = function(mobile) {
@@ -112,13 +112,15 @@
                     if (vm.vendor.businesses.length > 0) {
                         vm.business_id = vm.vendor.businesses[0].id; // select first items
                     }
+
+                     vm.RedemptionsHistory();
                 }
                 // vm.vendor.mobile = null;
                 if (!vm.vendor.mobile) {
                     vm.openPopup();
                 }
             });
-            vm.RedemptionsHistory();
+           
             // LoginService.getVendorDataList(function(data) {
             //     vm.vendorDataList = data;
             // });

@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-10-07. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-10-09. 
 * @author Kathik
 */
 (function() {
@@ -309,14 +309,31 @@ angular.module('signupModule')
      * # HomeCtrl
      * Controller of the app
      */
-    angular.module('angular-app').controller('HomeCtrl', Home);
-    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope', '$timeout', 'ngToast', 'Socialshare','$anchorScroll',];
+    angular.module('angular-app')
+
+.directive('ngEnter', function() {
+        return function(scope, element, attrs) {
+            element.bind("keydown keypress", function(event) {
+                if(event.which === 13) {
+                        scope.$apply(function(){
+                                scope.$eval(attrs.ngEnter);
+                        });
+                        
+                        event.preventDefault();
+                }
+            });
+        };
+})
+
+
+    .controller('HomeCtrl', Home);
+    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope', '$timeout', 'ngToast', 'Socialshare', '$anchorScroll', '$rootScope'];
     /*
      * recommend
      * Using function declarations
      * and bindable members up top.
      */
-    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _, $scope, $timeout, ngToast, Socialshare,$anchorScroll) {
+    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _, $scope, $timeout, ngToast, Socialshare, $anchorScroll, $rootScope) {
         /*jshint validthis: true */
         var vm = this;
         vm.offer_id;
@@ -377,73 +394,55 @@ angular.module('signupModule')
                 }
             })
         };
-
-
-
         vm.SeoHelpSocialShare = function(offer_id, type) {
-            
             var data = {};
             angular.forEach(vm.offers, function(value, key) {
                 if (value.id == offer_id) {
-
-                   data = value.attributes;
-                
+                    data = value.attributes;
                 }
             });
-
-        try {
-            if (type == 'treasure') {
-
-      
-                return data.treasure_value;
+            try {
+                if (type == 'treasure') {
+                    return data.treasure_value;
+                }
+                if (type == 'facebook') {
+                    Socialshare.share({
+                        'provider': 'facebook',
+                        'attrs': {
+                            'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.facebook)
+                        }
+                    });
+                    LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
+                }
+                if (type == 'twitter') {
+                    Socialshare.share({
+                        'provider': 'twitter',
+                        'attrs': {
+                            'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.twitter)
+                        }
+                    });
+                    LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
+                }
+                if (type == 'copy') {
+                    return vm.OfferLink(data.seo_url, data.tracking_code.general)
+                }
+            } catch (e) {
+                console.log('error');
             }
-
-
-            if (type == 'facebook') {
-                Socialshare.share({
-                    'provider': 'facebook',
-                    'attrs': {
-                        'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.facebook)
-                    }
-                });
-                LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
-            }
-            if (type == 'twitter') {
-                Socialshare.share({
-                    'provider': 'twitter',
-                    'attrs': {
-                        'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.twitter)
-                    }
-                });
-                LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
-            }
-            if (type == 'copy') {
-                return vm.OfferLink(data.seo_url, data.tracking_code.general)
-            }
-        }
-        catch(e)
-        {
-            console.log('error');
-        }
- 
         }
         vm.SocialShareUpdate = function(url, type) {
             LoginService.UpdateSocialShare(url, type, function(result) {})
         };
         vm.SetCookie = function() {
-
             var track = {};
-            window.location.search.replace(/\?/,'').split('&').map(function(o){ track[o.split('=')[0]]= o.split('=')[1]});
-
-
+            window.location.search.replace(/\?/, '').split('&').map(function(o) {
+                track[o.split('=')[0]] = o.split('=')[1]
+            });
             if (track) {
-                if(track.tracking_id)
-                {
-                LoginService.SetTrackingCode(track.tracking_id);
+                if (track.tracking_id) {
+                    LoginService.SetTrackingCode(track.tracking_id);
                 }
             }
-
-
         }
         vm.SetCookie();
         vm.VendorLoginPopup = function() {
@@ -546,76 +545,49 @@ angular.module('signupModule')
                     vm.overall_compaigns = vm.compaigns;
                 }
             });
-
-        vm.gridlength = 9;
-        vm.gridShow = true;
+            vm.gridlength = 9;
+            vm.gridShow = true;
         }
+        vm.gotoBottom = function() {
+            //document.getElementById('Gridbottom').scrollIntoView(true);
+            $('html,body').animate({
+                scrollTop: $("#Gridbottom").offset().top
+            }, 'slow');
+            //$location.hash('Gridbottom');
+            // $anchorScroll();
 
-
-    vm.gotoBottom = function() {
-
-
-
-//document.getElementById('Gridbottom').scrollIntoView(true);
-
-
-
-    $('html,body').animate({scrollTop: $("#Gridbottom").offset().top},'slow');
-
-       //$location.hash('Gridbottom');
-
-      // $anchorScroll();
-    };
-
-
+        };
+        $scope.$on("SearchComplete", function(event, args) {
+            var response = args.authData.data.data;
+            $scope.filter_items.push(response);
+            vm.offers = [];
+            vm.compaigns = [];
+            vm.offers = response;
+            vm.compaigns = _.uniqBy(response, function(e) {
+                return e.attributes.campaign_id;
+            });
+            vm.overall_compaigns = vm.compaigns;
+            vm.gridlength = 0;
+            vm.gridShow = false;
+            vm.gotoBottom();
+        });
         vm.searchBox = function(txt) {
-
-
-            $http.get(apiBaseURL + '/home/offers?search='+txt).then(function(response) {
+            $http.get(apiBaseURL + '/home/offers?search=' + txt).then(function(response) {
                 if (response) {
-                    var response = response.data.data;
-
-                    $scope.filter_items.push(response);
-                    
-                    vm.offers = [];
-                    
-                    vm.compaigns = [];
-                    
-                    vm.offers = response;
-                    
-                    
-                    vm.compaigns = _.uniqBy(response, function(e) {
-                        return e.attributes.campaign_id;
+                    $rootScope.$broadcast("SearchComplete", {
+                        "authData": response
                     });
-
-
-                    vm.overall_compaigns = vm.compaigns;
-                    
                 }
             });
-                  vm.gridlength = 1;
-        vm.gridShow = false;
-
-
         }
-
-
-
-
         vm.categories = [];
-
         vm.getCategories = function() {
             $http.get(apiBaseURL + 'home/categories').then(function(response) {
-                
                 if (response) {
                     vm.categories = response.data.data;
-
-                    
                 }
             });
         }
-
-
         vm.open = false;
         vm.isReferral = LoginService.isReferral;
         vm.isVendor = LoginService.isVendor;
@@ -715,38 +687,21 @@ angular.module('signupModule')
                 $scope.myWelcome = response.statusText;
             });
         }
-
-
         vm.filter_by_cat = function(id) {
             vm.filter_items = vm.overall_compaigns;
-            
             vm.compaigns = [];
-
             for (var i = 0; i <= vm.filter_items.length; i++) {
-
-                if(vm.filter_items[i])
-                {
-
-                if (vm.filter_items[i].attributes.offer_category_id == id) {
-
-                    vm.compaigns.push(vm.filter_items[i]);
-                    
-                    console.log(vm.compaigns);
-             
-                   }
+                if (vm.filter_items[i]) {
+                    if (vm.filter_items[i].attributes.offer_category_id == id) {
+                        vm.compaigns.push(vm.filter_items[i]);
+                        console.log(vm.compaigns);
+                    }
                 }
-
             }
-
-        
-
-        vm.gridlength = 1;
-        vm.gridShow = false;
-
+            vm.gridlength = 1;
+            vm.gridShow = false;
             return vm.compaigns;
         };
-
-
         vm.filter_by_food = function(some) {
             vm.filter_items = some;
             vm.compaigns = [];
@@ -1311,6 +1266,7 @@ LodashFactory.$inject = ['$window'];
         service.VendorAuth = VendorAuth;
         service.authToken = authToken;
         service.VendorCreate = VendorCreate;
+        service.offersClickTrack = offersClickTrack;
         service.getProfileInfo = getProfileInfo;
         service.UpdateSocialShare = UpdateSocialShare;
         service.TrackingCode = TrackingCode;
@@ -1335,24 +1291,16 @@ LodashFactory.$inject = ['$window'];
             return false;
         }
 
-
         function TrackingCode() {
             if ($cookies.get('TrackingCode')) {
-
                 return $cookies.get('TrackingCode');
-
-    
             }
             return null;
         }
 
-
-
         function SetTrackingCode(code) {
-            $cookies.put('TrackingCode',code);
+            $cookies.put('TrackingCode', code);
         }
-
-
 
         function authToken() {
             if ($cookies.get('token')) {
@@ -1374,16 +1322,10 @@ LodashFactory.$inject = ['$window'];
             });
         }
 
-
-
-        function VendorCreate(vendor,callback) {
-
-
-            $http.post(apiBaseURL + '/registration',
-                {
-                    "registration": vendor
-
-                }).then(function(response) {
+        function VendorCreate(vendor, callback) {
+            $http.post(apiBaseURL + '/registration', {
+                "registration": vendor
+            }).then(function(response) {
                 var response = response.data.data;
                 // login successful if there's a token in the response
                 if (response.attributes) {
@@ -1393,27 +1335,19 @@ LodashFactory.$inject = ['$window'];
                     callback(false);
                 }
             });
-
         }
 
-
-        function VendorAuth(loginAuth,callback) {
-
-
-            $http.post(apiBaseURL + '/user_token',
-                {
-                    "auth": loginAuth
-
-                }).then(function(response) {
-
-                    console.log(response);
-
-                 var response = response.data;
+        function VendorAuth(loginAuth, callback) {
+            $http.post(apiBaseURL + '/user_token', {
+                "auth": loginAuth
+            }).then(function(response) {
+                console.log(response);
+                var response = response.data;
                 // login successful if there's a token in the response
                 if (response.jwt) {
                     // store username and token in cookies storage to keep user logged in between page refreshes
                     $cookies.put('role', 'vendor');
-                   // $cookies.put('name', response.name);
+                    // $cookies.put('name', response.name);
                     $cookies.put('token', response.jwt);
                     if (response.mobile) {
                         $cookies.put('mobile', response.mobile);
@@ -1421,30 +1355,20 @@ LodashFactory.$inject = ['$window'];
                     // add jwt token to auth header for all requests made by the $http service
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.jwt;
                     // execute callback with true to indicate successful login
-
                     callback(true);
                 } else {
                     // execute callback with false to indicate failed login
                     callback(false);
                 }
-
-
             });
-
         }
 
-
-
-
-        function UpdateSocialShare(url,data,callback) {
-
- 
-
-            $http.put(apiBaseURL + '/home/offers/'+url+'/share',
-            {
-                "share" : {"social_media": data}
-            }
-                ).then(function(response) {
+        function UpdateSocialShare(url, data, callback) {
+            $http.put(apiBaseURL + '/home/offers/' + url + '/share', {
+                "share": {
+                    "social_media": data
+                }
+            }).then(function(response) {
                 var response = response.data.data;
                 // login successful if there's a token in the response
                 if (response.attributes) {
@@ -1456,8 +1380,26 @@ LodashFactory.$inject = ['$window'];
             });
         }
 
+        function offersClickTrack(offer_id, callback) {
+            $http.put(apiBaseURL + 'offer_clicks', {
+                "offer_click": {
+                    "offer_id": offer_id,
+                    "ip_address": document.getElementById("ip").value,
+                    "tracking_code": this.TrackingCode()
+                }
+            }).then(function(response) {
+                var response = response.data.data;
+                // login successful if there's a token in the response
+                if (response.attributes) {
+                    callback(true);
+                } else {
+                    // execute callback with false to indicate failed login
+                    callback(false);
+                }
+            });
+        }
 
-      function getVendorProfileInfo(callback) {
+        function getVendorProfileInfo(callback) {
             $http.get(apiBaseURL + '/profile').then(function(response) {
                 var response = response.data.data;
                 // login successful if there's a token in the response
@@ -1484,9 +1426,7 @@ LodashFactory.$inject = ['$window'];
         }
 
         function Login(auth, callback) {
-
             auth.tracking_code = this.TrackingCode();
-
             $http.post(apiBaseURL + '/facebook_user_token', {
                 auth: auth
             }).then(function(response) {
@@ -1581,7 +1521,6 @@ LodashFactory.$inject = ['$window'];
                 }, {
                     scope: 'email,public_profile' // to make sure the email access from fb
                 });
-  
             },
             facebookLogin: function() {
                 var _self = this;
@@ -1603,7 +1542,6 @@ LodashFactory.$inject = ['$window'];
                 }, {
                     scope: 'email,public_profile' // to make sure the email access from fb
                 });
-               
             }
         };
     };

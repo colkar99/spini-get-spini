@@ -627,7 +627,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "      <div class=\"col-md-6 main-header-search\">\n" +
     "        <input type=\"text\" placeholder=\"Search Offers\" ng-model=\"vm.search_txt\" class=\"search_n\">\n" +
     "\n" +
-    "        <button class=\"search_n\" ng-click=\"vm.searchBox(vm.search_txt)\"></button>\n" +
+    "        <button class=\"search_n\" ng-enter=\"vm.searchBox(vm.search_txt)\" ng-click=\"vm.searchBox(vm.search_txt)\"></button>\n" +
     "      </div>\n" +
     "   <!--    <div class=\"col-md-2 main-header-partner\" ng-hide=\"menu.isVendor()\">\n" +
     "        <button ng-click=\"menu.signupPOP('vendor');\">Become our partner</button>\n" +
@@ -1759,7 +1759,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "            <label class=\"text-muted\"> No of Code Generated</label>\n" +
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
-    "            <label>{{vm.user.coupons_generated.self}}</label>\n" +
+    "            <label>{{vm.user.total_coupon_generated}}</label>\n" +
     "          </div>\n" +
     "\n" +
     "\n" +
@@ -1767,7 +1767,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "            <label class=\"text-muted\"> No of Code Redeemed</label>\n" +
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
-    "            <label>1000</label>\n" +
+    "            <label>{{vm.user.total_offers_redeemed}}</label>\n" +
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
     "            <!-- <button class=\"btn btn-default\"  style=\"border: 1px solid #b6f3d1; color:#b6f3d1;\">Get more offers</button> -->\n" +

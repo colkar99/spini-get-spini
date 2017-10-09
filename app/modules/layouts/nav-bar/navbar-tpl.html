@@ -2,7 +2,7 @@
 <header  >
   <div class="container">
     <div class="row main-header">
-      <div class="col-md-2 main-header-logo">
+      <div class="col-md-2 col-xs-12 col-sm-12 text-center main-header-logo">
         <a href="/">
           <img src="/app/assets/images/header/Logo@2x.png" alt="spini-logo">
         </a>
@@ -10,7 +10,7 @@
       <div class="col-md-6 main-header-search">
         <input type="text" placeholder="Search Offers" ng-model="vm.search_txt" class="search_n">
 
-        <button class="search_n" ng-click="vm.searchBox(vm.search_txt)"></button>
+        <button class="search_n" ng-enter="vm.searchBox(vm.search_txt)" ng-click="vm.searchBox(vm.search_txt)"></button>
       </div>
    <!--    <div class="col-md-2 main-header-partner" ng-hide="menu.isVendor()">
         <button ng-click="menu.signupPOP('vendor');">Become our partner</button>
@@ -18,7 +18,7 @@
 <span ng-controller="HomeCtrl as menu">
   
 
-         <div class="col-md-2 main-header-partner" ng-hide="menu.isVendor() || menu.isReferral()">
+         <div class="col-md-2  col-xs-6 nopad main-header-partner" ng-hide="menu.isVendor() || menu.isReferral()">
         <button ng-click="menu.VendorContactUs();">Become our partner</button>
       </div>
 
@@ -78,7 +78,7 @@
     box-shadow: 0px 0px 6px #888;
     border-radius: 3px;
     top: 50px;
-    left: 70px;
+  /*  left: 70px;*/
   }
   .manage-account i{
     text-align: right;

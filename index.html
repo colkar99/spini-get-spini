@@ -19,10 +19,17 @@
 	<link rel="stylesheet" href="/app/assets/css/style.css">
 	<!-- endinjector -->
 
+
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-toast/2.0.0/ngToast.min.css"/>
 
 </head>
 <body ng-clock>
+
+
+    <input type="hidden" name="ip" id="ip" value="NDkuMjA3LjE4NS4zNg==" />
+
+   
+
 
 	<div ng-include="'app/modules/layouts/nav-bar/navbar.html'"></div>
 	<!--Beginning-->
@@ -32,8 +39,45 @@
 <div>
   <div class="backwhite">
     <div class="container">
-      <div class="col-md-10">
-        <nav class="main-header-navigation">
+      <div class="col-md-10 col-xs-6">
+
+
+
+<nav class="navbar main-header-navigation">
+  <div class="container-fluid nopad">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+     
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav" ng-init="vm.getCategories()">
+    
+            <li  ng-click="vm.getOffers(); vm.gotoBottom();">
+
+              <a >All</a>
+
+            </li>
+
+
+        <li  ng-repeat="(key, value) in vm.categories" ng-click="vm.filter_by_cat(value.id); vm.gotoBottom();" >
+
+                <a  >{{value.name}}</a>
+
+              </li>
+
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <!--       <nav class="main-header-navigation">
           <ul ng-init="vm.getCategories()">
 
             <li class="main-nav-education"  ng-click="vm.getOffers(); vm.gotoBottom();">
@@ -44,17 +88,32 @@
 
             <li  ng-repeat="(key, value) in vm.categories" ng-click="vm.filter_by_cat(value.id); vm.gotoBottom();" class="main-nav-education">
 
-                <a  >{{value.attributes.name}}</a>
+                <a  >{{value.name}}</a>
 
               </li>
 
 
          
 
+
           </ul>
-        </nav>
+
+
+
+
+        </nav> -->
+
+
+  
+
+
+
+
       </div>
-      <div class="col-md-2 main-header-location">
+
+
+
+      <div class="col-md-2 col-xs-6 main-header-location">
         <i class="glyphicon glyphicon-map-marker"></i>
         <div class="dropdown">
           <span class="dropdown-toggle" type="button" data-toggle="dropdown">Chennai
@@ -69,8 +128,13 @@
       </div>
     </div>
   </div>
+
+
+
+
+
 			<!-- slider code -->
-<section class="main-slider">
+<section class="main-slider" ng-show="vm.slider">
   <div class="container">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
@@ -85,19 +149,16 @@
 
         <div class="item active">
 
-          <img src="/app/assets/images/03Banner/cream_fudge.png" alt="Los Angeles" style="width:100%;">
+          <img ng-src="/app/assets/images/03Banner/cream_fudge.png" alt="Los Angeles" style="width:100%;">
         </div>
 
         <div class="item">
-          <img src="/app/assets/images/03Banner/naturals.png" alt="Chicago" style="width:100%;">
+          <img ng-src="/app/assets/images/03Banner/naturals.png" alt="Chicago" style="width:100%;">
         </div>
 
         <div class="item">
-          <img src="/app/assets/images/03Banner/ak.png" alt="New York" style="width:100%;">
-          <!-- <div class="carousel-caption">
-            <h3>New York</h3>
-            <p>We love the Big Apple!</p>
-          </div> -->
+          <img ng-src="/app/assets/images/03Banner/ak.png" alt="New York" style="width:100%;">
+
         </div>
 
       </div>
@@ -116,14 +177,24 @@
 </section>
 
 <!-- how works code -->
-<section class="how-spini-works">
+<section class="how-spini-works" ng-show="vm.how_works" >
   <div class="container">
     <img src="/app/assets/images/04HowSpini/00-Bann-HowSpini-Complete.png">
   </div>
 </section>
 
 
-<section class="offers-grid" ng-init="vm.getOffers()" id="Gridbottom">
+<section ng-if="vm.compaigns.length == 0">
+  <span class="text-center h1Span"> No Offers Found </span>
+</section>
+
+<section 
+
+
+ ng-class="{'offersBottom' : vm.offerClass}"
+
+
+class="offers-grid" ng-init="vm.getOffers()" id="Gridbottom">
   <div class="container">
     <div class="col-md-4" ng-repeat="offer in vm.compaigns track by $index ">
       <div class="offer-container">
@@ -141,10 +212,8 @@
             <b>At - {{offer.attributes.business_name}}</b><span>{{offer.attributes.place}} </span>
           </div>
 
-          <p>
-{{offer.attributes.description | limitTo: 65}}
-{{offer.attributes.description.length > 65 ? '...' : ''}}
-
+          <p>{{offer.attributes.description | limitTo: 140}}
+<!-- {{offer.attributes.description.length > 140 ? '...' : ''}} -->
           </p>
         </span>
           <div class="offer-share" style="    margin: 0px;
@@ -172,7 +241,7 @@
 
                                              >
                                                 <a socialshare 
-                                                socialshare-url="{{vm.OfferLink(offer.attributes.seo_url,offer.attributes.tracking_code.facebook)}}"
+                                                socialshare-url="{{vm.OfferLink(offer.attributes.seo_url,offer.attributes.tracking_code.twitter)}}"
                                                 socialshare-provider="twitter"
 
                                                   ng-click="vm.SocialShareUpdate(offer.attributes.seo_url,'twitter')"
@@ -225,10 +294,17 @@ socialshare-hashtags="{offer.attributes.seo_keywords}}"
                                                 </i> SPINI TREASURE</span>
 
 
-    <span class="hover" ng-show=" {{offer.attributes.treasure_value}}"> <i class="fa fa-gift link-icon fagift">
+    <span class="hover" ng-show=" {{offer.attributes.treasure_value}}"> 
+
+      <i class="fa fa-gift link-icon fagift">
                                                 </i> SPINI TREASURE ₹{{offer.attributes.treasure_value}}!</span>
-    <span class="hover" ng-hide=" {{offer.attributes.treasure_value}}"> <i class="fa fa-gift link-icon fagift">
-                                                </i> Become a refferal to enjoy Treasure!</span>
+    <span class="hover" ng-hide=" {{offer.attributes.treasure_value}}"
+
+ng-click="vm.signupPOP()"
+    >
+
+     <i class="fa fa-gift link-icon fagift">
+        </i> Refer this offer and earn!</span>
   </a>
 
 
@@ -283,9 +359,29 @@ socialshare-hashtags="{offer.attributes.seo_keywords}}"
 <script src="/src/bower_components/angular-timer/dist/angular-timer.js"></script>
 <script src="/app/app.js"></script>
 <script src="/app/app.config.js"></script>
-<script src="/app/assets/js/angular-app-angularbundle.js"></script>
-<script src="/app/assets/js/angular-app-appbundle.js"></script>
-<script src="/app/assets/js/templates.js"></script>
+<script src="/app/modules/home/homeModule.js"></script>
+<script src="/app/modules/loginAuth/loginModule.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponModule.js"></script>
+<script src="/app/modules/refferal_user/refferalModule.js"></script>
+<script src="/app/modules/signup/signupModule.js"></script>
+<script src="/app/modules/home/homeRoute.js"></script>
+<script src="/app/modules/loginAuth/loginRoute.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponRoute.js"></script>
+<script src="/app/modules/refferal_user/refferalRoute.js"></script>
+<script src="/app/modules/signup/signupRoute.js"></script>
+<script src="/app/modules/home/homeCtrl.js"></script>
+<script src="/app/modules/layouts/nav-bar/navBarCtrl.js"></script>
+<script src="/app/modules/loginAuth/loginCtrl.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponCtrl.js"></script>
+<script src="/app/modules/refferal_user/refferalCtrl.js"></script>
+<script src="/app/modules/signup/signupCtrl.js"></script>
+<script src="/app/modules/home/homeService.js"></script>
+<script src="/app/modules/layouts/nav-bar/navbarService.js"></script>
+<script src="/app/modules/loginAuth/loginService.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponService.js"></script>
+<script src="/app/modules/refferal_user/refferalService.js"></script>
+<script src="/app/modules/signup/signupService.js"></script>
+<script src="/app/modules/layouts/nav-bar/navbarDirective.js"></script>
 <!-- endinjector -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/oclazyload/1.1.0/ocLazyLoad.min.js"></script>
 <script src="//use.fontawesome.com/9a830e8669.js"></script>
