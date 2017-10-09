@@ -31,7 +31,9 @@
 		'signupModule',
 		'timer',
 		'720kb.socialshare',
-		'ngclipboard'
+		'ngclipboard',
+		'hm.readmore'
+
 
 	]);
 
@@ -300,6 +302,9 @@ angular.module('signupModule')
 			
 	}]);
 
+"use strict";function readMore(e){function t(e,t,o){function s(){o.debug("setToggleMoreText"),d.toggle.moreText=d.hmMoreText||"Read more"}function n(){o.debug("setToggleLessText"),d.toggle.lessText=d.hmLessText||"Read less"}function m(){o.debug("setCurrentToggleText"),d.toggle.text=d.toggle.state?d.toggle.lessText:d.toggle.moreText}function g(){o.debug("setShowToggle"),d.toggle.show=d.moreText&&d.moreText.length>0}function l(){o.debug("setLinkClass"),d.toggle.linkClass=d.hmLinkClass}function i(){o.debug("setDotsClass"),d.toggle.dotsClass=d.hmDotsClass}function a(){o.debug("validateLimit"),d.hmLimit=d.hmLimit&&d.hmLimit<=0?void 0:d.hmLimit}function h(){return o.debug("getMoreTextLimit"),d.hmLimit&&d.hmLimit<d.hmText.length?d.hmLimit-d.hmText.length:0}function r(){o.debug("setLessAndMoreText"),d.lessText=e("limitTo")(d.hmText,d.hmLimit),d.moreText=e("limitTo")(d.hmText,h())}var d=this;d.toggle={dots:"...",dotsClass:d.hmDotsClass,linkClass:d.hmLinkClass},d.$onInit=function(){o.debug("initialize"),s(),n(),a(),r(),g(),m(),l(),i()},d.doToggle=function(){o.debug("doToggle"),d.toggle.state=!d.toggle.state,d.showMoreText=!d.showMoreText,m()},t.$watch("vm.hmMoreText",function(e,t){e!=t&&(o.debug("hmMoreText changed"),s(),m())}),t.$watch("vm.hmLessText",function(e,t){e!=t&&(o.debug("hmLessText changed"),n(),m())}),t.$watch("vm.hmDotsClass",function(e,t){e!=t&&(o.debug("hmDotsClass changed"),i())}),t.$watch("vm.hmLinkClass",function(e,t){e!=t&&(o.debug("hmLinkClass changed"),l())}),t.$watch("vm.hmText",function(e,t){e!=t&&(o.debug("hmText changed"),a(),r(),g())}),t.$watch("vm.hmLimit",function(e,t){e!=t&&(o.debug("hmLimit changed"),a(),r(),g())})}return t.$inject=["$filter","$scope","$log"],{restrict:"AE",scope:{hmText:"@",hmLimit:"@",hmMoreText:"@",hmLessText:"@",hmDotsClass:"@",hmLinkClass:"@"},template:e.get("readmore.template.html"),controller:t,controllerAs:"vm",bindToController:!0}}readMore.$inject=["$templateCache"],angular.module("hm.readmore",["ngAnimate","ngSanitize"]).directive("hmReadMore",readMore).config(["$logProvider",function(e){e.debugEnabled(!1)}]),angular.module("hm.readmore").run(["$templateCache",function(e){e.put("readmore.template.html",'<span name="text"><span ng-bind-html="vm.lessText" style="white-space:pre-wrap;"></span><span ng-show="vm.showMoreText" class="more-show-hide" ng-bind-html="vm.moreText" style="white-space:pre-wrap;"></span></span><span name="toggle" ng-show="vm.toggle.show"><span ng-class="vm.toggle.dotsClass" ng-show="!vm.toggle.state">{{ vm.toggle.dots }}</span><a ng-class="vm.toggle.linkClass" ng-click="vm.doToggle()">{{ vm.toggle.text }}</a></span>')}]);
+
+
 (function() {
     'use strict';
     /**
@@ -326,6 +331,42 @@ angular.module('signupModule')
 })
 
 
+.directive('onCarouselChange', function($parse) {
+    return {
+        require: '^uibCarousel',
+        link: function(scope, element, attrs, carouselCtrl) {
+            var fn = $parse(attrs.onCarouselChange);
+            var origSelect = carouselCtrl.select;
+            carouselCtrl.select = function(nextSlide, direction, nextIndex) {
+                if (nextSlide !== this.currentSlide) {
+                    fn(scope, {
+                        nextSlide: nextSlide,
+                        direction: direction,
+                        // nextIndex: this.indexOfSlide(nextSlide)
+                    });
+                }
+                return origSelect.apply(this, arguments);
+            };
+        }
+    };
+})
+
+.filter('nl2br', function() {
+    var span = document.createElement('span');
+    return function(input) {
+        if (!input) return input;
+        var lines = input.split('\n');
+
+        for (var i = 0; i < lines.length; i++) {
+            span.innerText = lines[i];
+            span.textContent = lines[i];  //for Firefox
+            lines[i] = span.innerHTML;
+        }
+        return lines.join('<br />');
+    }
+})
+
+
     .controller('HomeCtrl', Home);
     Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope', '$timeout', 'ngToast', 'Socialshare', '$anchorScroll', '$rootScope'];
     /*
@@ -337,6 +378,10 @@ angular.module('signupModule')
         /*jshint validthis: true */
         var vm = this;
         vm.offer_id;
+        vm.slider = true;
+        vm.how_works = true;
+        vm.offerClass = false;
+
         vm.gridlength = 9;
         vm.gridShow = true;
         window.loginRole = 'refferal';
@@ -374,6 +419,26 @@ angular.module('signupModule')
                 console.log(result);
             });
         }
+
+        vm.onSlideChanged = function (nextSlide, direction) { 
+
+
+
+            if( nextSlide.index)
+            {
+
+                console.log(window.SelectedCampOffers);
+                
+                vm.offersClickTrack(window.SelectedCampOffers[nextSlide.index].id)
+            }
+
+
+
+           
+
+             }; 
+
+
         vm.VendorContactUs = function() {
             document.getElementById("vendor-popup").style.width = "100%";
         }
@@ -394,6 +459,20 @@ angular.module('signupModule')
                 }
             })
         };
+
+         vm.offersClickTrack = function(offer_id) {
+
+            LoginService.offersClickTrack(offer_id, function(result) {
+                if (result) {
+                    
+                    console.log('offersClickTrack');
+                }
+            })
+        };
+
+
+
+
         vm.SeoHelpSocialShare = function(offer_id, type) {
             var data = {};
             angular.forEach(vm.offers, function(value, key) {
@@ -459,8 +538,27 @@ angular.module('signupModule')
                 document.getElementById(id).style.width = "0%";
             }
         }
-        vm.getSlidepopup = function(campaign_id) {
-            vm.campaign_id = campaign_id;
+        vm.getSlidepopup = function(campaign_id,is_offer) {
+
+            
+            if(is_offer)
+            {
+
+            angular.forEach(vm.offers, function(value, key) {
+                if (value.id == campaign_id) {
+
+                   vm.campaign_id = value.attributes.campaign_id;
+                   console.log('data');
+                   console.log(value)
+                }   
+            });
+
+            }
+            else
+            {
+                vm.campaign_id = campaign_id;
+            }   
+            
             console.log(campaign_id);
             document.getElementById("offer-popup").style.width = "100%";
             vm.getSelectedCampaignOffers();
@@ -553,6 +651,10 @@ angular.module('signupModule')
             $('html,body').animate({
                 scrollTop: $("#Gridbottom").offset().top
             }, 'slow');
+
+        vm.slider = false;
+        vm.how_works = false;
+        vm.offerClass = true;
             //$location.hash('Gridbottom');
             // $anchorScroll();
 
@@ -579,12 +681,13 @@ angular.module('signupModule')
                     });
                 }
             });
+           
         }
         vm.categories = [];
         vm.getCategories = function() {
-            $http.get(apiBaseURL + 'home/categories').then(function(response) {
+            $http.get(apiBaseURL + 'home/preload_data').then(function(response) {
                 if (response) {
-                    vm.categories = response.data.data;
+                    vm.categories = response.data.categories;
                 }
             });
         }
@@ -631,6 +734,15 @@ angular.module('signupModule')
                     vm.SelectedCampOffers.push(value);
                 }
             });
+
+            // if(vm.SelectedCampOffers)
+            // {
+            //     vm.offersClickTrack(vm.SelectedCampOffers[0].id)
+            // }
+
+            
+
+
             window.SelectedCampOffers = [];
             window.SelectedCampOffers = vm.SelectedCampOffers;
             return vm.SelectedCampOffers;
@@ -958,8 +1070,8 @@ angular.module('signupModule')
             document.getElementById("get-vendor-mobile-no-popup").style.width = "100%";
         }
         vm.RedemptionsHistory = function() {
-            $http.get('https://api.spini.co/v1/redemptions?'+vm.business_id).then(function(response) {
-                vm.History = response.data;
+            $http.get('https://api.spini.co/v1/redemptions?business_id='+vm.business_id).then(function(response) {
+                vm.History = response.data.data;
             });
         }
         vm.UpdateMobile = function(mobile) {
@@ -988,13 +1100,15 @@ angular.module('signupModule')
                     if (vm.vendor.businesses.length > 0) {
                         vm.business_id = vm.vendor.businesses[0].id; // select first items
                     }
+
+                     vm.RedemptionsHistory();
                 }
                 // vm.vendor.mobile = null;
                 if (!vm.vendor.mobile) {
                     vm.openPopup();
                 }
             });
-            vm.RedemptionsHistory();
+           
             // LoginService.getVendorDataList(function(data) {
             //     vm.vendorDataList = data;
             // });
@@ -1267,6 +1381,7 @@ LodashFactory.$inject = ['$window'];
         service.authToken = authToken;
         service.VendorCreate = VendorCreate;
         service.offersClickTrack = offersClickTrack;
+        service.offersViewTrack = offersViewTrack;
         service.getProfileInfo = getProfileInfo;
         service.UpdateSocialShare = UpdateSocialShare;
         service.TrackingCode = TrackingCode;
@@ -1364,7 +1479,7 @@ LodashFactory.$inject = ['$window'];
         }
 
         function UpdateSocialShare(url, data, callback) {
-            $http.put(apiBaseURL + '/home/offers/' + url + '/share', {
+            $http.post(apiBaseURL + '/home/offers/' + url + '/share', {
                 "share": {
                     "social_media": data
                 }
@@ -1381,7 +1496,14 @@ LodashFactory.$inject = ['$window'];
         }
 
         function offersClickTrack(offer_id, callback) {
-            $http.put(apiBaseURL + 'offer_clicks', {
+
+            var temp_cookie = 'OfferClickcode_' + offer_id;
+            if ($cookies.get(temp_cookie)) {
+                return;
+            }
+
+
+            $http.post(apiBaseURL + 'offer_clicks', {
                 "offer_click": {
                     "offer_id": offer_id,
                     "ip_address": document.getElementById("ip").value,
@@ -1389,6 +1511,33 @@ LodashFactory.$inject = ['$window'];
                 }
             }).then(function(response) {
                 var response = response.data.data;
+                // login successful if there's a token in the response
+                if (response.attributes) {
+
+                     $cookies.put(temp_cookie, temp_cookie);
+                    callback(true);
+                } else {
+                    // execute callback with false to indicate failed login
+                    callback(false);
+                }
+            });
+        }
+
+        function offersViewTrack(callback) {
+            var temp_cookie = 'code_' + document.getElementById("offer_id").value;
+            if ($cookies.get(temp_cookie)) {
+                return;
+            }
+            $http.put(apiBaseURL + 'page_visits', {
+                "page_visit": {
+                    "url": window.location.href.replace('#!/', ''),
+                    "offer_id": document.getElementById("offer_id").value,
+                    "ip_address": document.getElementById("ip").value,
+                    "tracking_code": document.getElementById("tracking_code").value
+                }
+            }).then(function(response) {
+                var response = response.data.data;
+                $cookies.put(temp_cookie, temp_cookie);
                 // login successful if there's a token in the response
                 if (response.attributes) {
                     callback(true);
@@ -1424,6 +1573,8 @@ LodashFactory.$inject = ['$window'];
                 }
             });
         }
+
+        function checkOfferCookie(auth, callback) {}
 
         function Login(auth, callback) {
             auth.tracking_code = this.TrackingCode();

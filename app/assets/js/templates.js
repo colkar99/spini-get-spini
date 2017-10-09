@@ -619,7 +619,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "<header  >\n" +
     "  <div class=\"container\">\n" +
     "    <div class=\"row main-header\">\n" +
-    "      <div class=\"col-md-2 main-header-logo\">\n" +
+    "      <div class=\"col-md-2 col-xs-12 col-sm-12 text-center main-header-logo\">\n" +
     "        <a href=\"/\">\n" +
     "          <img src=\"/app/assets/images/header/Logo@2x.png\" alt=\"spini-logo\">\n" +
     "        </a>\n" +
@@ -635,7 +635,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "<span ng-controller=\"HomeCtrl as menu\">\n" +
     "  \n" +
     "\n" +
-    "         <div class=\"col-md-2 main-header-partner\" ng-hide=\"menu.isVendor() || menu.isReferral()\">\n" +
+    "         <div class=\"col-md-2  col-xs-6 nopad main-header-partner\" ng-hide=\"menu.isVendor() || menu.isReferral()\">\n" +
     "        <button ng-click=\"menu.VendorContactUs();\">Become our partner</button>\n" +
     "      </div>\n" +
     "\n" +
@@ -695,7 +695,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    box-shadow: 0px 0px 6px #888;\n" +
     "    border-radius: 3px;\n" +
     "    top: 50px;\n" +
-    "    left: 70px;\n" +
+    "  /*  left: 70px;*/\n" +
     "  }\n" +
     "  .manage-account i{\n" +
     "    text-align: right;\n" +
@@ -782,11 +782,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        </span>\n" +
     "                        Sign in with Facebook\n" +
     "                    </button>\n" +
-    "                    <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
+    "                   <!--  <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
     "                        <span class=\"fa fa-google left falign\">\n" +
     "                        </span>\n" +
     "                        Sign in with Google\n" +
-    "                    </button>\n" +
+    "                    </button> -->\n" +
     "                </div>\n" +
     "                <div>\n" +
     "                </div>\n" +
@@ -820,11 +820,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        </span>\n" +
     "                        Sign UP with Facebook\n" +
     "                    </button>\n" +
-    "                    <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
+    "         <!--            <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
     "                        <span class=\"fa fa-google left falign\">\n" +
     "                        </span>\n" +
     "                        Sign UP with Google\n" +
-    "                    </button>\n" +
+    "                    </button> -->\n" +
     "                </div>\n" +
     "                <div>\n" +
     "                </div>\n" +
@@ -865,7 +865,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <div class=\"col-md-8 text-right\">\n" +
-    "                        <img class=\"offer-logo-set\" ng-src=\"    {{item.attributes.avatar_medium}}\">\n" +
+    "                        <img class=\"offer-logo-set\" ng-src=\"    {{item.attributes.business_avatar_thumb}}\">\n" +
     "                        \n" +
     "                    </div>\n" +
     "                    <hr>\n" +
@@ -917,7 +917,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"row backcls mar-10px text-left dotted\">\n" +
+    "                <div class=\"row backcls mar-10px text-left dotted\" ng-if=\"vm.user.name == null\">\n" +
     "                    <div class=\"col-md-12 nopad mar45\">\n" +
     "                        <div class=\"col-md-8\">\n" +
     "                            <p class=\"font15px popupfoot1 \">\n" +
@@ -930,11 +930,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                </b>\n" +
     "                            </p>\n" +
     "                            <div class=\"social pad-bot10 padtop30 popupfoot1\">\n" +
-    "                                <a class=\"fa fa-twitter twitter\" href=\"#\" target=\"_blank\" title=\"\">\n" +
+    "                                <a class=\"fa fa-twitter twitter\" ng-click=\"vm.openLoginPopup('referral','confirm-code-popup')\" title=\"\">\n" +
     "                                </a>\n" +
-    "                                <a class=\"fa fa-facebook fb\" href=\"#\" target=\"_blank\" title=\"\">\n" +
+    "                                <a class=\"fa fa-facebook fb\"   ng-click=\"vm.openLoginPopup('referral','confirm-code-popup')\" title=\"\">\n" +
     "                                </a>\n" +
-    "                                <a class=\"fa fa-clone clone\" href=\"#\" target=\"_blank\" title=\"\">\n" +
+    "                                <a class=\"fa fa-clone clone\" ng-click=\"vm.openLoginPopup('referral','confirm-code-popup')\" title=\"\">\n" +
     "                                </a>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
@@ -948,6 +948,39 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
+    "\n" +
+    "                                <div class=\"row backcls mar-10px text-left dotted\" ng-if=\"vm.user.name\">\n" +
+    "                    <div class=\"col-md-12 nopad mar45\">\n" +
+    "                        <div class=\"col-md-8\">\n" +
+    "                            <p class=\"font15px popupfoot1 \">\n" +
+    "                                <b>\n" +
+    "                                    Further more sharing this code will earn you\n" +
+    "                                </b>\n" +
+    "                                <br/>\n" +
+    "                                <b>\n" +
+    "                                    Rs.{{item.attributes.treasure_value}} each time it's availed\n" +
+    "                                </b>\n" +
+    "                            </p>\n" +
+    "                            <div class=\"social pad-bot10 padtop30 popupfoot1\">\n" +
+    "                    <!--             <a class=\"fa fa-twitter twitter\" href=\"#\" target=\"_blank\" title=\"\">\n" +
+    "                                </a>\n" +
+    "                                <a class=\"fa fa-facebook fb\" href=\"#\" target=\"_blank\" title=\"\">\n" +
+    "                                </a>\n" +
+    "                                <a class=\"fa fa-clone clone\" href=\"#\" target=\"_blank\" title=\"\">\n" +
+    "                                </a> -->\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"col-md-4 text-center\">\n" +
+    "                            <h1 class=\"b\">\n" +
+    "                                Rs.{{item.attributes.treasure_value}}\n" +
+    "                            </h1>\n" +
+    "                            <p>\n" +
+    "                                Earn real cash while you enjoy Spini offers!!\n" +
+    "                            </p>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -985,7 +1018,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <div class=\"col-md-8 text-right\">\n" +
-    "                        <img class=\"offer-logo-set\" ng-src=\"    {{item.attributes.avatar_medium}}\">\n" +
+    "                        <img class=\"offer-logo-set\" ng-src=\"    {{item.attributes.business_avatar_thumb}}\">\n" +
     "                        \n" +
     "                    </div>\n" +
     "                    <hr>\n" +
@@ -1052,41 +1085,19 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    </a>\n" +
     "    <div class=\"overlay-content\">\n" +
     "        <div style=\"height: 305px\">\n" +
-    "            <div active=\"active\" interval=\"myInterval\" no-wrap=\"noWrapSlides\" uib-carousel=\"\">\n" +
-    "                <div index=\"$index\" ng-repeat=\"item in vm.getItems() track by $index\" uib-slide=\"\">\n" +
+    "            <div active=\"active\" interval=\"myInterval\" on-carousel-change=\"vm.onSlideChanged(nextSlide, direction)\"\n" +
+    " no-wrap=\"noWrapSlides\" uib-carousel=\"\" >\n" +
+    "                <div index=\"$index\" ng-repeat=\"item in vm.getItems() track by $index\"\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                 uib-slide=\"\">\n" +
     "                    <!-- <img ng-src=\"{{item.business_avatar}}\" style=\"margin:auto;\">{{item}} -->\n" +
-    "                    <div class=\"row \">\n" +
+    "                    <div class=\"row \" >\n" +
     "                        <div class=\"col-md-8 row col-md-offset-2 white pad10\">\n" +
     "                            <div class=\"col-md-5 nopad\">\n" +
-    "                                <!-- <div class=\"carousel slide\" data-ride=\"carousel\" id=\"carousel-example-generic\"> -->\n" +
-    "                                <!-- <ol class=\"carousel-indicators\"> -->\n" +
-    "                                <!-- <li data-target=\"#carousel-example-generic\" data-slide-to=\"0\" class=\"active\"></li>\n" +
-    "            <li data-target=\"#carousel-example-generic\" data-slide-to=\"1\"></li>\n" +
-    "            <li data-target=\"#carousel-example-generic\" data-slide-to=\"2\"></li> -->\n" +
-    "                                <!-- </ol> -->\n" +
-    "                                <!-- <div class=\"carousel-inner\"> -->\n" +
-    "                                <!-- <div class=\"active item\"> -->\n" +
     "                                <img \"=\"\" alt=\"...\" class=\"fixed-height\" ng-src=\"{{item.attributes.avatar}}\" style=\"width: 100% !important;\">\n" +
-    "                                    <!-- </div> -->\n" +
-    "                                    <!--    <div class=\"item\">\n" +
-    "              <img class=\"fixed-height\" src=\"http://placehold.it/1200x400\" alt=\"...\">\n" +
-    "            </div>\n" +
-    "            <div class=\"item\">\n" +
-    "              <img class=\"fixed-height\" src=\"http://placehold.it/1200x400\" alt=\"...\">\n" +
-    "            </div> -->\n" +
-    "                                    <!-- </div> -->\n" +
-    "                                    <!-- </div> -->\n" +
-    "                                    <!-- <div class=\"col-md-12 nopad mr10px\">\n" +
-    "                <div class=\"col-md-6 text-left nopad\">\n" +
-    "                    <i aria-hidden=\"true\" class=\"fa fa-arrow-circle-o-left ft25px grey\">\n" +
-    "                    </i>\n" +
-    "                </div>\n" +
-    "                <div class=\"col-md-6 text-right nopad\">\n" +
-    "                    <i aria-hidden=\"true\" class=\"fa fa-arrow-circle-o-right ft25px grey\">\n" +
-    "                    </i>\n" +
-    "                </div>\n" +
-    "            </div> -->\n" +
-    "                                \n" +
+    "                      \n" +
     "                            </div>\n" +
     "                            <div class=\"col-md-7 nopad\">\n" +
     "                                <div class=\"pad-top-none offer-details text-left\">\n" +
@@ -1097,7 +1108,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                            </h3>\n" +
     "                                            <div class=\"ts pad5 offer-location\">\n" +
     "                                                <b>\n" +
-    "                                                    At {{item.attributes.business_name}} at -\n" +
+    "                                                    At {{item.attributes.business_name}} at\n" +
     "                                                </b>\n" +
     "                                                <span>\n" +
     "                                                    {{item.attributes.place}}\n" +
@@ -1105,7 +1116,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                            </div>\n" +
     "                                        </div>\n" +
     "                                        <div class=\"col-md-4 text-right \">\n" +
-    "                                            <img class=\"offer-logo-set\" ng-src=\"{{item.attributes.avatar_medium}}\">\n" +
+    "                                            <img class=\"offer-logo-set\" ng-src=\"{{item.attributes.business_avatar_thumb}}\">\n" +
     "                                            \n" +
     "                                        </div>\n" +
     "                                    </div>\n" +
@@ -1114,6 +1125,8 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                            <button ng-click=\"vm.getcodepopup(item.id)\">\n" +
     "                                                GET CODE!\n" +
     "                                            </button>\n" +
+    "\n" +
+    "\n" +
     "                                        </div>\n" +
     "                                        <div class=\"col-md-6\">\n" +
     "                                            <span class=\"offer-spini\" ng-show=\" {{item.attributes.treasure_value}}\">\n" +
@@ -1134,81 +1147,75 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                        </div>\n" +
     "                                    </div>\n" +
     "                                    <div class=\"min-height160px\">\n" +
-    "                                        <p class=\"\">\n" +
-    "                                            {{item.attributes.description}}\n" +
-    "                                        </p>\n" +
+    "                                        <div class=\"col-md-10 nopad\">\n" +
+    "                                         \n" +
+    "\n" +
+    "\n" +
+    "                                            <p class=\"read\" hm-read-more\n" +
+    "        hm-text=\"{{ item.attributes.description | nl2br }}\" \n" +
+    "        hm-limit=\"300\" \n" +
+    "        hm-more-text=\"Read more\" \n" +
+    "        hm-less-text=\"Read less\"\n" +
+    "        hm-dots-class=\"dots\"\n" +
+    "        hm-link-class=\"read-more\" >\n" +
+    "\n" +
+    "    </p>\n" +
+    "\n" +
+    "                              <!--             <p  read-more ng-bind-html=\"item.attributes.description | nl2br\">\n" +
+    "                                           \n" +
+    "                                        </p>  -->\n" +
+    "                                    <!--  \n" +
+    "                                        <p  read-more ng-bind-html=\"item.attributes.description | nl2br\">\n" +
+    "                           {{item.attributes.description}}\n" +
+    "                                        </p> -->\n" +
+    "\n" +
+    "\n" +
     "                                        <p class=\"offer-wrap-text space-div\">\n" +
     "                                            **OFFER VALID TILL {{item.attributes.end_date | date:'medium'}} only at {{item.attributes.business_name}} @ {{item.attributes.place}}\n" +
     "                                        </p>\n" +
-    "                                    </div>\n" +
-    "                                    <div class=\"offer-share col-md-6\">\n" +
-    "                                        <label>\n" +
-    "                                            SHARE & EARN\n" +
-    "                                        </label>\n" +
-    "                              \n" +
-    "\n" +
-    "                <ul ng-show=\" {{item.attributes.treasure_value}}\">\n" +
-    "                                            <li class=\"offer-share-max\">\n" +
-    "                                                <a ngclipboard data-clipboard-text=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}\" ngclipboard-success=\"vm.onCopySuccess(e);\">\n" +
-    "                                                </a>\n" +
-    "                                            </li>\n" +
-    "                                            <li class=\"offer-share-fb\" \n" +
-    "\n" +
-    "\n" +
-    "                                            >\n" +
-    "                                                <a socialshare socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.facebook)}}\" socialshare-provider=\"facebook\"\n" +
-    "\n" +
-    "                                                ng-click=\"vm.SocialShareUpdate(item.attributes.seo_url,'facebook')\"\n" +
-    "\n" +
-    "                                                >\n" +
-    "                                                </a>\n" +
-    "                                            </li>\n" +
-    "                                            <li class=\"offer-share-twitter\"\n" +
-    "\n" +
-    "\n" +
-    "                                             >\n" +
-    "                                                <a socialshare \n" +
-    "                                                socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}\"\n" +
-    "                                                socialshare-provider=\"twitter\"\n" +
-    "\n" +
-    "                                                  ng-click=\"vm.SocialShareUpdate(item.attributes.seo_url,'twitter')\"\n" +
-    "                                                \n" +
-    "socialshare-text=\"{{item.attributes.seo_description}} {{item.attributes.seo_keywords}}\"\n" +
-    "socialshare-hashtags=\"{item.attributes.seo_keywords}}\"\n" +
-    "\n" +
-    ">\n" +
-    "                                                </a>\n" +
-    "                                            </li>\n" +
-    "                                        </ul>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "                                             <ul ng-hide=\" {{item.attributes.treasure_value}}\" ng-click=\"vm.signupPOP('referral')\">\n" +
-    "                                            <li class=\"offer-share-max\">\n" +
-    "                                                <a >\n" +
-    "                                                </a>\n" +
-    "                                            </li>\n" +
-    "                                            <li class=\"offer-share-fb\" \n" +
-    "\n" +
-    "\n" +
-    "                                            >\n" +
-    "                                                <a \n" +
-    "                                                >\n" +
-    "                                                </a>\n" +
-    "                                            </li>\n" +
-    "                                            <li class=\"offer-share-twitter\"\n" +
-    "\n" +
-    "\n" +
-    "                                             >\n" +
-    "                                                <a  \n" +
-    "                                  \n" +
-    "\n" +
-    ">\n" +
-    "                                                </a>\n" +
-    "                                            </li>\n" +
-    "                                        </ul>\n" +
     "\n" +
     "                                    </div>\n" +
+    "\n" +
+    "                                        <div class=\"col-md-2\">\n" +
+    "                                            <div class=\"offer-share col-md-6\">\n" +
+    "    <label>\n" +
+    "        SHARE\n" +
+    "    </label>\n" +
+    "    <ul ng-show=\" {{item.attributes.treasure_value}}\">\n" +
+    "        <li class=\"offer-share-max\">\n" +
+    "            <a data-clipboard-text=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}\" ngclipboard=\"\" ngclipboard-success=\"vm.onCopySuccess(e);\">\n" +
+    "            </a>\n" +
+    "        </li>\n" +
+    "        <li class=\"offer-share-fb\">\n" +
+    "            <a ng-click=\"vm.SocialShareUpdate(item.attributes.seo_url,'facebook')\" socialshare=\"\" socialshare-provider=\"facebook\" socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.facebook)}}\">\n" +
+    "            </a>\n" +
+    "        </li>\n" +
+    "        <li class=\"offer-share-twitter\">\n" +
+    "            <a ng-click=\"vm.SocialShareUpdate(item.attributes.seo_url,'twitter')\" socialshare=\"\" socialshare-hashtags=\"{item.attributes.seo_keywords}}\" socialshare-provider=\"twitter\" socialshare-text=\"{{item.attributes.seo_description}} {{item.attributes.seo_keywords}}\" socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}\">\n" +
+    "            </a>\n" +
+    "        </li>\n" +
+    "    </ul>\n" +
+    "    <ul ng-click=\"vm.signupPOP('referral')\" ng-hide=\" {{item.attributes.treasure_value}}\">\n" +
+    "        <li class=\"offer-share-max\">\n" +
+    "            <a>\n" +
+    "            </a>\n" +
+    "        </li>\n" +
+    "        <li class=\"offer-share-fb\">\n" +
+    "            <a>\n" +
+    "            </a>\n" +
+    "        </li>\n" +
+    "        <li class=\"offer-share-twitter\">\n" +
+    "            <a>\n" +
+    "            </a>\n" +
+    "        </li>\n" +
+    "    </ul>\n" +
+    "</div>\n" +
+    "                                            \n" +
+    "                                        </div>\n" +
+    "\n" +
+    "                                           \n" +
+    "                                    </div>\n" +
+    "                     \n" +
     "                                    <div class=\"offer-share col-md-6\">\n" +
     "                            <!--             <label class=\"right\">\n" +
     "                                            OFFERS END IN\n" +
@@ -1520,6 +1527,8 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "            </div> -->\n" +
     "</section>\n" +
     "<!-- coupon table -->\n" +
+    "\n" +
+    "\n" +
     "<section ng-if=\"vm.History.length > 0\">\n" +
     "    <div class=\"container\">\n" +
     "        <table class=\"coupon-redeem-table col-md-12\">\n" +
@@ -1733,7 +1742,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "          </div>\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
     "            <i class=\"fa fa-inr\" aria-hidden=\"true\"></i>\n" +
-    "            <label>1000</label>\n" +
+    "            <label>{{vm.user.treasure_value}}</label>\n" +
     "          </div>\n" +
     "\n" +
     "\n" +
@@ -1844,7 +1853,8 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    margin: 2px;\n" +
     "    background-color: #fff;\n" +
     "}\n" +
-    "</style>\n"
+    "</style>\n" +
+    "\n"
   );
 
 

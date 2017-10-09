@@ -234,8 +234,27 @@
                 document.getElementById(id).style.width = "0%";
             }
         }
-        vm.getSlidepopup = function(campaign_id) {
-            vm.campaign_id = campaign_id;
+        vm.getSlidepopup = function(campaign_id,is_offer) {
+
+            
+            if(is_offer)
+            {
+
+            angular.forEach(vm.offers, function(value, key) {
+                if (value.id == campaign_id) {
+
+                   vm.campaign_id = value.attributes.campaign_id;
+                   console.log('data');
+                   console.log(value)
+                }   
+            });
+
+            }
+            else
+            {
+                vm.campaign_id = campaign_id;
+            }   
+            
             console.log(campaign_id);
             document.getElementById("offer-popup").style.width = "100%";
             vm.getSelectedCampaignOffers();
@@ -358,6 +377,7 @@
                     });
                 }
             });
+           
         }
         vm.categories = [];
         vm.getCategories = function() {
