@@ -11,11 +11,11 @@
                 <div class="text-center bg-grey nopad pad-bot-10">
                     <img class="poplogo" src="/app/assets/images/header/Logo@2x.png">
                         <h3>
-                            SPINI SIGN IN
+                            Referla SIGN IN
                         </h3>
                         <br/>
                         <h5>
-                            Share & Earn Spini Treasure..!!!
+                            Share & Earn My Treasure..!!!
                         </h5>
                     
                 </div>
@@ -49,11 +49,11 @@
                 <div class="text-center bg-grey nopad pad-bot-10">
                     <img class="poplogo" src="/app/assets/images/header/Logo@2x.png">
                         <h3>
-                            SIGN UP WITH SPINI
+                            SIGN UP WITH Referla
                         </h3>
                         <br/>
                         <h5>
-                            Share & Earn Spini Treasure..!!!
+                            Share & Earn My Treasure..!!!
                         </h5>
                     
                 </div>
@@ -121,7 +121,7 @@
                                 Hi  {{vm.user.name ? vm.user.name : 'Guest'}}
                             </h4>
                             <h4 class="marbt20">
-                                Availing this offer will add  Rs.{{item.attributes.treasure_value}} to your Spini Wallet!
+                                Availing this offer will add  Rs.{{item.attributes.treasure_value}} to your Referla Wallet!
                             </h4>
                             <h4 class="marbt20">
                                 Offer code sent to your registered mobile No - 
@@ -186,7 +186,7 @@
                                 Rs.200
                             </h1>
                             <p>
-                                Earn real cash while you enjoy Spini offers!!
+                                Earn real cash while you enjoy Referla offers!!
                             </p>
                         </div>
                     </div>
@@ -218,7 +218,7 @@
                                 Rs.{{item.attributes.treasure_value}}
                             </h1>
                             <p>
-                                Earn real cash while you enjoy Spini offers!!
+                                Earn real cash while you enjoy Referla offers!!
                             </p>
                         </div>
                     </div>
@@ -236,7 +236,7 @@
     </a>
     <div class="overlay-content">
         <div class="row "  ng-repeat="item in vm.getSelectedOfferData()">
-            <div class="col-md-8 row col-md-offset-2 white pad-bot0 pad10 ">
+            <div class="col-md-6 row col-md-offset-3 white pad-bot0 pad10 ">
                 <div class="row mar20bt">
                     <div class="col-md-1 nopad ico">
                         <i aria-hidden="true" class="fa fa-arrow-left offer-logo-40px mar10" ng-click="vm.closeGetNoPopup()">
@@ -245,7 +245,7 @@
 
            
 
- <div class="col-md-3 nopad text-left">
+ <div class="col-md-8 nopad text-left">
                         <h4 class="mar10">
                             <b>
                                   {{item.attributes.name}}
@@ -260,7 +260,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="col-md-8 text-right">
+                    <div class="col-md-3 text-right">
                         <img class="offer-logo-set" ng-src="    {{item.attributes.business_avatar_thumb}}">
                         
                     </div>
@@ -293,7 +293,7 @@
                             <span class="offer-spini">
                                 <i aria-hidden="true" class="fa fa-gift link-icon fagift">
                                 </i>
-                                SPINI TREASURE
+                                MY TREASURE
                             </span>
                         </div>
                     </div>
@@ -303,12 +303,12 @@
                         <p class="font15px popupfoot pad-bot ">
                             Psst...!
                             <br/>
-                            Signup to become a Spini referral and earn Rs.200 with this offer!
+                            Signup to become a Referla referral and earn Rs.200 with this offer!
                             <br/>
-                            Sparsh earned Rs.2000 begin a Spini Referral!
+                            Sparsh earned Rs.2000 begin a Referla Referral!
                             <br/>
                         </p>
-                        <p class="fbblue font15px popupfoot pad-bot" ng-click="vm.openLoginPopup('referral','get-code-popup')">
+                        <p class="fbblue font15px popupfoot pad-bot" ng-click="vm.signupPOP()">
                             <i aria-hidden="true" class="fa fa-facebook link-icon">
                             </i>
                             SIGN UP WITH FACEBOOK
@@ -375,7 +375,7 @@
                                             <span class="offer-spini" ng-show=" {{item.attributes.treasure_value}}">
                                                 <i aria-hidden="true" class="fa fa-gift link-icon fagift">
                                                 </i>
-                                                Spini Treasure
+                                                My Treasure
                                                
                                                  ₹ {{item.attributes.treasure_value}}
                                                

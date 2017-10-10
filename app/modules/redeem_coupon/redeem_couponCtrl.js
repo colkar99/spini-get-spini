@@ -8,27 +8,19 @@
      * Controller of the app
      */
     angular.module('redeemcoupon').controller('redeemcouponCtrl', RedeemCoupon);
-    RedeemCoupon.$inject = ['redeemcouponService', '$http', 'LoginService', '$location', 'ngToast'];
+    RedeemCoupon.$inject = ['redeemcouponService', '$http', 'LoginService', '$location', 'ngToast','$timeout'];
     /*
      * recommend
      * Using function declarations
      * and bindable members up top.
      */
-    function RedeemCoupon(redeemcouponService, $http, LoginService, $location, ngToast) {
+    function RedeemCoupon(redeemcouponService, $http, LoginService, $location, ngToast,$timeout) {
         /*jshint validthis: true */
         var vm = this;
-        vm.checkCode = function() {
-            console.log('de');
-            $http.post('https://api.spini.co/v1/redemptions/verify_coupon', {
-                "redemption": {
-                    "coupon_code": vm.coupon_code,
-                    "business_id": vm.business_id,
-                    "amount": vm.amount
-                }
-            }).then(function(response) {
-                if (response.data.code) {
-                    vm.showInfo = response.data;
-                    if (response.data.amount_to_pay) {
+
+        vm.redeemCoupon = function()
+        {
+             if (vm.showInfo.amount_to_pay) {
                         $http.post('https://api.spini.co/v1/redemptions', {
                             "redemption": {
                                 "coupon_code": vm.coupon_code,
@@ -42,14 +34,16 @@
                         }).then(function() {
                             ngToast.dismiss();
                             ngToast.create({
-                                content: '<strong>Spini</strong>: Code Redemptions complete',
+                                content: '<strong>Referla</strong>: Code Redemptions complete',
                                 dismissOnTimeout: false,
                                 dismissButton: true,
                                 dismissOnClick: false
                             });
-                            //   vm.coupon_code='';
-                            // vm.amount='';
-                            //vm.showInfo='';
+                              vm.coupon_code='';
+                            vm.amount='';
+                            vm.showInfo='';
+
+                            // vm.showInfo = '';
                             vm.RedemptionsHistory()
                         }).catch(function(response) {
                             ngToast.dismiss();
@@ -61,6 +55,20 @@
                             });
                         });
                     }
+        }
+        vm.checkCode = function() {
+            console.log('de');
+
+            $http.post('https://api.spini.co/v1/redemptions/verify_coupon', {
+                "redemption": {
+                    "coupon_code": vm.coupon_code,
+                    "business_id": vm.business_id,
+                    "amount": vm.amount
+                }
+            }).then(function(response) {
+                if (response.data.code) {
+                    vm.showInfo = response.data;
+                   
                 }
             }).catch(function(response) {
                 ngToast.dismiss();
@@ -70,7 +78,11 @@
                     dismissButton: true,
                     dismissOnClick: false
                 });
-            });;
+            });
+
+
+      
+            
         }
         // vm.History = angular.fromJson('[{"id":"2","type":"redemptions","attributes":{"coupon_code":"39610A","coupon_id":3,"business_id":1,"offer_id":1,"created_at":"Oct 05, 2017","place":"T.Nagar","price":"1000.0","amount_paid_by_buyer":"500.0"}}]');
         // console.log()

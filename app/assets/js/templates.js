@@ -768,11 +768,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                <div class=\"text-center bg-grey nopad pad-bot-10\">\n" +
     "                    <img class=\"poplogo\" src=\"/app/assets/images/header/Logo@2x.png\">\n" +
     "                        <h3>\n" +
-    "                            SPINI SIGN IN\n" +
+    "                            Referla SIGN IN\n" +
     "                        </h3>\n" +
     "                        <br/>\n" +
     "                        <h5>\n" +
-    "                            Share & Earn Spini Treasure..!!!\n" +
+    "                            Share & Earn My Treasure..!!!\n" +
     "                        </h5>\n" +
     "                    \n" +
     "                </div>\n" +
@@ -806,11 +806,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                <div class=\"text-center bg-grey nopad pad-bot-10\">\n" +
     "                    <img class=\"poplogo\" src=\"/app/assets/images/header/Logo@2x.png\">\n" +
     "                        <h3>\n" +
-    "                            SIGN UP WITH SPINI\n" +
+    "                            SIGN UP WITH Referla\n" +
     "                        </h3>\n" +
     "                        <br/>\n" +
     "                        <h5>\n" +
-    "                            Share & Earn Spini Treasure..!!!\n" +
+    "                            Share & Earn My Treasure..!!!\n" +
     "                        </h5>\n" +
     "                    \n" +
     "                </div>\n" +
@@ -878,7 +878,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                Hi  {{vm.user.name ? vm.user.name : 'Guest'}}\n" +
     "                            </h4>\n" +
     "                            <h4 class=\"marbt20\">\n" +
-    "                                Availing this offer will add  Rs.{{item.attributes.treasure_value}} to your Spini Wallet!\n" +
+    "                                Availing this offer will add  Rs.{{item.attributes.treasure_value}} to your Referla Wallet!\n" +
     "                            </h4>\n" +
     "                            <h4 class=\"marbt20\">\n" +
     "                                Offer code sent to your registered mobile No - \n" +
@@ -943,7 +943,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                Rs.200\n" +
     "                            </h1>\n" +
     "                            <p>\n" +
-    "                                Earn real cash while you enjoy Spini offers!!\n" +
+    "                                Earn real cash while you enjoy Referla offers!!\n" +
     "                            </p>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -975,7 +975,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                Rs.{{item.attributes.treasure_value}}\n" +
     "                            </h1>\n" +
     "                            <p>\n" +
-    "                                Earn real cash while you enjoy Spini offers!!\n" +
+    "                                Earn real cash while you enjoy Referla offers!!\n" +
     "                            </p>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -993,7 +993,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    </a>\n" +
     "    <div class=\"overlay-content\">\n" +
     "        <div class=\"row \"  ng-repeat=\"item in vm.getSelectedOfferData()\">\n" +
-    "            <div class=\"col-md-8 row col-md-offset-2 white pad-bot0 pad10 \">\n" +
+    "            <div class=\"col-md-6 row col-md-offset-3 white pad-bot0 pad10 \">\n" +
     "                <div class=\"row mar20bt\">\n" +
     "                    <div class=\"col-md-1 nopad ico\">\n" +
     "                        <i aria-hidden=\"true\" class=\"fa fa-arrow-left offer-logo-40px mar10\" ng-click=\"vm.closeGetNoPopup()\">\n" +
@@ -1002,7 +1002,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "           \n" +
     "\n" +
-    " <div class=\"col-md-3 nopad text-left\">\n" +
+    " <div class=\"col-md-8 nopad text-left\">\n" +
     "                        <h4 class=\"mar10\">\n" +
     "                            <b>\n" +
     "                                  {{item.attributes.name}}\n" +
@@ -1017,7 +1017,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                            </span>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                    <div class=\"col-md-8 text-right\">\n" +
+    "                    <div class=\"col-md-3 text-right\">\n" +
     "                        <img class=\"offer-logo-set\" ng-src=\"    {{item.attributes.business_avatar_thumb}}\">\n" +
     "                        \n" +
     "                    </div>\n" +
@@ -1050,7 +1050,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                            <span class=\"offer-spini\">\n" +
     "                                <i aria-hidden=\"true\" class=\"fa fa-gift link-icon fagift\">\n" +
     "                                </i>\n" +
-    "                                SPINI TREASURE\n" +
+    "                                MY TREASURE\n" +
     "                            </span>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -1060,12 +1060,12 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        <p class=\"font15px popupfoot pad-bot \">\n" +
     "                            Psst...!\n" +
     "                            <br/>\n" +
-    "                            Signup to become a Spini referral and earn Rs.200 with this offer!\n" +
+    "                            Signup to become a Referla referral and earn Rs.200 with this offer!\n" +
     "                            <br/>\n" +
-    "                            Sparsh earned Rs.2000 begin a Spini Referral!\n" +
+    "                            Sparsh earned Rs.2000 begin a Referla Referral!\n" +
     "                            <br/>\n" +
     "                        </p>\n" +
-    "                        <p class=\"fbblue font15px popupfoot pad-bot\" ng-click=\"vm.openLoginPopup('referral','get-code-popup')\">\n" +
+    "                        <p class=\"fbblue font15px popupfoot pad-bot\" ng-click=\"vm.signupPOP()\">\n" +
     "                            <i aria-hidden=\"true\" class=\"fa fa-facebook link-icon\">\n" +
     "                            </i>\n" +
     "                            SIGN UP WITH FACEBOOK\n" +
@@ -1132,7 +1132,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                            <span class=\"offer-spini\" ng-show=\" {{item.attributes.treasure_value}}\">\n" +
     "                                                <i aria-hidden=\"true\" class=\"fa fa-gift link-icon fagift\">\n" +
     "                                                </i>\n" +
-    "                                                Spini Treasure\n" +
+    "                                                My Treasure\n" +
     "                                               \n" +
     "                                                 ₹ {{item.attributes.treasure_value}}\n" +
     "                                               \n" +
@@ -1490,7 +1490,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    <label>\n" +
     "        Buiness :\n" +
     "    </label>\n" +
-    "    <select ng-model=\"vm.business_id\" ng-options=\"item.id as item.name for item in vm.vendor.businesses\" style=\"    min-width: 130px;\">\n" +
+    "    <select ng-change=\"vm.RedemptionsHistory()\" ng-model=\"vm.business_id\" ng-options=\"item.id as item.name for item in vm.vendor.businesses\" style=\"    min-width: 130px;\">\n" +
     "    </select>\n" +
     "</div>\n" +
     "<!-- container for coupon redeem console -->\n" +
@@ -1498,12 +1498,17 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    <h3>\n" +
     "        Enter Offer Price & Coupon Code\n" +
     "    </h3>\n" +
-    "    <input class=\"price-entry\" ng-model=\"vm.amount\" placeholder=\"Enter Price\" type=\"number\"/>\n" +
-    "    <input class=\"coupon-entry\" min=\"1\" ng-disabled=\"vm.amount==null\" ng-model=\"vm.coupon_code\" placeholder=\"Enter Coupon Code\" type=\"text\"/>\n" +
-    "    <button ng-click=\"vm.checkCode()\">\n" +
-    "        SUBMIT\n" +
-    "    </button>\n" +
-    "    <div ng-show=\"vm.showInfo\">\n" +
+    "    <input ng-change=\"vm.showInfo=''\" class=\"price-entry\" ng-model=\"vm.amount\" placeholder=\"Enter Price\" type=\"number\"/>\n" +
+    "\n" +
+    "    <input \n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "    class=\"coupon-entry\" ng-change=\"vm.showInfo=''\" min=\"1\" ng-disabled=\"vm.amount==null\" ng-model=\"vm.coupon_code\" placeholder=\"Enter Coupon Code\" type=\"text\"/>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "    <div ng-show=\"vm.showInfo\" class=\"txt-list\">\n" +
     "        <h5>\n" +
     "            Offer Applied {{vm.showInfo.savings}} {{vm.showInfo.savings_type}}\n" +
     "        </h5>\n" +
@@ -1514,9 +1519,19 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "            Offer Amount: Rs.{{vm.showInfo.offer_amount}}\n" +
     "        </h5>\n" +
     "        <h4>\n" +
-    "            Amount to Pay: Rs.{{vm.showInfo.amount_to_pay}}\n" +
+    "            Amount to Pay: <b>Rs.{{vm.showInfo.amount_to_pay}}</b>\n" +
     "        </h4>\n" +
     "    </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "    <button ng-click=\"vm.redeemCoupon()\" ng-show=\"vm.showInfo\">\n" +
+    "        REDEEM OFFER\n" +
+    "    </button>\n" +
+    "  <button ng-click=\"vm.checkCode()\" ng-hide=\"vm.showInfo\">\n" +
+    "        CHECK OFFER CODE\n" +
+    "    </button>\n" +
+    "\n" +
     "    <!--        <div class=\"pull-right\">\n" +
     "                <a>\n" +
     "                    FAQ\n" +
@@ -1632,6 +1647,12 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     ".main-header-partner {\n" +
     "    text-align: center;\n" +
     "    opacity: 0;\n" +
+    "}\n" +
+    ".txt-list\n" +
+    "{\n" +
+    "        background: white;\n" +
+    "    padding: 10px;\n" +
+    "    margin-bottom: 25px;\n" +
     "}\n" +
     "</style>"
   );

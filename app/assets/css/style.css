@@ -684,6 +684,9 @@ header hr {
 
 .offer-logo-set {
     height: 70px !important;
+
+    max-width: 150px;
+
     /*    width: 50%;
     margin-top: -22px;*/
 }

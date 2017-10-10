@@ -2,7 +2,7 @@
     <label>
         Buiness :
     </label>
-    <select ng-model="vm.business_id" ng-options="item.id as item.name for item in vm.vendor.businesses" style="    min-width: 130px;">
+    <select ng-change="vm.RedemptionsHistory()" ng-model="vm.business_id" ng-options="item.id as item.name for item in vm.vendor.businesses" style="    min-width: 130px;">
     </select>
 </div>
 <!-- container for coupon redeem console -->
@@ -10,12 +10,17 @@
     <h3>
         Enter Offer Price & Coupon Code
     </h3>
-    <input class="price-entry" ng-model="vm.amount" placeholder="Enter Price" type="number"/>
-    <input class="coupon-entry" min="1" ng-disabled="vm.amount==null" ng-model="vm.coupon_code" placeholder="Enter Coupon Code" type="text"/>
-    <button ng-click="vm.checkCode()">
-        SUBMIT
-    </button>
-    <div ng-show="vm.showInfo">
+    <input ng-change="vm.showInfo=''" class="price-entry" ng-model="vm.amount" placeholder="Enter Price" type="number"/>
+
+    <input 
+
+
+
+    class="coupon-entry" ng-change="vm.showInfo=''" min="1" ng-disabled="vm.amount==null" ng-model="vm.coupon_code" placeholder="Enter Coupon Code" type="text"/>
+
+
+
+    <div ng-show="vm.showInfo" class="txt-list">
         <h5>
             Offer Applied {{vm.showInfo.savings}} {{vm.showInfo.savings_type}}
         </h5>
@@ -26,9 +31,19 @@
             Offer Amount: Rs.{{vm.showInfo.offer_amount}}
         </h5>
         <h4>
-            Amount to Pay: Rs.{{vm.showInfo.amount_to_pay}}
+            Amount to Pay: <b>Rs.{{vm.showInfo.amount_to_pay}}</b>
         </h4>
     </div>
+
+
+
+    <button ng-click="vm.redeemCoupon()" ng-show="vm.showInfo">
+        REDEEM OFFER
+    </button>
+  <button ng-click="vm.checkCode()" ng-hide="vm.showInfo">
+        CHECK OFFER CODE
+    </button>
+
     <!--        <div class="pull-right">
                 <a>
                     FAQ
@@ -144,5 +159,11 @@ footer p
 .main-header-partner {
     text-align: center;
     opacity: 0;
+}
+.txt-list
+{
+        background: white;
+    padding: 10px;
+    margin-bottom: 25px;
 }
 </style>

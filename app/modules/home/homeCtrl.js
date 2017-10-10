@@ -198,16 +198,22 @@
                             'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.facebook)
                         }
                     });
-                    LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
+
+                    LoginService.UpdateSocialShare(vm.OfferLink(data.seo_url, data.tracking_code.facebook),data.tracking_code.facebook,type,offer_id,function(result) {})
+
+
+                    // LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
                 }
                 if (type == 'twitter') {
                     Socialshare.share({
                         'provider': 'twitter',
                         'attrs': {
+                            'socialshareText' : data.caption,
                             'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.twitter)
                         }
                     });
-                    LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
+            LoginService.UpdateSocialShare(vm.OfferLink(data.seo_url, data.tracking_code.twitter),data.tracking_code.twitter,type,offer_id,function(result) {})
+
                 }
                 if (type == 'copy') {
                     return vm.OfferLink(data.seo_url, data.tracking_code.general)
@@ -277,6 +283,7 @@
             // closeNav()
             window.loginRole = data;
             document.getElementById("offer-popup").style.width = "0%";
+            document.getElementById("get-code-popup").style.width = "0%";
             document.getElementById("login-signup").style.width = "100%";
         }
         vm.signupPOPClose = function() {
@@ -461,7 +468,7 @@
             $timeout(function() {
                 ngToast.dismiss();
                 ngToast.create({
-                    content: '<strong>Spini</strong>: Link Copied',
+                    content: '<strong>Referla</strong>: Link Copied',
                     dismissOnTimeout: false,
                     dismissButton: true,
                     dismissOnClick: false
@@ -497,7 +504,7 @@
                 $timeout(function() {
                     ngToast.dismiss();
                     ngToast.create({
-                        content: '<strong>Spini</strong>: Code already sent',
+                        content: '<strong>Referla</strong>: Code already sent',
                         dismissOnTimeout: false,
                         dismissButton: true,
                         dismissOnClick: false

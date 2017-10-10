@@ -31,7 +31,7 @@
                     $timeout(function() {
                         ngToast.dismiss();
                         ngToast.create({
-                            content: '<strong>Spini</strong>: Welcome to S Treasure!',
+                            content: '<strong>Referla</strong>: Welcome to Referla!',
                             dismissOnTimeout: false,
                             dismissButton: true,
                             dismissOnClick: false

@@ -502,16 +502,22 @@ angular.module('signupModule')
                             'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.facebook)
                         }
                     });
-                    LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
+
+                    LoginService.UpdateSocialShare(vm.OfferLink(data.seo_url, data.tracking_code.facebook),data.tracking_code.facebook,type,offer_id,function(result) {})
+
+
+                    // LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
                 }
                 if (type == 'twitter') {
                     Socialshare.share({
                         'provider': 'twitter',
                         'attrs': {
+                            'socialshareText' : data.caption,
                             'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.twitter)
                         }
                     });
-                    LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
+            LoginService.UpdateSocialShare(vm.OfferLink(data.seo_url, data.tracking_code.twitter),data.tracking_code.twitter,type,offer_id,function(result) {})
+
                 }
                 if (type == 'copy') {
                     return vm.OfferLink(data.seo_url, data.tracking_code.general)
@@ -581,6 +587,7 @@ angular.module('signupModule')
             // closeNav()
             window.loginRole = data;
             document.getElementById("offer-popup").style.width = "0%";
+            document.getElementById("get-code-popup").style.width = "0%";
             document.getElementById("login-signup").style.width = "100%";
         }
         vm.signupPOPClose = function() {
@@ -765,7 +772,7 @@ angular.module('signupModule')
             $timeout(function() {
                 ngToast.dismiss();
                 ngToast.create({
-                    content: '<strong>Spini</strong>: Link Copied',
+                    content: '<strong>Referla</strong>: Link Copied',
                     dismissOnTimeout: false,
                     dismissButton: true,
                     dismissOnClick: false
@@ -801,7 +808,7 @@ angular.module('signupModule')
                 $timeout(function() {
                     ngToast.dismiss();
                     ngToast.create({
-                        content: '<strong>Spini</strong>: Code already sent',
+                        content: '<strong>Referla</strong>: Code already sent',
                         dismissOnTimeout: false,
                         dismissButton: true,
                         dismissOnClick: false
@@ -936,7 +943,7 @@ angular.module('signupModule')
                     $timeout(function() {
                         ngToast.dismiss();
                         ngToast.create({
-                            content: '<strong>Spini</strong>: Welcome to S Treasure!',
+                            content: '<strong>Referla</strong>: Welcome to Referla!',
                             dismissOnTimeout: false,
                             dismissButton: true,
                             dismissOnClick: false
@@ -1007,27 +1014,19 @@ angular.module('signupModule')
      * Controller of the app
      */
     angular.module('redeemcoupon').controller('redeemcouponCtrl', RedeemCoupon);
-    RedeemCoupon.$inject = ['redeemcouponService', '$http', 'LoginService', '$location', 'ngToast'];
+    RedeemCoupon.$inject = ['redeemcouponService', '$http', 'LoginService', '$location', 'ngToast','$timeout'];
     /*
      * recommend
      * Using function declarations
      * and bindable members up top.
      */
-    function RedeemCoupon(redeemcouponService, $http, LoginService, $location, ngToast) {
+    function RedeemCoupon(redeemcouponService, $http, LoginService, $location, ngToast,$timeout) {
         /*jshint validthis: true */
         var vm = this;
-        vm.checkCode = function() {
-            console.log('de');
-            $http.post('https://api.spini.co/v1/redemptions/verify_coupon', {
-                "redemption": {
-                    "coupon_code": vm.coupon_code,
-                    "business_id": vm.business_id,
-                    "amount": vm.amount
-                }
-            }).then(function(response) {
-                if (response.data.code) {
-                    vm.showInfo = response.data;
-                    if (response.data.amount_to_pay) {
+
+        vm.redeemCoupon = function()
+        {
+             if (vm.showInfo.amount_to_pay) {
                         $http.post('https://api.spini.co/v1/redemptions', {
                             "redemption": {
                                 "coupon_code": vm.coupon_code,
@@ -1041,14 +1040,16 @@ angular.module('signupModule')
                         }).then(function() {
                             ngToast.dismiss();
                             ngToast.create({
-                                content: '<strong>Spini</strong>: Code Redemptions complete',
+                                content: '<strong>Referla</strong>: Code Redemptions complete',
                                 dismissOnTimeout: false,
                                 dismissButton: true,
                                 dismissOnClick: false
                             });
-                            //   vm.coupon_code='';
-                            // vm.amount='';
-                            //vm.showInfo='';
+                              vm.coupon_code='';
+                            vm.amount='';
+                            vm.showInfo='';
+
+                            // vm.showInfo = '';
                             vm.RedemptionsHistory()
                         }).catch(function(response) {
                             ngToast.dismiss();
@@ -1060,6 +1061,20 @@ angular.module('signupModule')
                             });
                         });
                     }
+        }
+        vm.checkCode = function() {
+            console.log('de');
+
+            $http.post('https://api.spini.co/v1/redemptions/verify_coupon', {
+                "redemption": {
+                    "coupon_code": vm.coupon_code,
+                    "business_id": vm.business_id,
+                    "amount": vm.amount
+                }
+            }).then(function(response) {
+                if (response.data.code) {
+                    vm.showInfo = response.data;
+                   
                 }
             }).catch(function(response) {
                 ngToast.dismiss();
@@ -1069,7 +1084,11 @@ angular.module('signupModule')
                     dismissButton: true,
                     dismissOnClick: false
                 });
-            });;
+            });
+
+
+      
+            
         }
         // vm.History = angular.fromJson('[{"id":"2","type":"redemptions","attributes":{"coupon_code":"39610A","coupon_id":3,"business_id":1,"offer_id":1,"created_at":"Oct 05, 2017","place":"T.Nagar","price":"1000.0","amount_paid_by_buyer":"500.0"}}]');
         // console.log()
@@ -1489,12 +1508,18 @@ LodashFactory.$inject = ['$window'];
             });
         }
 
-        function UpdateSocialShare(url, data, callback) {
-            $http.post(apiBaseURL + '/home/offers/' + url + '/share', {
-                "share": {
-                    "social_media": data
-                }
-            }).then(function(response) {
+        function UpdateSocialShare(url, tracking_code, media_type, offer_id, callback) {
+            $http.post(apiBaseURL + 'offer_shares',
+
+{
+            "offer_share" : {
+                "shared_url": url,
+                "offer_id": offer_id,
+                "tracking_code": this.TrackingCode(),
+                "shared_tracking_code": tracking_code,
+                "social_media": media_type,
+                "ip_address": document.getElementById("ip").value
+            }}).then(function(response) {
                 var response = response.data.data;
                 // login successful if there's a token in the response
                 if (response.attributes) {
@@ -1507,13 +1532,10 @@ LodashFactory.$inject = ['$window'];
         }
 
         function offersClickTrack(offer_id, callback) {
-
             var temp_cookie = 'OfferClickcode_' + offer_id;
             if ($cookies.get(temp_cookie)) {
                 return;
             }
-
-
             $http.post(apiBaseURL + 'offer_clicks', {
                 "offer_click": {
                     "offer_id": offer_id,
@@ -1524,8 +1546,7 @@ LodashFactory.$inject = ['$window'];
                 var response = response.data.data;
                 // login successful if there's a token in the response
                 if (response.attributes) {
-
-                     $cookies.put(temp_cookie, temp_cookie);
+                    $cookies.put(temp_cookie, temp_cookie);
                     callback(true);
                 } else {
                     // execute callback with false to indicate failed login

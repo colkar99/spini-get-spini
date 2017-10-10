@@ -119,12 +119,18 @@
             });
         }
 
-        function UpdateSocialShare(url, data, callback) {
-            $http.post(apiBaseURL + '/home/offers/' + url + '/share', {
-                "share": {
-                    "social_media": data
-                }
-            }).then(function(response) {
+        function UpdateSocialShare(url, tracking_code, media_type, offer_id, callback) {
+            $http.post(apiBaseURL + 'offer_shares',
+
+{
+            "offer_share" : {
+                "shared_url": url,
+                "offer_id": offer_id,
+                "tracking_code": this.TrackingCode(),
+                "shared_tracking_code": tracking_code,
+                "social_media": media_type,
+                "ip_address": document.getElementById("ip").value
+            }}).then(function(response) {
                 var response = response.data.data;
                 // login successful if there's a token in the response
                 if (response.attributes) {
@@ -137,13 +143,10 @@
         }
 
         function offersClickTrack(offer_id, callback) {
-
             var temp_cookie = 'OfferClickcode_' + offer_id;
             if ($cookies.get(temp_cookie)) {
                 return;
             }
-
-
             $http.post(apiBaseURL + 'offer_clicks', {
                 "offer_click": {
                     "offer_id": offer_id,
@@ -154,8 +157,7 @@
                 var response = response.data.data;
                 // login successful if there's a token in the response
                 if (response.attributes) {
-
-                     $cookies.put(temp_cookie, temp_cookie);
+                    $cookies.put(temp_cookie, temp_cookie);
                     callback(true);
                 } else {
                     // execute callback with false to indicate failed login
