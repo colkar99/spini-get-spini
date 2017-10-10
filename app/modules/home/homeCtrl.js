@@ -78,6 +78,7 @@
         vm.how_works = true;
         vm.offerClass = false;
 
+
         vm.gridlength = 9;
         vm.gridShow = true;
         window.loginRole = 'refferal';
@@ -162,6 +163,16 @@
                 if (result) {
                     
                     console.log('offersClickTrack');
+                }
+            })
+        };
+
+         vm.offersViewTrack = function() {
+
+            LoginService.offersViewTrack( function(result) {
+                if (result) {
+                    
+                    console.log('offersViewTrack');
                 }
             })
         };
@@ -431,10 +442,10 @@
                 }
             });
 
-            // if(vm.SelectedCampOffers)
-            // {
-            //     vm.offersClickTrack(vm.SelectedCampOffers[0].id)
-            // }
+            if(vm.SelectedCampOffers)
+            {
+                vm.offersClickTrack(vm.SelectedCampOffers[0].id)
+            }
 
             
 

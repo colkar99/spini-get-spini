@@ -169,7 +169,7 @@
             if ($cookies.get(temp_cookie)) {
                 return;
             }
-            $http.put(apiBaseURL + 'page_visits', {
+            $http.post(apiBaseURL + 'page_visits', {
                 "page_visit": {
                     "url": window.location.href.replace('#!/', ''),
                     "offer_id": document.getElementById("offer_id").value,

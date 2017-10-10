@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-10-09. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-10-10. 
 * @author Kathik
 */
 (function() {
@@ -382,6 +382,7 @@ angular.module('signupModule')
         vm.how_works = true;
         vm.offerClass = false;
 
+
         vm.gridlength = 9;
         vm.gridShow = true;
         window.loginRole = 'refferal';
@@ -466,6 +467,16 @@ angular.module('signupModule')
                 if (result) {
                     
                     console.log('offersClickTrack');
+                }
+            })
+        };
+
+         vm.offersViewTrack = function() {
+
+            LoginService.offersViewTrack( function(result) {
+                if (result) {
+                    
+                    console.log('offersViewTrack');
                 }
             })
         };
@@ -735,10 +746,10 @@ angular.module('signupModule')
                 }
             });
 
-            // if(vm.SelectedCampOffers)
-            // {
-            //     vm.offersClickTrack(vm.SelectedCampOffers[0].id)
-            // }
+            if(vm.SelectedCampOffers)
+            {
+                vm.offersClickTrack(vm.SelectedCampOffers[0].id)
+            }
 
             
 
@@ -1528,7 +1539,7 @@ LodashFactory.$inject = ['$window'];
             if ($cookies.get(temp_cookie)) {
                 return;
             }
-            $http.put(apiBaseURL + 'page_visits', {
+            $http.post(apiBaseURL + 'page_visits', {
                 "page_visit": {
                     "url": window.location.href.replace('#!/', ''),
                     "offer_id": document.getElementById("offer_id").value,
