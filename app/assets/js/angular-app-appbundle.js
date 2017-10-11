@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-10-10. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-10-11. 
 * @author Kathik
 */
 (function() {
@@ -1397,10 +1397,10 @@ LodashFactory.$inject = ['$window'];
      * Service of the app
      */
     angular.module('angular-app').service('LoginService', LoginService).service('SocialLoginService', SocialLoginService);
-    LoginService.$inject = ['$http', '$cookies', 'apiBaseURL', '$state'];
+    LoginService.$inject = ['$http', '$cookies', 'apiBaseURL', '$state','ngToast'];
     SocialLoginService.$inject = ['$q', '$rootScope', '$window'];
 
-    function LoginService($http, $cookies, apiBaseURL, $state) {
+    function LoginService($http, $cookies, apiBaseURL, $state,ngToast) {
         var service = {};
         service.Login = Login;
         service.Logout = Logout;
@@ -1455,7 +1455,7 @@ LodashFactory.$inject = ['$window'];
         }
 
         function getProfileInfo(callback) {
-            $http.get(apiBaseURL + '/profile').then(function(response) {
+            $http.get(apiBaseURL + 'profile').then(function(response) {
                 var response = response.data.data;
                 // login successful if there's a token in the response
                 if (response.attributes) {
@@ -1468,7 +1468,7 @@ LodashFactory.$inject = ['$window'];
         }
 
         function VendorCreate(vendor, callback) {
-            $http.post(apiBaseURL + '/registration', {
+            $http.post(apiBaseURL + 'registration', {
                 "registration": vendor
             }).then(function(response) {
                 var response = response.data.data;
@@ -1476,14 +1476,27 @@ LodashFactory.$inject = ['$window'];
                 if (response.attributes) {
                     callback(response.attributes);
                 } else {
+
+
+     
+
+
                     // execute callback with false to indicate failed login
                     callback(false);
                 }
-            });
+            }).catch(function(response) {
+                            ngToast.dismiss();
+                            ngToast.create({
+                                content: response.data.errors[0].detail,
+                                dismissOnTimeout: false,
+                                dismissButton: true,
+                                dismissOnClick: false
+                            });
+                        });
         }
 
         function VendorAuth(loginAuth, callback) {
-            $http.post(apiBaseURL + '/user_token', {
+            $http.post(apiBaseURL + 'user_token', {
                 "auth": loginAuth
             }).then(function(response) {
                 console.log(response);
@@ -1581,7 +1594,7 @@ LodashFactory.$inject = ['$window'];
         }
 
         function getVendorProfileInfo(callback) {
-            $http.get(apiBaseURL + '/profile').then(function(response) {
+            $http.get(apiBaseURL + 'profile').then(function(response) {
                 var response = response.data.data;
                 // login successful if there's a token in the response
                 if (response.attributes) {
@@ -1594,7 +1607,7 @@ LodashFactory.$inject = ['$window'];
         }
 
         function getVendorDataList(callback) {
-            $http.get(apiBaseURL + '/profile').then(function(response) {
+            $http.get(apiBaseURL + 'profile').then(function(response) {
                 var response = response.data.data;
                 // login successful if there's a token in the response
                 if (response.attributes) {
@@ -1610,7 +1623,7 @@ LodashFactory.$inject = ['$window'];
 
         function Login(auth, callback) {
             auth.tracking_code = this.TrackingCode();
-            $http.post(apiBaseURL + '/facebook_user_token', {
+            $http.post(apiBaseURL + 'facebook_user_token', {
                 auth: auth
             }).then(function(response) {
                 var response = response.data;
