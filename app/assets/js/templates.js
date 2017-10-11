@@ -1164,51 +1164,92 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "            <button class=\"btn btn-default\" style=\"border: 1px solid #fce7b7; color:#fce7b7; \" ng-click=\"vm.required()\">Required approval status</button>\n" +
     "          </div> -->\n" +
     "        </div>\n" +
-    "        <div class=\"col-sm-3\">\n" +
-    "    <!--       <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
-    "            <img src=\"/app/assets/images/ProfileSection/Icn-OffersShared@2x.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"background-color: #f7f7f7;\">\n" +
-    "            <i class=\"fa fa-hand-paper-o\" aria-hidden=\"true\" style=\"font-size: 80px;\"></i>\n" +
-    "          </div> -->\n" +
-    "    <!--       <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
-    "            <label class=\"text-muted\">No of Code Generated</label>\n" +
-    "          </div>\n" +
-    "          <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
-    "            <label>{{vm.user.coupons_generated.self}}</label>\n" +
-    "          </div> -->\n" +
+    "\n" +
+    "         <div class=\"col-sm-6\"  style=\" border-right: 1px dashed #dcdcdc;\">\n" +
+    "       \n" +
+    "\n" +
+    "<div class=\"col-md-12 nopad\">\n" +
     "\n" +
     "\n" +
-    "          <div class=\"col-sm-12 text-center\" style=\"    padding-top: 30%;border-right: 1px dashed #dcdcdc;\">\n" +
-    "            <label class=\"text-muted\"> No of Code Generated</label>\n" +
-    "          </div>\n" +
-    "          <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
-    "            <label>{{vm.user.total_coupon_generated}}</label>\n" +
+    "   <div class=\"col-sm-12 text-center nopad\" style=\"padding-top: 35px;\">\n" +
+    "            <label class=\"text-muted\">Offer Share Info</label>\n" +
     "          </div>\n" +
     "\n" +
     "\n" +
-    "               <div class=\"col-sm-12 text-center\" style=\"    padding-top: 30%;border-right: 1px dashed #dcdcdc;\">\n" +
-    "            <label class=\"text-muted\"> No of Code Redeemed</label>\n" +
-    "          </div>\n" +
-    "          <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
-    "            <label>{{vm.user.total_offers_redeemed}}</label>\n" +
-    "          </div>\n" +
-    "          <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
-    "            <!-- <button class=\"btn btn-default\"  style=\"border: 1px solid #b6f3d1; color:#b6f3d1;\">Get more offers</button> -->\n" +
-    "          </div>\n" +
-    "        </div>\n" +
-    "         <div class=\"col-sm-3\"  style=\" border-right: 1px dashed #dcdcdc;\">\n" +
-    "       <!--    <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
-    "            <img src=\"/app/assets/images/ProfileSection/Icn-OffersShared@2x.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"background-color: #f7f7f7;\">\n" +
-    "            <i class=\"fa fa-handshake-o\" aria-hidden=\"true\" style=\" font-size: 80px;\"></i>\n" +
-    "          </div> -->\n" +
-    "          <div class=\"col-sm-12 text-center\" style=\"padding-top: 35px;\">\n" +
-    "            <label class=\"text-muted\">Share Count</label>\n" +
-    "          </div>\n" +
+    "\n" +
+    "<div class=\"col-md-6 nopad\">\n" +
+    "  \n" +
+    "\n" +
+    "       <h4>Your Self :  </h4>\n" +
+    "    <p>\n" +
     "\n" +
     "\n" +
-    "          <div class=\"col-sm-12 text-center\" style=\"font-size: 16px;\" ng-repeat=\"item in vm.user.social_sharing \">\n" +
-    "            <label class=\"text-capitalize\" style=\"    margin-top: 30px;\">{{item.social_media}} : {{item.total_shares}}</label>\n" +
-    "     \n" +
-    "          </div>\n" +
+    "No Clicks : <b> {{vm.user.offer_info.user.clicks}} </b><br/>\n" +
+    "No Views : <b> {{vm.user.offer_info.user.views}} </b><br/>\n" +
+    "No Shares : <b> {{vm.user.offer_info.user.shares}} </b><br/>\n" +
+    "No Generated Coupons : <b> {{vm.user.offer_info.user.coupons}} </b><br/>\n" +
+    "No Redemptions : <b> {{vm.user.offer_info.user.redemptions}} </b><br/>\n" +
+    "\n" +
+    "    </p>\n" +
+    "\n" +
+    "    <hr>\n" +
+    "    \n" +
+    "</div>\n" +
+    "\n" +
+    "\n" +
+    "<div class=\"col-md-6 nopad\">\n" +
+    "  \n" +
+    "\n" +
+    "         <h4>Your Child :  </h4>\n" +
+    "\n" +
+    "    <p>\n" +
+    "\n" +
+    "No Clicks : <b> {{vm.user.offer_info.child.clicks}} </b><br/>\n" +
+    "No Views : <b> {{vm.user.offer_info.child.views}} </b><br/>\n" +
+    "No Shares : <b> {{vm.user.offer_info.child.shares}} </b><br/>\n" +
+    "No Generated Coupons : <b> {{vm.user.offer_info.child.coupons}} </b><br/>\n" +
+    "No Redemptions : <b> {{vm.user.offer_info.child.redemptions}} </b><br/>\n" +
+    "\n" +
+    "    </p>\n" +
+    "\n" +
+    "    <hr>\n" +
+    "    \n" +
+    "</div>\n" +
+    "  </div>\n" +
+    "\n" +
+    "     <div class=\"col-sm-12\" ng-repeat=\"item in vm.user.offer_info track by $index\" style=\"font-size: 16px;\">\n" +
+    "    <!-- <p ng-if=\"$index == 0\">\n" +
+    "        Your Info\n" +
+    "    </p>\n" +
+    "\n" +
+    "    <p ng-if=\"$index == 1\">\n" +
+    "        Your Guest\n" +
+    "    </p>\n" +
+    "    <p ng-if=\"$index == 2\">\n" +
+    "        Your Child\n" +
+    "    </p>\n" +
+    "    <label class=\"text-capitalize\" style=\"    font-size: 13px;\">\n" +
+    "        Clicks:{{item.clicks}}\n" +
+    "    </label>\n" +
+    "    <label class=\"text-capitalize\" style=\"    font-size: 13px;\">\n" +
+    "        Sign ups:{{item.signups}}\n" +
+    "    </label>\n" +
+    "    <label class=\"text-capitalize\" style=\"    font-size: 13px;\">\n" +
+    "        Views:{{item.views}}\n" +
+    "    </label>\n" +
+    "    <label class=\"text-capitalize\" style=\"    font-size: 13px;\">\n" +
+    "        Shares:{{item.shares}}\n" +
+    "    </label>\n" +
+    "    <label class=\"text-capitalize\" style=\"    font-size: 13px;\">\n" +
+    "        No Generated Coupons:{{item.coupons}}\n" +
+    "    </label>\n" +
+    "    <label class=\"text-capitalize\" style=\"    font-size: 13px;\">\n" +
+    "        No Redemptions :    {{\n" +
+    "                item.redemptions\n" +
+    "            }}\n" +
+    "    </label> -->\n" +
+    "</div>\n" +
+    "\n" +
     "          <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
     "            <!-- <button class=\"btn btn-default\"  style=\"border: 1px solid #b6f3d1; color:#b6f3d1;\">Get more offers</button> -->\n" +
     "          </div>\n" +
