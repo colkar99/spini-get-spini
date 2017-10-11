@@ -11,11 +11,11 @@
                 <div class="text-center bg-grey nopad pad-bot-10">
                     <img class="poplogo" src="/app/assets/images/header/Logo@2x.png">
                         <h3>
-                            Referla SIGN IN
+                            REFERYOGI SIGN IN
                         </h3>
                         <br/>
                         <h5>
-                            Share & Earn My Treasure..!!!
+                            Share & Earn Treasure..!!!
                         </h5>
                     
                 </div>
@@ -49,11 +49,11 @@
                 <div class="text-center bg-grey nopad pad-bot-10">
                     <img class="poplogo" src="/app/assets/images/header/Logo@2x.png">
                         <h3>
-                            SIGN UP WITH Referla
+                            SIGN UP WITH REFERYOGI
                         </h3>
                         <br/>
                         <h5>
-                            Share & Earn My Treasure..!!!
+                            Share & Earn Treasure..!!!
                         </h5>
                     
                 </div>
@@ -116,24 +116,24 @@
                 </div>
                 <div class="row backcls mar-10px text-left">
                     <div class="form-group popupcenter padtop40 ">
-                        <div class="col-md-12 nopad text-center" ng-if="vm.user.name">
+                        <div class="col-md-12 nopad text-center" ng-show="vm.isReferral()">
                             <h4 class="marbt20">
-                                Hi  {{vm.user.name ? vm.user.name : 'Guest'}}
+                                Hi  {{vm.username()}}
                             </h4>
                             <h4 class="marbt20">
-                                Availing this offer will add  Rs.{{item.attributes.treasure_value}} to your Referla Wallet!
+                                Availing this offer will add  Rs.{{item.attributes.treasure_value}} to your ReferYogi Wallet!
                             </h4>
                             <h4 class="marbt20">
                                 Offer code sent to your registered mobile No - 
 
 
 
-                  {{vm.user.mobile ? vm.user.mobile : vm.mobie()}}
+                  {{vm.usermobile()}}
                             </h4>
                         </div>
-                        <div class="col-md-12 nopad text-center" ng-if="vm.user.name == null">
+                        <div class="col-md-12 nopad text-center" ng-hide="vm.isReferral()">
                             <h4 class="marbt20">
-                                Hi  {{vm.user.name ? vm.user.name : 'Guest'}}
+                                Hi  Guest
                             </h4>
                
                             <h4 class="marbt20">
@@ -143,7 +143,7 @@
                             </h4>
                        
                         </div>
-                        <div class="col-md-12 nopad gpad text-center"ng-if="vm.user.name" >
+                        <div class="col-md-12 nopad gpad text-center" ng-show="vm.isReferral()" >
                             <span class="offer-spini" >
                                 <i aria-hidden="true" class="fa fa-share-alt-square link-icon">
                                 </i>
@@ -151,8 +151,8 @@
                             </span>
                         </div>
 
-                             <div class="col-md-12 nopad gpad text-center" ng-if="vm.user.name == null">
-                            <span class="offer-spini"  ng-click="vm.openLoginPopup('referral','confirm-code-popup')">
+                             <div class="col-md-12 nopad gpad text-center" ng-hide="vm.isReferral()">
+                            <span class="offer-spini"  ng-click="vm.signupPOP()">
                                 <i aria-hidden="true" class="fa fa-share-alt-square link-icon">
                                 </i>
                                 SIGN UP & SHARE & EARN
@@ -160,12 +160,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="row backcls mar-10px text-left dotted" ng-if="vm.user.name == null">
+                <div class="row backcls mar-10px text-left dotted" ng-hide="vm.isReferral()">
                     <div class="col-md-12 nopad mar45">
                         <div class="col-md-8">
                             <p class="font15px popupfoot1 ">
                                 <b>
-                                    Further more sharing this code will earn you
+                                    Further more sharing this code will earn you upto
                                 </b>
                                 <br/>
                                 <b>
@@ -173,11 +173,11 @@
                                 </b>
                             </p>
                             <div class="social pad-bot10 padtop30 popupfoot1">
-                                <a class="fa fa-twitter twitter" ng-click="vm.openLoginPopup('referral','confirm-code-popup')" title="">
+                                <a class="fa fa-twitter twitter" ng-click="vm.signupPOP()" title="">
                                 </a>
-                                <a class="fa fa-facebook fb"   ng-click="vm.openLoginPopup('referral','confirm-code-popup')" title="">
+                                <a class="fa fa-facebook fb"   ng-click="vm.signupPOP()" title="">
                                 </a>
-                                <a class="fa fa-clone clone" ng-click="vm.openLoginPopup('referral','confirm-code-popup')" title="">
+                                <a class="fa fa-clone clone" ng-click="vm.signupPOP()" title="">
                                 </a>
                             </div>
                         </div>
@@ -186,18 +186,18 @@
                                 Rs.200
                             </h1>
                             <p>
-                                Earn real cash while you enjoy Referla offers!!
+                                Earn real cash while you enjoy ReferYogi offers!!
                             </p>
                         </div>
                     </div>
                 </div>
 
-                                <div class="row backcls mar-10px text-left dotted" ng-if="vm.user.name">
+                                <div class="row backcls mar-10px text-left dotted" ng-show="vm.isReferral()">
                     <div class="col-md-12 nopad mar45">
                         <div class="col-md-8">
                             <p class="font15px popupfoot1 ">
                                 <b>
-                                    Further more sharing this code will earn you
+                                    Further more sharing this code will earn you upto
                                 </b>
                                 <br/>
                                 <b>
@@ -218,7 +218,7 @@
                                 Rs.{{item.attributes.treasure_value}}
                             </h1>
                             <p>
-                                Earn real cash while you enjoy Referla offers!!
+                                Earn real cash while you enjoy ReferYogi offers!!
                             </p>
                         </div>
                     </div>
@@ -236,7 +236,7 @@
     </a>
     <div class="overlay-content">
         <div class="row "  ng-repeat="item in vm.getSelectedOfferData()">
-            <div class="col-md-6 row col-md-offset-3 white pad-bot0 pad10 ">
+            <div class="col-md-8 row col-md-offset-2 white pad-bot0 pad10 ">
                 <div class="row mar20bt">
                     <div class="col-md-1 nopad ico">
                         <i aria-hidden="true" class="fa fa-arrow-left offer-logo-40px mar10" ng-click="vm.closeGetNoPopup()">
@@ -279,7 +279,7 @@
                                         Minimum 10 digits required.
                                     </span>
                                     <span ng-show="(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.maxlength" style="color: red">
-                                        Maximum 13 digits only allowed.
+                                        Maximum 10 digits only allowed.
                                     </span>
                                 </input>
                             </div>
@@ -303,9 +303,9 @@
                         <p class="font15px popupfoot pad-bot ">
                             Psst...!
                             <br/>
-                            Signup to become a Referla referral and earn Rs.200 with this offer!
+                            Signup to become a ReferYogi referral and earn upto Rs.200 with this offer!
                             <br/>
-                            Sparsh earned Rs.2000 begin a Referla Referral!
+                            Sparsh earned Rs.2000 begin a ReferYogi Referral!
                             <br/>
                         </p>
                         <p class="fbblue font15px popupfoot pad-bot" ng-click="vm.signupPOP()">
@@ -375,7 +375,7 @@
                                             <span class="offer-spini" ng-show=" {{item.attributes.treasure_value}}">
                                                 <i aria-hidden="true" class="fa fa-gift link-icon fagift">
                                                 </i>
-                                                My Treasure
+                                                Treasure Upto 
                                                
                                                  ₹ {{item.attributes.treasure_value}}
                                                

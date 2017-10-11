@@ -483,7 +483,21 @@ angular.module('signupModule')
 
 
 
+        vm.username = function()
+        {
 
+            return vm.user.name;
+        }
+
+
+        vm.usermobile = function()
+        {
+
+            return vm.user.mobile;
+        }
+
+
+ 
         vm.SeoHelpSocialShare = function(offer_id, type) {
             var data = {};
             angular.forEach(vm.offers, function(value, key) {
@@ -587,6 +601,7 @@ angular.module('signupModule')
             // closeNav()
             window.loginRole = data;
             document.getElementById("offer-popup").style.width = "0%";
+            document.getElementById("confirm-code-popup").style.width = "0%";
             document.getElementById("get-code-popup").style.width = "0%";
             document.getElementById("login-signup").style.width = "100%";
         }
@@ -772,7 +787,7 @@ angular.module('signupModule')
             $timeout(function() {
                 ngToast.dismiss();
                 ngToast.create({
-                    content: '<strong>Referla</strong>: Link Copied',
+                    content: '<strong>ReferYogi</strong>: Link Copied',
                     dismissOnTimeout: false,
                     dismissButton: true,
                     dismissOnClick: false
@@ -808,7 +823,7 @@ angular.module('signupModule')
                 $timeout(function() {
                     ngToast.dismiss();
                     ngToast.create({
-                        content: '<strong>Referla</strong>: Code already sent',
+                        content: '<strong>ReferYogi</strong>: Code already sent',
                         dismissOnTimeout: false,
                         dismissButton: true,
                         dismissOnClick: false
@@ -943,7 +958,7 @@ angular.module('signupModule')
                     $timeout(function() {
                         ngToast.dismiss();
                         ngToast.create({
-                            content: '<strong>Referla</strong>: Welcome to Referla!',
+                            content: 'Welcome to ReferYogi!!',
                             dismissOnTimeout: false,
                             dismissButton: true,
                             dismissOnClick: false
