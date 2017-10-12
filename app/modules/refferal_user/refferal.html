@@ -1,171 +1,174 @@
 <article>
-  <div class="container" style="padding: 15px;">
-    <div class="col-sm-2" >
-      <div class="row" style="background-color: #fff;">
-        <div class="col-sm-12">
-          <div class="side_nav_refferal" >
-            <img  src="/app/assets/images/ProfileSection/Left-Nav/02Icn-ProfileDetails-Over@2x.png" class="img-thumbnail" alt="Cinque Terre" width="200" height="150">
-            <div class="col-sm-11">
-              <label class="text-center" style="    margin-top: 20px;">{{vm.user.name}} </label>
-              <label class="text-muted">{{vm.user.mobile}}</label>
-              <!-- <label><i class=" glyphicon glyphicon-map-marker">Location</i></label> -->
-            </div>
-            </div>
-          </div>
-        </div>
-        <div class="row" style="margin-top: 20px;">
-          <div class="col-sm-12">
-            <div class="sidebar-nav">
-              <div class="navbar navbar-default" role="navigation">
-                <div class="navbar-header">
-                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                  <span class="visible-xs navbar-brand">Sidebar Menu</span>
+    <div class="container" style="padding: 15px;">
+        <div class="col-sm-2">
+            <div class="row" style="background-color: #fff;">
+                <div class="col-sm-12" style="    margin-top: 10px;">
+                    <div class="side_nav_refferal">
+                        <img  class="img-thumbnail" height="150" ng-src="{{vm.user.profile_image}}" width="200">
+                            <div class="col-sm-12">
+                                <p class="text-center" style="    margin-top: 20px;">
+                                   <b> {{vm.user.name}}</b>
+                                </p>
+                                <p class="text-muted text-center">
+                                    <b>{{vm.user.mobile}}</b>
+                                </p>
+                                <!-- <label><i class=" glyphicon glyphicon-map-marker">Location</i></label> -->
+                            </div>
+                        </img>
+                    </div>
                 </div>
-                <div class="navbar-collapse collapse sidebar-navbar-collapse">
-                  <ul class="nav navbar-nav">
-                    <li  style="font-size: 18px;">
-                      <a class="text-center" href="#">
-                        <i class="glyphicon glyphicon-stats pull-left" aria-hidden="true"></i>
-                        <span>Dashboard</span>
-                      </a>
-                    </li>
-                    <li style="font-size: 18px;">
-                      <a href="" class="text-center">
-                        <i class="glyphicon glyphicon-user pull-left"></i>
-                         Profile
-                       </a>
-                     </li>
-                    <li style="font-size: 18px;">
-                      <a href="" class="text-center">
-                        <i class="glyphicon glyphicon-tag pull-left"></i>
-                      Saved Offer
-                      </a>
-                    </li>
-                    <li style="font-size: 18px;">
-                      <a href="" class="text-center">
-                        <i class="glyphicon glyphicon-usd pull-left"></i>
-                        Wallet
-                      </a>
-                  </li>
-                  </ul>
-                </div><!--/.nav-collapse -->
-              </div>
             </div>
-          </div>
-      </div>
-    </div>
-    <div class="col-sm-10">
-      <div class="row">
-        <div class="col-sm-12">
-          <img src="/app/assets/images/03Banner/01Banner - 1166w - complete.png" class="img-thumbnail" alt="Cinque Terre" width="100%" height="236">
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-sm-12">
+                    <div class="sidebar-nav">
+                        <div class="navbar navbar-default" role="navigation">
+                            <div class="navbar-header">
+                                <button class="navbar-toggle" data-target=".sidebar-navbar-collapse" data-toggle="collapse" type="button">
+                                    <span class="sr-only">
+                                        Toggle navigation
+                                    </span>
+                                    <span class="icon-bar">
+                                    </span>
+                                    <span class="icon-bar">
+                                    </span>
+                                    <span class="icon-bar">
+                                    </span>
+                                </button>
+                                <span class="visible-xs navbar-brand">
+                                    Sidebar Menu
+                                </span>
+                            </div>
+                            <div class="navbar-collapse collapse sidebar-navbar-collapse">
+                                <ul class="nav navbar-nav">
+                                    <li style="font-size: 18px;">
+                                        <a class="text-center" href="#">
+                                            <i aria-hidden="true" class="glyphicon glyphicon-stats pull-left">
+                                            </i>
+                                            <span>
+                                                Dashboard
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li style="font-size: 18px;">
+                                        <a class="text-center" href="">
+                                            <i class="glyphicon glyphicon-user pull-left">
+                                            </i>
+                                            Profile
+                                        </a>
+                                    </li>
+                                    <li style="font-size: 18px;">
+                                        <a class="text-center" href="">
+                                            <i class="glyphicon glyphicon-tag pull-left">
+                                            </i>
+                                            Saved Offer
+                                        </a>
+                                    </li>
+                                    <li style="font-size: 18px;">
+                                        <a class="text-center" href="">
+                                            <i class="glyphicon glyphicon-usd pull-left">
+                                            </i>
+                                            Wallet
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--/.nav-collapse -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="row content-refferal" >
-        <div class="col-sm-3" style="border-right: 1px dashed #dcdcdc;">
-          <div class="col-sm-12 text-center" style="padding: 35px;">
-            <!-- <img src="/app/assets/images/ProfileSection/Icn-WalletMoney@2x.png" class="img-thumbnail" alt="Cinque Terre" width="80" height="80" style="background-color: #f7f7f7;"> -->
-            <i class="fa fa-money" aria-hidden="true" style="font-size: 80px;"></i>
-          </div>
-          <div class="col-sm-12 text-center">
-            <label class="text-muted">Wallet Money</label>
-          </div>
-          <div class="col-sm-12 text-center" style="font-size: 28px;">
-            <i class="fa fa-inr" aria-hidden="true"></i>
-            <label>{{vm.user.wallet_money}}</label>
-          </div>
-
-
-
-
-          <div class="col-sm-12 text-center" style="padding: 20px;">
-
-            <button class="btn btn-default field-tip" style="border: 1px solid #bfe7fe;color:#bfe7fe" ng-disabled="true">
- <span class="tip-content">Earn minimum Rs.500/- to make a transfer</span>
-            Transfer to paytm wallet</button>
-
-          </div>
-        </div>
-        <div class="col-sm-3" style="border-right: 1px dashed #dcdcdc;">
-          <div class="col-sm-12 text-center" style="padding: 35px;">
-            <!-- <img src="/app/assets/images/ProfileSection/Icn-ApproveMoney.png" class="img-thumbnail" alt="Cinque Terre" width="80" height="80" style="height: 80px;    background-color: #f7f7f7;"> -->
-            <i class="fa fa-gift" aria-hidden="true" style="font-size: 80px;"></i>
-          </div>
-        
-
-          <div class="col-sm-12 text-center">
-            <label class="text-muted">Treasure Value</label>
-          </div>
-          <div class="col-sm-12 text-center" style="font-size: 28px;">
-            <i class="fa fa-inr" aria-hidden="true"></i>
-            <label>{{vm.user.treasure_value}}</label>
-          </div>
-
-
-
-     <!--      <div class="col-sm-12 text-center" style="padding: 20px;">
+        <div class="col-sm-10">
+            <div class="row">
+                <div class="col-sm-12">
+                    <img alt="Cinque Terre" class="img-thumbnail" height="236" src="/app/assets/images/03Banner/01Banner - 1166w - complete.png" width="100%">
+                    </img>
+                </div>
+            </div>
+            <div class="row content-refferal">
+                <div class="col-sm-3" style="border-right: 1px dashed #dcdcdc;">
+                    <div class="col-sm-12 text-center" style="padding: 35px;">
+                        <!-- <img src="/app/assets/images/ProfileSection/Icn-WalletMoney@2x.png" class="img-thumbnail" alt="Cinque Terre" width="80" height="80" style="background-color: #f7f7f7;"> -->
+                        <i aria-hidden="true" class="fa fa-money" style="font-size: 80px;">
+                        </i>
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        <label class="text-muted">
+                            Wallet Money
+                        </label>
+                    </div>
+                    <div class="col-sm-12 text-center" style="font-size: 28px;">
+                        <i aria-hidden="true" class="fa fa-inr">
+                        </i>
+                        <label>
+                            {{vm.user.wallet_money}}
+                        </label>
+                    </div>
+                    <div class="col-sm-12 text-center" style="padding: 20px;">
+                        <button class="btn btn-default field-tip" ng-disabled="true" style="border: 1px solid #bfe7fe;color:#bfe7fe">
+                            <span class="tip-content">
+                                Earn minimum Rs.500/- to make a transfer
+                            </span>
+                            Transfer to paytm wallet
+                        </button>
+                    </div>
+                </div>
+                <div class="col-sm-3" style="border-right: 1px dashed #dcdcdc;">
+                    <div class="col-sm-12 text-center" style="padding: 35px;">
+                        <!-- <img src="/app/assets/images/ProfileSection/Icn-ApproveMoney.png" class="img-thumbnail" alt="Cinque Terre" width="80" height="80" style="height: 80px;    background-color: #f7f7f7;"> -->
+                        <i aria-hidden="true" class="fa fa-gift" style="font-size: 80px;">
+                        </i>
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        <label class="text-muted">
+                            Treasure Value
+                        </label>
+                    </div>
+                    <div class="col-sm-12 text-center" style="font-size: 28px;">
+                        <i aria-hidden="true" class="fa fa-inr">
+                        </i>
+                        <label>
+                            {{vm.user.treasure_value}}
+                        </label>
+                    </div>
+                    <!--      <div class="col-sm-12 text-center" style="padding: 20px;">
             <button class="btn btn-default" style="border: 1px solid #fce7b7; color:#fce7b7; " ng-click="vm.required()">Required approval status</button>
           </div> -->
-        </div>
-
-         <div class="col-sm-6"  style=" border-right: 1px dashed #dcdcdc;">
-       
-
-<div class="col-md-12 nopad">
-
-
-   <div class="col-sm-12 text-center nopad" style="padding-top: 35px;">
-            <label class="text-muted">Offer Share Info</label>
-          </div>
-
-
-
-<div class="col-md-6 nopad">
-  
-
-       <h4>Your Self :  </h4>
-    <p>
-
-
-No Clicks : <b> {{vm.user.offer_info.user.clicks}} </b><br/>
-No Views : <b> {{vm.user.offer_info.user.views}} </b><br/>
-No Shares : <b> {{vm.user.offer_info.user.shares}} </b><br/>
-No Generated Coupons : <b> {{vm.user.offer_info.user.coupons}} </b><br/>
-No Redemptions : <b> {{vm.user.offer_info.user.redemptions}} </b><br/>
-
-    </p>
-
-    <hr>
-    
-</div>
-
-
-<div class="col-md-6 nopad">
-  
-
-         <h4>Your Child :  </h4>
-
-    <p>
-
-No Clicks : <b> {{vm.user.offer_info.child.clicks}} </b><br/>
-No Views : <b> {{vm.user.offer_info.child.views}} </b><br/>
-No Shares : <b> {{vm.user.offer_info.child.shares}} </b><br/>
-No Generated Coupons : <b> {{vm.user.offer_info.child.coupons}} </b><br/>
-No Redemptions : <b> {{vm.user.offer_info.child.redemptions}} </b><br/>
-
-    </p>
-
-    <hr>
-    
-</div>
-  </div>
-
-     <div class="col-sm-12" ng-repeat="item in vm.user.offer_info track by $index" style="font-size: 16px;">
-    <!-- <p ng-if="$index == 0">
+                </div>
+                <div class="col-sm-6" style=" border-right: 1px dashed #dcdcdc;">
+                    <div class="col-md-12 nopad">
+                        <div class="col-sm-6 text-center nopad" style="padding-top: 35px;">
+                            <hr>
+                                <label class="text-muted">
+                                    No of Code Generated : {{vm.user.offer_info.user.coupons}}
+                                </label>
+                                <hr>
+                                    <label class="text-muted">
+                                        No of Shares : {{vm.user.offer_info.user.shares}}
+                                    </label>
+                                    <hr>
+                                    </hr>
+                                </hr>
+                            </hr>
+                        </div>
+                        <div class="col-sm-6 text-center nopad" style="padding-top: 35px;">
+                            <hr>
+                                <label class="text-muted">
+                                    No of Code Redeemed : {{vm.user.offer_info.user.redemptions}}
+                                </label>
+                                <hr>
+                                    <label class="text-muted">
+                                        No of Childs : {{vm.user.child_references_count}}
+                                    </label>
+                                    <hr>
+                                    </hr>
+                                </hr>
+                            </hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12" ng-repeat="item in vm.user.offer_info track by $index" style="font-size: 16px;">
+                    <!-- <p ng-if="$index == 0">
         Your Info
     </p>
 
@@ -195,20 +198,16 @@ No Redemptions : <b> {{vm.user.offer_info.child.redemptions}} </b><br/>
                 item.redemptions
             }}
     </label> -->
-</div>
-
-          <div class="col-sm-12 text-center" style="padding: 20px;">
-            <!-- <button class="btn btn-default"  style="border: 1px solid #b6f3d1; color:#b6f3d1;">Get more offers</button> -->
-          </div>
+                </div>
+                <div class="col-sm-12 text-center" style="padding: 20px;">
+                    <!-- <button class="btn btn-default"  style="border: 1px solid #b6f3d1; color:#b6f3d1;">Get more offers</button> -->
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </article>
-
-
 <style type="text/css">
-  .side_nav_refferal{
+    .side_nav_refferal{
      /*border: 1px solid black;*/
     height: 225px;
   }
@@ -255,4 +254,3 @@ No Redemptions : <b> {{vm.user.offer_info.child.redemptions}} </b><br/>
     background-color: #fff;
 }
 </style>
-

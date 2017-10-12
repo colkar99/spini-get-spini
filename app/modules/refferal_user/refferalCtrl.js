@@ -36,6 +36,11 @@
 		 LoginService.getProfileInfo(function(data)
 		{
 			vm.user = data;
+
+			if(!vm.user.profile_image)
+			{
+				vm.user.profile_image = '/app/assets/images/ProfileSection/Left-Nav/02Icn-ProfileDetails-Over@2x.png';
+			}
 		})
 		}
 		else

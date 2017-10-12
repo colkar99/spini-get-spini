@@ -160,7 +160,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                <div class=\"text-center bg-grey nopad pad-bot-10\">\n" +
     "                    <img class=\"poplogo\" src=\"/app/assets/images/header/Logo@2x.png\">\n" +
     "                        <h3>\n" +
-    "                            REFERYOGI SIGN IN\n" +
+    "                            ReferYogi Sign in\n" +
     "                        </h3>\n" +
     "                        <br/>\n" +
     "                        <h5>\n" +
@@ -198,7 +198,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                <div class=\"text-center bg-grey nopad pad-bot-10\">\n" +
     "                    <img class=\"poplogo\" src=\"/app/assets/images/header/Logo@2x.png\">\n" +
     "                        <h3>\n" +
-    "                            SIGN UP WITH REFERYOGI\n" +
+    "                            Sign up with ReferYogi\n" +
     "                        </h3>\n" +
     "                        <br/>\n" +
     "                        <h5>\n" +
@@ -1052,173 +1052,176 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('app/modules/refferal_user/refferal.html',
     "<article>\n" +
-    "  <div class=\"container\" style=\"padding: 15px;\">\n" +
-    "    <div class=\"col-sm-2\" >\n" +
-    "      <div class=\"row\" style=\"background-color: #fff;\">\n" +
-    "        <div class=\"col-sm-12\">\n" +
-    "          <div class=\"side_nav_refferal\" >\n" +
-    "            <img  src=\"/app/assets/images/ProfileSection/Left-Nav/02Icn-ProfileDetails-Over@2x.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"200\" height=\"150\">\n" +
-    "            <div class=\"col-sm-11\">\n" +
-    "              <label class=\"text-center\" style=\"    margin-top: 20px;\">{{vm.user.name}} </label>\n" +
-    "              <label class=\"text-muted\">{{vm.user.mobile}}</label>\n" +
-    "              <!-- <label><i class=\" glyphicon glyphicon-map-marker\">Location</i></label> -->\n" +
-    "            </div>\n" +
-    "            </div>\n" +
-    "          </div>\n" +
-    "        </div>\n" +
-    "        <div class=\"row\" style=\"margin-top: 20px;\">\n" +
-    "          <div class=\"col-sm-12\">\n" +
-    "            <div class=\"sidebar-nav\">\n" +
-    "              <div class=\"navbar navbar-default\" role=\"navigation\">\n" +
-    "                <div class=\"navbar-header\">\n" +
-    "                  <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".sidebar-navbar-collapse\">\n" +
-    "                    <span class=\"sr-only\">Toggle navigation</span>\n" +
-    "                    <span class=\"icon-bar\"></span>\n" +
-    "                    <span class=\"icon-bar\"></span>\n" +
-    "                    <span class=\"icon-bar\"></span>\n" +
-    "                  </button>\n" +
-    "                  <span class=\"visible-xs navbar-brand\">Sidebar Menu</span>\n" +
+    "    <div class=\"container\" style=\"padding: 15px;\">\n" +
+    "        <div class=\"col-sm-2\">\n" +
+    "            <div class=\"row\" style=\"background-color: #fff;\">\n" +
+    "                <div class=\"col-sm-12\" style=\"    margin-top: 10px;\">\n" +
+    "                    <div class=\"side_nav_refferal\">\n" +
+    "                        <img  class=\"img-thumbnail\" height=\"150\" ng-src=\"{{vm.user.profile_image}}\" width=\"200\">\n" +
+    "                            <div class=\"col-sm-12\">\n" +
+    "                                <p class=\"text-center\" style=\"    margin-top: 20px;\">\n" +
+    "                                   <b> {{vm.user.name}}</b>\n" +
+    "                                </p>\n" +
+    "                                <p class=\"text-muted text-center\">\n" +
+    "                                    <b>{{vm.user.mobile}}</b>\n" +
+    "                                </p>\n" +
+    "                                <!-- <label><i class=\" glyphicon glyphicon-map-marker\">Location</i></label> -->\n" +
+    "                            </div>\n" +
+    "                        </img>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"navbar-collapse collapse sidebar-navbar-collapse\">\n" +
-    "                  <ul class=\"nav navbar-nav\">\n" +
-    "                    <li  style=\"font-size: 18px;\">\n" +
-    "                      <a class=\"text-center\" href=\"#\">\n" +
-    "                        <i class=\"glyphicon glyphicon-stats pull-left\" aria-hidden=\"true\"></i>\n" +
-    "                        <span>Dashboard</span>\n" +
-    "                      </a>\n" +
-    "                    </li>\n" +
-    "                    <li style=\"font-size: 18px;\">\n" +
-    "                      <a href=\"\" class=\"text-center\">\n" +
-    "                        <i class=\"glyphicon glyphicon-user pull-left\"></i>\n" +
-    "                         Profile\n" +
-    "                       </a>\n" +
-    "                     </li>\n" +
-    "                    <li style=\"font-size: 18px;\">\n" +
-    "                      <a href=\"\" class=\"text-center\">\n" +
-    "                        <i class=\"glyphicon glyphicon-tag pull-left\"></i>\n" +
-    "                      Saved Offer\n" +
-    "                      </a>\n" +
-    "                    </li>\n" +
-    "                    <li style=\"font-size: 18px;\">\n" +
-    "                      <a href=\"\" class=\"text-center\">\n" +
-    "                        <i class=\"glyphicon glyphicon-usd pull-left\"></i>\n" +
-    "                        Wallet\n" +
-    "                      </a>\n" +
-    "                  </li>\n" +
-    "                  </ul>\n" +
-    "                </div><!--/.nav-collapse -->\n" +
-    "              </div>\n" +
     "            </div>\n" +
-    "          </div>\n" +
-    "      </div>\n" +
-    "    </div>\n" +
-    "    <div class=\"col-sm-10\">\n" +
-    "      <div class=\"row\">\n" +
-    "        <div class=\"col-sm-12\">\n" +
-    "          <img src=\"/app/assets/images/03Banner/01Banner - 1166w - complete.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"100%\" height=\"236\">\n" +
+    "            <div class=\"row\" style=\"margin-top: 20px;\">\n" +
+    "                <div class=\"col-sm-12\">\n" +
+    "                    <div class=\"sidebar-nav\">\n" +
+    "                        <div class=\"navbar navbar-default\" role=\"navigation\">\n" +
+    "                            <div class=\"navbar-header\">\n" +
+    "                                <button class=\"navbar-toggle\" data-target=\".sidebar-navbar-collapse\" data-toggle=\"collapse\" type=\"button\">\n" +
+    "                                    <span class=\"sr-only\">\n" +
+    "                                        Toggle navigation\n" +
+    "                                    </span>\n" +
+    "                                    <span class=\"icon-bar\">\n" +
+    "                                    </span>\n" +
+    "                                    <span class=\"icon-bar\">\n" +
+    "                                    </span>\n" +
+    "                                    <span class=\"icon-bar\">\n" +
+    "                                    </span>\n" +
+    "                                </button>\n" +
+    "                                <span class=\"visible-xs navbar-brand\">\n" +
+    "                                    Sidebar Menu\n" +
+    "                                </span>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"navbar-collapse collapse sidebar-navbar-collapse\">\n" +
+    "                                <ul class=\"nav navbar-nav\">\n" +
+    "                                    <li style=\"font-size: 18px;\">\n" +
+    "                                        <a class=\"text-center\" href=\"#\">\n" +
+    "                                            <i aria-hidden=\"true\" class=\"glyphicon glyphicon-stats pull-left\">\n" +
+    "                                            </i>\n" +
+    "                                            <span>\n" +
+    "                                                Dashboard\n" +
+    "                                            </span>\n" +
+    "                                        </a>\n" +
+    "                                    </li>\n" +
+    "                                    <li style=\"font-size: 18px;\">\n" +
+    "                                        <a class=\"text-center\" href=\"\">\n" +
+    "                                            <i class=\"glyphicon glyphicon-user pull-left\">\n" +
+    "                                            </i>\n" +
+    "                                            Profile\n" +
+    "                                        </a>\n" +
+    "                                    </li>\n" +
+    "                                    <li style=\"font-size: 18px;\">\n" +
+    "                                        <a class=\"text-center\" href=\"\">\n" +
+    "                                            <i class=\"glyphicon glyphicon-tag pull-left\">\n" +
+    "                                            </i>\n" +
+    "                                            Saved Offer\n" +
+    "                                        </a>\n" +
+    "                                    </li>\n" +
+    "                                    <li style=\"font-size: 18px;\">\n" +
+    "                                        <a class=\"text-center\" href=\"\">\n" +
+    "                                            <i class=\"glyphicon glyphicon-usd pull-left\">\n" +
+    "                                            </i>\n" +
+    "                                            Wallet\n" +
+    "                                        </a>\n" +
+    "                                    </li>\n" +
+    "                                </ul>\n" +
+    "                            </div>\n" +
+    "                            <!--/.nav-collapse -->\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
     "        </div>\n" +
-    "      </div>\n" +
-    "      <div class=\"row content-refferal\" >\n" +
-    "        <div class=\"col-sm-3\" style=\"border-right: 1px dashed #dcdcdc;\">\n" +
-    "          <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
-    "            <!-- <img src=\"/app/assets/images/ProfileSection/Icn-WalletMoney@2x.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"background-color: #f7f7f7;\"> -->\n" +
-    "            <i class=\"fa fa-money\" aria-hidden=\"true\" style=\"font-size: 80px;\"></i>\n" +
-    "          </div>\n" +
-    "          <div class=\"col-sm-12 text-center\">\n" +
-    "            <label class=\"text-muted\">Wallet Money</label>\n" +
-    "          </div>\n" +
-    "          <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
-    "            <i class=\"fa fa-inr\" aria-hidden=\"true\"></i>\n" +
-    "            <label>{{vm.user.wallet_money}}</label>\n" +
-    "          </div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "          <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
-    "\n" +
-    "            <button class=\"btn btn-default field-tip\" style=\"border: 1px solid #bfe7fe;color:#bfe7fe\" ng-disabled=\"true\">\n" +
-    " <span class=\"tip-content\">Earn minimum Rs.500/- to make a transfer</span>\n" +
-    "            Transfer to paytm wallet</button>\n" +
-    "\n" +
-    "          </div>\n" +
-    "        </div>\n" +
-    "        <div class=\"col-sm-3\" style=\"border-right: 1px dashed #dcdcdc;\">\n" +
-    "          <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
-    "            <!-- <img src=\"/app/assets/images/ProfileSection/Icn-ApproveMoney.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"height: 80px;    background-color: #f7f7f7;\"> -->\n" +
-    "            <i class=\"fa fa-gift\" aria-hidden=\"true\" style=\"font-size: 80px;\"></i>\n" +
-    "          </div>\n" +
-    "        \n" +
-    "\n" +
-    "          <div class=\"col-sm-12 text-center\">\n" +
-    "            <label class=\"text-muted\">Treasure Value</label>\n" +
-    "          </div>\n" +
-    "          <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
-    "            <i class=\"fa fa-inr\" aria-hidden=\"true\"></i>\n" +
-    "            <label>{{vm.user.treasure_value}}</label>\n" +
-    "          </div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "     <!--      <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
+    "        <div class=\"col-sm-10\">\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-12\">\n" +
+    "                    <img alt=\"Cinque Terre\" class=\"img-thumbnail\" height=\"236\" src=\"/app/assets/images/03Banner/01Banner - 1166w - complete.png\" width=\"100%\">\n" +
+    "                    </img>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"row content-refferal\">\n" +
+    "                <div class=\"col-sm-3\" style=\"border-right: 1px dashed #dcdcdc;\">\n" +
+    "                    <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
+    "                        <!-- <img src=\"/app/assets/images/ProfileSection/Icn-WalletMoney@2x.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"background-color: #f7f7f7;\"> -->\n" +
+    "                        <i aria-hidden=\"true\" class=\"fa fa-money\" style=\"font-size: 80px;\">\n" +
+    "                        </i>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-sm-12 text-center\">\n" +
+    "                        <label class=\"text-muted\">\n" +
+    "                            Wallet Money\n" +
+    "                        </label>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
+    "                        <i aria-hidden=\"true\" class=\"fa fa-inr\">\n" +
+    "                        </i>\n" +
+    "                        <label>\n" +
+    "                            {{vm.user.wallet_money}}\n" +
+    "                        </label>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
+    "                        <button class=\"btn btn-default field-tip\" ng-disabled=\"true\" style=\"border: 1px solid #bfe7fe;color:#bfe7fe\">\n" +
+    "                            <span class=\"tip-content\">\n" +
+    "                                Earn minimum Rs.500/- to make a transfer\n" +
+    "                            </span>\n" +
+    "                            Transfer to paytm wallet\n" +
+    "                        </button>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-3\" style=\"border-right: 1px dashed #dcdcdc;\">\n" +
+    "                    <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
+    "                        <!-- <img src=\"/app/assets/images/ProfileSection/Icn-ApproveMoney.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"height: 80px;    background-color: #f7f7f7;\"> -->\n" +
+    "                        <i aria-hidden=\"true\" class=\"fa fa-gift\" style=\"font-size: 80px;\">\n" +
+    "                        </i>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-sm-12 text-center\">\n" +
+    "                        <label class=\"text-muted\">\n" +
+    "                            Treasure Value\n" +
+    "                        </label>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-sm-12 text-center\" style=\"font-size: 28px;\">\n" +
+    "                        <i aria-hidden=\"true\" class=\"fa fa-inr\">\n" +
+    "                        </i>\n" +
+    "                        <label>\n" +
+    "                            {{vm.user.treasure_value}}\n" +
+    "                        </label>\n" +
+    "                    </div>\n" +
+    "                    <!--      <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
     "            <button class=\"btn btn-default\" style=\"border: 1px solid #fce7b7; color:#fce7b7; \" ng-click=\"vm.required()\">Required approval status</button>\n" +
     "          </div> -->\n" +
-    "        </div>\n" +
-    "\n" +
-    "         <div class=\"col-sm-6\"  style=\" border-right: 1px dashed #dcdcdc;\">\n" +
-    "       \n" +
-    "\n" +
-    "<div class=\"col-md-12 nopad\">\n" +
-    "\n" +
-    "\n" +
-    "   <div class=\"col-sm-12 text-center nopad\" style=\"padding-top: 35px;\">\n" +
-    "            <label class=\"text-muted\">Offer Share Info</label>\n" +
-    "          </div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "<div class=\"col-md-6 nopad\">\n" +
-    "  \n" +
-    "\n" +
-    "       <h4>Your Self :  </h4>\n" +
-    "    <p>\n" +
-    "\n" +
-    "\n" +
-    "No Clicks : <b> {{vm.user.offer_info.user.clicks}} </b><br/>\n" +
-    "No Views : <b> {{vm.user.offer_info.user.views}} </b><br/>\n" +
-    "No Shares : <b> {{vm.user.offer_info.user.shares}} </b><br/>\n" +
-    "No Generated Coupons : <b> {{vm.user.offer_info.user.coupons}} </b><br/>\n" +
-    "No Redemptions : <b> {{vm.user.offer_info.user.redemptions}} </b><br/>\n" +
-    "\n" +
-    "    </p>\n" +
-    "\n" +
-    "    <hr>\n" +
-    "    \n" +
-    "</div>\n" +
-    "\n" +
-    "\n" +
-    "<div class=\"col-md-6 nopad\">\n" +
-    "  \n" +
-    "\n" +
-    "         <h4>Your Child :  </h4>\n" +
-    "\n" +
-    "    <p>\n" +
-    "\n" +
-    "No Clicks : <b> {{vm.user.offer_info.child.clicks}} </b><br/>\n" +
-    "No Views : <b> {{vm.user.offer_info.child.views}} </b><br/>\n" +
-    "No Shares : <b> {{vm.user.offer_info.child.shares}} </b><br/>\n" +
-    "No Generated Coupons : <b> {{vm.user.offer_info.child.coupons}} </b><br/>\n" +
-    "No Redemptions : <b> {{vm.user.offer_info.child.redemptions}} </b><br/>\n" +
-    "\n" +
-    "    </p>\n" +
-    "\n" +
-    "    <hr>\n" +
-    "    \n" +
-    "</div>\n" +
-    "  </div>\n" +
-    "\n" +
-    "     <div class=\"col-sm-12\" ng-repeat=\"item in vm.user.offer_info track by $index\" style=\"font-size: 16px;\">\n" +
-    "    <!-- <p ng-if=\"$index == 0\">\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-6\" style=\" border-right: 1px dashed #dcdcdc;\">\n" +
+    "                    <div class=\"col-md-12 nopad\">\n" +
+    "                        <div class=\"col-sm-6 text-center nopad\" style=\"padding-top: 35px;\">\n" +
+    "                            <hr>\n" +
+    "                                <label class=\"text-muted\">\n" +
+    "                                    No of Code Generated : {{vm.user.offer_info.user.coupons}}\n" +
+    "                                </label>\n" +
+    "                                <hr>\n" +
+    "                                    <label class=\"text-muted\">\n" +
+    "                                        No of Shares : {{vm.user.offer_info.user.shares}}\n" +
+    "                                    </label>\n" +
+    "                                    <hr>\n" +
+    "                                    </hr>\n" +
+    "                                </hr>\n" +
+    "                            </hr>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"col-sm-6 text-center nopad\" style=\"padding-top: 35px;\">\n" +
+    "                            <hr>\n" +
+    "                                <label class=\"text-muted\">\n" +
+    "                                    No of Code Redeemed : {{vm.user.offer_info.user.redemptions}}\n" +
+    "                                </label>\n" +
+    "                                <hr>\n" +
+    "                                    <label class=\"text-muted\">\n" +
+    "                                        No of Childs : {{vm.user.child_references_count}}\n" +
+    "                                    </label>\n" +
+    "                                    <hr>\n" +
+    "                                    </hr>\n" +
+    "                                </hr>\n" +
+    "                            </hr>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-12\" ng-repeat=\"item in vm.user.offer_info track by $index\" style=\"font-size: 16px;\">\n" +
+    "                    <!-- <p ng-if=\"$index == 0\">\n" +
     "        Your Info\n" +
     "    </p>\n" +
     "\n" +
@@ -1248,20 +1251,16 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                item.redemptions\n" +
     "            }}\n" +
     "    </label> -->\n" +
-    "</div>\n" +
-    "\n" +
-    "          <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
-    "            <!-- <button class=\"btn btn-default\"  style=\"border: 1px solid #b6f3d1; color:#b6f3d1;\">Get more offers</button> -->\n" +
-    "          </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
+    "                    <!-- <button class=\"btn btn-default\"  style=\"border: 1px solid #b6f3d1; color:#b6f3d1;\">Get more offers</button> -->\n" +
+    "                </div>\n" +
+    "            </div>\n" +
     "        </div>\n" +
-    "      </div>\n" +
     "    </div>\n" +
-    "  </div>\n" +
     "</article>\n" +
-    "\n" +
-    "\n" +
     "<style type=\"text/css\">\n" +
-    "  .side_nav_refferal{\n" +
+    "    .side_nav_refferal{\n" +
     "     /*border: 1px solid black;*/\n" +
     "    height: 225px;\n" +
     "  }\n" +
@@ -1307,8 +1306,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    margin: 2px;\n" +
     "    background-color: #fff;\n" +
     "}\n" +
-    "</style>\n" +
-    "\n"
+    "</style>\n"
   );
 
 
