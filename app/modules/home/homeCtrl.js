@@ -223,10 +223,10 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             })
         };
         vm.username = function() {
-            return vm.user.name;
+            return window.user.name;
         }
         vm.usermobile = function() {
-            return vm.user.mobile;
+            return window.user.mobile;
         }
         vm.SeoHelpSocialShare = function(offer_id, type) {
             var data = {};
@@ -235,6 +235,8 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     data = value.attributes;
                 }
             });
+
+            console.log(data);
             try {
                 if (type == 'treasure') {
                     return data.treasure_value;
@@ -350,6 +352,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     if (data.mobile) {
                         vm.sentMobileNo(data.mobile, 'toast')
                         vm.user = data;
+                        window.user = data;
                         //  document.getElementById("confirm-code-popup").style.width = "100%";
                     } else {
                         document.getElementById("get-code-popup").style.width = "100%";
@@ -508,10 +511,15 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
         vm.mobile = function() {
             return vm.mobile_no;
         }
-        vm.sentMobileNo = function(mobile, type) {
+        vm.sentMobileNo = function(mobile, type,offer_id) {
             var type = type || 0;
             vm.mobile_no = mobile.toString();
-            vm.offer_id;
+            if(offer_id)
+            {
+              vm.offer_id;   
+            }
+
+       
             vm.post = {
                 "coupon_code": {
                     "mobile": vm.mobile_no,
@@ -594,10 +602,12 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             return new Date(formattedDate).getTime();
         };
         
-        if (LoginService.isReferral()) {
+        var temp = LoginService.isReferral();
+        if (temp) {
             $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
             LoginService.getProfileInfo(function(data) {
                 vm.user = data;
+                window.user = data;
             })
         }
     }

@@ -4,13 +4,17 @@
             <div class="row" style="background-color: #fff;">
                 <div class="col-sm-12" style="    margin-top: 10px;">
                     <div class="side_nav_refferal">
-                        <img  class="img-thumbnail" height="150" ng-src="{{vm.user.profile_image}}" width="200">
+                        <img class="img-thumbnail" height="150" ng-src="{{vm.user.profile_image}}" width="200">
                             <div class="col-sm-12">
                                 <p class="text-center" style="    margin-top: 20px;">
-                                   <b> {{vm.user.name}}</b>
+                                    <b>
+                                        {{vm.user.name}}
+                                    </b>
                                 </p>
                                 <p class="text-muted text-center">
-                                    <b>{{vm.user.mobile}}</b>
+                                    <b>
+                                        {{vm.user.mobile}}
+                                    </b>
                                 </p>
                                 <!-- <label><i class=" glyphicon glyphicon-map-marker">Location</i></label> -->
                             </div>
@@ -88,7 +92,6 @@
             <div class="row content-refferal">
                 <div class="col-sm-3" style="border-right: 1px dashed #dcdcdc;">
                     <div class="col-sm-12 text-center" style="padding: 35px;">
-                        <!-- <img src="/app/assets/images/ProfileSection/Icn-WalletMoney@2x.png" class="img-thumbnail" alt="Cinque Terre" width="80" height="80" style="background-color: #f7f7f7;"> -->
                         <i aria-hidden="true" class="fa fa-money" style="font-size: 80px;">
                         </i>
                     </div>
@@ -115,7 +118,6 @@
                 </div>
                 <div class="col-sm-3" style="border-right: 1px dashed #dcdcdc;">
                     <div class="col-sm-12 text-center" style="padding: 35px;">
-                        <!-- <img src="/app/assets/images/ProfileSection/Icn-ApproveMoney.png" class="img-thumbnail" alt="Cinque Terre" width="80" height="80" style="height: 80px;    background-color: #f7f7f7;"> -->
                         <i aria-hidden="true" class="fa fa-gift" style="font-size: 80px;">
                         </i>
                     </div>
@@ -131,44 +133,58 @@
                             {{vm.user.treasure_value}}
                         </label>
                     </div>
-                    <!--      <div class="col-sm-12 text-center" style="padding: 20px;">
-            <button class="btn btn-default" style="border: 1px solid #fce7b7; color:#fce7b7; " ng-click="vm.required()">Required approval status</button>
-          </div> -->
                 </div>
                 <div class="col-sm-6" style=" border-right: 1px dashed #dcdcdc;">
                     <div class="col-md-12 nopad">
-                        <div class="col-sm-6 text-center nopad" style="padding-top: 35px;">
+                        <div class="col-sm-12 text-center nopad" style="padding-top: 35px;">
                             <hr>
-                                <label class="text-muted">
-                                    No of Code Generated : {{vm.user.offer_info.user.coupons}}
-                                </label>
-                                <hr>
-                                    <label class="text-muted">
-                                        No of Shares : {{vm.user.offer_info.user.shares}}
+                                <div class="col-md-6 text-muted field-tip">
+                                    <span class="tip-content" style="    right: 80%;">
+                                        Self : {{vm.user.offer_info.user.coupons}}
+                            Guest : {{ vm.user.offer_info.guest.coupons}} 
+                            Child : {{ vm.user.offer_info.child.coupons }}
+                                    </span>
+                                    <label class="text-muted" s>
+                                        No of Code Generated : {{vm.user.offer_info.user.coupons + vm.user.offer_info.guest.coupons + vm.user.offer_info.child.coupons }}
                                     </label>
-                                    <hr>
-                                    </hr>
-                                </hr>
+                                </div>
+                                <div class="col-md-6 text-muted field-tip">
+                                    <label class="text-muted">
+                                        No of Shares : {{vm.user.offer_info.user.shares + vm.user.offer_info.guest.shares + vm.user.offer_info.child.shares }}
+                                    </label>
+                                    <span class="tip-content"  style="    right: 80%;">
+                                        Self : {{vm.user.offer_info.user.shares}}
+                            Guest : {{ vm.user.offer_info.guest.shares}} 
+                            Child : {{ vm.user.offer_info.child.shares }}
+                                    </span>
+                                </div>
                             </hr>
                         </div>
-                        <div class="col-sm-6 text-center nopad" style="padding-top: 35px;">
-                            <hr>
-                                <label class="text-muted">
-                                    No of Code Redeemed : {{vm.user.offer_info.user.redemptions}}
-                                </label>
+                        <div class="col-md-12 nopad">
+                            <div class="col-sm-12 text-center nopad" style="padding-top: 35px;">
                                 <hr>
-                                    <label class="text-muted">
-                                        No of Childs : {{vm.user.child_references_count}}
-                                    </label>
-                                    <hr>
-                                    </hr>
+                                    <div class="col-md-6 text-muted field-tip">
+                                        <span class="tip-content"  style="    right: 80%;">
+                                            Self : {{vm.user.offer_info.user.redemptions}}
+                            Guest : {{ vm.user.offer_info.guest.redemptions}} 
+                            Child : {{ vm.user.offer_info.child.redemptions }}
+                                        </span>
+
+                                        <label class="text-muted">
+                                            No of Code Redeemed : {{vm.user.offer_info.user.redemptions + vm.user.offer_info.guest.redemptions + vm.user.offer_info.child.redemptions }}
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-6 text-center nopad">
+                                        <label class="text-muted">
+                                            No of Childs : {{vm.user.child_references_count}}
+                                        </label>
+                                    </div>
                                 </hr>
-                            </hr>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-12" ng-repeat="item in vm.user.offer_info track by $index" style="font-size: 16px;">
-                    <!-- <p ng-if="$index == 0">
+                    <div class="col-sm-12" ng-repeat="item in vm.user.offer_info track by $index" style="font-size: 16px;">
+                        <!-- <p ng-if="$index == 0">
         Your Info
     </p>
 
@@ -198,9 +214,10 @@
                 item.redemptions
             }}
     </label> -->
-                </div>
-                <div class="col-sm-12 text-center" style="padding: 20px;">
-                    <!-- <button class="btn btn-default"  style="border: 1px solid #b6f3d1; color:#b6f3d1;">Get more offers</button> -->
+                    </div>
+                    <div class="col-sm-12 text-center" style="padding: 20px;">
+                        <!-- <button class="btn btn-default"  style="border: 1px solid #b6f3d1; color:#b6f3d1;">Get more offers</button> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -252,5 +269,8 @@
       border: 1px solid #dcdcdc;
     margin: 2px;
     background-color: #fff;
+}
+.field-tip .tip-content {
+z-index: 99;
 }
 </style>

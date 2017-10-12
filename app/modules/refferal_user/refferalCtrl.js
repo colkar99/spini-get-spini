@@ -30,7 +30,10 @@
 		vm.required = function(){
 			alert("This will move to your wallet once redeemed") 
 		};
-		if(LoginService.isReferral())
+
+		var temp = 1;
+
+		if(LoginService.isReferral() && temp ==1)
 		{
 		$http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
 		 LoginService.getProfileInfo(function(data)
@@ -41,6 +44,7 @@
 			{
 				vm.user.profile_image = '/app/assets/images/ProfileSection/Left-Nav/02Icn-ProfileDetails-Over@2x.png';
 			}
+			temp = 2;
 		})
 		}
 		else
