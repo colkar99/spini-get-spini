@@ -527,10 +527,10 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             })
         };
         vm.username = function() {
-            return vm.user.name;
+            return window.user.name;
         }
         vm.usermobile = function() {
-            return vm.user.mobile;
+            return window.user.mobile;
         }
         vm.SeoHelpSocialShare = function(offer_id, type) {
             var data = {};
@@ -539,6 +539,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     data = value.attributes;
                 }
             });
+            console.log(data);
             try {
                 if (type == 'treasure') {
                     return data.treasure_value;
@@ -654,6 +655,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     if (data.mobile) {
                         vm.sentMobileNo(data.mobile, 'toast')
                         vm.user = data;
+                        window.user = data;
                         //  document.getElementById("confirm-code-popup").style.width = "100%";
                     } else {
                         document.getElementById("get-code-popup").style.width = "100%";
@@ -812,14 +814,17 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
         vm.mobile = function() {
             return vm.mobile_no;
         }
-        vm.sentMobileNo = function(mobile, type) {
+        vm.sentMobileNo = function(mobile, type, offer_id) {
             var type = type || 0;
+            var offer_id = offer_id || 0;
             vm.mobile_no = mobile.toString();
-            vm.offer_id;
+            if (offer_id == 0) {
+                offer_id = vm.offer_id;
+            }
             vm.post = {
                 "coupon_code": {
-                    "mobile": vm.mobile_no,
-                    "offer_id": vm.offer_id,
+                    "mobile": mobile,
+                    "offer_id": offer_id,
                     "tracking_code": LoginService.TrackingCode()
                 }
             }
@@ -829,6 +834,14 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 url: apiBaseURL + 'coupon_codes',
                 data: vm.post
             }).then(function mySuccess(response) {
+                var temp = LoginService.isReferral();
+                if (temp) {
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
+                    LoginService.getProfileInfo(function(data) {
+                        vm.user = data;
+                        window.user = data;
+                    })
+                }
                 vm.openConformPopup();
             }, function myError(response) {
                 console.log(type);
@@ -897,10 +910,12 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             var formattedDate = dateSplitted[0] + '/' + dateSplitted[1] + '/' + dateSplitted[2];
             return new Date(formattedDate).getTime();
         };
-        if (LoginService.isReferral()) {
+        var temp = LoginService.isReferral();
+        if (temp) {
             $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
             LoginService.getProfileInfo(function(data) {
                 vm.user = data;
+                window.user = data;
             })
         }
     }
@@ -1209,7 +1224,10 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
 		vm.required = function(){
 			alert("This will move to your wallet once redeemed") 
 		};
-		if(LoginService.isReferral())
+
+		var temp = 1;
+
+		if(LoginService.isReferral() && temp ==1)
 		{
 		$http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
 		 LoginService.getProfileInfo(function(data)
@@ -1220,6 +1238,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
 			{
 				vm.user.profile_image = '/app/assets/images/ProfileSection/Left-Nav/02Icn-ProfileDetails-Over@2x.png';
 			}
+			temp = 2;
 		})
 		}
 		else

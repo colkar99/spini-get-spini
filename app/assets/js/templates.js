@@ -418,7 +418,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                </div>\n" +
     "                <div class=\"row backcls mar-10px text-left\">\n" +
     "                    <div class=\"form-group popupcenter \">\n" +
-    "                        <form name=\"get_coupen\" ng-submit=\"vm.sentMobileNo(mobile)\" novalidate=\"\">\n" +
+    "                        <form name=\"get_coupen\" ng-submit=\"vm.sentMobileNo(mobile,true,item.id)\" novalidate=\"\">\n" +
     "                            <div class=\"col-md-8 nopad\">\n" +
     "                                <label for=\"usr\">\n" +
     "                                    Enter your mobile No. to get Code\n" +
@@ -1057,13 +1057,17 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "            <div class=\"row\" style=\"background-color: #fff;\">\n" +
     "                <div class=\"col-sm-12\" style=\"    margin-top: 10px;\">\n" +
     "                    <div class=\"side_nav_refferal\">\n" +
-    "                        <img  class=\"img-thumbnail\" height=\"150\" ng-src=\"{{vm.user.profile_image}}\" width=\"200\">\n" +
+    "                        <img class=\"img-thumbnail\" height=\"150\" ng-src=\"{{vm.user.profile_image}}\" width=\"200\">\n" +
     "                            <div class=\"col-sm-12\">\n" +
     "                                <p class=\"text-center\" style=\"    margin-top: 20px;\">\n" +
-    "                                   <b> {{vm.user.name}}</b>\n" +
+    "                                    <b>\n" +
+    "                                        {{vm.user.name}}\n" +
+    "                                    </b>\n" +
     "                                </p>\n" +
     "                                <p class=\"text-muted text-center\">\n" +
-    "                                    <b>{{vm.user.mobile}}</b>\n" +
+    "                                    <b>\n" +
+    "                                        {{vm.user.mobile}}\n" +
+    "                                    </b>\n" +
     "                                </p>\n" +
     "                                <!-- <label><i class=\" glyphicon glyphicon-map-marker\">Location</i></label> -->\n" +
     "                            </div>\n" +
@@ -1141,7 +1145,6 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "            <div class=\"row content-refferal\">\n" +
     "                <div class=\"col-sm-3\" style=\"border-right: 1px dashed #dcdcdc;\">\n" +
     "                    <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
-    "                        <!-- <img src=\"/app/assets/images/ProfileSection/Icn-WalletMoney@2x.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"background-color: #f7f7f7;\"> -->\n" +
     "                        <i aria-hidden=\"true\" class=\"fa fa-money\" style=\"font-size: 80px;\">\n" +
     "                        </i>\n" +
     "                    </div>\n" +
@@ -1168,7 +1171,6 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                </div>\n" +
     "                <div class=\"col-sm-3\" style=\"border-right: 1px dashed #dcdcdc;\">\n" +
     "                    <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
-    "                        <!-- <img src=\"/app/assets/images/ProfileSection/Icn-ApproveMoney.png\" class=\"img-thumbnail\" alt=\"Cinque Terre\" width=\"80\" height=\"80\" style=\"height: 80px;    background-color: #f7f7f7;\"> -->\n" +
     "                        <i aria-hidden=\"true\" class=\"fa fa-gift\" style=\"font-size: 80px;\">\n" +
     "                        </i>\n" +
     "                    </div>\n" +
@@ -1184,44 +1186,58 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                            {{vm.user.treasure_value}}\n" +
     "                        </label>\n" +
     "                    </div>\n" +
-    "                    <!--      <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
-    "            <button class=\"btn btn-default\" style=\"border: 1px solid #fce7b7; color:#fce7b7; \" ng-click=\"vm.required()\">Required approval status</button>\n" +
-    "          </div> -->\n" +
     "                </div>\n" +
     "                <div class=\"col-sm-6\" style=\" border-right: 1px dashed #dcdcdc;\">\n" +
     "                    <div class=\"col-md-12 nopad\">\n" +
-    "                        <div class=\"col-sm-6 text-center nopad\" style=\"padding-top: 35px;\">\n" +
+    "                        <div class=\"col-sm-12 text-center nopad\" style=\"padding-top: 35px;\">\n" +
     "                            <hr>\n" +
-    "                                <label class=\"text-muted\">\n" +
-    "                                    No of Code Generated : {{vm.user.offer_info.user.coupons}}\n" +
-    "                                </label>\n" +
-    "                                <hr>\n" +
-    "                                    <label class=\"text-muted\">\n" +
-    "                                        No of Shares : {{vm.user.offer_info.user.shares}}\n" +
+    "                                <div class=\"col-md-6 text-muted field-tip\">\n" +
+    "                                    <span class=\"tip-content\" style=\"    right: 80%;\">\n" +
+    "                                        Self : {{vm.user.offer_info.user.coupons}}\n" +
+    "                            Guest : {{ vm.user.offer_info.guest.coupons}} \n" +
+    "                            Child : {{ vm.user.offer_info.child.coupons }}\n" +
+    "                                    </span>\n" +
+    "                                    <label class=\"text-muted\" s>\n" +
+    "                                        No of Code Generated : {{vm.user.offer_info.user.coupons + vm.user.offer_info.guest.coupons + vm.user.offer_info.child.coupons }}\n" +
     "                                    </label>\n" +
-    "                                    <hr>\n" +
-    "                                    </hr>\n" +
-    "                                </hr>\n" +
+    "                                </div>\n" +
+    "                                <div class=\"col-md-6 text-muted field-tip\">\n" +
+    "                                    <label class=\"text-muted\">\n" +
+    "                                        No of Shares : {{vm.user.offer_info.user.shares + vm.user.offer_info.guest.shares + vm.user.offer_info.child.shares }}\n" +
+    "                                    </label>\n" +
+    "                                    <span class=\"tip-content\"  style=\"    right: 80%;\">\n" +
+    "                                        Self : {{vm.user.offer_info.user.shares}}\n" +
+    "                            Guest : {{ vm.user.offer_info.guest.shares}} \n" +
+    "                            Child : {{ vm.user.offer_info.child.shares }}\n" +
+    "                                    </span>\n" +
+    "                                </div>\n" +
     "                            </hr>\n" +
     "                        </div>\n" +
-    "                        <div class=\"col-sm-6 text-center nopad\" style=\"padding-top: 35px;\">\n" +
-    "                            <hr>\n" +
-    "                                <label class=\"text-muted\">\n" +
-    "                                    No of Code Redeemed : {{vm.user.offer_info.user.redemptions}}\n" +
-    "                                </label>\n" +
+    "                        <div class=\"col-md-12 nopad\">\n" +
+    "                            <div class=\"col-sm-12 text-center nopad\" style=\"padding-top: 35px;\">\n" +
     "                                <hr>\n" +
-    "                                    <label class=\"text-muted\">\n" +
-    "                                        No of Childs : {{vm.user.child_references_count}}\n" +
-    "                                    </label>\n" +
-    "                                    <hr>\n" +
-    "                                    </hr>\n" +
+    "                                    <div class=\"col-md-6 text-muted field-tip\">\n" +
+    "                                        <span class=\"tip-content\"  style=\"    right: 80%;\">\n" +
+    "                                            Self : {{vm.user.offer_info.user.redemptions}}\n" +
+    "                            Guest : {{ vm.user.offer_info.guest.redemptions}} \n" +
+    "                            Child : {{ vm.user.offer_info.child.redemptions }}\n" +
+    "                                        </span>\n" +
+    "\n" +
+    "                                        <label class=\"text-muted\">\n" +
+    "                                            No of Code Redeemed : {{vm.user.offer_info.user.redemptions + vm.user.offer_info.guest.redemptions + vm.user.offer_info.child.redemptions }}\n" +
+    "                                        </label>\n" +
+    "                                    </div>\n" +
+    "                                    <div class=\"col-sm-6 text-center nopad\">\n" +
+    "                                        <label class=\"text-muted\">\n" +
+    "                                            No of Childs : {{vm.user.child_references_count}}\n" +
+    "                                        </label>\n" +
+    "                                    </div>\n" +
     "                                </hr>\n" +
-    "                            </hr>\n" +
+    "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                </div>\n" +
-    "                <div class=\"col-sm-12\" ng-repeat=\"item in vm.user.offer_info track by $index\" style=\"font-size: 16px;\">\n" +
-    "                    <!-- <p ng-if=\"$index == 0\">\n" +
+    "                    <div class=\"col-sm-12\" ng-repeat=\"item in vm.user.offer_info track by $index\" style=\"font-size: 16px;\">\n" +
+    "                        <!-- <p ng-if=\"$index == 0\">\n" +
     "        Your Info\n" +
     "    </p>\n" +
     "\n" +
@@ -1251,9 +1267,10 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                item.redemptions\n" +
     "            }}\n" +
     "    </label> -->\n" +
-    "                </div>\n" +
-    "                <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
-    "                    <!-- <button class=\"btn btn-default\"  style=\"border: 1px solid #b6f3d1; color:#b6f3d1;\">Get more offers</button> -->\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
+    "                        <!-- <button class=\"btn btn-default\"  style=\"border: 1px solid #b6f3d1; color:#b6f3d1;\">Get more offers</button> -->\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -1305,6 +1322,9 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "      border: 1px solid #dcdcdc;\n" +
     "    margin: 2px;\n" +
     "    background-color: #fff;\n" +
+    "}\n" +
+    ".field-tip .tip-content {\n" +
+    "z-index: 99;\n" +
     "}\n" +
     "</style>\n"
   );

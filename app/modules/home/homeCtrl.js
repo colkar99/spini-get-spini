@@ -235,7 +235,6 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     data = value.attributes;
                 }
             });
-
             console.log(data);
             try {
                 if (type == 'treasure') {
@@ -511,19 +510,17 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
         vm.mobile = function() {
             return vm.mobile_no;
         }
-        vm.sentMobileNo = function(mobile, type,offer_id) {
+        vm.sentMobileNo = function(mobile, type, offer_id) {
             var type = type || 0;
+            var offer_id = offer_id || 0;
             vm.mobile_no = mobile.toString();
-            if(offer_id)
-            {
-              vm.offer_id;   
+            if (offer_id == 0) {
+                offer_id = vm.offer_id;
             }
-
-       
             vm.post = {
                 "coupon_code": {
-                    "mobile": vm.mobile_no,
-                    "offer_id": vm.offer_id,
+                    "mobile": mobile,
+                    "offer_id": offer_id,
                     "tracking_code": LoginService.TrackingCode()
                 }
             }
@@ -533,6 +530,14 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 url: apiBaseURL + 'coupon_codes',
                 data: vm.post
             }).then(function mySuccess(response) {
+                var temp = LoginService.isReferral();
+                if (temp) {
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
+                    LoginService.getProfileInfo(function(data) {
+                        vm.user = data;
+                        window.user = data;
+                    })
+                }
                 vm.openConformPopup();
             }, function myError(response) {
                 console.log(type);
@@ -601,7 +606,6 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             var formattedDate = dateSplitted[0] + '/' + dateSplitted[1] + '/' + dateSplitted[2];
             return new Date(formattedDate).getTime();
         };
-        
         var temp = LoginService.isReferral();
         if (temp) {
             $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
