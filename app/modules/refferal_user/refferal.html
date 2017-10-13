@@ -45,33 +45,39 @@
                             <div class="navbar-collapse collapse sidebar-navbar-collapse">
                                 <ul class="nav navbar-nav">
                                     <li style="font-size: 18px;">
-                                        <a class="text-center" href="#">
+                                        <a>
                                             <i aria-hidden="true" class="glyphicon glyphicon-stats pull-left">
                                             </i>
-                                            <span>
+                                            <span style="margin-left: 10px;">
                                                 Dashboard
                                             </span>
                                         </a>
                                     </li>
                                     <li style="font-size: 18px;">
-                                        <a class="text-center" href="">
+                                        <a>
                                             <i class="glyphicon glyphicon-user pull-left">
                                             </i>
+                                            <span style="margin-left: 10px;">
                                             Profile
+                                            </span>
                                         </a>
                                     </li>
                                     <li style="font-size: 18px;">
-                                        <a class="text-center" href="">
+                                        <a>
                                             <i class="glyphicon glyphicon-tag pull-left">
                                             </i>
+                                            <span style="margin-left: 10px;">
                                             Saved Offer
+                                            </span>
                                         </a>
                                     </li>
                                     <li style="font-size: 18px;">
-                                        <a class="text-center" href="">
-                                            <i class="glyphicon glyphicon-usd pull-left">
+                                        <a>
+                                            <i class="fa fa-inr pull-left" style="font-size: 20px;">
                                             </i>
+                                            <span style="margin-left: 10px;">
                                             Wallet
+                                            </span>
                                         </a>
                                     </li>
                                 </ul>
@@ -107,9 +113,10 @@
                             {{vm.user.wallet_money}}
                         </label>
                     </div>
-                    <div class="col-sm-12 text-center" style="padding: 20px;">
-                        <button class="btn btn-default field-tip" ng-disabled="true" style="border: 1px solid #bfe7fe;color:#bfe7fe">
-                            <span class="tip-content">
+                    <div class="col-sm-12 text-center" style="padding: 20px;" >
+                        <button class="btn btn-default field-tip" ng-disabled="vm.user.wallet_money<500" style="    border: 1px solid #40799a;
+    color: #155275;" ng-click="vm.openPopup()">
+                            <span class="tip-content" ng-hide="vm.user.wallet_money>500">
                                 Earn minimum Rs.500/- to make a transfer
                             </span>
                             Transfer to paytm wallet
@@ -274,3 +281,72 @@
 z-index: 99;
 }
 </style>
+
+
+<!-- Get  PayTm Request-->
+<div class="overlay" id="get-paytm-no-popup">
+
+      <a class="closebtn" href="javascript:void(0)" ng-click="vm.closePopup()">
+        ×
+    </a>
+
+    <div class="overlay-content">
+        <div class="row">
+            <div class="col-md-4 row col-md-offset-4 pad-bot0 pad10 ">
+                <div class="row backcls mar-10px text-left" style="padding: 20px;">
+                    <div class="form-group">
+                        <form name="get_coupen" ng-submit="vm.PaytmAsk(mobile,amount)" novalidate="">
+                            <div class="col-md-12 nopad">
+                                <label for="usr">
+                                    Enter your paytm account no
+                                </label>
+                                <input class="form-control nbr min40" id="usr" maxlength="10" minlength="10" name="mobile" ng-model="mobile" ng-pattern="/^[0-9]+$/" placeholder="Mobile no" required="" type="number">
+                                    <span ng-show="(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.minlength" style="color: red">
+                                        Minimum 10 digits required.
+                                    </span>
+                                    <span ng-show="(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.maxlength" style="color: red">
+                                        Maximum 10 digits only allowed.
+                                    </span>
+                                </input>
+                            </div> 
+                            <div class="col-md-12 nopad" style="padding-top: 25px;">
+                                <label for="usr">
+                                    Enter Amount 
+                                </label>
+                                <input class="form-control nbr min40"
+
+
+                                ng-min="100"
+                                ng-max="vm.user.wallet_money"
+
+
+                                 id="usr"  name="amount" 
+                                ng-model="amount"   placeholder="Amount" required="" type="number">
+
+
+
+
+                                    <span ng-show="(get_coupen.amount.$touched || submitted) && get_coupen.amount.$error.min" style="color: red">
+                                        Minimum 100 rs required.
+                                    </span>
+                                    <span ng-show="(get_coupen.amount.$touched || submitted) && get_coupen.amount.$error.max" style="color: red">
+                                        Maximum {{vm.user.wallet_money}} rs only allowed.
+                                    </span>
+
+
+
+                                </input>
+                            </div>
+                            <div class="col-md-6 nopad mar25x">
+                                <button class="btn min40 width100 nbr" ng-disabled="get_coupen.$invalid" type="submit">
+                                 Transfer to PayTm Wallet
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Get  PayTm Request-->

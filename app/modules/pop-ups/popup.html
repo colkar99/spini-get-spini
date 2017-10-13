@@ -161,16 +161,16 @@
                     </div>
                 </div>
                 <div class="row backcls mar-10px text-left dotted" ng-hide="vm.isReferral()">
-                    <div class="col-md-12 nopad mar45">
-                        <div class="col-md-8">
+                    <div class="col-md-12 nopad" style="margin-top: 10px">
+                        <div class="col-md-12 nopad text-center">
                             <p class="font15px popupfoot1 ">
                                 <b>
-                                    Further more sharing this code will earn you upto
+                                   Become a ReferYogi to enjoy the Treasure amount hidden under every offer!!! 
                                 </b>
                                 <br/>
-                                <b>
+                           <!--      <b>
                                     Rs.200 each time it's availed
-                                </b>
+                                </b> -->
                             </p>
                             <div class="social pad-bot10 padtop30 popupfoot1">
                                 <a class="fa fa-twitter twitter" ng-click="vm.signupPOP()" title="">
@@ -179,30 +179,32 @@
                                 </a>
                                 <a class="fa fa-clone clone" ng-click="vm.signupPOP()" title="">
                                 </a>
+
+
                             </div>
                         </div>
-                        <div class="col-md-4 text-center">
+                      <!--   <div class="col-md-4 text-center">
                             <h1 class="b">
                                 Rs.200
                             </h1>
                             <p>
                                 Earn real cash while you enjoy ReferYogi offers!!
                             </p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
                                 <div class="row backcls mar-10px text-left dotted" ng-show="vm.isReferral()">
                     <div class="col-md-12 nopad mar45">
-                        <div class="col-md-8">
+                        <div class="col-md-12 nopad text-center">
                             <p class="font15px popupfoot1 ">
                                 <b>
-                                    Further more sharing this code will earn you upto
+
+                                    Keep Sharing and Earn upto Rs.{{item.attributes.treasure_value}} every time the code is Redeemed 
+
+
                                 </b>
-                                <br/>
-                                <b>
-                                    Rs.{{item.attributes.treasure_value}} each time it's availed
-                                </b>
+                       
                             </p>
                             <div class="social pad-bot10 padtop30 popupfoot1">
                     <!--             <a class="fa fa-twitter twitter" href="#" target="_blank" title="">
@@ -213,14 +215,14 @@
                                 </a> -->
                             </div>
                         </div>
-                        <div class="col-md-4 text-center">
+<!--                         <div class="col-md-4 text-center">
                             <h1 class="b">
                                 Rs.{{item.attributes.treasure_value}}
                             </h1>
                             <p>
                                 Earn real cash while you enjoy ReferYogi offers!!
                             </p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -303,9 +305,7 @@
                         <p class="font15px popupfoot pad-bot ">
                             Psst...!
                             <br/>
-                            Signup to become a ReferYogi referral and earn upto Rs.200 with this offer!
-                            <br/>
-                            Sparsh earned Rs.2000 begin a ReferYogi Referral!
+                            Signup to become a ReferYogi referral and earn the Treasure amount with this offer!
                             <br/>
                         </p>
                         <p class="fbblue font15px popupfoot pad-bot" ng-click="vm.signupPOP()">
@@ -323,9 +323,9 @@
 <!-- end get code -->
 <!-- OFFERS POPUP 1st-->
 <div class="overlay" id="offer-popup">
-    <a class="closebtn" href="javascript:void(0)" ng-click="vm.closeSlidepopup()">
+   <!--  <a class="closebtn" href="javascript:void(0)" ng-click="vm.closeSlidepopup()">
         ×
-    </a>
+    </a> -->
     <div class="overlay-content">
         <div style="height: 305px">
             <div active="active" interval="myInterval" on-carousel-change="vm.onSlideChanged(nextSlide, direction)"
@@ -345,6 +345,17 @@
                             <div class="col-md-7 nopad">
                                 <div class="pad-top-none offer-details text-left">
                                     <div class="row">
+
+
+                                        <span class=" close closif fa-stack " style="font-size: 12px;" ng-click="vm.closeSlidepopup()">
+  <i class="fa fa-circle-thin fa-stack-2x"></i>
+  <i class="fa fa-close fa-stack-1x"></i>
+</span>
+
+
+                        <!--                 <span class="close">
+                                            <i class="fa fa-close  fa-circle "></i>
+                                        </span> -->
                                         <div class="col-md-8">
                                             <h3 class="tm">
                                                 {{item.attributes.name}}
@@ -358,7 +369,8 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 text-right ">
+                                        <div class="col-md-4 text-right " style="
+    margin-top: -15px;">
                                             <img class="offer-logo-set" ng-src="{{item.attributes.business_avatar_thumb}}">
                                             
                                         </div>

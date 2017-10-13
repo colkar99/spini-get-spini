@@ -528,11 +528,18 @@ header hr {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(208, 197, 197, 0.81);
+  /*  background-color: rgb(0, 0, 0);
+    background-color: rgba(208, 197, 197, 0.81);*/
+
+        /*background-color: rgba(82, 57, 57, 0.65);*/
+
+background-color: rgba(109, 71, 71, 0.44);
+
     overflow-x: hidden;
     transition: 0.5s;
 }
+
+
 
 .overlay-content {
     position: relative;
@@ -553,6 +560,9 @@ header hr {
     display: block;
     transition: 0.3s;
 }
+
+
+
 
 .overlay a:hover, .overlay a:focus {
     color: #f1f1f1;
@@ -1045,7 +1055,7 @@ footer p {
 
 .field-tip {
     position: relative;
-    cursor: help;
+    /*cursor: help;*/
 }
 
 .field-tip .tip-content {
@@ -1350,3 +1360,56 @@ span.more-text.show {
 {
     display: block;
 }
+
+
+
+
+
+
+.overlay-content .carousel-control .glyphicon-chevron-right
+{
+
+    color: black;
+    opacity: 1;
+
+        margin-top: 85%;
+    left: -30%;
+}
+
+
+.overlay-content
+{
+  /*  border: 1px solid rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);*/
+}
+
+
+.overlay-content .carousel-control .glyphicon-chevron-left
+{
+
+   margin-top: 85%;
+    left: 115%;
+
+    color: black;
+    opacity: 1;
+}
+
+.overlay-content .close
+{
+
+opacity: 1; 
+}
+
+.closif
+{
+        font-size: 12px;
+    margin-top: -8px;
+    margin-right: -12px;
+}
+/*
+.overlay .closebtn
+{
+    display: none;
+}*/

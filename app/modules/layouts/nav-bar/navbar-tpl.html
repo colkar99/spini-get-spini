@@ -7,7 +7,7 @@
           <img src="/app/assets/images/header/Logo@2x.png" alt="spini-logo">
         </a>
       </div>
-      <div class="col-md-6 main-header-search">
+      <div class="col-md-6 main-header-search" ng-controller="HomeCtrl as vm">
         <input type="text" placeholder="Search Offers" ng-model="vm.search_txt" class="search_n">
 
         <button class="search_n" ng-enter="vm.searchBox(vm.search_txt)" ng-click="vm.searchBox(vm.search_txt)"></button>
@@ -78,7 +78,7 @@
     box-shadow: 0px 0px 6px #888;
     border-radius: 3px;
     top: 50px;
-  /*  left: 70px;*/
+    left: -40px;
   }
   .manage-account i{
     text-align: right;

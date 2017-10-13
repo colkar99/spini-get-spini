@@ -32,6 +32,8 @@
                                 'amount_paid': vm.showInfo.amount_to_pay
                             }
                         }).then(function() {
+
+
                             ngToast.dismiss();
                             ngToast.create({
                                 content: '<strong>Referla</strong>: Code Redemptions complete',
@@ -39,12 +41,15 @@
                                 dismissButton: true,
                                 dismissOnClick: false
                             });
-                              vm.coupon_code='';
+                            
+                            vm.coupon_code='';
                             vm.amount='';
                             vm.showInfo='';
 
                             // vm.showInfo = '';
                             vm.RedemptionsHistory()
+
+
                         }).catch(function(response) {
                             ngToast.dismiss();
                             ngToast.create({
