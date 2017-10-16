@@ -1321,6 +1321,20 @@ header
     .manage-account {
         left: 60%;
     }
+.cls4
+{
+    text-align: center;
+    padding-bottom: 40px;
+}
+.cls4 .img-responsive
+{
+
+
+    float: none !important;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
 }
 
 @media only screen and (max-width: 480px) {
@@ -1544,4 +1558,10 @@ font-size: 14px;
 .fshow {
 
     display: block;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueLight';
+
+    src: url("/app/assets/css/fonts/HelveticaNeue-UltraLigCond.otf") format("opentype");
 }

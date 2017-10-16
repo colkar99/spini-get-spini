@@ -11,7 +11,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "<header  >\n" +
     "  <div class=\"container\">\n" +
     "\n" +
-    "    <div class=\"col-md-12 hidden-sm nopad mt6\">\n" +
+    "    <div class=\"col-md-12 hidden-sm  hidden-xs nopad mt6\">\n" +
     "        <div class=\"col-md-6 nopad right-lf main-header-partner\" >\n" +
     "       <a> Contact Us : +91 8682 800800</a>\n" +
     "      </div>\n" +
@@ -19,20 +19,214 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "      \n" +
     "    </div>\n" +
     "    <div class=\"row main-header\">\n" +
-    "      <div class=\"col-md-2 col-xs-12 col-sm-12 text-center main-header-logo\">\n" +
+    "<div class=\"col-md-12 nopad\">\n" +
+    "  \n" +
+    "\n" +
+    "\n" +
+    "      <div class=\"hidden-md hidden-lg col-sm-3 col-xs-3 nopad\">\n" +
+    "        \n" +
+    "            <div style=\"margin-top: -7px;\">\n" +
+    "      <button type=\"button\" class=\"navbar-toggle fshow\" data-toggle=\"collapse\" data-target=\"#myNavbar\">\n" +
+    "        <span class=\"icon-bar\"></span>\n" +
+    "        <span class=\"icon-bar\"></span>\n" +
+    "        <span class=\"icon-bar\"></span>                        \n" +
+    "      </button>\n" +
+    "     \n" +
+    "    </div>\n" +
+    "\n" +
+    "\n" +
+    "      </div>\n" +
+    "\n" +
+    "      <div class=\"col-md-2 col-xs-6 col-sm-6 text-center main-header-logo\">\n" +
     "        <a href=\"/\">\n" +
     "          <img src=\"/app/assets/images/header/Logo@2x.png\" alt=\"spini-logo\">\n" +
     "        </a>\n" +
     "      </div>\n" +
-    "      <div class=\"col-md-6 main-header-search\" ng-controller=\"HomeCtrl as vm\">\n" +
-    "        <input type=\"text\" placeholder=\"Search Offers\" ng-model=\"vm.search_txt\" class=\"search_n\">\n" +
     "\n" +
-    "        <button class=\"search_n\" ng-enter=\"vm.searchBox(vm.search_txt)\" ng-click=\"vm.searchBox(vm.search_txt)\"></button>\n" +
+    "\n" +
+    "      <div class=\"hidden-md hidden-lg col-sm-3 col-xs-3 \">\n" +
+    "     \n" +
+    "\n" +
+    "      <div class=\"row\">\n" +
+    "\n" +
+    "        <div class=\"col-xs-12 nopad\">\n" +
+    "          \n" +
+    "     \n" +
+    "     <div class=\"col-xs-6 nopad\">\n" +
+    "       \n" +
+    "         <button class=\"bton-ser\" ng-controller=\"HomeCtrl as vm\" ng-click=\"vm.MobileToggleSearch()\">\n" +
+    "          <i class=\"fa fa-search\"> </i>\n" +
+    "\n" +
+    "        </button>\n" +
+    "     </div>\n" +
+    "\n" +
+    "     \n" +
+    "     <div class=\"col-xs-6 nopad\">\n" +
+    "       \n" +
+    "         <button class=\"bton-ser\" ng-controller=\"HomeCtrl as vm\" ng-click=\"vm.MobileLogin()\">\n" +
+    "          <i class=\"fa fa-user\"> </i>\n" +
+    "\n" +
+    "        </button>\n" +
+    "     </div>\n" +
+    "\n" +
+    "\n" +
+    "           </div>\n" +
+    "           </div>\n" +
+    "\n" +
     "      </div>\n" +
-    "   <!--    <div class=\"col-md-2 main-header-partner\" ng-hide=\"menu.isVendor()\">\n" +
-    "        <button ng-click=\"menu.signupPOP('vendor');\">Become our partner</button>\n" +
-    "      </div> -->\n" +
-    "<span ng-controller=\"HomeCtrl as menu\">\n" +
+    " \n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "      <div id=\"mobileSearch\"  class=\"main-header-search  hidden-md  hidden-lg \" style=\"display: none;\" ng-controller=\"HomeCtrl as vm\">\n" +
+    "        <input type=\"text\" placeholder=\"Search Offers\" ng-model=\"vm.search_txt\" ng-enter=\"vm.searchBox(vm.search_txt)\"  class=\"search_n\">\n" +
+    "\n" +
+    "        <button class=\"search_n\" ng-click=\"vm.searchBox(vm.search_txt)\"></button>\n" +
+    "      </div>\n" +
+    "\n" +
+    "    <div id=\"mobileMenu\"  class=\"main-header-search  hidden-md  hidden-lg \" style=\"display: none;\" ng-controller=\"HomeCtrl as vm\">\n" +
+    "\n" +
+    "   <span ng-controller=\"HomeCtrl as menu\" >\n" +
+    "  \n" +
+    "\n" +
+    "      \n" +
+    "            <div class=\"col-xs-12\" style=\"    padding-top: 20px;\"  ng-show=\"menu.isReferral()\">\n" +
+    "                <b style=\"color: #e83634\">\n" +
+    "                    Your Account\n" +
+    "                </b>\n" +
+    "                <br>\n" +
+    "                <p>\n" +
+    "                    Access account and manage offers\n" +
+    "                </p>\n" +
+    "<br>\n" +
+    "                <div class=\"col-xs-6\">\n" +
+    "                  <button ng-click=\"menu.goProfile()\" style=\"    float: left;\n" +
+    "    width: 100%;\n" +
+    "    background-image: none;\">\n" +
+    "                    Profile\n" +
+    "                </button>\n" +
+    "                </div>\n" +
+    "          \n" +
+    "\n" +
+    "              <div class=\"col-xs-6\">\n" +
+    "                    <button ng-click=\"menu.Logout()\" style=\"\n" +
+    "                        float: left;\n" +
+    "    width: 100%;\n" +
+    "    background-image: none;\">\n" +
+    "                    Logout\n" +
+    "                </button>\n" +
+    "                </div>\n" +
+    "\n" +
+    "\n" +
+    "            </div>\n" +
+    "      \n" +
+    "\n" +
+    "\n" +
+    "                  <div class=\"col-xs-12\" style=\"    padding-top: 20px;\"  ng-hide=\"menu.isVendor() || menu.isReferral()\">\n" +
+    "                <b style=\"color: #e83634\">\n" +
+    "                    ReferYogi\n" +
+    "                </b>\n" +
+    "                <br>\n" +
+    "                <p>\n" +
+    "                   Access and become a Yogi! \n" +
+    "                </p>\n" +
+    "<br>\n" +
+    "\n" +
+    "\n" +
+    "                <div class=\"col-xs-6\">\n" +
+    "                  <button ng-click=\"menu.signupPOP('referral')\" style=\"    float: left;\n" +
+    "    width: 100%;\n" +
+    "    background-image: none;\">\n" +
+    "                    SignUp\n" +
+    "                </button>\n" +
+    "                </div>\n" +
+    "          \n" +
+    "\n" +
+    "              <div class=\"col-xs-6\">\n" +
+    "                    <button ng-click=\"menu.openLoginPopup('referral')\" style=\"\n" +
+    "                        float: left;\n" +
+    "    width: 100%;\n" +
+    "    background-image: none;\">\n" +
+    "                    Login\n" +
+    "                </button>\n" +
+    "                </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "         <div class=\"col-md-12  col-xs-12 \" style=\"    padding-top: 30px;\">\n" +
+    "        <button ng-click=\"menu.VendorContactUs();\" \n" +
+    "         style=\"    float: left;\n" +
+    "    width: 100%;\n" +
+    "\n" +
+    "    background-image: none;\">Become our partner</button>\n" +
+    "      </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "            </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                  <div class=\"col-xs-12\" style=\"    padding-top: 20px;\" ng-show =\"menu.isVendor()\">\n" +
+    "                <b style=\"color: #e83634\">\n" +
+    "                    ReferYogi\n" +
+    "                </b>\n" +
+    "                <br>\n" +
+    "                <p>\n" +
+    "                   Redemption Dashboard\n" +
+    "                </p>\n" +
+    "<br>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                <div class=\"col-xs-6\">\n" +
+    "                  <button ng-click=\"menu.goVendorProfile()\" style=\"    float: left;\n" +
+    "    width: 100%;\n" +
+    "    background-image: none;\">\n" +
+    "                    Dashboard\n" +
+    "                </button>\n" +
+    "                </div>\n" +
+    "          \n" +
+    "\n" +
+    "              <div class=\"col-xs-6\">\n" +
+    "                    <button ng-click=\"menu.Logout()\" style=\"\n" +
+    "                        float: left;\n" +
+    "    width: 100%;\n" +
+    "    background-image: none;\">\n" +
+    "                    Logout\n" +
+    "                </button>\n" +
+    "                </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "            </div>\n" +
+    "\n" +
+    "  </span>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "      </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "      <div class=\"col-md-6 main-header-search  hidden-sm  hidden-xs \" ng-controller=\"HomeCtrl as vm\">\n" +
+    "        <input type=\"text\" ng-enter=\"vm.searchBox(vm.search_txt)\"  placeholder=\"Search Offers\" ng-model=\"vm.search_txt\" class=\"search_n\">\n" +
+    "\n" +
+    "        <button class=\"search_n\" ng-click=\"vm.searchBox(vm.search_txt)\"></button>\n" +
+    "      </div>\n" +
+    "\n" +
+    "<span ng-controller=\"HomeCtrl as menu\" class=\" hidden-sm  hidden-xs \">\n" +
     "  \n" +
     "\n" +
     "         <div class=\"col-md-2  col-xs-6 nopad main-header-partner\" ng-hide=\"menu.isVendor() || menu.isReferral()\">\n" +
@@ -45,29 +239,58 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "\n" +
     "\n" +
-    "      <div ng-class=\"menu.isReferral() ?'col-md-4':'col-md-2'\" class=\"col-md-4 main-header-signin\" ng-hide=\"menu.isVendor()\">\n" +
-    "        <a  ng-mouseover=\"menu.open = true\" ng-hide=\"menu.isReferral()\">Sign In <img src=\"/app/assets/images/header/UserIcon@2x.png\"></a>\n" +
-    "        <a  ng-mouseover=\"menu.open = true\" ng-show=\"menu.isReferral()\"><img src=\"/app/assets/images/header/UserIcon@2x.png\"></a>\n" +
-    "\n" +
-    "        <div class=\"manage-account\" ng-if=\"menu.open ==  true && menu.isReferral() == false\">\n" +
-    "          <i class=\"glyphicon glyphicon-remove-circle\" ng-click=\"menu.open = false\"></i>\n" +
-    "          <b>Your Account</b>\n" +
-    "          <p>Access account and manage offers</p>\n" +
-    "          <button ng-click=\"menu.open = false;menu.signupPOP('referral');\">SIGN UP</button>\n" +
-    "          <button ng-click=\"menu.open = false;menu.openLoginPopup('referral');\">LOGIN</button>\n" +
-    "\n" +
+    "<div class=\"col-md-4 main-header-signin\" ng-class=\"menu.isReferral() ?'col-md-6':'col-md-2'\" ng-hide=\"menu.isVendor()\">\n" +
+    "    <div class=\"dropdown\" ng-if=\"menu.isReferral() == true\" >\n" +
+    "        <button class=\"dropbtn\">\n" +
+    "        \n" +
+    "            <img src=\"/app/assets/images/header/UserIcon@2x.png\"/>\n" +
+    "         \n" +
+    "        </button>\n" +
+    "        <div class=\"dropdown-content\" style=\"    left: -115px;\">\n" +
+    "            <div class=\"dropbox\">\n" +
+    "                <b style=\"color: #e83634\">\n" +
+    "                    Your Account\n" +
+    "                </b>\n" +
+    "                <p>\n" +
+    "                    Access account and manage offers\n" +
+    "                </p>\n" +
+    "                <button ng-click=\"menu.goProfile()\" style=\"float: left;\">\n" +
+    "                    Profile\n" +
+    "                </button>\n" +
+    "                <button ng-click=\"menu.Logout()\" style=\"float: right;\">\n" +
+    "                    Logout\n" +
+    "                </button>\n" +
+    "            </div>\n" +
     "        </div>\n" +
+    "    </div> \n" +
+    "    <div class=\"dropdown\" ng-if=\"menu.isReferral() == false\">\n" +
+    "        <button class=\"dropbtn\">\n" +
+    "             \n" +
+    "            <img src=\"/app/assets/images/header/UserIcon@2x.png\"/>\n" +
+    "         \n" +
+    "        </button>\n" +
+    "        <div class=\"dropdown-content\" style=\"    left: -115px;\">\n" +
+    "            <div class=\"dropbox\">\n" +
+    "                <b style=\"color: #e83634\">\n" +
+    "                   ReferYogi\n" +
+    "                </b>\n" +
+    "                <p>\n" +
+    "                     Access and become a Yogi! \n" +
+    "                </p>\n" +
     "\n" +
-    "          <div class=\"manage-account\" ng-if=\"menu.open == true && menu.isReferral() == true\">\n" +
-    "          <i class=\"glyphicon glyphicon-remove-circle\" ng-click=\"menu.open = false\"></i>\n" +
-    "          <b>Your Account</b>\n" +
-    "          <p>Access account and manage offers</p>\n" +
-    "          <button ng-click=\"menu.open = false;menu.goProfile()\" >Profile</button>\n" +
-    "          <button ng-click=\"menu.open = false;menu.Logout()\" >Logout</button>\n" +
-    "\n" +
-    "\n" +
+    "                <button ng-click=\"menu.signupPOP('referral')\" style=\"float: left;\">\n" +
+    "                    SignUp\n" +
+    "                </button>\n" +
+    "                <button ng-click=\"menu.openLoginPopup('referral')\" style=\"float: right;\">\n" +
+    "                    Login\n" +
+    "                </button>\n" +
+    "            </div>\n" +
     "        </div>\n" +
-    "      </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "\n" +
     "\n" +
     "\n" +
@@ -86,11 +309,18 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "      </div>\n" +
     "\n" +
     "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "    </div>\n" +
     "  </div>\n" +
     "\n" +
     "</span>\n" +
-    "  <hr>\n" +
+    "\n" +
+    "   </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "  <hr/>\n" +
     "</header>\n" +
     "<style type=\"text/css\">\n" +
     "  .manage-account{\n" +

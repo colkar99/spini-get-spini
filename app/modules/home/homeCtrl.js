@@ -374,7 +374,8 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
 
             if( document.getElementById('mobileSearch').style.display == 'none')
             {
-                 document.getElementById('mobileSearch').style.display='block';    
+                 document.getElementById('mobileSearch').style.display='block';   
+                  document.getElementById('mobileMenu').style.display='none';  
              }
 
             else
@@ -389,6 +390,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
 
             if( document.getElementById('mobileMenu').style.display == 'none')
             {
+                 document.getElementById('mobileSearch').style.display='none';  
                  document.getElementById('mobileMenu').style.display='block';    
              }
 
@@ -595,7 +597,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     }
                 }
             }
-            vm.gridlength = 1;
+            vm.gridlength = 0;
             vm.gridShow = false;
             return vm.compaigns;
         };

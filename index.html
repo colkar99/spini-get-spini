@@ -142,15 +142,15 @@
 
         <div class="item active" ng-click="vm.getSlidepopup(1,true)">
 
-          <img ng-src="/app/assets/images/03Banner/cream_fudge.png" alt="Los Angeles" style="width:100%;">
+          <img ng-src="/app/assets/images/03Banner/cream_fudge.png" alt="Los Angeles" style="width:100%;max-height: 350px">
         </div>
 
         <div class="item">
-          <img ng-src="/app/assets/images/03Banner/naturals.png" alt="Chicago" style="width:100%;">
+          <img ng-src="/app/assets/images/03Banner/naturals.png" alt="Chicago" style="width:100%;max-height: 350px">
         </div>
 
         <div class="item">
-          <img ng-src="/app/assets/images/03Banner/ak.png" alt="New York" style="width:100%;">
+          <img ng-src="/app/assets/images/03Banner/ak.png" alt="New York" style="width:100%;max-height: 350px">
 
         </div>
 
@@ -169,22 +169,96 @@
   </div>
 </section>
 
+<section class="how-spini-works" ng-show="vm.how_works" >
+
+<div class="container">
+
+  <h3 class="text-center"  style="
+      font-size: 35px;
+    font-family: HelveticaNeueLight;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #bbbbbb;">How  ReferYogi Works </h3>
+
+
+  <div class="col-sm-12" style="    margin-top: 50px">
+  <div class="col-sm-4 cls4">
+    <img  class="img-responsive" style="float: left;" src="/app/assets/images/01-Signup-Img.png">
+
+    <span style="
+    margin-top: 26px;
+    display: inline-block;
+    margin-left: 10px;">
+    <b style="color: #e83634;">
+      Sign Up
+    </b>
+    <br>  
+   <span>
+      with you Facebook<br>
+      Account
+    </span>
+    </span>
+  </div> 
+  <div class="col-sm-4 cls4">
+     <img class="img-responsive"  style="float: left;" src="/app/assets/images/02-Avail-Img.png">
+
+
+    <span style="
+    margin-top: 26px;
+    display: inline-block;
+    margin-left: 10px;">
+    <b style="color: #e83634;">
+      Avail Offers
+    </b>
+    <br>  
+   <span>
+      you like and enjoy<br>
+      ReferYogi treasure
+    </span>
+    </span>
+
+  </div> 
+ 
+   <div class="col-sm-4 cls4">
+     <img class="img-responsive"  style="float: left;" src="/app/assets/images/03-Cash-Img.png">
+
+
+    <span style="
+    margin-top: 26px;
+    display: inline-block;
+    margin-left: 10px;">
+    <b style="color: #e83634;">
+      Get CASH in your wallet
+    </b>
+    <br>  
+   <span>
+     every time your shared <br>
+      code is redeemed 
+    </span>
+    </span>
+  </div> 
+  </div> 
+
+
+</div>
+</section>
+
 <!-- how works code -->
-<section class="how-spini-works hidden-sm hidden-xs  " ng-show="vm.how_works" >
+<!-- <section class="how-spini-works hidden-sm hidden-xs  " ng-show="vm.how_works" >
   <div class="container">
     <img src="/app/assets/images/04HowSpini/00-Bann-HowSpini-Complete.png">
   </div>
-</section>
+</section> -->
 
 
 
 <!-- how works code -->
-<section class="how-spini-works hidden-md hidden-lg  " ng-show="vm.how_works" style="padding:0px;padding-bottom: 40px" >
+<!-- <section class="how-spini-works hidden-md hidden-lg  " ng-show="vm.how_works" style="padding:0px;padding-bottom: 40px" >
   <div class="container">
     <img src="/app/assets/images/How it Works 2.jpg" class="img-responsive" style="
     width: 100%;">
   </div>
-</section>
+</section> -->
 
 
 
@@ -363,29 +437,9 @@ ng-click="vm.signupPOP()"
 <script src="/src/bower_components/angular-timer/dist/angular-timer.js"></script>
 <script src="/app/app.js"></script>
 <script src="/app/app.config.js"></script>
-<script src="/app/modules/home/homeModule.js"></script>
-<script src="/app/modules/loginAuth/loginModule.js"></script>
-<script src="/app/modules/redeem_coupon/redeem_couponModule.js"></script>
-<script src="/app/modules/refferal_user/refferalModule.js"></script>
-<script src="/app/modules/signup/signupModule.js"></script>
-<script src="/app/modules/home/homeRoute.js"></script>
-<script src="/app/modules/loginAuth/loginRoute.js"></script>
-<script src="/app/modules/redeem_coupon/redeem_couponRoute.js"></script>
-<script src="/app/modules/refferal_user/refferalRoute.js"></script>
-<script src="/app/modules/signup/signupRoute.js"></script>
-<script src="/app/modules/home/homeCtrl.js"></script>
-<script src="/app/modules/layouts/nav-bar/navBarCtrl.js"></script>
-<script src="/app/modules/loginAuth/loginCtrl.js"></script>
-<script src="/app/modules/redeem_coupon/redeem_couponCtrl.js"></script>
-<script src="/app/modules/refferal_user/refferalCtrl.js"></script>
-<script src="/app/modules/signup/signupCtrl.js"></script>
-<script src="/app/modules/home/homeService.js"></script>
-<script src="/app/modules/layouts/nav-bar/navbarService.js"></script>
-<script src="/app/modules/loginAuth/loginService.js"></script>
-<script src="/app/modules/redeem_coupon/redeem_couponService.js"></script>
-<script src="/app/modules/refferal_user/refferalService.js"></script>
-<script src="/app/modules/signup/signupService.js"></script>
-<script src="/app/modules/layouts/nav-bar/navbarDirective.js"></script>
+<script src="/app/assets/js/angular-app-angularbundle.js"></script>
+<script src="/app/assets/js/angular-app-appbundle.js"></script>
+<script src="/app/assets/js/templates.js"></script>
 <!-- endinjector -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/oclazyload/1.1.0/ocLazyLoad.min.js"></script>
 <script src="//use.fontawesome.com/9a830e8669.js"></script>
@@ -400,6 +454,86 @@ ng-click="vm.signupPOP()"
 * https://github.com/sachinchoolur/ngclipboard
 * Copyright (c) 2016 Sachin; Licensed MIT */
 !function(){"use strict";var a,b,c="ngclipboard";"object"==typeof module&&module.exports?(a=require("angular"),b=require("clipboard"),module.exports=c):(a=window.angular,b=window.Clipboard),a.module(c,[]).directive("ngclipboard",function(){return{restrict:"A",scope:{ngclipboardSuccess:"&",ngclipboardError:"&"},link:function(a,c){var d=new b(c[0]);d.on("success",function(b){a.$apply(function(){a.ngclipboardSuccess({e:b})})}),d.on("error",function(b){a.$apply(function(){a.ngclipboardError({e:b})})})}}})}();
+</script>
+
+
+<!--  Page Loader  -->
+
+<style>
+
+    .noscroll {
+        position: fixed;
+        overflow: hidden;
+    }
+
+    #overlay {
+        display: none;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: #ffffff;
+    }
+
+    #spinner {
+        display: none;
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        top: 50%;
+        left: 50%;
+        margin-top: -20px;
+        margin-left: -20px;
+        z-index: 101;
+        background-color: #3498db;
+
+        -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+        animation: sk-rotateplane 1.2s infinite ease-in-out;
+    }
+
+    @-webkit-keyframes sk-rotateplane {
+        0% { -webkit-transform: perspective(120px) }
+        50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+        100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+    }
+
+    @keyframes sk-rotateplane {
+        0% {
+            transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+            -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+        } 50% {
+            transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+            -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+        } 100% {
+            transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+            -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        }
+    }
+
+</style>
+
+
+<div id="overlay"></div>
+<div id="spinner"></div>
+
+<script>
+
+    document.body.setAttribute("class", "noscroll");
+
+    document.getElementById("overlay").style.display = "block";
+    document.getElementById("spinner").style.display = "block";
+
+
+    window.onload = function() {
+      document.getElementById("spinner").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+
+      document.body.className = document.body.className.replace(/\bnoscroll\b/,'');
+    }
+
 </script>
 
 </body>
