@@ -397,12 +397,19 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "</toast>\n" +
     "<!-- login POPUP -->\n" +
     "<div class=\"overlay\" id=\"login-popup\">\n" +
-    "    <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closeLoginPopup()\">\n" +
+    "<!--     <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closeLoginPopup()\">\n" +
     "        ×\n" +
-    "    </a>\n" +
+    "    </a> -->\n" +
     "    <div class=\"overlay-content\">\n" +
     "        <div class=\"row \">\n" +
-    "            <div class=\"col-md-4 row col-md-offset-4 white nopad\">\n" +
+    "            <div class=\"col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12  white nopad\">\n" +
+    "\n" +
+    "                     <div class=\"col-md-1 nopad ico\" style=\"float: right;\n" +
+    "    margin-top: -13px;\">\n" +
+    "                        <i aria-hidden=\"true\" class=\"fa fa-close offer-logo-40px mar10\" ng-click=\"vm.closeLoginPopup()\">\n" +
+    "                        </i>\n" +
+    "                    </div>\n" +
+    "\n" +
     "                <div class=\"text-center bg-grey nopad pad-bot-10\">\n" +
     "                    <img class=\"poplogo\" src=\"/app/assets/images/header/Logo@2x.png\">\n" +
     "                        <h3>\n" +
@@ -435,12 +442,20 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "<!-- end login code -->\n" +
     "<!-- login POPUP -->\n" +
     "<div class=\"overlay\" id=\"login-signup\">\n" +
-    "    <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.signupPOPClose()\">\n" +
+    "<!--     <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.signupPOPClose()\">\n" +
     "        ×\n" +
-    "    </a>\n" +
+    "    </a> -->\n" +
     "    <div class=\"overlay-content\">\n" +
     "        <div class=\"row \">\n" +
-    "            <div class=\"col-md-4 row col-md-offset-4 white nopad\">\n" +
+    "              <div class=\"col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12  white nopad\">\n" +
+    "\n" +
+    "\n" +
+    "                     <div class=\"col-md-1 nopad ico\" style=\"float: right;\n" +
+    "    margin-top: -13px;\">\n" +
+    "                        <i aria-hidden=\"true\" class=\"fa fa-close offer-logo-40px mar10\" ng-click=\"vm.signupPOPClose()\">\n" +
+    "                        </i>\n" +
+    "                    </div>\n" +
+    "\n" +
     "                <div class=\"text-center bg-grey nopad pad-bot-10\">\n" +
     "                    <img class=\"poplogo\" src=\"/app/assets/images/header/Logo@2x.png\">\n" +
     "                        <h3>\n" +
@@ -722,17 +737,22 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "        ×\n" +
     "    </a> -->\n" +
     "    <div class=\"overlay-content\">\n" +
-    "        <div style=\"height: 305px\">\n" +
+    "        <div style=\"min-height: 305px\">\n" +
     "            <div active=\"active\" interval=\"myInterval\" on-carousel-change=\"vm.onSlideChanged(nextSlide, direction)\"\n" +
     " no-wrap=\"noWrapSlides\" uib-carousel=\"\" >\n" +
     "                <div index=\"$index\" ng-repeat=\"item in vm.getItems() track by $index\"\n" +
     "\n" +
-    "\n" +
-    "\n" +
     "                 uib-slide=\"\">\n" +
     "                    <!-- <img ng-src=\"{{item.business_avatar}}\" style=\"margin:auto;\">{{item}} -->\n" +
     "                    <div class=\"row \" >\n" +
-    "                        <div class=\"col-md-8 row col-md-offset-2 white pad10\">\n" +
+    "\n" +
+    "                                                <div class=\"col-md-1 nopad ico\" style=\"float: right;    z-index: 999;\n" +
+    "    margin-top: -13px;\">\n" +
+    "                        <i aria-hidden=\"true\" class=\"fa fa-close offer-logo-40px mar10\" ng-click=\"vm.closeSlidepopup()\">\n" +
+    "                        </i>\n" +
+    "                    </div>\n" +
+    "                    \n" +
+    "                        <div class=\"col-md-8  col-md-offset-2 col-sm-10  col-sm-offset-1 col-xs-12 white pad10\">\n" +
     "                            <div class=\"col-md-5 nopad\">\n" +
     "                                <img \"=\"\" alt=\"...\" class=\"fixed-height\" ng-src=\"{{item.attributes.avatar}}\" style=\"width: 100% !important;\">\n" +
     "                      \n" +
@@ -741,16 +761,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                <div class=\"pad-top-none offer-details text-left\">\n" +
     "                                    <div class=\"row\">\n" +
     "\n" +
-    "\n" +
-    "                                        <span class=\" close closif fa-stack \" style=\"font-size: 12px;\" ng-click=\"vm.closeSlidepopup()\">\n" +
-    "  <i class=\"fa fa-circle-thin fa-stack-2x\"></i>\n" +
-    "  <i class=\"fa fa-close fa-stack-1x\"></i>\n" +
-    "</span>\n" +
-    "\n" +
-    "\n" +
-    "                        <!--                 <span class=\"close\">\n" +
-    "                                            <i class=\"fa fa-close  fa-circle \"></i>\n" +
-    "                                        </span> -->\n" +
+    "     \n" +
     "                                        <div class=\"col-md-8\">\n" +
     "                                            <h3 class=\"tm\">\n" +
     "                                                {{item.attributes.name}}\n" +
@@ -919,22 +930,29 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "\n" +
     "<!-- Get  Register for vendor-->\n" +
-    "<div class=\"overlay\" id=\"vendor-popup\">\n" +
+    "<div class=\"overlay\" id=\"vendor-popup\" >\n" +
     "\n" +
-    "    <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closeVendorRegister()\">\n" +
+    "  <!--   <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closeVendorRegister()\">\n" +
     "        ×\n" +
     "    </a>\n" +
+    " -->\n" +
     "\n" +
-    "\n" +
-    "    <div class=\"overlay-content\">\n" +
+    "    <div class=\"overlay-content\" style=\"top: 2%\" >\n" +
     "        <div class=\"row\" >\n" +
     "            <div class=\"col-md-8 row col-md-offset-2  pad-bot0 pad10 \">\n" +
+    "\n" +
+    "                              <div class=\"col-md-1 nopad ico\" style=\"float: right;    z-index: 999;\n" +
+    "    margin-top: -13px;\">\n" +
+    "                        <i aria-hidden=\"true\" class=\"fa fa-close offer-logo-40px mar10\" ng-click=\"vm.closeVendorRegister()\">\n" +
+    "                        </i>\n" +
+    "                    </div>\n" +
+    "\n" +
     "\n" +
     "                <div class=\"row backcls mar-10px text-left\">\n" +
     "                    <div class=\"form-group  \">\n" +
     "                        <form name=\"vendorReg\" ng-submit=\"vm.CreateVendor(mobile)\" novalidate=\"\">\n" +
     "\n" +
-    "<div class=\"col-md-12 nopad\">\n" +
+    "<div class=\"col-md-12\">\n" +
     "\n" +
     "    <h4 class=\"text-center\">Vendor Sign UP</h4>\n" +
     "\n" +
@@ -1025,7 +1043,8 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "\n" +
     "\n" +
-    "                            <div class=\"col-md-4 row col-md-offset-4 mar25x slven\">\n" +
+    "                            <div class=\"col-md-4 row col-md-offset-4 mar25x slven\" style=\"    padding-right: 30px;\n" +
+    "    padding-left: 30px;\">\n" +
     "                                <button class=\"btn min40 width100 nbr\" ng-disabled=\"vendorReg.$invalid\" type=\"submit\">\n" +
     "                                    Create Vendor Account\n" +
     "                                </button>\n" +
@@ -1050,20 +1069,30 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "<!-- Vendor Login-->\n" +
     "<div class=\"overlay\" id=\"vendor-popup-login\">\n" +
     "\n" +
-    "    <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closeVendorLoginPopup()\">\n" +
+    "<!--     <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closeVendorLoginPopup()\">\n" +
     "        ×\n" +
-    "    </a>\n" +
+    "    </a> -->\n" +
     "\n" +
     "\n" +
-    "    <div class=\"overlay-content\">\n" +
+    "    <div class=\"overlay-content\" style=\"top: 2%\" >\n" +
     "        <div class=\"row\" >\n" +
-    "            <div class=\"col-md-8 row col-md-offset-2  pad-bot0 pad10 \">\n" +
+    "            <div class=\"col-md-6 row col-md-offset-3  pad-bot0 pad10 \">\n" +
+    "\n" +
+    "\n" +
+    "                        \n" +
+    "\n" +
+    "                              <div class=\"col-md-1 col-sm-1 col-xs-1 nopad ico\" style=\"float: right;    z-index: 999;\n" +
+    "    margin-top: -13px;\">\n" +
+    "                        <i aria-hidden=\"true\" class=\"fa fa-close offer-logo-40px mar10\" ng-click=\"vm.closeVendorLoginPopup()\">\n" +
+    "                        </i>\n" +
+    "                    </div>\n" +
+    "\n" +
     "\n" +
     "                <div class=\"row backcls mar-10px text-left\">\n" +
     "                    <div class=\"form-group  \">\n" +
     "                        <form name=\"VendorData\" ng-submit=\"vm.VendorLogin()\" novalidate=\"\">\n" +
     "\n" +
-    "<div class=\"col-md-12 nopad\">\n" +
+    "<div class=\"col-md-12\">\n" +
     "\n" +
     "    <h4 class=\"text-center\">Vendor Sign In</h4>\n" +
     "\n" +
@@ -1114,8 +1143,9 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "                                </div>\n" +
     "\n" +
-    "                            <div class=\"col-md-4 row col-md-offset-4 mar25x slven\">\n" +
-    "                                <button class=\"btn min40 width100 nbr\" ng-disabled=\"VendorData.$invalid\" type=\"submit\">\n" +
+    "                            <div class=\"col-md-4 row col-md-offset-4 mar25x slven\" style=\"    padding-right: 30px;\n" +
+    "    padding-left: 30px;\">\n" +
+    "                                 <button class=\"btn min40 width100 nbr\" ng-disabled=\"VendorData.$invalid\" type=\"submit\">\n" +
     "                                   Login\n" +
     "                                </button>\n" +
     "                            </div>\n" +

@@ -169,6 +169,8 @@ header hr {
     padding-left: 25px;
 }
 
+
+
 .main-nav-food {
     background: url('../images/02MenuBar/01Menu-Icn-Food.png')no-repeat;
 }
@@ -590,6 +592,8 @@ background-color: rgba(109, 71, 71, 0.44);
         top: 15px;
         right: 35px;
     }
+
+
 }
 
 #carousel-example-generic .carousel-indicators {
@@ -714,7 +718,7 @@ background-color: rgba(109, 71, 71, 0.44);
 }
 
 .offer-logo-40px {
-    font-size: 40px;
+    font-size: 24px;
 }
 
 .mar63 {
@@ -1087,6 +1091,14 @@ footer p {
 }
 
 
+
+.closif
+{
+        font-size: 12px;
+    margin-top: -11px;
+    margin-right: -9px;
+}
+
 /* <http://css-tricks.com/snippets/css/css-triangle/> */
 
 .field-tip .tip-content:before {
@@ -1256,14 +1268,43 @@ span.more-text.show {
 
 /* Medium Devices, Desktops */
 
-@media only screen and (min-width: 992px) {}
+@media only screen and (min-width: 992px) {
+
+
+}
 
 
 /* Large Devices, Wide Screens */
 
 @media only screen and (min-width: 1200px) {}
 
-@media only screen and (max-width: 1200px) {}
+@media only screen and (max-width: 1200px) {
+
+
+
+}
+
+.overlay-content .carousel-control .glyphicon-chevron-right
+{
+
+    color: black;
+    opacity: 1;
+    top: 50%;
+        margin-top: 85%;
+    left: -30%;
+}
+
+
+.overlay-content .carousel-control .glyphicon-chevron-left
+{
+
+   margin-top: 85%;
+    left: 115%;
+    top: 50%;
+
+    color: black;
+    opacity: 1;
+}
 
 @media only screen and (max-width: 979px) {
     .main-header-logo, .main-header-search {
@@ -1308,9 +1349,12 @@ header
 {
         box-shadow: -2px 3px 10px #b8bdbf;
 }
-}
 
-@media only screen and (max-width: 767px) {
+
+
+
+}
+@media only screen and (max-width: 768px) {
     .main-header-logo, .main-header-search {
         padding-bottom: 30px;
     }
@@ -1335,7 +1379,34 @@ header
     margin-left: auto;
     margin-right: auto;
 }
+
+.how-spini-works
+{
+    padding: 25px 0;
 }
+
+.how-spini-works  .container  h3
+{
+    font-size: 15px;
+}
+
+.overlay-content .carousel-control .glyphicon-chevron-right {
+    color: black;
+    opacity: 1;
+
+    top: 84%;
+    left: 20%;
+}
+
+.overlay-content .carousel-control .glyphicon-chevron-left {
+       top: 84%;
+    left: 60%;
+    color: black;
+    opacity: 1;
+}
+
+
+} 
 
 @media only screen and (max-width: 480px) {
     .main-header-logo a img {
@@ -1362,9 +1433,111 @@ header
     .manage-account {
         left: 15%;
     }
+
+    .how-spini-works
+{
+    padding: 20px 0;
 }
 
+.how-spini-works  .container  h3
+{
+    font-size: 15px;
+}
+
+.popupcenter {
+    padding-top: 70px;
+    padding-bottom: 90px;
+    padding-right: 32px;
+    padding-left: 27px;
+    border-top: #e8e4e4 solid 6px;
+    margin-top: 3px;
+    min-height: 200px;
+}
+
+.popupfoot {
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+
+.closif
+{
+        font-size: 12px;
+    margin-top: -11px;
+    margin-right: 2px;
+    z-index: 999;
+}
+
+
+.overlay-content .carousel-control .glyphicon-chevron-right {
+    color: black;
+    opacity: 1;
+    top: 90%;
+        left: 15%;
+}
+
+.overlay-content .carousel-control .glyphicon-chevron-left {
+    top: 90%;
+        left: 15%;
+    color: black;
+    opacity: 1;
+}
+
+
+}
+
+/*@media only screen and (min-width: 768px)
+{
+
+   .overlay-content .carousel-control .glyphicon-chevron-right {
+    color: black;
+    opacity: 1;
+    top: 82%;
+        left: 10%;
+}
+
+.overlay-content .carousel-control .glyphicon-chevron-left {
+    top: 82%;
+        left: 70%;
+    color: black;
+    opacity: 1;
+} 
+}*/
+
 @media only screen and (max-width: 320px) {
+
+
+    .overlay-content .carousel-control .glyphicon-chevron-right {
+    color: black;
+    opacity: 1;
+    top: 78%;
+        left: 15%;
+}
+
+.overlay-content .carousel-control .glyphicon-chevron-left {
+    top: 78%;
+        left: 15%;
+    color: black;
+    opacity: 1;
+}
+
+
+
+    .popupcenter {
+    padding-top: 70px;
+    padding-bottom: 90px;
+    padding-right: 32px;
+    padding-left: 27px;
+    border-top: #e8e4e4 solid 6px;
+    margin-top: 3px;
+    min-height: 200px;
+}
+
+
+.popupfoot {
+    padding-right: 30px;
+    padding-left: 30px;
+}
     .main-header-logo, .main-header-search {
     /*    padding-bottom: 10px;
         margin: 0px;
@@ -1422,17 +1595,6 @@ header
 
 
 
-.overlay-content .carousel-control .glyphicon-chevron-right
-{
-
-    color: black;
-    opacity: 1;
-
-        margin-top: 85%;
-    left: -30%;
-}
-
-
 .overlay-content
 {
   /*  border: 1px solid rgba(0, 0, 0, 0.3);
@@ -1442,28 +1604,13 @@ header
 }
 
 
-.overlay-content .carousel-control .glyphicon-chevron-left
-{
-
-   margin-top: 85%;
-    left: 115%;
-
-    color: black;
-    opacity: 1;
-}
-
 .overlay-content .close
 {
 
 opacity: 1; 
 }
 
-.closif
-{
-        font-size: 12px;
-    margin-top: -8px;
-    margin-right: -12px;
-}
+
 /*
 .overlay .closebtn
 {
@@ -1565,3 +1712,27 @@ font-size: 14px;
 
     src: url("/app/assets/css/fonts/HelveticaNeue-UltraLigCond.otf") format("opentype");
 }
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px)  { 
+
+.dropdown-content
+{
+        left: -182px !important;
+}
+}
+
+
+.overlay-content
+{
+        padding: 20px;
+
+
+}
+
+
+
+.carousel-control.right {
+    margin-top: 5%;
+    }

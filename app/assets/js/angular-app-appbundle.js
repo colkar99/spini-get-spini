@@ -1294,7 +1294,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 if (!vm.user.profile_image) {
                     vm.user.profile_image = '/app/assets/images/ProfileSection/Left-Nav/02Icn-ProfileDetails-Over@2x.png';
                 }
-                vm.user.wallet_money = 550;
+                // vm.user.wallet_money = 550;
                 temp = 2;
             })
         } else {
