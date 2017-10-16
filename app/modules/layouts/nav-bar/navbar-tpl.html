@@ -1,6 +1,14 @@
 <!-- header section -->
 <header  >
   <div class="container">
+
+    <div class="col-md-12 hidden-sm nopad mt6">
+        <div class="col-md-6 nopad right-lf main-header-partner" >
+       <a> Contact Us : +91 8682 800800</a>
+      </div>
+
+      
+    </div>
     <div class="row main-header">
       <div class="col-md-2 col-xs-12 col-sm-12 text-center main-header-logo">
         <a href="/">
@@ -25,9 +33,12 @@
 
 
 
+
+
+
       <div ng-class="menu.isReferral() ?'col-md-4':'col-md-2'" class="col-md-4 main-header-signin" ng-hide="menu.isVendor()">
-        <a  ng-click="menu.open = true" ng-hide="menu.isReferral()">Sign In <img src="/app/assets/images/header/UserIcon@2x.png"></a>
-        <a  ng-click="menu.open = true" ng-show="menu.isReferral()">MyAccount <img src="/app/assets/images/header/UserIcon@2x.png"></a>
+        <a  ng-mouseover="menu.open = true" ng-hide="menu.isReferral()">Sign In <img src="/app/assets/images/header/UserIcon@2x.png"></a>
+        <a  ng-mouseover="menu.open = true" ng-show="menu.isReferral()"><img src="/app/assets/images/header/UserIcon@2x.png"></a>
 
         <div class="manage-account" ng-if="menu.open ==  true && menu.isReferral() == false">
           <i class="glyphicon glyphicon-remove-circle" ng-click="menu.open = false"></i>
@@ -48,6 +59,11 @@
 
         </div>
       </div>
+
+
+
+
+  
 
 
     <div class="col-md-2 main-header-partner" ng-show="menu.isVendor()">

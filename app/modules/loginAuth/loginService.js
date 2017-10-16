@@ -312,7 +312,7 @@
             vendorFacebookLogin: function() {
                 var _self = this;
                 FB.init({
-                    appId: '131797584045674',
+                    appId: '1745197009116134',
                     status: true,
                     cookie: true,
                     xfbml: true,
@@ -332,7 +332,7 @@
             facebookLogin: function() {
                 var _self = this;
                 FB.init({
-                    appId: '131797584045674',
+                    appId: '1745197009116134',
                     status: true,
                     cookie: true,
                     xfbml: true,

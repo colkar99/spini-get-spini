@@ -83,7 +83,7 @@ module.exports = function (grunt) {
 			server: {
 				options: {
 					keepalive: true,
-					port: 8080,
+					port: 3000,
 					base: '.',
 					hostname: 'localhost',
 					debug: true,

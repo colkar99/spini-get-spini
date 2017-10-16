@@ -72,13 +72,19 @@ header hr {
 }
 
 .main-header {
-    padding: 40px 0;
+        padding: 0;
+    margin-top: 32px;
+    padding-bottom: 5px;
 }
 
 .main-header-logo a {}
 
 .main-header-logo a img {
+
+        margin-top: -11px;
     width: 150px;
+/*    height: 54px;*/
+    
 }
 
 .main-header-search {
@@ -1217,6 +1223,18 @@ span.more-text.show {
 .main-header-navigation ul li a {
     padding: 0px;
 }
+
+
+.right-lf
+{
+    float: right;
+    text-align:  right;
+}
+.mt6
+{
+ margin-top: 6px;
+}
+
 
 
 /* Custom, iPhone Retina */

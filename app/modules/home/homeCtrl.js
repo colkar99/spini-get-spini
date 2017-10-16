@@ -505,7 +505,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }, 0)
         }
         vm.OfferLink = function(offer, tracking_id) {
-            return 'https://www.spini.co/offers/' + offer + '/?tracking_id=' + tracking_id;
+            return 'https://www.referyogi.com/offers/' + offer + '/?tracking_id=' + tracking_id;
         }
         vm.mobile = function() {
             return vm.mobile_no;
