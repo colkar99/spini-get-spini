@@ -10,13 +10,21 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "<!-- header section -->\n" +
     "<header  >\n" +
     "  <div class=\"container\">\n" +
+    "\n" +
+    "    <div class=\"col-md-12 hidden-sm nopad mt6\">\n" +
+    "        <div class=\"col-md-6 nopad right-lf main-header-partner\" >\n" +
+    "       <a> Contact Us : +91 8682 800800</a>\n" +
+    "      </div>\n" +
+    "\n" +
+    "      \n" +
+    "    </div>\n" +
     "    <div class=\"row main-header\">\n" +
     "      <div class=\"col-md-2 col-xs-12 col-sm-12 text-center main-header-logo\">\n" +
     "        <a href=\"/\">\n" +
     "          <img src=\"/app/assets/images/header/Logo@2x.png\" alt=\"spini-logo\">\n" +
     "        </a>\n" +
     "      </div>\n" +
-    "      <div class=\"col-md-6 main-header-search\">\n" +
+    "      <div class=\"col-md-6 main-header-search\" ng-controller=\"HomeCtrl as vm\">\n" +
     "        <input type=\"text\" placeholder=\"Search Offers\" ng-model=\"vm.search_txt\" class=\"search_n\">\n" +
     "\n" +
     "        <button class=\"search_n\" ng-enter=\"vm.searchBox(vm.search_txt)\" ng-click=\"vm.searchBox(vm.search_txt)\"></button>\n" +
@@ -34,9 +42,12 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "\n" +
     "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "      <div ng-class=\"menu.isReferral() ?'col-md-4':'col-md-2'\" class=\"col-md-4 main-header-signin\" ng-hide=\"menu.isVendor()\">\n" +
-    "        <a  ng-click=\"menu.open = true\" ng-hide=\"menu.isReferral()\">Sign In <img src=\"/app/assets/images/header/UserIcon@2x.png\"></a>\n" +
-    "        <a  ng-click=\"menu.open = true\" ng-show=\"menu.isReferral()\">MyAccount <img src=\"/app/assets/images/header/UserIcon@2x.png\"></a>\n" +
+    "        <a  ng-mouseover=\"menu.open = true\" ng-hide=\"menu.isReferral()\">Sign In <img src=\"/app/assets/images/header/UserIcon@2x.png\"></a>\n" +
+    "        <a  ng-mouseover=\"menu.open = true\" ng-show=\"menu.isReferral()\"><img src=\"/app/assets/images/header/UserIcon@2x.png\"></a>\n" +
     "\n" +
     "        <div class=\"manage-account\" ng-if=\"menu.open ==  true && menu.isReferral() == false\">\n" +
     "          <i class=\"glyphicon glyphicon-remove-circle\" ng-click=\"menu.open = false\"></i>\n" +
@@ -57,6 +68,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "        </div>\n" +
     "      </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "  \n" +
     "\n" +
     "\n" +
     "    <div class=\"col-md-2 main-header-partner\" ng-show=\"menu.isVendor()\">\n" +
@@ -87,7 +103,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    box-shadow: 0px 0px 6px #888;\n" +
     "    border-radius: 3px;\n" +
     "    top: 50px;\n" +
-    "  /*  left: 70px;*/\n" +
+    "    left: -40px;\n" +
     "  }\n" +
     "  .manage-account i{\n" +
     "    text-align: right;\n" +
@@ -310,16 +326,16 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                    </div>\n" +
     "                </div>\n" +
     "                <div class=\"row backcls mar-10px text-left dotted\" ng-hide=\"vm.isReferral()\">\n" +
-    "                    <div class=\"col-md-12 nopad mar45\">\n" +
-    "                        <div class=\"col-md-8\">\n" +
+    "                    <div class=\"col-md-12 nopad\" style=\"margin-top: 10px\">\n" +
+    "                        <div class=\"col-md-12 nopad text-center\">\n" +
     "                            <p class=\"font15px popupfoot1 \">\n" +
     "                                <b>\n" +
-    "                                    Further more sharing this code will earn you upto\n" +
+    "                                   Become a ReferYogi to enjoy the Treasure amount hidden under every offer!!! \n" +
     "                                </b>\n" +
     "                                <br/>\n" +
-    "                                <b>\n" +
+    "                           <!--      <b>\n" +
     "                                    Rs.200 each time it's availed\n" +
-    "                                </b>\n" +
+    "                                </b> -->\n" +
     "                            </p>\n" +
     "                            <div class=\"social pad-bot10 padtop30 popupfoot1\">\n" +
     "                                <a class=\"fa fa-twitter twitter\" ng-click=\"vm.signupPOP()\" title=\"\">\n" +
@@ -328,30 +344,32 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                </a>\n" +
     "                                <a class=\"fa fa-clone clone\" ng-click=\"vm.signupPOP()\" title=\"\">\n" +
     "                                </a>\n" +
+    "\n" +
+    "\n" +
     "                            </div>\n" +
     "                        </div>\n" +
-    "                        <div class=\"col-md-4 text-center\">\n" +
+    "                      <!--   <div class=\"col-md-4 text-center\">\n" +
     "                            <h1 class=\"b\">\n" +
     "                                Rs.200\n" +
     "                            </h1>\n" +
     "                            <p>\n" +
     "                                Earn real cash while you enjoy ReferYogi offers!!\n" +
     "                            </p>\n" +
-    "                        </div>\n" +
+    "                        </div> -->\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +
     "                                <div class=\"row backcls mar-10px text-left dotted\" ng-show=\"vm.isReferral()\">\n" +
     "                    <div class=\"col-md-12 nopad mar45\">\n" +
-    "                        <div class=\"col-md-8\">\n" +
+    "                        <div class=\"col-md-12 nopad text-center\">\n" +
     "                            <p class=\"font15px popupfoot1 \">\n" +
     "                                <b>\n" +
-    "                                    Further more sharing this code will earn you upto\n" +
+    "\n" +
+    "                                    Keep Sharing and Earn upto Rs.{{item.attributes.treasure_value}} every time the code is Redeemed \n" +
+    "\n" +
+    "\n" +
     "                                </b>\n" +
-    "                                <br/>\n" +
-    "                                <b>\n" +
-    "                                    Rs.{{item.attributes.treasure_value}} each time it's availed\n" +
-    "                                </b>\n" +
+    "                       \n" +
     "                            </p>\n" +
     "                            <div class=\"social pad-bot10 padtop30 popupfoot1\">\n" +
     "                    <!--             <a class=\"fa fa-twitter twitter\" href=\"#\" target=\"_blank\" title=\"\">\n" +
@@ -362,14 +380,14 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                </a> -->\n" +
     "                            </div>\n" +
     "                        </div>\n" +
-    "                        <div class=\"col-md-4 text-center\">\n" +
+    "<!--                         <div class=\"col-md-4 text-center\">\n" +
     "                            <h1 class=\"b\">\n" +
     "                                Rs.{{item.attributes.treasure_value}}\n" +
     "                            </h1>\n" +
     "                            <p>\n" +
     "                                Earn real cash while you enjoy ReferYogi offers!!\n" +
     "                            </p>\n" +
-    "                        </div>\n" +
+    "                        </div> -->\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +
@@ -452,9 +470,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        <p class=\"font15px popupfoot pad-bot \">\n" +
     "                            Psst...!\n" +
     "                            <br/>\n" +
-    "                            Signup to become a ReferYogi referral and earn upto Rs.200 with this offer!\n" +
-    "                            <br/>\n" +
-    "                            Sparsh earned Rs.2000 begin a ReferYogi Referral!\n" +
+    "                            Signup to become a ReferYogi referral and earn the Treasure amount with this offer!\n" +
     "                            <br/>\n" +
     "                        </p>\n" +
     "                        <p class=\"fbblue font15px popupfoot pad-bot\" ng-click=\"vm.signupPOP()\">\n" +
@@ -472,9 +488,9 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "<!-- end get code -->\n" +
     "<!-- OFFERS POPUP 1st-->\n" +
     "<div class=\"overlay\" id=\"offer-popup\">\n" +
-    "    <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closeSlidepopup()\">\n" +
+    "   <!--  <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closeSlidepopup()\">\n" +
     "        ×\n" +
-    "    </a>\n" +
+    "    </a> -->\n" +
     "    <div class=\"overlay-content\">\n" +
     "        <div style=\"height: 305px\">\n" +
     "            <div active=\"active\" interval=\"myInterval\" on-carousel-change=\"vm.onSlideChanged(nextSlide, direction)\"\n" +
@@ -494,6 +510,17 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                            <div class=\"col-md-7 nopad\">\n" +
     "                                <div class=\"pad-top-none offer-details text-left\">\n" +
     "                                    <div class=\"row\">\n" +
+    "\n" +
+    "\n" +
+    "                                        <span class=\" close closif fa-stack \" style=\"font-size: 12px;\" ng-click=\"vm.closeSlidepopup()\">\n" +
+    "  <i class=\"fa fa-circle-thin fa-stack-2x\"></i>\n" +
+    "  <i class=\"fa fa-close fa-stack-1x\"></i>\n" +
+    "</span>\n" +
+    "\n" +
+    "\n" +
+    "                        <!--                 <span class=\"close\">\n" +
+    "                                            <i class=\"fa fa-close  fa-circle \"></i>\n" +
+    "                                        </span> -->\n" +
     "                                        <div class=\"col-md-8\">\n" +
     "                                            <h3 class=\"tm\">\n" +
     "                                                {{item.attributes.name}}\n" +
@@ -507,7 +534,8 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                                </span>\n" +
     "                                            </div>\n" +
     "                                        </div>\n" +
-    "                                        <div class=\"col-md-4 text-right \">\n" +
+    "                                        <div class=\"col-md-4 text-right \" style=\"\n" +
+    "    margin-top: -15px;\">\n" +
     "                                            <img class=\"offer-logo-set\" ng-src=\"{{item.attributes.business_avatar_thumb}}\">\n" +
     "                                            \n" +
     "                                        </div>\n" +
@@ -879,11 +907,16 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('app/modules/redeem_coupon/redeem_coupon.html',
     "<div class=\"container\" style=\"margin-top: 5px;\">\n" +
-    "    <label>\n" +
-    "        Buiness :\n" +
+    "<div class=\"col-md-2\">\n" +
+    "    \n" +
+    "       <label>\n" +
+    "      Choose  Buiness :\n" +
     "    </label>\n" +
-    "    <select ng-change=\"vm.RedemptionsHistory()\" ng-model=\"vm.business_id\" ng-options=\"item.id as item.name for item in vm.vendor.businesses\" style=\"    min-width: 130px;\">\n" +
+    "    <select class=\"form-control\" ng-change=\"vm.RedemptionsHistory()\" ng-model=\"vm.business_id\" ng-options=\"item.id as item.name for item in vm.vendor.businesses\" style=\"    min-width: 130px;\">\n" +
     "    </select>\n" +
+    "</div>\n" +
+    "\n" +
+    " \n" +
     "</div>\n" +
     "<!-- container for coupon redeem console -->\n" +
     "<section class=\"coupon-redeem-entry\">\n" +
@@ -1098,33 +1131,39 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                            <div class=\"navbar-collapse collapse sidebar-navbar-collapse\">\n" +
     "                                <ul class=\"nav navbar-nav\">\n" +
     "                                    <li style=\"font-size: 18px;\">\n" +
-    "                                        <a class=\"text-center\" href=\"#\">\n" +
+    "                                        <a>\n" +
     "                                            <i aria-hidden=\"true\" class=\"glyphicon glyphicon-stats pull-left\">\n" +
     "                                            </i>\n" +
-    "                                            <span>\n" +
+    "                                            <span style=\"margin-left: 10px;\">\n" +
     "                                                Dashboard\n" +
     "                                            </span>\n" +
     "                                        </a>\n" +
     "                                    </li>\n" +
     "                                    <li style=\"font-size: 18px;\">\n" +
-    "                                        <a class=\"text-center\" href=\"\">\n" +
+    "                                        <a>\n" +
     "                                            <i class=\"glyphicon glyphicon-user pull-left\">\n" +
     "                                            </i>\n" +
+    "                                            <span style=\"margin-left: 10px;\">\n" +
     "                                            Profile\n" +
+    "                                            </span>\n" +
     "                                        </a>\n" +
     "                                    </li>\n" +
     "                                    <li style=\"font-size: 18px;\">\n" +
-    "                                        <a class=\"text-center\" href=\"\">\n" +
+    "                                        <a>\n" +
     "                                            <i class=\"glyphicon glyphicon-tag pull-left\">\n" +
     "                                            </i>\n" +
+    "                                            <span style=\"margin-left: 10px;\">\n" +
     "                                            Saved Offer\n" +
+    "                                            </span>\n" +
     "                                        </a>\n" +
     "                                    </li>\n" +
     "                                    <li style=\"font-size: 18px;\">\n" +
-    "                                        <a class=\"text-center\" href=\"\">\n" +
-    "                                            <i class=\"glyphicon glyphicon-usd pull-left\">\n" +
+    "                                        <a>\n" +
+    "                                            <i class=\"fa fa-inr pull-left\" style=\"font-size: 20px;\">\n" +
     "                                            </i>\n" +
+    "                                            <span style=\"margin-left: 10px;\">\n" +
     "                                            Wallet\n" +
+    "                                            </span>\n" +
     "                                        </a>\n" +
     "                                    </li>\n" +
     "                                </ul>\n" +
@@ -1160,9 +1199,10 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                            {{vm.user.wallet_money}}\n" +
     "                        </label>\n" +
     "                    </div>\n" +
-    "                    <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\">\n" +
-    "                        <button class=\"btn btn-default field-tip\" ng-disabled=\"true\" style=\"border: 1px solid #bfe7fe;color:#bfe7fe\">\n" +
-    "                            <span class=\"tip-content\">\n" +
+    "                    <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\" >\n" +
+    "                        <button class=\"btn btn-default field-tip\" ng-disabled=\"vm.user.wallet_money<500\" style=\"    border: 1px solid #40799a;\n" +
+    "    color: #155275;\" ng-click=\"vm.openPopup()\">\n" +
+    "                            <span class=\"tip-content\" ng-hide=\"vm.user.wallet_money>500\">\n" +
     "                                Earn minimum Rs.500/- to make a transfer\n" +
     "                            </span>\n" +
     "                            Transfer to paytm wallet\n" +
@@ -1326,7 +1366,76 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     ".field-tip .tip-content {\n" +
     "z-index: 99;\n" +
     "}\n" +
-    "</style>\n"
+    "</style>\n" +
+    "\n" +
+    "\n" +
+    "<!-- Get  PayTm Request-->\n" +
+    "<div class=\"overlay\" id=\"get-paytm-no-popup\">\n" +
+    "\n" +
+    "      <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closePopup()\">\n" +
+    "        ×\n" +
+    "    </a>\n" +
+    "\n" +
+    "    <div class=\"overlay-content\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-md-4 row col-md-offset-4 pad-bot0 pad10 \">\n" +
+    "                <div class=\"row backcls mar-10px text-left\" style=\"padding: 20px;\">\n" +
+    "                    <div class=\"form-group\">\n" +
+    "                        <form name=\"get_coupen\" ng-submit=\"vm.PaytmAsk(mobile,amount)\" novalidate=\"\">\n" +
+    "                            <div class=\"col-md-12 nopad\">\n" +
+    "                                <label for=\"usr\">\n" +
+    "                                    Enter your paytm account no\n" +
+    "                                </label>\n" +
+    "                                <input class=\"form-control nbr min40\" id=\"usr\" maxlength=\"10\" minlength=\"10\" name=\"mobile\" ng-model=\"mobile\" ng-pattern=\"/^[0-9]+$/\" placeholder=\"Mobile no\" required=\"\" type=\"number\">\n" +
+    "                                    <span ng-show=\"(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.minlength\" style=\"color: red\">\n" +
+    "                                        Minimum 10 digits required.\n" +
+    "                                    </span>\n" +
+    "                                    <span ng-show=\"(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.maxlength\" style=\"color: red\">\n" +
+    "                                        Maximum 10 digits only allowed.\n" +
+    "                                    </span>\n" +
+    "                                </input>\n" +
+    "                            </div> \n" +
+    "                            <div class=\"col-md-12 nopad\" style=\"padding-top: 25px;\">\n" +
+    "                                <label for=\"usr\">\n" +
+    "                                    Enter Amount \n" +
+    "                                </label>\n" +
+    "                                <input class=\"form-control nbr min40\"\n" +
+    "\n" +
+    "\n" +
+    "                                ng-min=\"100\"\n" +
+    "                                ng-max=\"vm.user.wallet_money\"\n" +
+    "\n" +
+    "\n" +
+    "                                 id=\"usr\"  name=\"amount\" \n" +
+    "                                ng-model=\"amount\"   placeholder=\"Amount\" required=\"\" type=\"number\">\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                                    <span ng-show=\"(get_coupen.amount.$touched || submitted) && get_coupen.amount.$error.min\" style=\"color: red\">\n" +
+    "                                        Minimum 100 rs required.\n" +
+    "                                    </span>\n" +
+    "                                    <span ng-show=\"(get_coupen.amount.$touched || submitted) && get_coupen.amount.$error.max\" style=\"color: red\">\n" +
+    "                                        Maximum {{vm.user.wallet_money}} rs only allowed.\n" +
+    "                                    </span>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                                </input>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"col-md-6 nopad mar25x\">\n" +
+    "                                <button class=\"btn min40 width100 nbr\" ng-disabled=\"get_coupen.$invalid\" type=\"submit\">\n" +
+    "                                 Transfer to PayTm Wallet\n" +
+    "                                </button>\n" +
+    "                            </div>\n" +
+    "                        </form>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<!-- Get  PayTm Request-->\n"
   );
 
 

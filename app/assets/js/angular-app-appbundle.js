@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-10-12. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-10-16. 
 * @author Kathik
 */
 (function() {
@@ -809,7 +809,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }, 0)
         }
         vm.OfferLink = function(offer, tracking_id) {
-            return 'https://www.spini.co/offers/' + offer + '/?tracking_id=' + tracking_id;
+            return 'https://www.referyogi.com/offers/' + offer + '/?tracking_id=' + tracking_id;
         }
         vm.mobile = function() {
             return vm.mobile_no;
@@ -1083,6 +1083,8 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                                 'amount_paid': vm.showInfo.amount_to_pay
                             }
                         }).then(function() {
+
+
                             ngToast.dismiss();
                             ngToast.create({
                                 content: '<strong>Referla</strong>: Code Redemptions complete',
@@ -1090,12 +1092,15 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                                 dismissButton: true,
                                 dismissOnClick: false
                             });
-                              vm.coupon_code='';
+                            
+                            vm.coupon_code='';
                             vm.amount='';
                             vm.showInfo='';
 
                             // vm.showInfo = '';
                             vm.RedemptionsHistory()
+
+
                         }).catch(function(response) {
                             ngToast.dismiss();
                             ngToast.create({
@@ -1192,64 +1197,78 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
         }
     }
 })();
-(function () {
-	'use strict';
+(function() {
+    'use strict';
+    /**
+     * @ngdoc function
+     * @name app.controller:HomeCtrl
+     * @description
+     * # HomeCtrl
+     * Controller of the app
+     */
+    angular.module('refferal').controller('refferalCtrl', Refferal);
+    Refferal.$inject = ['refferalService', 'LoginService', '$http', '$location','ngToast'];
+    /*
+     * recommend
+     * Using function declarations
+     * and bindable members up top.
+     */
+    function Refferal(refferalService, LoginService, $http, $location,ngToast) {
+        /*jshint validthis: true */
+        var vm = this;
+        vm.closePopup = function() {
+            document.getElementById("get-paytm-no-popup").style.width = "0%";
+        }
+        vm.openPopup = function(data, id) {
+            document.getElementById("get-paytm-no-popup").style.width = "100%";
+        }
+        vm.PaytmAsk = function(mobile, PaytmAsk) {
+            console.log(mobile)
+            console.log(PaytmAsk)
+            console.log(mobile);
+            $http.post('https://api.spini.co/v1/payment_requests', {
+                "payment_request": {
+                    "amount": PaytmAsk,
+                    "paytm_number": mobile
+                }
+            }).then(function(response) {
+                vm.closePopup();
 
-	/**
-	* @ngdoc function
-	* @name app.controller:HomeCtrl
-	* @description
-	* # HomeCtrl
-	* Controller of the app
-	*/
+                ngToast.dismiss();
+                ngToast.create({
+                    content: 'Request Sent amount will credited with in 2 to 3 business days',
+                    dismissOnTimeout: false,
+                    dismissButton: true,
+                    dismissOnClick: false
+                });
 
-	angular
-		.module('refferal')
-		.controller('refferalCtrl', Refferal);
 
-	Refferal.$inject = ['refferalService','LoginService','$http','$location'];
-
-	/*
-	* recommend
-	* Using function declarations
-	* and bindable members up top.
-	*/
-
-	function Refferal(refferalService,LoginService,$http,$location) {
-		/*jshint validthis: true */
-		var vm = this;
-		vm.title = "Hello, angular-app!";
-		vm.version = "1.0.0";
-		vm.listFeatures = refferalService.getFeaturesList();
-		vm.required = function(){
-			alert("This will move to your wallet once redeemed") 
-		};
-
-		var temp = 1;
-
-		if(LoginService.isReferral() && temp ==1)
-		{
-		$http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
-		 LoginService.getProfileInfo(function(data)
-		{
-			vm.user = data;
-
-			if(!vm.user.profile_image)
-			{
-				vm.user.profile_image = '/app/assets/images/ProfileSection/Left-Nav/02Icn-ProfileDetails-Over@2x.png';
-			}
-			temp = 2;
-		})
-		}
-		else
-		{
-			$location.path('/')
-		}
-
-	}
-
+            }).catch(function(response) {
+                ngToast.dismiss();
+                ngToast.create({
+                    content: response.data.errors[0].detail,
+                    dismissOnTimeout: false,
+                    dismissButton: true,
+                    dismissOnClick: false
+                });
+            });
+        }
+        var temp = 1;
+        if (LoginService.isReferral() && temp == 1) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
+            LoginService.getProfileInfo(function(data) {
+                vm.user = data;
+                if (!vm.user.profile_image) {
+                    vm.user.profile_image = '/app/assets/images/ProfileSection/Left-Nav/02Icn-ProfileDetails-Over@2x.png';
+                }
+                vm.user.wallet_money = 550;
+                temp = 2;
+            })
+        } else {
+            $location.path('/')
+        }
+    }
 })();
-
 // (function() {
 //     'use strict';
 //     /**
@@ -1755,7 +1774,7 @@ LodashFactory.$inject = ['$window'];
             vendorFacebookLogin: function() {
                 var _self = this;
                 FB.init({
-                    appId: '131797584045674',
+                    appId: '1745197009116134',
                     status: true,
                     cookie: true,
                     xfbml: true,
@@ -1775,7 +1794,7 @@ LodashFactory.$inject = ['$window'];
             facebookLogin: function() {
                 var _self = this;
                 FB.init({
-                    appId: '131797584045674',
+                    appId: '1745197009116134',
                     status: true,
                     cookie: true,
                     xfbml: true,

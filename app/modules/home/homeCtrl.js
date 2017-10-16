@@ -368,6 +368,37 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             document.getElementById("offer-popup").style.width = "100%";
             // document.getElementById("get-code-popup").style.width = "100%";
         }
+
+        vm.MobileToggleSearch = function() {
+            // console.log( document.getElementById('mobileSearch').style.display);
+
+            if( document.getElementById('mobileSearch').style.display == 'none')
+            {
+                 document.getElementById('mobileSearch').style.display='block';    
+             }
+
+            else
+            {
+                 document.getElementById('mobileSearch').style.display='none';    
+             }
+          
+
+        }
+        vm.MobileLogin = function() {
+            // console.log( document.getElementById('mobileSearch').style.display);
+
+            if( document.getElementById('mobileMenu').style.display == 'none')
+            {
+                 document.getElementById('mobileMenu').style.display='block';    
+             }
+
+            else
+            {
+                 document.getElementById('mobileMenu').style.display='none';    
+             }
+          
+
+        }
         vm.closeGetNoPopup = function() {
             document.getElementById("get-code-popup").style.width = "0%";
             document.getElementById("offer-popup").style.width = "100%";
