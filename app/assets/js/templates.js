@@ -486,26 +486,24 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    </div>\n" +
     "</div>\n" +
     "<!-- end login code -->\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "<!-- Get Code POPUP -->\n" +
-    "<div class=\"overlay\" id=\"confirm-code-popup\">\n" +
-    "    <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closegetcodepopup()\">\n" +
-    "        ×\n" +
-    "    </a>\n" +
+    "<div class=\"overlay\" id=\"confirm-code-popup\" style=\"top: 5%\">\n" +
     "    <div class=\"overlay-content\">\n" +
-    "  <div class=\"row \"  ng-repeat=\"item in vm.getSelectedOfferData()\">\n" +
+    "      \n" +
     "            <div class=\"col-md-8 row col-md-offset-2 white pad-bot0 pad10 \">\n" +
+    "                  <div class=\"row \" ng-repeat=\"item in vm.getSelectedOfferData()\">\n" +
     "                <div class=\"row mar20bt\">\n" +
-    "                    <div class=\"col-md-1 nopad ico\">\n" +
-    "                        <i aria-hidden=\"true\" class=\"fa fa-arrow-left offer-logo-40px mar10\" ng-click=\"vm.closegetcodepopup()\">\n" +
+    "                    <div class=\"col-md-1 col-sm-2 col-xs-2 nopad ico\">\n" +
+    "                        <i aria-hidden=\"true\" class=\"fa fa-arrow-left offer-logo-40px mar10\" ng-click=\"vm.closegetcodepopup()\" style=\"padding-left: 11px;\">\n" +
     "                        </i>\n" +
     "                    </div>\n" +
-    "\n" +
-    "           \n" +
-    "\n" +
-    " <div class=\"col-md-3 nopad text-left\">\n" +
+    "                    <div class=\"col-md-8 col-sm-6 col-xs-6 nopad text-left\">\n" +
     "                        <h4 class=\"mar10\">\n" +
     "                            <b>\n" +
-    "                                  {{item.attributes.name}}\n" +
+    "                                {{item.attributes.name}}\n" +
     "                            </b>\n" +
     "                        </h4>\n" +
     "                        <div class=\"offer-location\">\n" +
@@ -517,147 +515,122 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                            </span>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                    <div class=\"col-md-8 text-right\">\n" +
-    "                        <img class=\"offer-logo-set\" ng-src=\"    {{item.attributes.business_avatar_thumb}}\">\n" +
-    "                        \n" +
+    "                    <div class=\"col-md-3 col-sm-4 col-xs-4 text-right\">\n" +
+    "                        <img class=\"offer-logo-set\" style=\"    padding-right: 10px;\" ng-src=\"    {{item.attributes.business_avatar_thumb}}\">\n" +
+    "                        </img>\n" +
     "                    </div>\n" +
-    "                    <hr>\n" +
-    "                    </hr>\n" +
+    "                 \n" +
     "                </div>\n" +
-    "                <div class=\"row backcls mar-10px text-left\">\n" +
-    "                    <div class=\"form-group popupcenter padtop40 \">\n" +
-    "                        <div class=\"col-md-12 nopad text-center\" ng-show=\"vm.isReferral()\">\n" +
-    "                            <h4 class=\"marbt20\">\n" +
-    "                                Hi  {{vm.username()}}\n" +
-    "                            </h4>\n" +
-    "                            <h4 class=\"marbt20\">\n" +
-    "                                Availing this offer will add  Rs.{{item.attributes.treasure_value}} to your ReferYogi Wallet!\n" +
-    "                            </h4>\n" +
-    "                            <h4 class=\"marbt20\">\n" +
-    "                                Offer code sent to your registered mobile No - \n" +
+    "            </div>\n" +
+    "            <div class=\"row backcls mar-10px text-left\">\n" +
+    "                <div class=\"form-group popupcenter padtop40 \">\n" +
+    "                    <div class=\"col-md-12 nopad text-center\" ng-show=\"vm.isReferral()\">\n" +
+    "                        <h4 class=\"marbt20\">\n" +
+    "                            Hi  {{vm.username()}}\n" +
+    "                        </h4>\n" +
+    "                        <h4 class=\"marbt20\">\n" +
+    "                            Availing this offer will add  Rs.{{item.attributes.treasure_value}} to your ReferYogi Wallet!\n" +
+    "                        </h4>\n" +
+    "                        <h4 class=\"marbt20\">\n" +
+    "                            Offer code sent to your registered mobile No - \n" +
     "\n" +
     "\n" +
     "\n" +
     "                  {{vm.usermobile()}}\n" +
-    "                            </h4>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"col-md-12 nopad text-center\" ng-hide=\"vm.isReferral()\">\n" +
-    "                            <h4 class=\"marbt20\">\n" +
-    "                                Hi  Guest\n" +
-    "                            </h4>\n" +
-    "               \n" +
-    "                            <h4 class=\"marbt20\">\n" +
-    "                                Offer code sent to your registered mobile No - \n" +
+    "                        </h4>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-md-12 nopad text-center\" ng-hide=\"vm.isReferral()\">\n" +
+    "                        <h4 class=\"marbt20\">\n" +
+    "                            Hi  Guest\n" +
+    "                        </h4>\n" +
+    "                        <h4 class=\"marbt20\">\n" +
+    "                            Offer code sent to your registered mobile No - \n" +
     "\n" +
     "                  {{vm.mobile()}}\n" +
-    "                            </h4>\n" +
-    "                       \n" +
-    "                        </div>\n" +
-    "                        <div class=\"col-md-12 nopad gpad text-center\" ng-show=\"vm.isReferral()\" >\n" +
-    "                            <span class=\"offer-spini\" >\n" +
-    "                                <i aria-hidden=\"true\" class=\"fa fa-share-alt-square link-icon\">\n" +
-    "                                </i>\n" +
-    "                                SHARE & EARN\n" +
-    "                            </span>\n" +
-    "                        </div>\n" +
-    "\n" +
-    "                             <div class=\"col-md-12 nopad gpad text-center\" ng-hide=\"vm.isReferral()\">\n" +
-    "                            <span class=\"offer-spini\"  ng-click=\"vm.signupPOP()\">\n" +
-    "                                <i aria-hidden=\"true\" class=\"fa fa-share-alt-square link-icon\">\n" +
-    "                                </i>\n" +
-    "                                SIGN UP & SHARE & EARN\n" +
-    "                            </span>\n" +
+    "                        </h4>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-md-12 nopad gpad text-center\" ng-show=\"vm.isReferral()\">\n" +
+    "                        <span class=\"offer-spini\">\n" +
+    "                            <i aria-hidden=\"true\" class=\"fa fa-share-alt-square link-icon\">\n" +
+    "                            </i>\n" +
+    "                            SHARE & EARN\n" +
+    "                        </span>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-md-12 nopad gpad text-center\" ng-hide=\"vm.isReferral()\">\n" +
+    "                        <span class=\"offer-spini\" ng-click=\"vm.signupPOP()\">\n" +
+    "                            <i aria-hidden=\"true\" class=\"fa fa-share-alt-square link-icon\">\n" +
+    "                            </i>\n" +
+    "                            SIGN UP & SHARE & EARN\n" +
+    "                        </span>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"row backcls mar-10px text-left dotted\" ng-hide=\"vm.isReferral()\">\n" +
+    "                <div class=\"col-md-12 nopad\" style=\"margin-top: 10px\">\n" +
+    "                    <div class=\"col-md-12 nopad text-center\">\n" +
+    "                        <p class=\"font15px popupfoot1 \">\n" +
+    "                            <b>\n" +
+    "                                Become a ReferYogi to enjoy the Treasure amount hidden under every offer!!!\n" +
+    "                            </b>\n" +
+    "                            <br/>\n" +
+    "                        </p>\n" +
+    "                        <div class=\"social pad-bot10 padtop30 popupfoot1\">\n" +
+    "                            <a class=\"fa fa-twitter twitter\" ng-click=\"vm.signupPOP()\" title=\"\">\n" +
+    "                            </a>\n" +
+    "                            <a class=\"fa fa-facebook fb\" ng-click=\"vm.signupPOP()\" title=\"\">\n" +
+    "                            </a>\n" +
+    "                            <a class=\"fa fa-clone clone\" ng-click=\"vm.signupPOP()\" title=\"\">\n" +
+    "                            </a>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"row backcls mar-10px text-left dotted\" ng-hide=\"vm.isReferral()\">\n" +
-    "                    <div class=\"col-md-12 nopad\" style=\"margin-top: 10px\">\n" +
-    "                        <div class=\"col-md-12 nopad text-center\">\n" +
-    "                            <p class=\"font15px popupfoot1 \">\n" +
-    "                                <b>\n" +
-    "                                   Become a ReferYogi to enjoy the Treasure amount hidden under every offer!!! \n" +
-    "                                </b>\n" +
-    "                                <br/>\n" +
-    "                           <!--      <b>\n" +
-    "                                    Rs.200 each time it's availed\n" +
-    "                                </b> -->\n" +
-    "                            </p>\n" +
-    "                            <div class=\"social pad-bot10 padtop30 popupfoot1\">\n" +
-    "                                <a class=\"fa fa-twitter twitter\" ng-click=\"vm.signupPOP()\" title=\"\">\n" +
-    "                                </a>\n" +
-    "                                <a class=\"fa fa-facebook fb\"   ng-click=\"vm.signupPOP()\" title=\"\">\n" +
-    "                                </a>\n" +
-    "                                <a class=\"fa fa-clone clone\" ng-click=\"vm.signupPOP()\" title=\"\">\n" +
-    "                                </a>\n" +
-    "\n" +
-    "\n" +
-    "                            </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"row backcls mar-10px text-left dotted\" ng-show=\"vm.isReferral()\">\n" +
+    "                <div class=\"col-md-12 nopad mar45\">\n" +
+    "                    <div class=\"col-md-12 nopad text-center\">\n" +
+    "                        <p class=\"font15px popupfoot1 \">\n" +
+    "                            <b>\n" +
+    "                                Keep Sharing and Earn upto Rs.{{item.attributes.treasure_value}} every time the code is Redeemed\n" +
+    "                            </b>\n" +
+    "                        </p>\n" +
+    "                        <div class=\"social pad-bot10 padtop30 popupfoot1\">\n" +
     "                        </div>\n" +
-    "                      <!--   <div class=\"col-md-4 text-center\">\n" +
-    "                            <h1 class=\"b\">\n" +
-    "                                Rs.200\n" +
-    "                            </h1>\n" +
-    "                            <p>\n" +
-    "                                Earn real cash while you enjoy ReferYogi offers!!\n" +
-    "                            </p>\n" +
-    "                        </div> -->\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "\n" +
-    "                                <div class=\"row backcls mar-10px text-left dotted\" ng-show=\"vm.isReferral()\">\n" +
-    "                    <div class=\"col-md-12 nopad mar45\">\n" +
-    "                        <div class=\"col-md-12 nopad text-center\">\n" +
-    "                            <p class=\"font15px popupfoot1 \">\n" +
-    "                                <b>\n" +
-    "\n" +
-    "                                    Keep Sharing and Earn upto Rs.{{item.attributes.treasure_value}} every time the code is Redeemed \n" +
-    "\n" +
-    "\n" +
-    "                                </b>\n" +
-    "                       \n" +
-    "                            </p>\n" +
-    "                            <div class=\"social pad-bot10 padtop30 popupfoot1\">\n" +
-    "                    <!--             <a class=\"fa fa-twitter twitter\" href=\"#\" target=\"_blank\" title=\"\">\n" +
-    "                                </a>\n" +
-    "                                <a class=\"fa fa-facebook fb\" href=\"#\" target=\"_blank\" title=\"\">\n" +
-    "                                </a>\n" +
-    "                                <a class=\"fa fa-clone clone\" href=\"#\" target=\"_blank\" title=\"\">\n" +
-    "                                </a> -->\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "<!--                         <div class=\"col-md-4 text-center\">\n" +
-    "                            <h1 class=\"b\">\n" +
-    "                                Rs.{{item.attributes.treasure_value}}\n" +
-    "                            </h1>\n" +
-    "                            <p>\n" +
-    "                                Earn real cash while you enjoy ReferYogi offers!!\n" +
-    "                            </p>\n" +
-    "                        </div> -->\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
     "<!-- end get code -->\n" +
+    "\n" +
+    "\n" +
     "<!-- Get Code POPUP mobile no-->\n" +
     "<div class=\"overlay\" id=\"get-code-popup\">\n" +
-    "    <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closegetMobilepopup()\">\n" +
-    "        ×\n" +
-    "    </a>\n" +
-    "    <div class=\"overlay-content\">\n" +
+    "\n" +
+    "    <div class=\"overlay-content\" style=\"    top: 5%;\">\n" +
+    "\n" +
+    "\n" +
+    "           \n" +
+    "\n" +
     "        <div class=\"row \"  ng-repeat=\"item in vm.getSelectedOfferData()\">\n" +
-    "            <div class=\"col-md-8 row col-md-offset-2 white pad-bot0 pad10 \">\n" +
-    "                <div class=\"row mar20bt\">\n" +
-    "                    <div class=\"col-md-1 nopad ico\">\n" +
-    "                        <i aria-hidden=\"true\" class=\"fa fa-arrow-left offer-logo-40px mar10\" ng-click=\"vm.closeGetNoPopup()\">\n" +
+    "\n" +
+    "\n" +
+    "   <div class=\"col-md-8 row col-md-offset-2 white pad-bot0 pad10 \">\n" +
+    "        \n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "        <div class=\"row mar20bt\">\n" +
+    "\n" +
+    "                        \n" +
+    "                    <div class=\"col-md-1  col-sm-2 col-xs-2 nopad ico\">\n" +
+    "                        <i aria-hidden=\"true\" class=\"fa fa-arrow-left offer-logo-40px mar10\" style=\"padding-left: 11px;\" ng-click=\"vm.closeGetNoPopup()\">\n" +
     "                        </i>\n" +
     "                    </div>\n" +
     "\n" +
     "           \n" +
     "\n" +
-    " <div class=\"col-md-8 nopad text-left\">\n" +
+    "                     <div class=\"col-md-8  col-sm-6 col-xs-6 nopad text-left\">\n" +
     "                        <h4 class=\"mar10\">\n" +
     "                            <b>\n" +
     "                                  {{item.attributes.name}}\n" +
@@ -672,8 +645,8 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                            </span>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                    <div class=\"col-md-3 text-right\">\n" +
-    "                        <img class=\"offer-logo-set\" ng-src=\"    {{item.attributes.business_avatar_thumb}}\">\n" +
+    "                    <div class=\"col-md-3 col-sm-4 col-xs-4 text-right\">\n" +
+    "                        <img class=\"offer-logo-set\" style=\"    padding-right: 43px;\" ng-src=\"    {{item.attributes.business_avatar_thumb}}\">\n" +
     "                        \n" +
     "                    </div>\n" +
     "                    <hr>\n" +
@@ -731,195 +704,6 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    </div>\n" +
     "</div>\n" +
     "<!-- end get code -->\n" +
-    "<!-- OFFERS POPUP 1st-->\n" +
-    "<div class=\"overlay\" id=\"offer-popup\">\n" +
-    "   <!--  <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closeSlidepopup()\">\n" +
-    "        ×\n" +
-    "    </a> -->\n" +
-    "    <div class=\"overlay-content\">\n" +
-    "        <div style=\"min-height: 305px\">\n" +
-    "            <div active=\"active\" interval=\"myInterval\" on-carousel-change=\"vm.onSlideChanged(nextSlide, direction)\"\n" +
-    " no-wrap=\"noWrapSlides\" uib-carousel=\"\" >\n" +
-    "                <div index=\"$index\" ng-repeat=\"item in vm.getItems() track by $index\"\n" +
-    "\n" +
-    "                 uib-slide=\"\">\n" +
-    "                    <!-- <img ng-src=\"{{item.business_avatar}}\" style=\"margin:auto;\">{{item}} -->\n" +
-    "                    <div class=\"row \" >\n" +
-    "\n" +
-    "                                                <div class=\"col-md-1 nopad ico\" style=\"float: right;    z-index: 999;\n" +
-    "    margin-top: -13px;\">\n" +
-    "                        <i aria-hidden=\"true\" class=\"fa fa-close offer-logo-40px mar10\" ng-click=\"vm.closeSlidepopup()\">\n" +
-    "                        </i>\n" +
-    "                    </div>\n" +
-    "                    \n" +
-    "                        <div class=\"col-md-8  col-md-offset-2 col-sm-10  col-sm-offset-1 col-xs-12 white pad10\">\n" +
-    "                            <div class=\"col-md-5 nopad\">\n" +
-    "                                <img \"=\"\" alt=\"...\" class=\"fixed-height\" ng-src=\"{{item.attributes.avatar}}\" style=\"width: 100% !important;\">\n" +
-    "                      \n" +
-    "                            </div>\n" +
-    "                            <div class=\"col-md-7 nopad\">\n" +
-    "                                <div class=\"pad-top-none offer-details text-left\">\n" +
-    "                                    <div class=\"row\">\n" +
-    "\n" +
-    "     \n" +
-    "                                        <div class=\"col-md-8\">\n" +
-    "                                            <h3 class=\"tm\">\n" +
-    "                                                {{item.attributes.name}}\n" +
-    "                                            </h3>\n" +
-    "                                            <div class=\"ts pad5 offer-location\">\n" +
-    "                                                <b>\n" +
-    "                                                    At {{item.attributes.business_name}} at\n" +
-    "                                                </b>\n" +
-    "                                                <span>\n" +
-    "                                                    {{item.attributes.place}}\n" +
-    "                                                </span>\n" +
-    "                                            </div>\n" +
-    "                                        </div>\n" +
-    "                                        <div class=\"col-md-4 text-right \" style=\"\n" +
-    "    margin-top: -15px;\">\n" +
-    "                                            <img class=\"offer-logo-set\" ng-src=\"{{item.attributes.business_avatar_thumb}}\">\n" +
-    "                                            \n" +
-    "                                        </div>\n" +
-    "                                    </div>\n" +
-    "                                    <div class=\"row space-div\">\n" +
-    "                                        <div class=\"col-md-4\">\n" +
-    "                                            <button ng-click=\"vm.getcodepopup(item.id)\">\n" +
-    "                                                GET CODE!\n" +
-    "                                            </button>\n" +
-    "\n" +
-    "\n" +
-    "                                        </div>\n" +
-    "                                        <div class=\"col-md-6\">\n" +
-    "                                            <span class=\"offer-spini\" ng-show=\" {{item.attributes.treasure_value}}\">\n" +
-    "                                                <i aria-hidden=\"true\" class=\"fa fa-gift link-icon fagift\">\n" +
-    "                                                </i>\n" +
-    "                                                Treasure Upto \n" +
-    "                                               \n" +
-    "                                                 ₹ {{item.attributes.treasure_value}}\n" +
-    "                                               \n" +
-    "                                            </span>\n" +
-    "                                        </div>\n" +
-    "                                        <div class=\"col-md-2 \">\n" +
-    "                                      <!--       <span class=\"offer-count\">\n" +
-    "                                                <i aria-hidden=\"true\" class=\"fa fa-star-o link-icon \">\n" +
-    "                                                </i>\n" +
-    "                                                54\n" +
-    "                                            </span> -->\n" +
-    "                                        </div>\n" +
-    "                                    </div>\n" +
-    "                                    <div class=\"min-height160px\">\n" +
-    "                                        <div class=\"col-md-10 nopad\">\n" +
-    "                                         \n" +
-    "\n" +
-    "\n" +
-    "                                            <p class=\"read\" hm-read-more\n" +
-    "        hm-text=\"{{ item.attributes.description | nl2br }}\" \n" +
-    "        hm-limit=\"300\" \n" +
-    "        hm-more-text=\"Read more\" \n" +
-    "        hm-less-text=\"Read less\"\n" +
-    "        hm-dots-class=\"dots\"\n" +
-    "        hm-link-class=\"read-more\" >\n" +
-    "\n" +
-    "    </p>\n" +
-    "\n" +
-    "                              <!--             <p  read-more ng-bind-html=\"item.attributes.description | nl2br\">\n" +
-    "                                           \n" +
-    "                                        </p>  -->\n" +
-    "                                    <!--  \n" +
-    "                                        <p  read-more ng-bind-html=\"item.attributes.description | nl2br\">\n" +
-    "                           {{item.attributes.description}}\n" +
-    "                                        </p> -->\n" +
-    "\n" +
-    "\n" +
-    "                                        <p class=\"offer-wrap-text space-div\">\n" +
-    "                                            **OFFER VALID TILL {{item.attributes.end_date | date:'medium'}} only at {{item.attributes.business_name}} @ {{item.attributes.place}}\n" +
-    "                                        </p>\n" +
-    "\n" +
-    "                                    </div>\n" +
-    "\n" +
-    "                                        <div class=\"col-md-2\">\n" +
-    "                                            <div class=\"offer-share col-md-6\">\n" +
-    "    <label>\n" +
-    "        SHARE\n" +
-    "    </label>\n" +
-    "    <ul ng-show=\" {{item.attributes.treasure_value}}\">\n" +
-    "        <li class=\"offer-share-max\">\n" +
-    "            <a data-clipboard-text=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}\" ngclipboard=\"\" ngclipboard-success=\"vm.onCopySuccess(e);\">\n" +
-    "            </a>\n" +
-    "        </li>\n" +
-    "        <li class=\"offer-share-fb\">\n" +
-    "            <a ng-click=\"vm.SocialShareUpdate(item.attributes.seo_url,'facebook')\" socialshare=\"\" socialshare-provider=\"facebook\" socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.facebook)}}\">\n" +
-    "            </a>\n" +
-    "        </li>\n" +
-    "        <li class=\"offer-share-twitter\">\n" +
-    "            <a ng-click=\"vm.SocialShareUpdate(item.attributes.seo_url,'twitter')\" socialshare=\"\" socialshare-hashtags=\"{item.attributes.seo_keywords}}\" socialshare-provider=\"twitter\" socialshare-text=\"{{item.attributes.seo_description}} {{item.attributes.seo_keywords}}\" socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}\">\n" +
-    "            </a>\n" +
-    "        </li>\n" +
-    "    </ul>\n" +
-    "    <ul ng-click=\"vm.signupPOP('referral')\" ng-hide=\" {{item.attributes.treasure_value}}\">\n" +
-    "        <li class=\"offer-share-max\">\n" +
-    "            <a>\n" +
-    "            </a>\n" +
-    "        </li>\n" +
-    "        <li class=\"offer-share-fb\">\n" +
-    "            <a>\n" +
-    "            </a>\n" +
-    "        </li>\n" +
-    "        <li class=\"offer-share-twitter\">\n" +
-    "            <a>\n" +
-    "            </a>\n" +
-    "        </li>\n" +
-    "    </ul>\n" +
-    "</div>\n" +
-    "                                            \n" +
-    "                                        </div>\n" +
-    "\n" +
-    "                                           \n" +
-    "                                    </div>\n" +
-    "                     \n" +
-    "                                    <div class=\"offer-share col-md-6\">\n" +
-    "                            <!--             <label class=\"right\">\n" +
-    "                                            OFFERS END IN\n" +
-    "                                        </label>\n" +
-    "                                        <p class=\"right timers\">\n" +
-    "\n" +
-    "                                            <timer \n" +
-    " end-time=\"vm.unixtime(item.attributes.end_date)\" max-time-unit=\"'day'\" interval=\"1000\"\n" +
-    "\n" +
-    "                                            >{{days}} days, {{hhours}}:{{mminutes}}:{{sseconds}}</timer>\n" +
-    "\n" +
-    "\n" +
-    "                                         \n" +
-    "                                        </p> -->\n" +
-    "                                    </div>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        <!--     <span class=\"tes\">\n" +
-    "                                <img class=\"roate-270\" src=\"/app/assets/images/icons8-Expand%20Arrow-64.png\">\n" +
-    "                                \n" +
-    "                            </span> -->\n" +
-    "                            <!-- <span class=\"tes1\">\n" +
-    "  <img class=\"roate-90\" src=\"/app/assets/images/icons8-Expand%20Arrow-64.png\">\n" +
-    "</span> -->\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                    <!-- <div class=\"carousel-caption\">\n" +
-    "          <h4>item {{item.id}}</h4>\n" +
-    "          <p>{{item.text}}</p>\n" +
-    "        </div> -->\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "<!-- end OFFERS POPUP -->\n" +
-    "<style type=\"text/css\">\n" +
-    "    .offer-carousel-r1{\n" +
-    "    width: 4%;\n" +
-    "  }\n" +
-    "</style>\n" +
-    "\n" +
-    "\n" +
     "\n" +
     "\n" +
     "\n" +
@@ -1161,7 +945,143 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "<!-- end get code -->"
+    "<!-- end get code -->\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "<!-- OFFERS POPUP 1st-->\n" +
+    "<div class=\"overlay\" id=\"offer-popup\">\n" +
+    "    <div class=\"overlay-content\">\n" +
+    "        <div style=\"min-height: 305px\">\n" +
+    "            <div active=\"active\" interval=\"myInterval\" no-wrap=\"noWrapSlides\" on-carousel-change=\"vm.onSlideChanged(nextSlide, direction)\" uib-carousel=\"\">\n" +
+    "                <div index=\"$index\" ng-repeat=\"item in vm.getItems() track by $index\" uib-slide=\"\">\n" +
+    "                    <div class=\"row \">\n" +
+    "                  \n" +
+    "                        <div class=\"col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 white pad10\">\n" +
+    "                            \n" +
+    " \n" +
+    "\n" +
+    "\n" +
+    "                                        <span class=\" close closif fa-stack \" style=\"font-size: 12px;\" ng-click=\"vm.closeSlidepopup()\">\n" +
+    "  <i class=\"fa fa-circle-thin fa-stack-2x\"></i>\n" +
+    "  <i class=\"fa fa-close fa-stack-1x\"></i>\n" +
+    "</span>\n" +
+    "\n" +
+    "\n" +
+    "                            <div class=\"col-md-5 nopad\">\n" +
+    "                                <img   class=\"fixed-height\" ng-src=\"{{item.attributes.avatar}}\" style=\"width: 100% !important;\"/>\n" +
+    "                               \n" +
+    "                            </div>\n" +
+    "                            <div class=\"col-md-7 nopad\">\n" +
+    "                                <div class=\"pad-top-none offer-details text-left\">\n" +
+    "                                    <div class=\"row\">\n" +
+    "\n" +
+    "                                        \n" +
+    "                                        <div class=\"col-md-8 col-sm-6 col-xs-6\">\n" +
+    "                                            <h3 class=\"tm\">\n" +
+    "                                                {{item.attributes.name}}\n" +
+    "                                            </h3>\n" +
+    "                                            <div class=\"ts pad5 offer-location\">\n" +
+    "                                                <b>\n" +
+    "                                                    At {{item.attributes.business_name}} at\n" +
+    "                                                </b>\n" +
+    "                                                <span>\n" +
+    "                                                    {{item.attributes.place}}\n" +
+    "                                                </span>\n" +
+    "                                            </div>\n" +
+    "                                        </div>\n" +
+    "                                        <div class=\"col-md-4 col-sm-6 hidden-xs text-right \" >\n" +
+    "\n" +
+    "\n" +
+    "                                            <img class=\"img-responsive\"  style=\"       float: right; margin-top: 3px;\" ng-src=\"{{item.attributes.business_avatar_thumb}}\">\n" +
+    "                                            </img>\n" +
+    "                                        </div>\n" +
+    "                                    </div>\n" +
+    "                                    <div class=\"row space-div\">\n" +
+    "                                        <div class=\"col-md-6\">\n" +
+    "                                            <button ng-click=\"vm.getcodepopup(item.id)\">\n" +
+    "                                                GET CODE!\n" +
+    "                                            </button>\n" +
+    "                                        </div>\n" +
+    "                                        <div class=\"col-md-6\">\n" +
+    "                                            <span class=\"offer-spini\" ng-show=\" {{item.attributes.treasure_value}}\">\n" +
+    "                                                <i aria-hidden=\"true\" class=\"fa fa-gift link-icon fagift\">\n" +
+    "                                                </i>\n" +
+    "                                                Treasure Upto \n" +
+    "                                               \n" +
+    "                                                 ₹ {{item.attributes.treasure_value}}\n" +
+    "                                            </span>\n" +
+    "                                        </div>\n" +
+    "                                        <div class=\"col-md-2 \">\n" +
+    "                                            <!--       <span class=\"offer-count\">\n" +
+    "                                                <i aria-hidden=\"true\" class=\"fa fa-star-o link-icon \">\n" +
+    "                                                </i>\n" +
+    "                                                54\n" +
+    "                                            </span> -->\n" +
+    "                                        </div>\n" +
+    "                                    </div>\n" +
+    "                                    <div class=\"min-height160px\">\n" +
+    "                                        <div class=\"col-md-10 nopad\">\n" +
+    "                                            <p class=\"read\" hm-dots-class=\"dots\" hm-less-text=\"Read less\" hm-limit=\"300\" hm-link-class=\"read-more\" hm-more-text=\"Read more\" hm-read-more=\"\" hm-text=\"{{ item.attributes.description | nl2br }}\">\n" +
+    "                                            </p>\n" +
+    "                                            <p class=\"offer-wrap-text space-div\">\n" +
+    "                                                **OFFER VALID TILL {{item.attributes.end_date | date:'medium'}} only at {{item.attributes.business_name}} @ {{item.attributes.place}}\n" +
+    "                                            </p>\n" +
+    "                                        </div>\n" +
+    "                                        <div class=\"col-md-2\">\n" +
+    "                                            <div class=\"offer-share col-md-6\">\n" +
+    "                                                <label>\n" +
+    "                                                    SHARE\n" +
+    "                                                </label>\n" +
+    "                                                <ul ng-show=\" {{item.attributes.treasure_value}}\">\n" +
+    "                                                    <li class=\"offer-share-max\">\n" +
+    "                                                        <a data-clipboard-text=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}\" ngclipboard=\"\" ngclipboard-success=\"vm.onCopySuccess(e);\">\n" +
+    "                                                        </a>\n" +
+    "                                                    </li>\n" +
+    "                                                    <li class=\"offer-share-fb\">\n" +
+    "                                                        <a ng-click=\"vm.SocialShareUpdate(item.attributes.seo_url,'facebook')\" socialshare=\"\" socialshare-provider=\"facebook\" socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.facebook)}}\">\n" +
+    "                                                        </a>\n" +
+    "                                                    </li>\n" +
+    "                                                    <li class=\"offer-share-twitter\">\n" +
+    "                                                        <a ng-click=\"vm.SocialShareUpdate(item.attributes.seo_url,'twitter')\" socialshare=\"\" socialshare-hashtags=\"{item.attributes.seo_keywords}}\" socialshare-provider=\"twitter\" socialshare-text=\"{{item.attributes.seo_description}} {{item.attributes.seo_keywords}}\" socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}\">\n" +
+    "                                                        </a>\n" +
+    "                                                    </li>\n" +
+    "                                                </ul>\n" +
+    "                                                <ul ng-click=\"vm.signupPOP('referral')\" ng-hide=\" {{item.attributes.treasure_value}}\">\n" +
+    "                                                    <li class=\"offer-share-max\">\n" +
+    "                                                        <a>\n" +
+    "                                                        </a>\n" +
+    "                                                    </li>\n" +
+    "                                                    <li class=\"offer-share-fb\">\n" +
+    "                                                        <a>\n" +
+    "                                                        </a>\n" +
+    "                                                    </li>\n" +
+    "                                                    <li class=\"offer-share-twitter\">\n" +
+    "                                                        <a>\n" +
+    "                                                        </a>\n" +
+    "                                                    </li>\n" +
+    "                                                </ul>\n" +
+    "                                            </div>\n" +
+    "                                        </div>\n" +
+    "                                    </div>\n" +
+    "                                    <div class=\"offer-share col-md-6\">\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<!-- end OFFERS POPUP -->\n" +
+    "<style type=\"text/css\">\n" +
+    "    .offer-carousel-r1{\n" +
+    "    width: 4%;\n" +
+    "  }\n" +
+    "</style>\n"
   );
 
 

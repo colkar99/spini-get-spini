@@ -326,7 +326,7 @@
                         });
                     } else if (response.status === 'not_authorized') {} else {}
                 }, {
-                    scope: 'email,public_profile' // to make sure the email access from fb
+                    scope: 'email,public_profile,user_address, user_mobile_phone' // to make sure the email access from fb
                 });
             },
             facebookLogin: function() {
@@ -347,7 +347,7 @@
                         // the user isn't logged in to Facebook.
                     }
                 }, {
-                    scope: 'email,public_profile' // to make sure the email access from fb
+                    scope: 'email,public_profile,user_address, user_mobile_phone' // to make sure the email access from fb
                 });
             }
         };

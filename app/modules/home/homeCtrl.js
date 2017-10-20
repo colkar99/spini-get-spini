@@ -250,6 +250,20 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     LoginService.UpdateSocialShare(vm.OfferLink(data.seo_url, data.tracking_code.facebook), data.tracking_code.facebook, type, offer_id, function(result) {})
                     // LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
                 }
+
+                 if (type == 'whatsapp') {
+                    Socialshare.share({
+                        'provider': 'whatsapp',
+                        'attrs': {
+                            'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.general),
+                            'socialshareText': data.caption,
+                        }
+                    });
+                    LoginService.UpdateSocialShare(vm.OfferLink(data.seo_url, data.tracking_code.general), data.tracking_code.general, type, offer_id, function(result) {})
+                    // LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
+                }
+
+
                 if (type == 'twitter') {
                     Socialshare.share({
                         'provider': 'twitter',
@@ -261,7 +275,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     LoginService.UpdateSocialShare(vm.OfferLink(data.seo_url, data.tracking_code.twitter), data.tracking_code.twitter, type, offer_id, function(result) {})
                 }
                 if (type == 'copy') {
-                    return vm.OfferLink(data.seo_url, data.tracking_code.general)
+                    return data.caption+' '+vm.OfferLink(data.seo_url, data.tracking_code.general)
                 }
             } catch (e) {
                 console.log('error');

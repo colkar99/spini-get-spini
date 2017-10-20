@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-10-16. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-10-17. 
 * @author Kathik
 */
 (function() {
@@ -554,6 +554,20 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     LoginService.UpdateSocialShare(vm.OfferLink(data.seo_url, data.tracking_code.facebook), data.tracking_code.facebook, type, offer_id, function(result) {})
                     // LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
                 }
+
+                 if (type == 'whatsapp') {
+                    Socialshare.share({
+                        'provider': 'whatsapp',
+                        'attrs': {
+                            'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.general),
+                            'socialshareText': data.caption,
+                        }
+                    });
+                    LoginService.UpdateSocialShare(vm.OfferLink(data.seo_url, data.tracking_code.general), data.tracking_code.general, type, offer_id, function(result) {})
+                    // LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
+                }
+
+
                 if (type == 'twitter') {
                     Socialshare.share({
                         'provider': 'twitter',
@@ -565,7 +579,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     LoginService.UpdateSocialShare(vm.OfferLink(data.seo_url, data.tracking_code.twitter), data.tracking_code.twitter, type, offer_id, function(result) {})
                 }
                 if (type == 'copy') {
-                    return vm.OfferLink(data.seo_url, data.tracking_code.general)
+                    return data.caption+' '+vm.OfferLink(data.seo_url, data.tracking_code.general)
                 }
             } catch (e) {
                 console.log('error');
@@ -1821,7 +1835,7 @@ LodashFactory.$inject = ['$window'];
                         });
                     } else if (response.status === 'not_authorized') {} else {}
                 }, {
-                    scope: 'email,public_profile' // to make sure the email access from fb
+                    scope: 'email,public_profile,user_address, user_mobile_phone' // to make sure the email access from fb
                 });
             },
             facebookLogin: function() {
@@ -1842,7 +1856,7 @@ LodashFactory.$inject = ['$window'];
                         // the user isn't logged in to Facebook.
                     }
                 }, {
-                    scope: 'email,public_profile' // to make sure the email access from fb
+                    scope: 'email,public_profile,user_address, user_mobile_phone' // to make sure the email access from fb
                 });
             }
         };
