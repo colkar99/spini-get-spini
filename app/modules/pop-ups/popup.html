@@ -652,6 +652,18 @@
                                                         <a ng-click="vm.SocialShareUpdate(item.attributes.seo_url,'twitter')" socialshare="" socialshare-hashtags="{item.attributes.seo_keywords}}" socialshare-provider="twitter" socialshare-text="{{item.attributes.seo_description}} {{item.attributes.seo_keywords}}" socialshare-url="{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}">
                                                         </a>
                                                     </li>
+
+                                                    <li class="offer-share-twitter hidden-lg hidden-md" style="background: url('share-whatsapp.png') no-repeat;
+    background-size: contain;">
+
+
+    <a socialshare="" 
+        socialshare-provider="whatsapp" 
+     socialshare-text="{{item.attributes.caption}}"
+     socialshare-url="{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}" style="    background: none;">
+    </a>
+                                                  </li>
+
                                                 </ul>
                                                 <ul ng-click="vm.signupPOP('referral')" ng-hide=" {{item.attributes.treasure_value}}">
                                                     <li class="offer-share-max">

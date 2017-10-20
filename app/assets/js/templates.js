@@ -1047,6 +1047,18 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                                        <a ng-click=\"vm.SocialShareUpdate(item.attributes.seo_url,'twitter')\" socialshare=\"\" socialshare-hashtags=\"{item.attributes.seo_keywords}}\" socialshare-provider=\"twitter\" socialshare-text=\"{{item.attributes.seo_description}} {{item.attributes.seo_keywords}}\" socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}\">\n" +
     "                                                        </a>\n" +
     "                                                    </li>\n" +
+    "\n" +
+    "                                                    <li class=\"offer-share-twitter hidden-lg hidden-md\" style=\"background: url('share-whatsapp.png') no-repeat;\n" +
+    "    background-size: contain;\">\n" +
+    "\n" +
+    "\n" +
+    "    <a socialshare=\"\" \n" +
+    "        socialshare-provider=\"whatsapp\" \n" +
+    "     socialshare-text=\"{{item.attributes.caption}}\"\n" +
+    "     socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}\" style=\"    background: none;\">\n" +
+    "    </a>\n" +
+    "                                                  </li>\n" +
+    "\n" +
     "                                                </ul>\n" +
     "                                                <ul ng-click=\"vm.signupPOP('referral')\" ng-hide=\" {{item.attributes.treasure_value}}\">\n" +
     "                                                    <li class=\"offer-share-max\">\n" +

@@ -527,6 +527,8 @@ header hr {
 
 .white {
     background: white;
+
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px 0px;
 }
 
 .overlay {
@@ -542,6 +544,8 @@ header hr {
         /*background-color: rgba(82, 57, 57, 0.65);*/
 
 background-color: rgba(109, 71, 71, 0.44);
+
+     /*background: rgba(247, 247, 247, 0.84);*/
 
     overflow-x: hidden;
     transition: 0.5s;
@@ -1607,6 +1611,7 @@ header
 .overlay-content .close
 {
 
+    color: rgba(134, 138, 134, 0.5);
 opacity: 1; 
 }
 

@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-10-17. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-10-20. 
 * @author Kathik
 */
 (function() {
@@ -51,9 +51,14 @@
     angular.module('angular-app').config(configure)
      .constant('apiBaseURL', 'https://api.spini.co/v1/')
     .run(runBlock);
-    configure.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
+    configure.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider','$compileProvider'];
 
-    function configure($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+    function configure($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider,$compileProvider) {
+
+
+         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|file|tel|whatsapp):/);
+
+
         //$locationProvider.html5Mode(true).hashPrefix('!');
         // This is required for Browser Sync to work poperly
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
