@@ -49,7 +49,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav" ng-init="vm.getCategories()">
     
-            <li  ng-click="vm.getOffers(); vm.gotoBottom();">
+            <li  ng-click="vm.getOffers(); vm.gotoBottom(1);">
 
               <a >All</a>
 
@@ -274,123 +274,122 @@
 
 class="offers-grid" ng-init="vm.getOffers()" id="Gridbottom">
   <div class="container">
-    <div class="col-md-4 col-sm-6" ng-repeat="offer in vm.compaigns track by $index ">
-      <div class="offer-container">
-        <img ng-src="{{offer.attributes.avatar_thumb}}" 
 
 
-        alt="offer-image"  ng-click="vm.getSlidepopup(offer.attributes.campaign_id)">
-        <div class="offer-details">
+  <div class="col-md-4 col-sm-6" ng-repeat="offer in vm.compaigns track by $index " ng-if="$index >= vm.gridlength">
+            <div class="offer-container">
+                <img alt="offer-image" ng-click="vm.getSlidepopup(offer.attributes.campaign_id)" ng-src="{{offer.attributes.avatar_thumb}}">
+                    <div class="offer-details">
+                        <span class="grisp" ng-click="vm.getSlidepopup(offer.attributes.campaign_id)">
+                            <button ng-click="vm.getSlidepopup(offer.attributes.campaign_id)">
+                                GET CODE!
+                            </button>
+                            <h3>
+                                {{offer.attributes.name | limitTo:30}}
 
-          <span class="grisp" ng-click="vm.getSlidepopup(offer.attributes.campaign_id)">
-          <button ng-click="vm.getSlidepopup(offer.attributes.campaign_id)">GET CODE!</button>
+                                {{offer.attributes.name.length > 30 ? '...' : ''}}
 
-          <h3>{{offer.attributes.name}}</h3>
-          <div class="offer-location">
-            <b>At - {{offer.attributes.business_name}}</b><span>{{offer.attributes.place}} </span>
-          </div>
+                            </h3>
+                            <div class="offer-location">
+                                <b>
+                                    At - 
 
-          <p>{{offer.attributes.description | limitTo: 140}}
-<!-- {{offer.attributes.description.length > 140 ? '...' : ''}} -->
-          </p>
-        </span>
-          <div class="offer-share" style="    margin: 0px;
+
+          {{offer.attributes.business_name | limitTo:20}}
+
+                                {{offer.attributes.business_name.length > 20 ? '...' : ''}}
+
+
+                                </b>
+                                <span>
+
+                                  {{offer.attributes.place | limitTo:10}}
+
+                                {{offer.attributes.place.length > 10 ? '...' : ''}}
+
+
+
+                                </span>
+                            </div>
+                            <p>
+                                {{offer.attributes.caption | limitTo: 140}}
+{{offer.attributes.caption.length > 140 ? '...' : ''}}
+                            </p>
+                        </span>
+                        <div class="offer-share" style="    margin: 0px;
     padding: 0px;
     padding-top: 10px;">
-            <label >SHARE & EARN</label>
-                       <ul ng-show=" {{offer.attributes.treasure_value}}">
-                                            <li class="offer-share-max">
-                                                <a ngclipboard data-clipboard-text="{{vm.OfferLink(offer.attributes.seo_url,offer.attributes.tracking_code.general)}}" ngclipboard-success="vm.onCopySuccess(e);">
-                                                </a>
-                                            </li>
-                                            <li class="offer-share-fb" 
+                            <label>
+                                SHARE & EARN
+                            </label>
+                            <ul ng-show=" vm.isReferral()">
+                                <li class="offer-share-max">
+                                    <a data-clipboard-text="{{vm.OfferLink(offer.attributes.seo_url,offer.attributes.tracking_code.general)}}" ngclipboard="" ngclipboard-success="vm.onCopySuccess(e);">
+                                    </a>
+                                </li>
+                                <li class="offer-share-fb">
+                                    <a ng-click="vm.SocialShareUpdate(offer.attributes.seo_url,'facebook')" socialshare="" socialshare-provider="facebook" socialshare-url="{{vm.OfferLink(offer.attributes.seo_url,offer.attributes.tracking_code.facebook)}}">
+                                    </a>
+                                </li>
+                                <li class="offer-share-twitter">
+                                    <a 
 
-
-                                            >
-                                                <a socialshare socialshare-url="{{vm.OfferLink(offer.attributes.seo_url,offer.attributes.tracking_code.facebook)}}" socialshare-provider="facebook"
-
-                                                ng-click="vm.SocialShareUpdate(offer.attributes.seo_url,'facebook')"
-
-                                                >
-                                                </a>
-                                            </li>
-                                            <li class="offer-share-twitter"
-
-
-                                             >
-                                                <a socialshare 
-                                                socialshare-url="{{vm.OfferLink(offer.attributes.seo_url,offer.attributes.tracking_code.twitter)}}"
-                                                socialshare-provider="twitter"
-
-                                                  ng-click="vm.SocialShareUpdate(offer.attributes.seo_url,'twitter')"
-                                                
-socialshare-text="{{offer.attributes.seo_description}} {{offer.attributes.seo_keywords}}"
-socialshare-hashtags="{offer.attributes.seo_keywords}}"
-
+                                     href="whatsapp://send?text={{vm.SeoHelpSocialShare(offer.id,'copy')}}"
 >
-                                                </a>
-                                            </li>
-                                        </ul>
+                                    </a>
+                                </li>
 
+                                <li class="offer-share-twitter hidden-md hidden-lg"  style="background: url(share-whatsapp.png) no-repeat;
+    background-size: contain;"  >
+                                    <a 
 
+style="    background: none;" 
+                                    socialshare="" socialshare-provider="whatsapp" 
 
-                                             <ul ng-hide=" {{offer.attributes.treasure_value}}" ng-click="vm.signupPOP('referral')">
-                                            <li class="offer-share-max">
-                                                <a >
-                                                </a>
-                                            </li>
-                                            <li class="offer-share-fb" 
+                                    socialshare-text="{{offer.attributes.caption}}" 
 
-
-                                            >
-                                                <a 
-                                                >
-                                                </a>
-                                            </li>
-                                            <li class="offer-share-twitter"
-
-
-                                             >
-                                                <a  
-                                  
-
->
-                                                </a>
-                                            </li>
-                                        </ul>
-          </div>
+                                    socialshare-url="{{vm.OfferLink(offer.attributes.seo_url,offer.attributes.tracking_code.general)}}">
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul ng-click="vm.signupPOP('referral')" ng-hide=" vm.isReferral()">
+                                <li class="offer-share-max">
+                                    <a>
+                                    </a>
+                                </li>
+                                <li class="offer-share-fb">
+                                    <a>
+                                    </a>
+                                </li>
+                                <li class="offer-share-twitter">
+                                    <a>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="offer-spini-treashure">
+                        <a class="hoverable" href="javascript://">
+                            <span class="normal">
+                                <i class="fa fa-gift link-icon fagift">
+                                </i>
+                                MY TREASURE
+                            </span>
+                            <span class="hover" ng-show=" {{offer.attributes.treasure_value}}">
+                                <i class="fa fa-gift link-icon fagift">
+                                </i>
+                                Refer & Earn Upto ₹{{offer.attributes.treasure_value}}!
+                            </span>
+                            <span class="hover" ng-hide=" {{offer.attributes.treasure_value}}" ng-click="vm.signupPOP()">
+                                <i class="fa fa-gift link-icon fagift">
+                                </i>
+                              Refer this offer and earn!
+                            </span>
+                        </a>
+                    </div>
+           
+            </div>
         </div>
-
-
-
-        <div class="offer-spini-treashure">
-
-
-  <a href="javascript://" class="hoverable">
-
-    <span class="normal"> <i class="fa fa-gift link-icon fagift">
-                                                </i> MY TREASURE</span>
-
-
-    <span class="hover" ng-show=" {{offer.attributes.treasure_value}}"> 
-
-      <i class="fa fa-gift link-icon fagift">
-                                                </i> MY TREASURE ₹{{offer.attributes.treasure_value}}!</span>
-    <span class="hover" ng-hide=" {{offer.attributes.treasure_value}}"
-
-ng-click="vm.signupPOP()"
-    >
-
-     <i class="fa fa-gift link-icon fagift">
-        </i> Refer this offer and earn!</span>
-  </a>
-
-
-
-
-        </div>
-      </div>
-    </div>
 
   </div>
 

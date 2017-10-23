@@ -1,5 +1,5 @@
 <!-- header section -->
-<header  >
+<header ng-controller="HomeCtrl as vm" >
   <div class="container">
 
     <div class="col-md-12 hidden-sm  hidden-xs nopad mt6">
@@ -29,7 +29,7 @@
       </div>
 
       <div class="col-md-2 col-xs-6 col-sm-6 text-center main-header-logo">
-        <a href="/">
+        <a href="/" ng-click="vm.refresh()">
           <img src="/app/assets/images/header/Logo@2x.png" alt="spini-logo">
         </a>
       </div>
@@ -45,7 +45,7 @@
      
      <div class="col-xs-6 nopad">
        
-         <button class="bton-ser" ng-controller="HomeCtrl as vm" ng-click="vm.MobileToggleSearch()">
+         <button class="bton-ser" ng-click="vm.MobileToggleSearch()">
           <i class="fa fa-search"> </i>
 
         </button>
@@ -54,7 +54,7 @@
      
      <div class="col-xs-6 nopad">
        
-         <button class="bton-ser" ng-controller="HomeCtrl as vm" ng-click="vm.MobileLogin()">
+         <button class="bton-ser"  ng-click="vm.MobileLogin()">
           <i class="fa fa-user"> </i>
 
         </button>
@@ -69,7 +69,7 @@
 
 
 
-      <div id="mobileSearch"  class="main-header-search  hidden-md  hidden-lg " style="display: none;" ng-controller="HomeCtrl as vm">
+      <div id="mobileSearch"  class="main-header-search  hidden-md  hidden-lg " style="display: none;" >
         <input type="text" placeholder="Search Offers" ng-model="vm.search_txt" ng-enter="vm.searchBox(vm.search_txt)"  class="search_n">
 
         <button class="search_n" ng-click="vm.searchBox(vm.search_txt)"></button>
@@ -87,7 +87,7 @@
                 </b>
                 <br>
                 <p>
-                    Access account and manage offers
+                    Access account & Manage offers
                 </p>
 <br>
                 <div class="col-xs-6">
@@ -119,7 +119,7 @@
                 </b>
                 <br>
                 <p>
-                   Access and become a Yogi! 
+                   Access & Become a Yogi! 
                 </p>
 <br>
 
@@ -150,7 +150,7 @@
          style="    float: left;
     width: 100%;
 
-    background-image: none;">Become our partner</button>
+    background-image: none;">Become Our Partner</button>
       </div>
 
 
@@ -211,7 +211,7 @@
 
 
 
-      <div class="col-md-6 main-header-search  hidden-sm  hidden-xs " ng-controller="HomeCtrl as vm">
+      <div class="col-md-6 main-header-search  hidden-sm  hidden-xs " >
         <input type="text" ng-enter="vm.searchBox(vm.search_txt)"  placeholder="Search Offers" ng-model="vm.search_txt" class="search_n">
 
         <button class="search_n" ng-click="vm.searchBox(vm.search_txt)"></button>
@@ -221,7 +221,7 @@
   
 
          <div class="col-md-2  col-xs-6 nopad main-header-partner" ng-hide="menu.isVendor() || menu.isReferral()">
-        <button ng-click="menu.VendorContactUs();">Become our partner</button>
+        <button ng-click="menu.VendorContactUs();">Become Our Partner</button>
       </div>
 
 
@@ -243,7 +243,7 @@
                     Your Account
                 </b>
                 <p>
-                    Access account and manage offers
+                    Access account & Manage offers
                 </p>
                 <button ng-click="menu.goProfile()" style="float: left;">
                     Profile
@@ -266,7 +266,7 @@
                    ReferYogi
                 </b>
                 <p>
-                     Access and become a Yogi! 
+                     Access & Become a Yogi! 
                 </p>
 
                 <button ng-click="menu.signupPOP('referral')" style="float: left;">

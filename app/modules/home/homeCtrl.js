@@ -444,15 +444,37 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             });
             vm.gridlength = 9;
             vm.gridShow = true;
+            
         }
-        vm.gotoBottom = function() {
+
+        vm.refresh = function()
+        {
+            window.location.reload();
+            console.log('response');
+
+        }
+        vm.gotoBottom = function(temp) {
+            var temp = temp || 0;
+
+
             //document.getElementById('Gridbottom').scrollIntoView(true);
             $('html,body').animate({
                 scrollTop: $("#Gridbottom").offset().top
             }, 'slow');
+            
+            if(temp==0)
+            {
             vm.slider = false;
             vm.how_works = false;
             vm.offerClass = true;
+            }
+            else
+
+            {
+            vm.slider = false;
+            vm.how_works = false;
+            vm.offerClass = true;   
+            }
             //$location.hash('Gridbottom');
             // $anchorScroll();
         };
