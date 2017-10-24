@@ -426,7 +426,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "        \n" +
     "                            <h4>Choose City</h4>          \n" +
     "\n" +
-    "                        <div class=\"col-md-12\" style=\"   padding-top: 50px;  padding-bottom: 10px;\">\n" +
+    "                        <div class=\"col-md-12 col-xs-12 col-sm 12 \" style=\"   padding-top: 50px;  padding-bottom: 10px;\">\n" +
     "\n" +
     "\n" +
     "                                 <div class=\"col-md-6 col-xs-6 col-sm-6 text-center but\" ng-repeat=\"city in vm.cities()\" ng-click=\"vm.setCityCookie(city)\">\n" +

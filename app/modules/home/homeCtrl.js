@@ -421,7 +421,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             if (locationCookie == false) {
                 var url = apiBaseURL + 'home/offers';
             } else {
-                var url = apiBaseURL + 'offers?location_id=' + locationCookie;
+                var url = apiBaseURL + 'home/offers?location_id=' + locationCookie;
             }
             $http.get(url).then(function(response) {
                 if (response) {
