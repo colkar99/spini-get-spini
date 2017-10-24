@@ -24,8 +24,12 @@
         service.offersClickTrack = offersClickTrack;
         service.offersViewTrack = offersViewTrack;
         service.getProfileInfo = getProfileInfo;
+        service.getCityCookie = getCityCookie;
+        service.getCityCookieName = getCityCookieName;
+        service.cityCookie = cityCookie;
         service.UpdateSocialShare = UpdateSocialShare;
         service.TrackingCode = TrackingCode;
+        service.getCityDataList = getCityDataList;
         service.SetTrackingCode = SetTrackingCode;
         return service;
 
@@ -64,6 +68,30 @@
             }
             return false;
         }
+
+        function getCityCookie() {
+            if ($cookies.get('city')) {
+                return $cookies.get('city');
+            }
+            return false;
+        }
+
+
+
+        function getCityCookieName() {
+            if ($cookies.get('city_name')) {
+                return $cookies.get('city_name');
+            }
+            return 'Chennai';
+        }
+
+        function cityCookie(id,name) {
+            $cookies.put('city', id);
+            $cookies.put('city_name', name);
+            window.location.reload();
+        }
+
+
 
         function getProfileInfo(callback) {
             $http.get(apiBaseURL + 'profile').then(function(response) {
@@ -229,6 +257,27 @@
                 }
             });
         }
+
+        function getCityDataList(callback) {
+
+            var url = apiBaseURL;
+            // var url = 'https://stagingapi.spini.co/v1/';
+
+        
+            
+            $http.get(url + 'locations').then(function(response) {
+                var response = response.data.data;
+                // login successful if there's a token in the response
+                if (response.attributes) {
+                    callback(response.attributes);
+                } else {
+                    // execute callback with false to indicate failed login
+                    callback(false);
+                }
+            });
+        }
+
+
 
         function checkOfferCookie(auth, callback) {}
 

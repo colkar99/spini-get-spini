@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-10-20. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-10-24. 
 * @author Kathik
 */
 (function() {
@@ -39,6 +39,7 @@
 
 })();
 
+
 (function() {
     'use strict';
     /**
@@ -48,8 +49,18 @@
      * # Config and run block
      * Configutation of the app
      */
+
+    if(window.location.hostname=='www.referyogi.com')
+            {
+                window.env = 'prod';
+            }
     angular.module('angular-app').config(configure)
-     .constant('apiBaseURL', 'https://api.spini.co/v1/')
+  
+     .constant('apiBaseURL', (window.env == "prod" ? 'https://api.spini.co/v1/' : 'https://stagingapi.spini.co/v1/'))
+     .constant('LinkUrl', (window.env == "prod" ? 'https://www.referyogi.com/' : 'https://staging.spini.co/'))
+
+
+
     .run(runBlock);
     configure.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider','$compileProvider'];
 
@@ -441,15 +452,18 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             return lines.join('<br />');
         }
     }).controller('HomeCtrl', Home);
-    Home.$inject = ['homeService', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope', '$timeout', 'ngToast', 'Socialshare', '$anchorScroll', '$rootScope'];
+    Home.$inject = ['homeService','LinkUrl', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope', '$timeout', 'ngToast', 'Socialshare', '$anchorScroll', '$rootScope'];
     /*
      * recommend
      * Using function declarations
      * and bindable members up top.
      */
-    function Home(homeService, $window, apiBaseURL, $http, LoginService, $location, _, $scope, $timeout, ngToast, Socialshare, $anchorScroll, $rootScope) {
+    function Home(homeService, LinkUrl,$window, apiBaseURL, $http, LoginService, $location, _, $scope, $timeout, ngToast, Socialshare, $anchorScroll, $rootScope) {
         /*jshint validthis: true */
+
+        console.log(apiBaseURL);
         var vm = this;
+        vm.City = LoginService.getCityCookieName();
         vm.offer_id;
         vm.slider = true;
         vm.how_works = true;
@@ -461,11 +475,11 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
         vm.compaigns = [];
         vm.overall_compaigns = [];
         var headers = {
-            "Accept": "application/json",
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': '*',
-            'Access-Control-Allow-Headers': 'Content-Type',
-            "Content-Type": 'application/json',
+            // "Accept": "application/json",
+            // 'Access-Control-Allow-Origin': '*',
+            // 'Access-Control-Allow-Methods': '*',
+            // 'Access-Control-Allow-Headers': 'Content-Type',
+            // "Content-Type": 'application/json',
             // 'Access-Token' : $rootScope.current_user.authentication_token
             // 'Access-Token' : "$2a$10$Z1QJ46AB.9Qx/IDCIWqnTO20HogZNyOl7ztRDwqzl75nFaCbORNSW",
         }
@@ -532,10 +546,14 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             })
         };
         vm.username = function() {
-            return window.user.name;
+            if (window.user) {
+                return window.user.name;
+            }
         }
         vm.usermobile = function() {
-            return window.user.mobile;
+            if (window.user) {
+                return window.user.mobile;
+            }
         }
         vm.SeoHelpSocialShare = function(offer_id, type) {
             var data = {};
@@ -544,7 +562,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     data = value.attributes;
                 }
             });
-            console.log(data);
+            // console.log(data);
             try {
                 if (type == 'treasure') {
                     return data.treasure_value;
@@ -559,8 +577,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     LoginService.UpdateSocialShare(vm.OfferLink(data.seo_url, data.tracking_code.facebook), data.tracking_code.facebook, type, offer_id, function(result) {})
                     // LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
                 }
-
-                 if (type == 'whatsapp') {
+                if (type == 'whatsapp') {
                     Socialshare.share({
                         'provider': 'whatsapp',
                         'attrs': {
@@ -571,8 +588,6 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     LoginService.UpdateSocialShare(vm.OfferLink(data.seo_url, data.tracking_code.general), data.tracking_code.general, type, offer_id, function(result) {})
                     // LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
                 }
-
-
                 if (type == 'twitter') {
                     Socialshare.share({
                         'provider': 'twitter',
@@ -584,10 +599,10 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     LoginService.UpdateSocialShare(vm.OfferLink(data.seo_url, data.tracking_code.twitter), data.tracking_code.twitter, type, offer_id, function(result) {})
                 }
                 if (type == 'copy') {
-                    return data.caption+' '+vm.OfferLink(data.seo_url, data.tracking_code.general)
+                    return data.caption + ' ' + vm.OfferLink(data.seo_url, data.tracking_code.general)
                 }
             } catch (e) {
-                console.log('error');
+                // console.log('error');
             }
         }
         vm.SocialShareUpdate = function(url, type) {
@@ -691,38 +706,23 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             document.getElementById("offer-popup").style.width = "100%";
             // document.getElementById("get-code-popup").style.width = "100%";
         }
-
         vm.MobileToggleSearch = function() {
             // console.log( document.getElementById('mobileSearch').style.display);
-
-            if( document.getElementById('mobileSearch').style.display == 'none')
-            {
-                 document.getElementById('mobileSearch').style.display='block';   
-                  document.getElementById('mobileMenu').style.display='none';  
-             }
-
-            else
-            {
-                 document.getElementById('mobileSearch').style.display='none';    
-             }
-          
-
+            if (document.getElementById('mobileSearch').style.display == 'none') {
+                document.getElementById('mobileSearch').style.display = 'block';
+                document.getElementById('mobileMenu').style.display = 'none';
+            } else {
+                document.getElementById('mobileSearch').style.display = 'none';
+            }
         }
         vm.MobileLogin = function() {
             // console.log( document.getElementById('mobileSearch').style.display);
-
-            if( document.getElementById('mobileMenu').style.display == 'none')
-            {
-                 document.getElementById('mobileSearch').style.display='none';  
-                 document.getElementById('mobileMenu').style.display='block';    
-             }
-
-            else
-            {
-                 document.getElementById('mobileMenu').style.display='none';    
-             }
-          
-
+            if (document.getElementById('mobileMenu').style.display == 'none') {
+                document.getElementById('mobileSearch').style.display = 'none';
+                document.getElementById('mobileMenu').style.display = 'block';
+            } else {
+                document.getElementById('mobileMenu').style.display = 'none';
+            }
         }
         vm.closeGetNoPopup = function() {
             document.getElementById("get-code-popup").style.width = "0%";
@@ -737,7 +737,13 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             document.getElementById("offer-popup").style.width = "100%";
         }
         vm.getOffers = function() {
-            $http.get(apiBaseURL + '/home/offers').then(function(response) {
+            var locationCookie = LoginService.getCityCookie();
+            if (locationCookie == false) {
+                var url = apiBaseURL + 'home/offers';
+            } else {
+                var url = apiBaseURL + 'offers?location_id=' + locationCookie;
+            }
+            $http.get(url).then(function(response) {
                 if (response) {
                     var response = response.data.data;
                     $scope.filter_items.push(response);
@@ -754,33 +760,60 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             vm.gridlength = 9;
             vm.gridShow = true;
         }
-        vm.gotoBottom = function() {
+        vm.refresh = function() {
+            window.location.reload();
+            console.log('response');
+        }
+        vm.gotoBottom = function(temp) {
+            var temp = temp || 0;
             //document.getElementById('Gridbottom').scrollIntoView(true);
             $('html,body').animate({
                 scrollTop: $("#Gridbottom").offset().top
             }, 'slow');
-            vm.slider = false;
-            vm.how_works = false;
-            vm.offerClass = true;
+            if (temp == 0) {
+                vm.slider = false;
+                vm.how_works = false;
+                vm.offerClass = true;
+            } else {
+                vm.slider = false;
+                vm.how_works = false;
+                vm.offerClass = true;
+            }
             //$location.hash('Gridbottom');
             // $anchorScroll();
         };
-        $scope.$on("SearchComplete", function(event, args) {
-            var response = args.authData.data.data;
-            $scope.filter_items.push(response);
-            vm.offers = [];
-            vm.compaigns = [];
-            vm.offers = response;
-            vm.compaigns = _.uniqBy(response, function(e) {
-                return e.attributes.campaign_id;
-            });
-            vm.overall_compaigns = vm.compaigns;
-            vm.gridlength = 0;
-            vm.gridShow = false;
-            vm.gotoBottom();
+        vm.searchBoxEnable = false;
+        $rootScope.$on("SearchComplete", function(event, args) {
+            if (vm.searchBoxEnable) {
+                console.log("SearchComplete");
+                var response = args.authData.data.data;
+                $scope.filter_items.push(response);
+                vm.offers = [];
+                vm.compaigns = [];
+                vm.offers = response;
+                vm.compaigns = _.uniqBy(response, function(e) {
+                    return e.attributes.campaign_id;
+                });
+                vm.overall_compaigns = vm.compaigns;
+                vm.gridlength = 0;
+                vm.gridShow = false;
+                vm.gotoBottom();
+            }
         });
         vm.searchBox = function(txt) {
-            $http.get(apiBaseURL + '/home/offers?search=' + txt).then(function(response) {
+            if (txt.length < 1) {
+                return;
+            }
+
+            var locationCookie = LoginService.getCityCookie();
+            if (locationCookie == false) {
+                var url = apiBaseURL + '/home/offers?search=' + txt;
+            } else {
+                var url = apiBaseURL + '/home/offers?search=' + txt +'&location_id='+locationCookie;
+            }
+
+
+            $http.get(url).then(function(response) {
                 if (response) {
                     $rootScope.$broadcast("SearchComplete", {
                         "authData": response
@@ -861,7 +894,8 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }, 0)
         }
         vm.OfferLink = function(offer, tracking_id) {
-            return 'https://www.referyogi.com/offers/' + offer + '/?tracking_id=' + tracking_id;
+
+            return LinkUrl + 'offers/' + offer + '/?tracking_id=' + tracking_id;
         }
         vm.mobile = function() {
             return vm.mobile_no;
@@ -916,7 +950,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 if (vm.filter_items[i]) {
                     if (vm.filter_items[i].attributes.offer_category_id == id) {
                         vm.compaigns.push(vm.filter_items[i]);
-                        console.log(vm.compaigns);
+                        //console.log(vm.compaigns);
                     }
                 }
             }
@@ -957,18 +991,51 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
             return vm.compaigns;
         };
+        vm.ChooseCity = function() {
+            document.getElementById('choose-city').style.width = '100%';
+        };
         vm.unixtime = function(date) {
             var dateSplitted = date.split('-'); // date must be in DD-MM-YYYY format
             var formattedDate = dateSplitted[0] + '/' + dateSplitted[1] + '/' + dateSplitted[2];
             return new Date(formattedDate).getTime();
         };
-        var temp = LoginService.isReferral();
-        if (temp) {
-            $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
-            LoginService.getProfileInfo(function(data) {
-                vm.user = data;
-                window.user = data;
-            })
+        vm.cities = function() {
+            return window.CityList;
+        }
+        vm.CityList = [];
+        window.CityList = [];
+        vm.Datacity = function() {
+            $http.get(apiBaseURL+'locations').then(function(response) {
+                if (response) {
+                    vm.CityList = response.data.data;
+                    window.CityList = response.data.data;
+                }
+            });
+        }
+        $timeout(function() {
+            if (!window.loadData) {
+                window.loadData = 1;
+                var temp = LoginService.getCityCookie();
+                if (temp == false) {
+                    vm.ChooseCity();
+                }
+            }
+        }, 10);
+        vm.setCityCookie = function(city) {
+            LoginService.cityCookie(city.id, city.attributes.name);
+        }
+        vm.temp = true;
+        if (window.user) {
+            vm.data = window.user;
+        } else {
+            var temp = LoginService.isReferral();
+            if (temp) {
+                $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
+                LoginService.getProfileInfo(function(data) {
+                    vm.user = data;
+                    window.user = data;
+                })
+            }
         }
     }
 })();
@@ -1538,8 +1605,12 @@ LodashFactory.$inject = ['$window'];
         service.offersClickTrack = offersClickTrack;
         service.offersViewTrack = offersViewTrack;
         service.getProfileInfo = getProfileInfo;
+        service.getCityCookie = getCityCookie;
+        service.getCityCookieName = getCityCookieName;
+        service.cityCookie = cityCookie;
         service.UpdateSocialShare = UpdateSocialShare;
         service.TrackingCode = TrackingCode;
+        service.getCityDataList = getCityDataList;
         service.SetTrackingCode = SetTrackingCode;
         return service;
 
@@ -1578,6 +1649,30 @@ LodashFactory.$inject = ['$window'];
             }
             return false;
         }
+
+        function getCityCookie() {
+            if ($cookies.get('city')) {
+                return $cookies.get('city');
+            }
+            return false;
+        }
+
+
+
+        function getCityCookieName() {
+            if ($cookies.get('city_name')) {
+                return $cookies.get('city_name');
+            }
+            return 'Chennai';
+        }
+
+        function cityCookie(id,name) {
+            $cookies.put('city', id);
+            $cookies.put('city_name', name);
+            window.location.reload();
+        }
+
+
 
         function getProfileInfo(callback) {
             $http.get(apiBaseURL + 'profile').then(function(response) {
@@ -1743,6 +1838,27 @@ LodashFactory.$inject = ['$window'];
                 }
             });
         }
+
+        function getCityDataList(callback) {
+
+            var url = apiBaseURL;
+            // var url = 'https://stagingapi.spini.co/v1/';
+
+        
+            
+            $http.get(url + 'locations').then(function(response) {
+                var response = response.data.data;
+                // login successful if there's a token in the response
+                if (response.attributes) {
+                    callback(response.attributes);
+                } else {
+                    // execute callback with false to indicate failed login
+                    callback(false);
+                }
+            });
+        }
+
+
 
         function checkOfferCookie(auth, callback) {}
 

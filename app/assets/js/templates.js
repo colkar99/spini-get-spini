@@ -8,12 +8,12 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('app/modules/layouts/nav-bar/navbar-tpl.html',
     "<!-- header section -->\n" +
-    "<header  >\n" +
+    "<header ng-controller=\"HomeCtrl as vm\" >\n" +
     "  <div class=\"container\">\n" +
     "\n" +
     "    <div class=\"col-md-12 hidden-sm  hidden-xs nopad mt6\">\n" +
     "        <div class=\"col-md-6 nopad right-lf main-header-partner\" >\n" +
-    "       <a> Contact Us : +91 8682 800800</a>\n" +
+    "       <a> Contact Us : +91 44-4211 5442</a>\n" +
     "      </div>\n" +
     "\n" +
     "      \n" +
@@ -38,8 +38,8 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "      </div>\n" +
     "\n" +
     "      <div class=\"col-md-2 col-xs-6 col-sm-6 text-center main-header-logo\">\n" +
-    "        <a href=\"/\">\n" +
-    "          <img src=\"/app/assets/images/header/Logo@2x.png\" alt=\"spini-logo\">\n" +
+    "        <a href=\"/\" ng-click=\"vm.refresh()\">\n" +
+    "          <img src=\"/app/assets/images/header/Logo@2x.png\" alt=\"ReferYogi logo\">\n" +
     "        </a>\n" +
     "      </div>\n" +
     "\n" +
@@ -54,7 +54,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "     \n" +
     "     <div class=\"col-xs-6 nopad\">\n" +
     "       \n" +
-    "         <button class=\"bton-ser\" ng-controller=\"HomeCtrl as vm\" ng-click=\"vm.MobileToggleSearch()\">\n" +
+    "         <button class=\"bton-ser\" ng-click=\"vm.MobileToggleSearch()\">\n" +
     "          <i class=\"fa fa-search\"> </i>\n" +
     "\n" +
     "        </button>\n" +
@@ -63,7 +63,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "     \n" +
     "     <div class=\"col-xs-6 nopad\">\n" +
     "       \n" +
-    "         <button class=\"bton-ser\" ng-controller=\"HomeCtrl as vm\" ng-click=\"vm.MobileLogin()\">\n" +
+    "         <button class=\"bton-ser\"  ng-click=\"vm.MobileLogin()\">\n" +
     "          <i class=\"fa fa-user\"> </i>\n" +
     "\n" +
     "        </button>\n" +
@@ -78,29 +78,29 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "\n" +
     "\n" +
-    "      <div id=\"mobileSearch\"  class=\"main-header-search  hidden-md  hidden-lg \" style=\"display: none;\" ng-controller=\"HomeCtrl as vm\">\n" +
-    "        <input type=\"text\" placeholder=\"Search Offers\" ng-model=\"vm.search_txt\" ng-enter=\"vm.searchBox(vm.search_txt)\"  class=\"search_n\">\n" +
+    "      <div id=\"mobileSearch\"  class=\"main-header-search  hidden-md  hidden-lg \" style=\"display: none;\" >\n" +
+    "        <input type=\"text\"  placeholder=\"Search Offers\" ng-model=\"vm.search_txt\" ng-enter=\"vm.searchBox(vm.search_txt)\"  class=\"search_n\">\n" +
     "\n" +
     "        <button class=\"search_n\" ng-click=\"vm.searchBox(vm.search_txt)\"></button>\n" +
     "      </div>\n" +
     "\n" +
-    "    <div id=\"mobileMenu\"  class=\"main-header-search  hidden-md  hidden-lg \" style=\"display: none;\" ng-controller=\"HomeCtrl as vm\">\n" +
+    "    <div id=\"mobileMenu\"  class=\"main-header-search  hidden-md  hidden-lg \" style=\"display: none;\" >\n" +
     "\n" +
-    "   <span ng-controller=\"HomeCtrl as menu\" >\n" +
+    "   <span>\n" +
     "  \n" +
     "\n" +
     "      \n" +
-    "            <div class=\"col-xs-12\" style=\"    padding-top: 20px;\"  ng-show=\"menu.isReferral()\">\n" +
+    "            <div class=\"col-xs-12\" style=\"    padding-top: 20px;\"  ng-show=\"vm.isReferral()\">\n" +
     "                <b style=\"color: #e83634\">\n" +
     "                    Your Account\n" +
     "                </b>\n" +
     "                <br>\n" +
     "                <p>\n" +
-    "                    Access account and manage offers\n" +
+    "                    Access Account & Manage offers\n" +
     "                </p>\n" +
     "<br>\n" +
     "                <div class=\"col-xs-6\">\n" +
-    "                  <button ng-click=\"menu.goProfile()\" style=\"    float: left;\n" +
+    "                  <button ng-click=\"vm.goProfile()\" style=\"    float: left;\n" +
     "    width: 100%;\n" +
     "    background-image: none;\">\n" +
     "                    Profile\n" +
@@ -109,7 +109,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "          \n" +
     "\n" +
     "              <div class=\"col-xs-6\">\n" +
-    "                    <button ng-click=\"menu.Logout()\" style=\"\n" +
+    "                    <button ng-click=\"vm.Logout()\" style=\"\n" +
     "                        float: left;\n" +
     "    width: 100%;\n" +
     "    background-image: none;\">\n" +
@@ -122,19 +122,19 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "      \n" +
     "\n" +
     "\n" +
-    "                  <div class=\"col-xs-12\" style=\"    padding-top: 20px;\"  ng-hide=\"menu.isVendor() || menu.isReferral()\">\n" +
+    "                  <div class=\"col-xs-12\" style=\"    padding-top: 20px;\"  ng-hide=\"vm.isVendor() || vm.isReferral()\">\n" +
     "                <b style=\"color: #e83634\">\n" +
     "                    ReferYogi\n" +
     "                </b>\n" +
     "                <br>\n" +
     "                <p>\n" +
-    "                   Access and become a Yogi! \n" +
+    "                   Access & Become a Yogi! \n" +
     "                </p>\n" +
     "<br>\n" +
     "\n" +
     "\n" +
     "                <div class=\"col-xs-6\">\n" +
-    "                  <button ng-click=\"menu.signupPOP('referral')\" style=\"    float: left;\n" +
+    "                  <button ng-click=\"vm.signupPOP('referral')\" style=\"    float: left;\n" +
     "    width: 100%;\n" +
     "    background-image: none;\">\n" +
     "                    SignUp\n" +
@@ -143,7 +143,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "          \n" +
     "\n" +
     "              <div class=\"col-xs-6\">\n" +
-    "                    <button ng-click=\"menu.openLoginPopup('referral')\" style=\"\n" +
+    "                    <button ng-click=\"vm.openLoginPopup('referral')\" style=\"\n" +
     "                        float: left;\n" +
     "    width: 100%;\n" +
     "    background-image: none;\">\n" +
@@ -155,11 +155,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "\n" +
     "         <div class=\"col-md-12  col-xs-12 \" style=\"    padding-top: 30px;\">\n" +
-    "        <button ng-click=\"menu.VendorContactUs();\" \n" +
+    "        <button ng-click=\"vm.VendorContactUs();\" \n" +
     "         style=\"    float: left;\n" +
     "    width: 100%;\n" +
     "\n" +
-    "    background-image: none;\">Become our partner</button>\n" +
+    "    background-image: none;\">Become Our Partner</button>\n" +
     "      </div>\n" +
     "\n" +
     "\n" +
@@ -170,7 +170,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "\n" +
     "\n" +
-    "                  <div class=\"col-xs-12\" style=\"    padding-top: 20px;\" ng-show =\"menu.isVendor()\">\n" +
+    "                  <div class=\"col-xs-12\" style=\"    padding-top: 20px;\" ng-show =\"vm.isVendor()\">\n" +
     "                <b style=\"color: #e83634\">\n" +
     "                    ReferYogi\n" +
     "                </b>\n" +
@@ -185,7 +185,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "\n" +
     "                <div class=\"col-xs-6\">\n" +
-    "                  <button ng-click=\"menu.goVendorProfile()\" style=\"    float: left;\n" +
+    "                  <button ng-click=\"vm.goVendorProfile()\" style=\"    float: left;\n" +
     "    width: 100%;\n" +
     "    background-image: none;\">\n" +
     "                    Dashboard\n" +
@@ -194,7 +194,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "          \n" +
     "\n" +
     "              <div class=\"col-xs-6\">\n" +
-    "                    <button ng-click=\"menu.Logout()\" style=\"\n" +
+    "                    <button ng-click=\"vm.Logout()\" style=\"\n" +
     "                        float: left;\n" +
     "    width: 100%;\n" +
     "    background-image: none;\">\n" +
@@ -220,17 +220,17 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "\n" +
     "\n" +
-    "      <div class=\"col-md-6 main-header-search  hidden-sm  hidden-xs \" ng-controller=\"HomeCtrl as vm\">\n" +
+    "      <div class=\"col-md-6 main-header-search  hidden-sm  hidden-xs \" >\n" +
     "        <input type=\"text\" ng-enter=\"vm.searchBox(vm.search_txt)\"  placeholder=\"Search Offers\" ng-model=\"vm.search_txt\" class=\"search_n\">\n" +
     "\n" +
     "        <button class=\"search_n\" ng-click=\"vm.searchBox(vm.search_txt)\"></button>\n" +
     "      </div>\n" +
     "\n" +
-    "<span ng-controller=\"HomeCtrl as menu\" class=\" hidden-sm  hidden-xs \">\n" +
+    "<span class=\" hidden-sm  hidden-xs \">\n" +
     "  \n" +
     "\n" +
-    "         <div class=\"col-md-2  col-xs-6 nopad main-header-partner\" ng-hide=\"menu.isVendor() || menu.isReferral()\">\n" +
-    "        <button ng-click=\"menu.VendorContactUs();\">Become our partner</button>\n" +
+    "         <div class=\"col-md-2  col-xs-6 nopad main-header-partner\" ng-hide=\"vm.isVendor() || vm.isReferral()\">\n" +
+    "        <button ng-click=\"vm.VendorContactUs();\">Become Our Partner</button>\n" +
     "      </div>\n" +
     "\n" +
     "\n" +
@@ -239,8 +239,8 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "\n" +
     "\n" +
-    "<div class=\"col-md-4 main-header-signin\" ng-class=\"menu.isReferral() ?'col-md-6':'col-md-2'\" ng-hide=\"menu.isVendor()\">\n" +
-    "    <div class=\"dropdown\" ng-if=\"menu.isReferral() == true\" >\n" +
+    "<div class=\"col-md-4 main-header-signin\" ng-class=\"vm.isReferral() ?'col-md-6':'col-md-2'\" ng-hide=\"vm.isVendor()\">\n" +
+    "    <div class=\"dropdown\" ng-if=\"vm.isReferral() == true\" >\n" +
     "        <button class=\"dropbtn\">\n" +
     "        \n" +
     "            <img src=\"/app/assets/images/header/UserIcon@2x.png\"/>\n" +
@@ -252,18 +252,18 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                    Your Account\n" +
     "                </b>\n" +
     "                <p>\n" +
-    "                    Access account and manage offers\n" +
+    "                    Access Account & Manage Offers\n" +
     "                </p>\n" +
-    "                <button ng-click=\"menu.goProfile()\" style=\"float: left;\">\n" +
+    "                <button ng-click=\"vm.goProfile()\" style=\"float: left;\">\n" +
     "                    Profile\n" +
     "                </button>\n" +
-    "                <button ng-click=\"menu.Logout()\" style=\"float: right;\">\n" +
+    "                <button ng-click=\"vm.Logout()\" style=\"float: right;\">\n" +
     "                    Logout\n" +
     "                </button>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div> \n" +
-    "    <div class=\"dropdown\" ng-if=\"menu.isReferral() == false\">\n" +
+    "    <div class=\"dropdown\" ng-if=\"vm.isReferral() == false\">\n" +
     "        <button class=\"dropbtn\">\n" +
     "             \n" +
     "            <img src=\"/app/assets/images/header/UserIcon@2x.png\"/>\n" +
@@ -275,13 +275,13 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                   ReferYogi\n" +
     "                </b>\n" +
     "                <p>\n" +
-    "                     Access and become a Yogi! \n" +
+    "                     Access & Become a Yogi! \n" +
     "                </p>\n" +
     "\n" +
-    "                <button ng-click=\"menu.signupPOP('referral')\" style=\"float: left;\">\n" +
+    "                <button ng-click=\"vm.signupPOP('referral')\" style=\"float: left;\">\n" +
     "                    SignUp\n" +
     "                </button>\n" +
-    "                <button ng-click=\"menu.openLoginPopup('referral')\" style=\"float: right;\">\n" +
+    "                <button ng-click=\"vm.openLoginPopup('referral')\" style=\"float: right;\">\n" +
     "                    Login\n" +
     "                </button>\n" +
     "            </div>\n" +
@@ -298,14 +298,14 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "  \n" +
     "\n" +
     "\n" +
-    "    <div class=\"col-md-2 main-header-partner\" ng-show=\"menu.isVendor()\">\n" +
-    "        <button ng-click=\"menu.goVendorProfile()\">Dashboard</button>\n" +
+    "    <div class=\"col-md-2 main-header-partner\" ng-show=\"vm.isVendor()\">\n" +
+    "        <button ng-click=\"vm.goVendorProfile()\">Dashboard</button>\n" +
     "      </div>\n" +
     "\n" +
     "\n" +
-    "      <div class=\"col-md-2 main-header-signin\" ng-show=\"menu.isVendor()\">\n" +
+    "      <div class=\"col-md-2 main-header-signin\" ng-show=\"vm.isVendor()\">\n" +
     "\n" +
-    "     <button ng-click=\"menu.Logout()\" >Logout</button>\n" +
+    "     <button ng-click=\"vm.Logout()\" >Logout</button>\n" +
     "      </div>\n" +
     "\n" +
     "\n" +
@@ -395,6 +395,61 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
   $templateCache.put('app/modules/pop-ups/popup.html',
     "<toast>\n" +
     "</toast>\n" +
+    "\n" +
+    "<style type=\"text/css\">\n" +
+    "    \n" +
+    "    \n" +
+    "    .but:hover\n" +
+    "    {    color: #e85826;\n" +
+    "    background-color: #fff;\n" +
+    "    border: 2px solid #e85826;\n" +
+    "\n" +
+    "}\n" +
+    "</style>\n" +
+    "\n" +
+    "<!-- City -->\n" +
+    "<div class=\"overlay\" id=\"choose-city\">\n" +
+    "\n" +
+    "    <div class=\"overlay-content\">\n" +
+    "        <div class=\"row \">\n" +
+    "              <div class=\"col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12  white nopad\">\n" +
+    "\n" +
+    "\n" +
+    "                     <div class=\"col-md-1 nopad ico\" style=\"float: right;\n" +
+    "    margin-top: -13px;\">\n" +
+    "                     <!--    <i aria-hidden=\"true\" class=\"fa fa-close offer-logo-40px mar10\" >\n" +
+    "                        </i> -->\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                <div class=\"text-center  nopad pad-bot-10\">\n" +
+    "                    <img class=\"poplogo\" style=\"    height: 70px;\" src=\"/app/assets/images/header/Logo@2x.png\">\n" +
+    "        \n" +
+    "                            <h4>Choose City</h4>          \n" +
+    "\n" +
+    "                        <div class=\"col-md-12\" style=\"   padding-top: 50px;  padding-bottom: 10px;\">\n" +
+    "\n" +
+    "\n" +
+    "                                 <div class=\"col-md-6 col-xs-6 col-sm-6 text-center but\" ng-repeat=\"city in vm.cities()\" ng-click=\"vm.setCityCookie(city)\">\n" +
+    "                                        <h3 style=\"    margin: 10px 0;cursor: pointer;\">{{city.attributes.name}} </h3>\n" +
+    "                                </div>     \n" +
+    "                        </div>\n" +
+    "           \n" +
+    "                      <!--         <h4>\n" +
+    "                           Choose Location to Continue\n" +
+    "                        </h4> -->\n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
+    "\n" +
+    "             \n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<!-- end login code -->\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "<!-- login POPUP -->\n" +
     "<div class=\"overlay\" id=\"login-popup\">\n" +
     "<!--     <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closeLoginPopup()\">\n" +
@@ -425,7 +480,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                    <button class=\"btn btn-block fbbutton \" ng-click=\"vm.FbLogin()\">\n" +
     "                        <span class=\"fa fa-facebook left falign\">\n" +
     "                        </span>\n" +
-    "                        Sign in with Facebook\n" +
+    "                        Sign In with Facebook\n" +
     "                    </button>\n" +
     "                   <!--  <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
     "                        <span class=\"fa fa-google left falign\">\n" +
@@ -471,7 +526,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                    <button class=\"btn btn-block fbbutton \" ng-click=\"vm.FbLogin('facebook')\">\n" +
     "                        <span class=\"fa fa-facebook left falign\">\n" +
     "                        </span>\n" +
-    "                        Sign UP with Facebook\n" +
+    "                        Sign Up with Facebook\n" +
     "                    </button>\n" +
     "         <!--            <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
     "                        <span class=\"fa fa-google left falign\">\n" +
@@ -486,6 +541,57 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    </div>\n" +
     "</div>\n" +
     "<!-- end login code -->\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "<!-- login POPUP -->\n" +
+    "<div class=\"overlay\" id=\"login-popup\">\n" +
+    "<!--     <a class=\"closebtn\" href=\"javascript:void(0)\" ng-click=\"vm.closeLoginPopup()\">\n" +
+    "        ×\n" +
+    "    </a> -->\n" +
+    "    <div class=\"overlay-content\">\n" +
+    "        <div class=\"row \">\n" +
+    "            <div class=\"col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12  white nopad\">\n" +
+    "\n" +
+    "                     <div class=\"col-md-1 nopad ico\" style=\"float: right;\n" +
+    "    margin-top: -13px;\">\n" +
+    "                        <i aria-hidden=\"true\" class=\"fa fa-close offer-logo-40px mar10\" ng-click=\"vm.closeLoginPopup()\">\n" +
+    "                        </i>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                <div class=\"text-center bg-grey nopad pad-bot-10\">\n" +
+    "                    <img class=\"poplogo\" src=\"/app/assets/images/header/Logo@2x.png\">\n" +
+    "                        <h3>\n" +
+    "                            ReferYogi Sign in\n" +
+    "                        </h3>\n" +
+    "                        <br/>\n" +
+    "                        <h5>\n" +
+    "                            Share & Earn Treasure..!!!\n" +
+    "                        </h5>\n" +
+    "                    \n" +
+    "                </div>\n" +
+    "                <div class=\"text-center temp\" ng-controller=\"LoginCtrl as vm\">\n" +
+    "                    <button class=\"btn btn-block fbbutton \" ng-click=\"vm.FbLogin()\">\n" +
+    "                        <span class=\"fa fa-facebook left falign\">\n" +
+    "                        </span>\n" +
+    "                        Sign In with Facebook\n" +
+    "                    </button>\n" +
+    "                   <!--  <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
+    "                        <span class=\"fa fa-google left falign\">\n" +
+    "                        </span>\n" +
+    "                        Sign in with Google\n" +
+    "                    </button> -->\n" +
+    "                </div>\n" +
+    "                <div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<!-- end login code -->\n" +
+    "\n" +
+    "\n" +
     "\n" +
     "\n" +
     "\n" +
@@ -657,7 +763,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        <form name=\"get_coupen\" ng-submit=\"vm.sentMobileNo(mobile,true,item.id)\" novalidate=\"\">\n" +
     "                            <div class=\"col-md-8 nopad\">\n" +
     "                                <label for=\"usr\">\n" +
-    "                                    Enter your mobile No. to get Code\n" +
+    "                                    Enter your mobile no to get code\n" +
     "                                </label>\n" +
     "                                <input class=\"form-control nbr min40\" id=\"usr\" maxlength=\"10\" minlength=\"10\" name=\"mobile\" ng-model=\"mobile\" ng-pattern=\"/^[0-9]+$/\" placeholder=\"Mobile no\" required=\"\" type=\"number\">\n" +
     "                                    <span ng-show=\"(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.minlength\" style=\"color: red\">\n" +
@@ -688,7 +794,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        <p class=\"font15px popupfoot pad-bot \">\n" +
     "                            Psst...!\n" +
     "                            <br/>\n" +
-    "                            Signup to become a ReferYogi referral and earn the Treasure amount with this offer!\n" +
+    "                            Sign up to become a ReferYogi referral and earn the Treasure amount with this offer!\n" +
     "                            <br/>\n" +
     "                        </p>\n" +
     "                        <p class=\"fbblue font15px popupfoot pad-bot\" ng-click=\"vm.signupPOP()\">\n" +
@@ -738,7 +844,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "<div class=\"col-md-12\">\n" +
     "\n" +
-    "    <h4 class=\"text-center\">Vendor Sign UP</h4>\n" +
+    "    <h4 class=\"text-center\">Vendor Sign Up</h4>\n" +
     "\n" +
     "                                <div class=\"col-md-8 row col-md-offset-2  filedmat \">\n" +
     "                                <label for=\"usr\">\n" +
@@ -994,7 +1100,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                        <div class=\"col-md-4 col-sm-6 hidden-xs text-right \" >\n" +
     "\n" +
     "\n" +
-    "                                            <img class=\"img-responsive\"  style=\"       float: right; margin-top: 3px;\" ng-src=\"{{item.attributes.business_avatar_thumb}}\">\n" +
+    "                                            <img class=\"img-responsive\"  style=\"       float: right; margin-top: 3px; height: 70px;\" ng-src=\"{{item.attributes.business_avatar_thumb}}\">\n" +
     "                                            </img>\n" +
     "                                        </div>\n" +
     "                                    </div>\n" +
@@ -1026,7 +1132,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                            <p class=\"read\" hm-dots-class=\"dots\" hm-less-text=\"Read less\" hm-limit=\"300\" hm-link-class=\"read-more\" hm-more-text=\"Read more\" hm-read-more=\"\" hm-text=\"{{ item.attributes.description | nl2br }}\">\n" +
     "                                            </p>\n" +
     "                                            <p class=\"offer-wrap-text space-div\">\n" +
-    "                                                **OFFER VALID TILL {{item.attributes.end_date | date:'medium'}} only at {{item.attributes.business_name}} @ {{item.attributes.place}}\n" +
+    "                                                **OFFER VALID TILL {{item.attributes.end_date | date:'mediumDate'}} only at {{item.attributes.business_name}} @ {{item.attributes.place}}\n" +
     "                                            </p>\n" +
     "                                        </div>\n" +
     "                                        <div class=\"col-md-2\">\n" +
@@ -1093,7 +1199,10 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    .offer-carousel-r1{\n" +
     "    width: 4%;\n" +
     "  }\n" +
-    "</style>\n"
+    "</style>\n" +
+    "\n" +
+    "\n" +
+    "\n"
   );
 
 
@@ -1369,7 +1478,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "        <div class=\"col-sm-10\">\n" +
     "            <div class=\"row\">\n" +
     "                <div class=\"col-sm-12\">\n" +
-    "                    <img alt=\"Cinque Terre\" class=\"img-thumbnail\" height=\"236\" src=\"/app/assets/images/03Banner/01Banner - 1166w - complete.png\" width=\"100%\">\n" +
+    "                    <img alt=\"Cinque Terre\" class=\"img-thumbnail\" height=\"236\" src=\"/app/assets/images/DashboardView.png\" width=\"100%\">\n" +
     "                    </img>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -1427,7 +1536,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                    <span class=\"tip-content\" style=\"    right: 80%;\">\n" +
     "                                        Self : {{vm.user.offer_info.user.coupons}}\n" +
     "                            Guest : {{ vm.user.offer_info.guest.coupons}} \n" +
-    "                            Child : {{ vm.user.offer_info.child.coupons }}\n" +
+    "                            Children : {{ vm.user.offer_info.child.coupons }}\n" +
     "                                    </span>\n" +
     "                                    <label class=\"text-muted\" s>\n" +
     "                                        No of Code Generated : {{vm.user.offer_info.user.coupons + vm.user.offer_info.guest.coupons + vm.user.offer_info.child.coupons }}\n" +
@@ -1440,7 +1549,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                    <span class=\"tip-content\"  style=\"    right: 80%;\">\n" +
     "                                        Self : {{vm.user.offer_info.user.shares}}\n" +
     "                            Guest : {{ vm.user.offer_info.guest.shares}} \n" +
-    "                            Child : {{ vm.user.offer_info.child.shares }}\n" +
+    "                            Children : {{ vm.user.offer_info.child.shares }}\n" +
     "                                    </span>\n" +
     "                                </div>\n" +
     "                            </hr>\n" +
@@ -1452,7 +1561,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                        <span class=\"tip-content\"  style=\"    right: 80%;\">\n" +
     "                                            Self : {{vm.user.offer_info.user.redemptions}}\n" +
     "                            Guest : {{ vm.user.offer_info.guest.redemptions}} \n" +
-    "                            Child : {{ vm.user.offer_info.child.redemptions }}\n" +
+    "                            Children : {{ vm.user.offer_info.child.redemptions }}\n" +
     "                                        </span>\n" +
     "\n" +
     "                                        <label class=\"text-muted\">\n" +
@@ -1461,7 +1570,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                    </div>\n" +
     "                                    <div class=\"col-sm-6 text-center nopad\">\n" +
     "                                        <label class=\"text-muted\">\n" +
-    "                                            No of Childs : {{vm.user.child_references_count}}\n" +
+    "                                            No of Children : {{vm.user.child_references_count}}\n" +
     "                                        </label>\n" +
     "                                    </div>\n" +
     "                                </hr>\n" +

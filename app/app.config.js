@@ -1,3 +1,4 @@
+
 (function() {
     'use strict';
     /**
@@ -7,8 +8,18 @@
      * # Config and run block
      * Configutation of the app
      */
+
+    if(window.location.hostname=='www.referyogi.com')
+            {
+                window.env = 'prod';
+            }
     angular.module('angular-app').config(configure)
-     .constant('apiBaseURL', 'https://api.spini.co/v1/')
+  
+     .constant('apiBaseURL', (window.env == "prod" ? 'https://api.spini.co/v1/' : 'https://stagingapi.spini.co/v1/'))
+     .constant('LinkUrl', (window.env == "prod" ? 'https://www.referyogi.com/' : 'https://staging.spini.co/'))
+
+
+
     .run(runBlock);
     configure.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider','$compileProvider'];
 

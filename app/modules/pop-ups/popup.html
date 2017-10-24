@@ -1,5 +1,60 @@
 <toast>
 </toast>
+
+<style type="text/css">
+    
+    
+    .but:hover
+    {    color: #e85826;
+    background-color: #fff;
+    border: 2px solid #e85826;
+
+}
+</style>
+
+<!-- City -->
+<div class="overlay" id="choose-city">
+
+    <div class="overlay-content">
+        <div class="row ">
+              <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12  white nopad">
+
+
+                     <div class="col-md-1 nopad ico" style="float: right;
+    margin-top: -13px;">
+                     <!--    <i aria-hidden="true" class="fa fa-close offer-logo-40px mar10" >
+                        </i> -->
+                    </div>
+
+                <div class="text-center  nopad pad-bot-10">
+                    <img class="poplogo" style="    height: 70px;" src="/app/assets/images/header/Logo@2x.png">
+        
+                            <h4>Choose City</h4>          
+
+                        <div class="col-md-12 col-xs-12 col-sm 12 " style="   padding-top: 50px;  padding-bottom: 10px;">
+
+
+                                 <div class="col-md-6 col-xs-6 col-sm-6 text-center but" ng-repeat="city in vm.cities()" ng-click="vm.setCityCookie(city)">
+                                        <h3 style="    margin: 10px 0;cursor: pointer;">{{city.attributes.name}} </h3>
+                                </div>     
+                        </div>
+           
+                      <!--         <h4>
+                           Choose Location to Continue
+                        </h4> -->
+
+                </div>
+
+
+             
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end login code -->
+
+
+
 <!-- login POPUP -->
 <div class="overlay" id="login-popup">
 <!--     <a class="closebtn" href="javascript:void(0)" ng-click="vm.closeLoginPopup()">
@@ -91,6 +146,57 @@
     </div>
 </div>
 <!-- end login code -->
+
+
+
+
+<!-- login POPUP -->
+<div class="overlay" id="login-popup">
+<!--     <a class="closebtn" href="javascript:void(0)" ng-click="vm.closeLoginPopup()">
+        ×
+    </a> -->
+    <div class="overlay-content">
+        <div class="row ">
+            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12  white nopad">
+
+                     <div class="col-md-1 nopad ico" style="float: right;
+    margin-top: -13px;">
+                        <i aria-hidden="true" class="fa fa-close offer-logo-40px mar10" ng-click="vm.closeLoginPopup()">
+                        </i>
+                    </div>
+
+                <div class="text-center bg-grey nopad pad-bot-10">
+                    <img class="poplogo" src="/app/assets/images/header/Logo@2x.png">
+                        <h3>
+                            ReferYogi Sign in
+                        </h3>
+                        <br/>
+                        <h5>
+                            Share & Earn Treasure..!!!
+                        </h5>
+                    
+                </div>
+                <div class="text-center temp" ng-controller="LoginCtrl as vm">
+                    <button class="btn btn-block fbbutton " ng-click="vm.FbLogin()">
+                        <span class="fa fa-facebook left falign">
+                        </span>
+                        Sign In with Facebook
+                    </button>
+                   <!--  <button class="btn btn-block gbutton" g-login="" ng-click="vm.GoogleLogin('google')">
+                        <span class="fa fa-google left falign">
+                        </span>
+                        Sign in with Google
+                    </button> -->
+                </div>
+                <div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end login code -->
+
+
 
 
 
@@ -599,7 +705,7 @@
                                         <div class="col-md-4 col-sm-6 hidden-xs text-right " >
 
 
-                                            <img class="img-responsive"  style="       float: right; margin-top: 3px;" ng-src="{{item.attributes.business_avatar_thumb}}">
+                                            <img class="img-responsive"  style="       float: right; margin-top: 3px; height: 70px;" ng-src="{{item.attributes.business_avatar_thumb}}">
                                             </img>
                                         </div>
                                     </div>
@@ -631,7 +737,7 @@
                                             <p class="read" hm-dots-class="dots" hm-less-text="Read less" hm-limit="300" hm-link-class="read-more" hm-more-text="Read more" hm-read-more="" hm-text="{{ item.attributes.description | nl2br }}">
                                             </p>
                                             <p class="offer-wrap-text space-div">
-                                                **OFFER VALID TILL {{item.attributes.end_date | date:'medium'}} only at {{item.attributes.business_name}} @ {{item.attributes.place}}
+                                                **OFFER VALID TILL {{item.attributes.end_date | date:'mediumDate'}} only at {{item.attributes.business_name}} @ {{item.attributes.place}}
                                             </p>
                                         </div>
                                         <div class="col-md-2">
@@ -699,3 +805,6 @@
     width: 4%;
   }
 </style>
+
+
+
