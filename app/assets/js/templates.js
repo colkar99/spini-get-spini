@@ -424,15 +424,45 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                <div class=\"text-center  nopad pad-bot-10\">\n" +
     "                    <img class=\"poplogo\" style=\"    height: 70px;\" src=\"/app/assets/images/header/Logo@2x.png\">\n" +
     "        \n" +
-    "                            <h4>Choose City</h4>          \n" +
+    "                            <h4>Choose City</h4>        \n" +
     "\n" +
-    "                        <div class=\"col-md-12 col-xs-12 col-sm 12 \" style=\"   padding-top: 50px;  padding-bottom: 10px;\">\n" +
+    "                            <div class=\"col-md-12\" style=\"    padding: 15px 0px;\">\n" +
+    "                            <div class=\"col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 \">\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                                <select class=\"form-control\" ng-init=\"vm.selectedCity=0\" ng-model=\"vm.selectedCity\">\n" +
+    "                                   <option ng-repeat=\"(id,value) in vm.cities() track by $index\" ng-value=\"{{$index}}\"   >\n" +
+    "                                     {{value.attributes.name}}\n" +
+    "                                   </option>\n" +
+    "                                 </select>\n" +
+    "\n" +
+    "<!-- \n" +
+    "                                <select class=\"form-control\"  ng-init=\"vm.selectedCity='Chennai'\" ng-model=\"vm.selectedCity\"  ng-options=\"x.attributes.name for x in vm.cities()\">\n" +
+    "                                </select>\n" +
+    " -->\n" +
+    "\n" +
+    "                                   <!--  <select class=\"form-control\" ng-modal=\"vm.tempCitydata\" >\n" +
+    "                                    <option ng-value=\"city\" ng-repeat=\"city in vm.cities()\" ng-click=\"vm.setCityCookie(city)\">{{city.attributes.name}}</option>\n" +
+    "                                      </select>   -->\n" +
+    "                            </div>\n" +
+    "\n" +
+    "                              <div class=\"col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2\" style=\"    margin-top: 15px;\">\n" +
+    "                          \n" +
+    "                            <button  ng-click=\"vm.setCityCookie(vm.cities()[vm.selectedCity])\" class=\"form-control\" style=\"background: #d8091f;\n" +
+    "    color: white;\n" +
+    "    font-size: 16px;\">Select</button>\n" +
+    "\n" +
+    "                                </div>\n" +
+    "                                </div>\n" +
+    "\n" +
+    "              <!--           <div class=\"col-md-12 col-xs-12 col-sm 12 \" style=\"   padding-top: 50px;  padding-bottom: 10px;\">\n" +
     "\n" +
     "\n" +
     "                                 <div class=\"col-md-6 col-xs-6 col-sm-6 text-center but\" ng-repeat=\"city in vm.cities()\" ng-click=\"vm.setCityCookie(city)\">\n" +
     "                                        <h3 style=\"    margin: 10px 0;cursor: pointer;\">{{city.attributes.name}} </h3>\n" +
     "                                </div>     \n" +
-    "                        </div>\n" +
+    "                        </div> -->\n" +
     "           \n" +
     "                      <!--         <h4>\n" +
     "                           Choose Location to Continue\n" +
@@ -1076,7 +1106,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "\n" +
     "                            <div class=\"col-md-5 nopad\">\n" +
-    "                                <img   class=\"fixed-height\" ng-src=\"{{item.attributes.avatar}}\" style=\"width: 100% !important;\"/>\n" +
+    "                                <img   class=\"img-responsive\" ng-src=\"{{item.attributes.avatar_medium}}\" style=\"width: 100% !important;\"/>\n" +
     "                               \n" +
     "                            </div>\n" +
     "                            <div class=\"col-md-7 nopad\">\n" +
