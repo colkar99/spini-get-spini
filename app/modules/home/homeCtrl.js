@@ -131,7 +131,20 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
             return lines.join('<br />');
         }
-    }).controller('HomeCtrl', Home);
+    })
+
+.directive('whenScrolled', function() {
+    return function(scope, elm, attr) {
+        var raw = elm[0];
+        
+        elm.bind('scroll', function() {
+            if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+                scope.$apply(attr.whenScrolled);
+            }
+        });
+    };
+})
+    .controller('HomeCtrl', Home);
     Home.$inject = ['homeService','LinkUrl', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope', '$timeout', 'ngToast', 'Socialshare', '$anchorScroll', '$rootScope'];
     /*
      * recommend
@@ -425,6 +438,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
             $http.get(url).then(function(response) {
                 if (response) {
+                    vm.setNextPage(response)
                     var response = response.data.data;
                     $scope.filter_items.push(response);
                     vm.offers = [];
@@ -464,7 +478,9 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
         };
         vm.searchBoxEnable = false;
         $rootScope.$on("SearchComplete", function(event, args) {
+
             if (vm.searchBoxEnable) {
+                vm.setNextPage(response)
                 console.log("SearchComplete");
                 var response = args.authData.data.data;
                 $scope.filter_items.push(response);
@@ -493,6 +509,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
 
 
+
             $http.get(url).then(function(response) {
                 if (response) {
                     $rootScope.$broadcast("SearchComplete", {
@@ -500,6 +517,69 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     });
                 }
             });
+        }
+
+
+
+window.scrollOff = true;
+
+
+        vm.nextPage = function()
+        {
+            var  url = document.getElementById('next_page').innerHtml;
+            if(url)
+{
+
+            if(window.scrollOff)
+    {         
+
+window.scrollOff = false;
+
+
+
+     
+
+
+        $http.get(url).then(function(response) {
+             if (response) {
+                document.getElementById('next_page').innerHtml ='';
+            vm.setNextPage(response)
+                               var response = response.data.data;
+
+                angular.forEach(response, function(item, key) {
+ 
+
+                $scope.filter_items.push(item);
+               
+                vm.offers.push(item);
+
+
+        });
+
+
+                var data  = _.uniqBy(response, function(e) {
+                    return e.attributes.campaign_id;
+                });
+
+                          angular.forEach(data, function(item, key) {
+ 
+
+           vm.compaigns.push(data);
+
+
+        });
+
+                
+
+                
+
+                vm.overall_compaigns = vm.compaigns;
+}
+window.scrollOff = true;
+
+            });
+}}
+
         }
         vm.categories = [];
         vm.getCategories = function() {
@@ -546,19 +626,52 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             return window.SelectedOffer;
         }
         vm.getSelectedCampaignOffers = function() {
-            vm.SelectedCampOffers = [];
+
+                        vm.SelectedCampOffers = [];
+
+            if(window.singlePageOfferView == 1)
+            {
+
+                 $http.get(apiBaseURL+'/home/offers/'+window.offerInfo.attributes.seo_url).then(function(response) {
+                
+            vm.SelectedCampOffers.push(response.data.data);
+            
+            debugger;
+              LoginService.offersClickTrack(response.data.data.id, function(result) {
+                if (result) {
+                    console.log('offersClickTrack');
+                }
+            })
+            
+            window.SelectedCampOffers = [];
+            window.SelectedCampOffers = vm.SelectedCampOffers;
+
+
+            });
+
+
+
+
+            
+            
+            }
+            else
+            {
+
             angular.forEach(vm.offers, function(value, key) {
                 if (value.attributes.campaign_id == vm.campaign_id) {
                     vm.SelectedCampOffers.push(value);
                 }
             });
+        
             if (vm.SelectedCampOffers) {
                 vm.offersClickTrack(vm.SelectedCampOffers[0].id)
             }
             window.SelectedCampOffers = [];
             window.SelectedCampOffers = vm.SelectedCampOffers;
             return vm.SelectedCampOffers;
-        }
+
+        }}
         vm.goHome = function() {
             window.location = window.location.origin;
         }
@@ -623,20 +736,66 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 $scope.myWelcome = response.statusText;
             });
         }
-        vm.filter_by_cat = function(id) {
-            vm.filter_items = vm.overall_compaigns;
-            vm.compaigns = [];
-            for (var i = 0; i <= vm.filter_items.length; i++) {
-                if (vm.filter_items[i]) {
-                    if (vm.filter_items[i].attributes.offer_category_id == id) {
-                        vm.compaigns.push(vm.filter_items[i]);
-                        //console.log(vm.compaigns);
+
+        vm.setNextPage = function(response)
+        {
+            if(response)
+            {
+                    if(response.data)
+                    {
+                if(response.data.links)
+                {
+
+                    if(response.data.links.next)
+                    {
+                            document.getElementById('next_page').innerHtml = response.data.links.next;
+                            return;
                     }
                 }
+                }
             }
-            vm.gridlength = 0;
-            vm.gridShow = false;
-            return vm.compaigns;
+    
+                document.getElementById('next_page').innerHtml ='';
+            
+            
+        }
+        vm.filter_by_cat = function(id) {
+
+
+
+            var locationCookie = LoginService.getCityCookie();
+            if (locationCookie == false) {
+                var url = apiBaseURL + '/home/offers?category_id=' + id;
+            } else {
+                var url = apiBaseURL + '/home/offers?category_id=' + id +'&location_id='+locationCookie;
+            }
+
+
+             $http.get(url).then(function(response) {
+                
+                vm.setNextPage(response)
+                               var response = response.data.data;
+                $scope.filter_items.push(response);
+               
+                vm.offers = response;
+                var data  = _.uniqBy(response, function(e) {
+                    return e.attributes.campaign_id;
+                });
+                vm.compaigns.push(data);
+                vm.overall_compaigns = vm.compaigns;
+                vm.gridlength = 0;
+                vm.gridShow = false;
+                vm.gotoBottom();
+
+
+            });
+
+
+      
+  
+  
+
+
         };
         vm.filter_by_food = function(some) {
             vm.filter_items = some;

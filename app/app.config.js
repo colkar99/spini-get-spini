@@ -9,7 +9,7 @@
      * Configutation of the app
      */
 
-    if(window.location.hostname=='www.referyogi.com')
+if(window.location.hostname=='www.referyogi.com' || window.location.hostname=='referyogi.com')
             {
                 window.env = 'prod';
             }

@@ -31,7 +31,352 @@
    
 
 
-	<div ng-include="'app/modules/layouts/nav-bar/navbar.html'"></div>
+<!-- header section -->
+<header ng-controller="HomeCtrl as vm" >
+  <div class="container">
+
+    <div class="col-md-12 hidden-sm  hidden-xs nopad mt6">
+        <div class="col-md-6 nopad right-lf main-header-partner" >
+       <a> Contact Us : +91 44-4211 5442</a>
+      </div>
+
+      
+    </div>
+    <div class="row main-header">
+<div class="col-md-12 nopad">
+  
+
+
+      <div class="hidden-md hidden-lg col-sm-3 col-xs-3 nopad">
+        
+            <div style="margin-top: -7px;">
+      <button type="button" class="navbar-toggle fshow" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+     
+    </div>
+
+
+      </div>
+
+      <div class="col-md-2 col-xs-6 col-sm-6 text-center main-header-logo">
+        <a href="/" ng-click="vm.refresh()">
+          <img src="/app/assets/images/header/Logo@2x.png" alt="ReferYogi logo">
+        </a>
+      </div>
+
+
+      <div class="hidden-md hidden-lg col-sm-3 col-xs-3 ">
+     
+
+      <div class="row">
+
+        <div class="col-xs-12 nopad">
+          
+     
+     <div class="col-xs-6 nopad">
+       
+         <button class="bton-ser" ng-click="vm.MobileToggleSearch()">
+          <i class="fa fa-search"> </i>
+
+        </button>
+     </div>
+
+     
+     <div class="col-xs-6 nopad">
+       
+         <button class="bton-ser"  ng-click="vm.MobileLogin()">
+          <i class="fa fa-user"> </i>
+
+        </button>
+     </div>
+
+
+           </div>
+           </div>
+
+      </div>
+ 
+
+
+
+      <div id="mobileSearch"  class="main-header-search  hidden-md  hidden-lg " style="display: none;" >
+        <input type="text"  placeholder="Search Offers" ng-model="vm.search_txt" ng-enter="vm.searchBox(vm.search_txt)"  class="search_n">
+
+        <button class="search_n" ng-click="vm.searchBox(vm.search_txt)"></button>
+      </div>
+
+    <div id="mobileMenu"  class="main-header-search  hidden-md  hidden-lg " style="display: none;" >
+
+   <span>
+  
+
+      
+            <div class="col-xs-12" style="    padding-top: 20px;"  ng-show="vm.isReferral()">
+                <b style="color: #e83634">
+                    Your Account
+                </b>
+                <br>
+                <p>
+                    Access Account & Manage offers
+                </p>
+<br>
+                <div class="col-xs-6">
+                  <button ng-click="vm.goProfile()" style="    float: left;
+    width: 100%;
+    background-image: none;">
+                    Profile
+                </button>
+                </div>
+          
+
+              <div class="col-xs-6">
+                    <button ng-click="vm.Logout()" style="
+                        float: left;
+    width: 100%;
+    background-image: none;">
+                    Logout
+                </button>
+                </div>
+
+
+            </div>
+      
+
+
+                  <div class="col-xs-12" style="    padding-top: 20px;"  ng-hide="vm.isVendor() || vm.isReferral()">
+                <b style="color: #e83634">
+                    ReferYogi
+                </b>
+                <br>
+                <p>
+                   Access & Become a Yogi! 
+                </p>
+<br>
+
+
+                <div class="col-xs-6">
+                  <button ng-click="vm.signupPOP('referral')" style="    float: left;
+    width: 100%;
+    background-image: none;">
+                    SignUp
+                </button>
+                </div>
+          
+
+              <div class="col-xs-6">
+                    <button ng-click="vm.openLoginPopup('referral')" style="
+                        float: left;
+    width: 100%;
+    background-image: none;">
+                    Login
+                </button>
+                </div>
+
+
+
+
+         <div class="col-md-12  col-xs-12 " style="    padding-top: 30px;">
+        <button ng-click="vm.VendorContactUs();" 
+         style="    float: left;
+    width: 100%;
+
+    background-image: none;">Become Our Partner</button>
+      </div>
+
+
+
+
+
+            </div>
+
+
+
+                  <div class="col-xs-12" style="    padding-top: 20px;" ng-show ="vm.isVendor()">
+                <b style="color: #e83634">
+                    ReferYogi
+                </b>
+                <br>
+                <p>
+                   Redemption Dashboard
+                </p>
+<br>
+
+
+
+
+
+                <div class="col-xs-6">
+                  <button ng-click="vm.goVendorProfile()" style="    float: left;
+    width: 100%;
+    background-image: none;">
+                    Dashboard
+                </button>
+                </div>
+          
+
+              <div class="col-xs-6">
+                    <button ng-click="vm.Logout()" style="
+                        float: left;
+    width: 100%;
+    background-image: none;">
+                    Logout
+                </button>
+                </div>
+
+
+
+
+
+
+            </div>
+
+  </span>
+
+
+
+      </div>
+
+
+
+
+
+
+      <div class="col-md-6 main-header-search  hidden-sm  hidden-xs " >
+        <input type="text" ng-enter="vm.searchBox(vm.search_txt)"  placeholder="Search Offers" ng-model="vm.search_txt" class="search_n">
+
+        <button class="search_n" ng-click="vm.searchBox(vm.search_txt)"></button>
+      </div>
+
+<span class=" hidden-sm  hidden-xs ">
+  
+
+         <div class="col-md-2  col-xs-6 nopad main-header-partner" ng-hide="vm.isVendor() || vm.isReferral()">
+        <button ng-click="vm.VendorContactUs();">Become Our Partner</button>
+      </div>
+
+
+
+
+
+
+
+<div class="col-md-4 main-header-signin" ng-class="vm.isReferral() ?'col-md-6':'col-md-2'" ng-hide="vm.isVendor()">
+    <div class="dropdown" ng-if="vm.isReferral() == true" >
+        <button class="dropbtn">
+        
+            <img src="/app/assets/images/header/UserIcon@2x.png"/>
+         
+        </button>
+        <div class="dropdown-content" style="    left: -115px;">
+            <div class="dropbox">
+                <b style="color: #e83634">
+                    Your Account
+                </b>
+                <p>
+                    Access Account & Manage Offers
+                </p>
+                <button ng-click="vm.goProfile()" style="float: left;">
+                    Profile
+                </button>
+                <button ng-click="vm.Logout()" style="float: right;">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </div> 
+    <div class="dropdown" ng-if="vm.isReferral() == false">
+        <button class="dropbtn">
+             
+            <img src="/app/assets/images/header/UserIcon@2x.png"/>
+         
+        </button>
+        <div class="dropdown-content" style="    left: -115px;">
+            <div class="dropbox">
+                <b style="color: #e83634">
+                   ReferYogi
+                </b>
+                <p>
+                     Access & Become a Yogi! 
+                </p>
+
+                <button ng-click="vm.signupPOP('referral')" style="float: left;">
+                    SignUp
+                </button>
+                <button ng-click="vm.openLoginPopup('referral')" style="float: right;">
+                    Login
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+  
+
+
+    <div class="col-md-2 main-header-partner" ng-show="vm.isVendor()">
+        <button ng-click="vm.goVendorProfile()">Dashboard</button>
+      </div>
+
+
+      <div class="col-md-2 main-header-signin" ng-show="vm.isVendor()">
+
+     <button ng-click="vm.Logout()" >Logout</button>
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+
+</span>
+
+   </div>
+</div>
+
+  <hr/>
+</header>
+<style type="text/css">
+  .manage-account{
+    background: #fff;
+    padding: 20px 16px;
+    text-align: left;
+    width: 300px;
+    position: absolute;
+    z-index: 1;
+    box-shadow: 0px 0px 6px #888;
+    border-radius: 3px;
+    top: 50px;
+    left: -40px;
+  }
+  .manage-account i{
+    text-align: right;
+    display: block;
+    color: #b3b3b3;
+  }
+  .manage-account b{
+    margin: 10px 0px;
+  }
+  .manage-account p{
+    margin: 10px 0px;
+  }  
+  .manage-account button{
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-right: 15px;
+  }
+</style>
+
 	<!--Beginning-->
 	<section id="wrapper" scroll-to>
 		<div class="view-slide-in" ui-view>
@@ -68,37 +413,6 @@
     </div>
   </div>
 </nav>
-
-
-  <!--       <nav class="main-header-navigation">
-          <ul ng-init="vm.getCategories()">
-
-            <li class="main-nav-education"  ng-click="vm.getOffers(); vm.gotoBottom();">
-
-              <a >All</a>
-
-            </li>
-
-            <li  ng-repeat="(key, value) in vm.categories" ng-click="vm.filter_by_cat(value.id); vm.gotoBottom();" class="main-nav-education">
-
-                <a  >{{value.name}}</a>
-
-              </li>
-
-
-         
-
-
-          </ul>
-
-
-
-
-        </nav> -->
-
-
-  
-
 
 
 
@@ -246,22 +560,6 @@
 </div>
 </section>
 
-<!-- how works code -->
-<!-- <section class="how-spini-works hidden-sm hidden-xs  " ng-show="vm.how_works" >
-  <div class="container">
-    <img src="/app/assets/images/04HowSpini/00-Bann-HowSpini-Complete.png">
-  </div>
-</section> -->
-
-
-
-<!-- how works code -->
-<!-- <section class="how-spini-works hidden-md hidden-lg  " ng-show="vm.how_works" style="padding:0px;padding-bottom: 40px" >
-  <div class="container">
-    <img src="/app/assets/images/How it Works 2.jpg" class="img-responsive" style="
-    width: 100%;">
-  </div>
-</section> -->
 
 
 
@@ -279,7 +577,10 @@ class="offers-grid" ng-init="vm.getOffers()" id="Gridbottom">
   <div class="container">
 
 
-  <div class="col-md-4 col-sm-6" ng-repeat="offer in vm.compaigns track by $index " ng-if="$index >= vm.gridlength">
+
+ <div lazy-scroll="vm.nextPage()"         lazy-scroll-trigger="100"
+            lazy-no-scroll="vm.scrollOff">
+        <div class="col-md-4 col-sm-6" ng-repeat="offer in vm.offers track by $index " ng-if="$index >= vm.gridlength">
             <div class="offer-container">
                 <img alt="offer-image" ng-click="vm.getSlidepopup(offer.attributes.campaign_id)" ng-src="{{offer.attributes.avatar_thumb}}">
                     <div class="offer-details">
@@ -288,9 +589,9 @@ class="offers-grid" ng-init="vm.getOffers()" id="Gridbottom">
                                 GET CODE!
                             </button>
                             <h3>
-                                {{offer.attributes.name | limitTo:30}}
+                                {{offer.attributes.name | limitTo:27}}
 
-                                {{offer.attributes.name.length > 30 ? '...' : ''}}
+                                {{offer.attributes.name.length > 27 ? '...' : ''}}
 
                             </h3>
                             <div class="offer-location">
@@ -298,9 +599,9 @@ class="offers-grid" ng-init="vm.getOffers()" id="Gridbottom">
                                     At - 
 
 
-          {{offer.attributes.business_name | limitTo:20}}
+          {{offer.attributes.business_name | limitTo:18}}
 
-                                {{offer.attributes.business_name.length > 20 ? '...' : ''}}
+                                {{offer.attributes.business_name.length > 18 ? '...' : ''}}
 
 
                                 </b>
@@ -394,6 +695,12 @@ style="    background: none;"
             </div>
         </div>
 
+ </div>
+
+<p id="next_page" style="display: none">
+
+</p>
+
   </div>
 
 </section>
@@ -439,9 +746,29 @@ style="    background: none;"
 <script src="/src/bower_components/angular-timer/dist/angular-timer.js"></script>
 <script src="/app/app.js"></script>
 <script src="/app/app.config.js"></script>
-<script src="/app/assets/js/angular-app-angularbundle.js"></script>
-<script src="/app/assets/js/angular-app-appbundle.js"></script>
-<script src="/app/assets/js/templates.js"></script>
+<script src="/app/modules/home/homeModule.js"></script>
+<script src="/app/modules/loginAuth/loginModule.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponModule.js"></script>
+<script src="/app/modules/refferal_user/refferalModule.js"></script>
+<script src="/app/modules/signup/signupModule.js"></script>
+<script src="/app/modules/home/homeRoute.js"></script>
+<script src="/app/modules/loginAuth/loginRoute.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponRoute.js"></script>
+<script src="/app/modules/refferal_user/refferalRoute.js"></script>
+<script src="/app/modules/signup/signupRoute.js"></script>
+<script src="/app/modules/home/homeCtrl.js"></script>
+<script src="/app/modules/layouts/nav-bar/navBarCtrl.js"></script>
+<script src="/app/modules/loginAuth/loginCtrl.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponCtrl.js"></script>
+<script src="/app/modules/refferal_user/refferalCtrl.js"></script>
+<script src="/app/modules/signup/signupCtrl.js"></script>
+<script src="/app/modules/home/homeService.js"></script>
+<script src="/app/modules/layouts/nav-bar/navbarService.js"></script>
+<script src="/app/modules/loginAuth/loginService.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponService.js"></script>
+<script src="/app/modules/refferal_user/refferalService.js"></script>
+<script src="/app/modules/signup/signupService.js"></script>
+<script src="/app/modules/layouts/nav-bar/navbarDirective.js"></script>
 <!-- endinjector -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/oclazyload/1.1.0/ocLazyLoad.min.js"></script>
 <script src="//use.fontawesome.com/9a830e8669.js"></script>
