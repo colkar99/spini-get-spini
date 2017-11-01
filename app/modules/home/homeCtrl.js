@@ -327,7 +327,11 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 document.getElementById(id).style.width = "0%";
             }
         }
-        vm.getSlidepopup = function(campaign_id, is_offer) {
+        vm.getSlidepopup = function(campaign_id, is_offer,is_slide) {
+
+            window.SlideClick = 0;
+            window.SlideClickSeoUrl ='';
+              debugger;
             if (is_offer) {
                 angular.forEach(vm.offers, function(value, key) {
                     if (value.id == campaign_id) {
@@ -336,7 +340,15 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                         console.log(value)
                     }
                 });
-            } else {
+            }
+            else if(is_slide)
+            {
+            window.SlideClick=1;
+          
+            window.SlideClickSeoUrl = is_slide;
+        
+            } 
+            else {
                 vm.campaign_id = campaign_id;
             }
             console.log(campaign_id);
@@ -627,9 +639,33 @@ window.scrollOff = true;
         }
         vm.getSelectedCampaignOffers = function() {
 
-                        vm.SelectedCampOffers = [];
+            vm.SelectedCampOffers = [];
 
-            if(window.singlePageOfferView == 1)
+            debugger;
+
+             if(window.SlideClick==1)
+            {
+
+
+                 $http.get(apiBaseURL+'/home/offers/'+window.SlideClickSeoUrl).then(function(response) {
+                
+            vm.SelectedCampOffers.push(response.data.data);
+            
+            debugger;
+              LoginService.offersClickTrack(response.data.data.id, function(result) {
+                if (result) {
+                    console.log('offersClickTrack');
+                }
+            })
+            
+            window.SelectedCampOffers = [];
+            window.SelectedCampOffers = vm.SelectedCampOffers;
+
+
+            });
+
+            }
+            else if(window.singlePageOfferView == 1)
             {
 
                  $http.get(apiBaseURL+'/home/offers/'+window.offerInfo.attributes.seo_url).then(function(response) {
@@ -665,7 +701,10 @@ window.scrollOff = true;
             });
         
             if (vm.SelectedCampOffers) {
+                if(vm.SelectedCampOffers[0])
+                {
                 vm.offersClickTrack(vm.SelectedCampOffers[0].id)
+                }
             }
             window.SelectedCampOffers = [];
             window.SelectedCampOffers = vm.SelectedCampOffers;

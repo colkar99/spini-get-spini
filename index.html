@@ -457,7 +457,7 @@
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
 
-        <div class="item active" ng-click="vm.getSlidepopup(1,true)">
+        <div class="item active" ng-click="vm.getSlidepopup(1,false,'alternative_medicine')">
 
           <img ng-src="/app/assets/images/03Banner/cream_fudge.png" alt="Los Angeles" style="width:100%;max-height: 350px">
         </div>
@@ -582,7 +582,7 @@ class="offers-grid" ng-init="vm.getOffers()" id="Gridbottom">
             lazy-no-scroll="vm.scrollOff">
         <div class="col-md-4 col-sm-6" ng-repeat="offer in vm.offers track by $index " ng-if="$index >= vm.gridlength">
             <div class="offer-container">
-                <img alt="offer-image" ng-click="vm.getSlidepopup(offer.attributes.campaign_id)" ng-src="{{offer.attributes.avatar_thumb}}">
+                <img alt="offer-image" ng-click="vm.getSlidepopup(offer.attributes.campaign_id,false)" ng-src="{{offer.attributes.avatar_thumb}}">
                     <div class="offer-details">
                         <span class="grisp" ng-click="vm.getSlidepopup(offer.attributes.campaign_id)">
                             <button ng-click="vm.getSlidepopup(offer.attributes.campaign_id)">
