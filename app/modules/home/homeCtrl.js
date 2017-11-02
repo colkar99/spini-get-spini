@@ -136,7 +136,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
 .directive('whenScrolled', function() {
     return function(scope, elm, attr) {
         var raw = elm[0];
-        
+
         elm.bind('scroll', function() {
             if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
                 scope.$apply(attr.whenScrolled);
@@ -344,10 +344,10 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             else if(is_slide)
             {
             window.SlideClick=1;
-          
+
             window.SlideClickSeoUrl = is_slide;
-        
-            } 
+
+            }
             else {
                 vm.campaign_id = campaign_id;
             }
@@ -543,13 +543,13 @@ window.scrollOff = true;
 {
 
             if(window.scrollOff)
-    {         
+    {
 
 window.scrollOff = false;
 
 
 
-     
+
 
 
         $http.get(url).then(function(response) {
@@ -559,10 +559,10 @@ window.scrollOff = false;
                                var response = response.data.data;
 
                 angular.forEach(response, function(item, key) {
- 
+
 
                 $scope.filter_items.push(item);
-               
+
                 vm.offers.push(item);
 
 
@@ -574,16 +574,16 @@ window.scrollOff = false;
                 });
 
                           angular.forEach(data, function(item, key) {
- 
+
 
            vm.compaigns.push(data);
 
 
         });
 
-                
 
-                
+
+
 
                 vm.overall_compaigns = vm.compaigns;
 }
@@ -647,17 +647,17 @@ window.scrollOff = true;
             {
 
 
-                 $http.get(apiBaseURL+'/home/offers/'+window.SlideClickSeoUrl).then(function(response) {
-                
+                 $http.get(apiBaseURL+'/home/offer_detail/?id='+window.SlideClickSeoUrl).then(function(response) {
+
             vm.SelectedCampOffers.push(response.data.data);
-            
+
             debugger;
               LoginService.offersClickTrack(response.data.data.id, function(result) {
                 if (result) {
                     console.log('offersClickTrack');
                 }
             })
-            
+
             window.SelectedCampOffers = [];
             window.SelectedCampOffers = vm.SelectedCampOffers;
 
@@ -669,16 +669,16 @@ window.scrollOff = true;
             {
 
                  $http.get(apiBaseURL+'/home/offers/'+window.offerInfo.attributes.seo_url).then(function(response) {
-                
+
             vm.SelectedCampOffers.push(response.data.data);
-            
+
             debugger;
               LoginService.offersClickTrack(response.data.data.id, function(result) {
                 if (result) {
                     console.log('offersClickTrack');
                 }
             })
-            
+
             window.SelectedCampOffers = [];
             window.SelectedCampOffers = vm.SelectedCampOffers;
 
@@ -688,8 +688,8 @@ window.scrollOff = true;
 
 
 
-            
-            
+
+
             }
             else
             {
@@ -699,7 +699,7 @@ window.scrollOff = true;
                     vm.SelectedCampOffers.push(value);
                 }
             });
-        
+
             if (vm.SelectedCampOffers) {
                 if(vm.SelectedCampOffers[0])
                 {
@@ -793,10 +793,10 @@ window.scrollOff = true;
                 }
                 }
             }
-    
+
                 document.getElementById('next_page').innerHtml ='';
-            
-            
+
+
         }
         vm.filter_by_cat = function(id) {
 
@@ -811,11 +811,11 @@ window.scrollOff = true;
 
 
              $http.get(url).then(function(response) {
-                
+
                 vm.setNextPage(response)
                                var response = response.data.data;
                 $scope.filter_items.push(response);
-               
+
                 vm.offers = response;
                 var data  = _.uniqBy(response, function(e) {
                     return e.attributes.campaign_id;
@@ -830,9 +830,9 @@ window.scrollOff = true;
             });
 
 
-      
-  
-  
+
+
+
 
 
         };
