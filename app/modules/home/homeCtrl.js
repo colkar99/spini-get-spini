@@ -172,9 +172,25 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             // 'Access-Control-Allow-Origin': '*',
             // 'Access-Control-Allow-Methods': '*',
             // 'Access-Control-Allow-Headers': 'Content-Type',
-            // "Content-Type": 'application/json',
-            // 'Access-Token' : $rootScope.current_user.authentication_token
+            "Content-Type": 'application/json',
+            'Authorization' : $http.defaults.headers.common.Authorization,
+            // 'Authorization' : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI3fQ.-vu4hddMCmT33Z8C8LvOI-Eup6LpCAe88c97AzIwtN4"
             // 'Access-Token' : "$2a$10$Z1QJ46AB.9Qx/IDCIWqnTO20HogZNyOl7ztRDwqzl75nFaCbORNSW",
+        }
+        vm.saveOffer = function(offer,index){
+            vm.post = {"saved_offer":{"offer_id": offer.id}};
+            $http({
+                method: "POST",
+                headers: headers,
+                url:  apiBaseURL,
+                data: vm.post
+            }).then(function mySuccess(response) {
+                vm.offers[index].saved =true ;
+            }, function myError(response) {
+                alert(response.data.errors[0].detail);
+               
+            });
+        
         }
         vm.closeLoginPopup = function() {
             document.getElementById("login-popup").style.width = "0%";
