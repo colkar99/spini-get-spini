@@ -145,13 +145,13 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
     };
 })
     .controller('HomeCtrl', Home);
-    Home.$inject = ['homeService','LinkUrl', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope', '$timeout', 'ngToast', 'Socialshare', '$anchorScroll', '$rootScope'];
+    Home.$inject = ['homeService','LinkUrl', '$state', '$stateParams','$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope', '$timeout', 'ngToast', 'Socialshare', '$anchorScroll', '$rootScope'];
     /*
      * recommend
      * Using function declarations
      * and bindable members up top.
      */
-    function Home(homeService, LinkUrl,$window, apiBaseURL, $http, LoginService, $location, _, $scope, $timeout, ngToast, Socialshare, $anchorScroll, $rootScope) {
+    function Home(homeService, LinkUrl, $state, $stateParams,$window, apiBaseURL, $http, LoginService, $location, _, $scope, $timeout, ngToast, Socialshare, $anchorScroll, $rootScope) {
         /*jshint validthis: true */
 
         console.log(apiBaseURL);
@@ -176,6 +176,16 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             // 'Access-Token' : $rootScope.current_user.authentication_token
             // 'Access-Token' : "$2a$10$Z1QJ46AB.9Qx/IDCIWqnTO20HogZNyOl7ztRDwqzl75nFaCbORNSW",
         }
+
+       vm.title = "Modular AngularJS with Angm-generator";
+       vm.desc = "ReferYogi Sample";
+
+   		vm.stitle = "Sample with Angm-generator";
+       vm.sdesc = "Kalidass Sample";
+       vm.statename = $state.current.name;
+
+
+
         vm.closeLoginPopup = function() {
             document.getElementById("login-popup").style.width = "0%";
         }

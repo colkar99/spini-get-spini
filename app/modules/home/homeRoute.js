@@ -17,6 +17,13 @@ angular.module('angular-app')
 				// templateUrl: 'app/modules/home/home.html',
 				controller: 'HomeCtrl',
 				 controllerAs: 'vm'
+			})
+
+			.state('sample', {
+				url: '/sample',
+				templateUrl: 'app/modules/home/home.html',
+				controller: 'HomeCtrl',
+				 controllerAs: 'vm'
 			});
 
 	}]);

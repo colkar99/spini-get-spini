@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="angular-app">
-<head>
-	<meta charset="utf-8">
+<head >
+	<meta charset="utf-8" >
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<base href="/">
-	<title>Refer-Yogi</title>
-	<meta name="description" content="Modular AngularJS with Angm-generator" />
+
 	<meta name="author" content="" />
 	<meta name="keywords" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=yes" />
@@ -33,6 +32,7 @@
 
 <!-- header section -->
 <header ng-controller="HomeCtrl as vm" >
+
   <div class="container">
 
     <div class="col-md-12 hidden-sm  hidden-xs nopad mt6">
@@ -380,6 +380,10 @@
 	<!--Beginning-->
 	<section id="wrapper" scroll-to>
 		<div class="view-slide-in" ui-view>
+
+
+	<title>{{vm.title}}</title>
+	<meta name="description" content="{{vm.desc}}" />
 
 <div>
   <div class="backwhite">
@@ -746,9 +750,29 @@ style="    background: none;"
 <script src="/src/bower_components/angular-timer/dist/angular-timer.js"></script>
 <script src="/app/app.js"></script>
 <script src="/app/app.config.js"></script>
-<script src="/app/assets/js/angular-app-angularbundle.js"></script>
-<script src="/app/assets/js/angular-app-appbundle.js"></script>
-<script src="/app/assets/js/templates.js"></script>
+<script src="/app/modules/home/homeModule.js"></script>
+<script src="/app/modules/loginAuth/loginModule.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponModule.js"></script>
+<script src="/app/modules/refferal_user/refferalModule.js"></script>
+<script src="/app/modules/signup/signupModule.js"></script>
+<script src="/app/modules/home/homeRoute.js"></script>
+<script src="/app/modules/loginAuth/loginRoute.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponRoute.js"></script>
+<script src="/app/modules/refferal_user/refferalRoute.js"></script>
+<script src="/app/modules/signup/signupRoute.js"></script>
+<script src="/app/modules/home/homeCtrl.js"></script>
+<script src="/app/modules/layouts/nav-bar/navBarCtrl.js"></script>
+<script src="/app/modules/loginAuth/loginCtrl.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponCtrl.js"></script>
+<script src="/app/modules/refferal_user/refferalCtrl.js"></script>
+<script src="/app/modules/signup/signupCtrl.js"></script>
+<script src="/app/modules/home/homeService.js"></script>
+<script src="/app/modules/layouts/nav-bar/navbarService.js"></script>
+<script src="/app/modules/loginAuth/loginService.js"></script>
+<script src="/app/modules/redeem_coupon/redeem_couponService.js"></script>
+<script src="/app/modules/refferal_user/refferalService.js"></script>
+<script src="/app/modules/signup/signupService.js"></script>
+<script src="/app/modules/layouts/nav-bar/navbarDirective.js"></script>
 <!-- endinjector -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/oclazyload/1.1.0/ocLazyLoad.min.js"></script>
 <script src="//use.fontawesome.com/9a830e8669.js"></script>
