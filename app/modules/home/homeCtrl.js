@@ -178,8 +178,15 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             // 'Access-Token' : "$2a$10$Z1QJ46AB.9Qx/IDCIWqnTO20HogZNyOl7ztRDwqzl75nFaCbORNSW",
         }
         vm.saveOffer = function(offer,index){
+            debugger
             vm.post = {"saved_offer":{"offer_id": offer.id}};
-            $http({
+            alert("hi");
+            alert(index);
+            if($http.defaults.headers.common.Authorization == undefined){
+                vm.openLoginPopup();
+            }
+            else {
+                $http({
                 method: "POST",
                 headers: headers,
                 url:  apiBaseURL,
@@ -190,6 +197,9 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 alert(response.data.errors[0].detail);
                
             });
+            }
+            
+            
         
         }
         vm.closeLoginPopup = function() {

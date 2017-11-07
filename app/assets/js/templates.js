@@ -447,7 +447,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                      </select>   -->\n" +
     "                            </div>\n" +
     "\n" +
-    "                              <div class=\"col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2\" style=\"    margin-top: 15px;\">\n" +
+    "                              <div class=\"col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2\" style=\"     padding-bottom: 15px;   margin-top: 15px;\">\n" +
     "                          \n" +
     "                            <button  ng-click=\"vm.setCityCookie(vm.cities()[vm.selectedCity])\" class=\"form-control\" style=\"background: #d8091f;\n" +
     "    color: white;\n" +

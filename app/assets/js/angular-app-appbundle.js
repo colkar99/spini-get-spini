@@ -1,7 +1,24 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-10-24. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-11-06. 
 * @author Kathik
 */
+
+/* ng-infinite-scroll - v1.3.0 - 2016-06-30 */
+angular.module("infinite-scroll",[]).value("THROTTLE_MILLISECONDS",null).directive("infiniteScroll",["$rootScope","$window","$interval","THROTTLE_MILLISECONDS",function(a,b,c,d){return{scope:{infiniteScroll:"&",infiniteScrollContainer:"=",infiniteScrollDistance:"=",infiniteScrollDisabled:"=",infiniteScrollUseDocumentBottom:"=",infiniteScrollListenForEvent:"@"},link:function(e,f,g){var h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z;return z=angular.element(b),u=null,v=null,j=null,k=null,r=!0,y=!1,x=null,i=!1,q=function(a){return a=a[0]||a,isNaN(a.offsetHeight)?a.document.documentElement.clientHeight:a.offsetHeight},s=function(a){if(a[0].getBoundingClientRect&&!a.css("none"))return a[0].getBoundingClientRect().top+t(a)},t=function(a){return a=a[0]||a,isNaN(window.pageYOffset)?a.document.documentElement.scrollTop:a.ownerDocument.defaultView.pageYOffset},p=function(){var b,d,g,h,l;return k===z?(b=q(k)+t(k[0].document.documentElement),g=s(f)+q(f)):(b=q(k),d=0,void 0!==s(k)&&(d=s(k)),g=s(f)-d+q(f)),y&&(g=q((f[0].ownerDocument||f[0].document).documentElement)),h=g-b,l=h<=q(k)*u+1,l?(j=!0,v?e.$$phase||a.$$phase?e.infiniteScroll():e.$apply(e.infiniteScroll):void 0):(i&&c.cancel(i),j=!1)},w=function(a,b){var d,e,f;return f=null,e=0,d=function(){return e=(new Date).getTime(),c.cancel(f),f=null,a.call()},function(){var g,h;return g=(new Date).getTime(),h=b-(g-e),h<=0?(c.cancel(f),f=null,e=g,a.call()):f?void 0:f=c(d,h,1)}},null!=d&&(p=w(p,d)),e.$on("$destroy",function(){if(k.unbind("scroll",p),null!=x&&(x(),x=null),i)return c.cancel(i)}),n=function(a){return u=parseFloat(a)||0},e.$watch("infiniteScrollDistance",n),n(e.infiniteScrollDistance),m=function(a){if(v=!a,v&&j)return j=!1,p()},e.$watch("infiniteScrollDisabled",m),m(e.infiniteScrollDisabled),o=function(a){return y=a},e.$watch("infiniteScrollUseDocumentBottom",o),o(e.infiniteScrollUseDocumentBottom),h=function(a){if(null!=k&&k.unbind("scroll",p),k=a,null!=a)return k.bind("scroll",p)},h(z),e.infiniteScrollListenForEvent&&(x=a.$on(e.infiniteScrollListenForEvent,p)),l=function(a){if(null!=a&&0!==a.length){if(a.nodeType&&1===a.nodeType?a=angular.element(a):"function"==typeof a.append?a=angular.element(a[a.length-1]):"string"==typeof a&&(a=angular.element(document.querySelector(a))),null!=a)return h(a);throw new Error("invalid infinite-scroll-container attribute.")}},e.$watch("infiniteScrollContainer",l),l(e.infiniteScrollContainer||[]),null!=g.infiniteScrollParent&&h(angular.element(f.parent())),null!=g.infiniteScrollImmediateCheck&&(r=e.$eval(g.infiniteScrollImmediateCheck)),i=c(function(){return r&&p(),c.cancel(i)})}}}]),"undefined"!=typeof module&&"undefined"!=typeof exports&&module.exports===exports&&(module.exports="infinite-scroll");
+
+
+/*
+** lazy-scroll v1.00
+** (c) shabeeb
+** mail@shabeebk.com
+* shabeebk.com/blog/lazy-scroll-infinite-scrolling-angularjs
+*
+*/
+angular.module("lazy-scroll",[]).directive("lazyScroll",["$rootScope","$window",function(l,o){return{link:function(l,r,n){var e,i,c=.9,e=!0;o=angular.element(o),null!=n.lazyNoScroll&&l.$watch(n.lazyNoScroll,function(l){e=1==l?!1:!0}),void 0!=n.lazyScrollTrigger&&n.lazyScrollTrigger>0&&n.lazyScrollTrigger<100&&(c=n.lazyScrollTrigger/100),i=function(){var o=window.pageYOffset,r=window.document.body.clientHeight,i=window.innerHeight,a=o/(r-i);return e&&a>=c?l.$apply(n.lazyScroll):void 0},o.on("scroll",i),l.$on("$destroy",function(){return o.off("scroll",i)})}}}]);
+
+
+
+
 (function() {
 	'use strict';
 
@@ -32,8 +49,9 @@
 		'timer',
 		'720kb.socialshare',
 		'ngclipboard',
-		'hm.readmore'
-
+		'hm.readmore',
+		'infinite-scroll',
+		'lazy-scroll'
 
 	]);
 
@@ -50,7 +68,7 @@
      * Configutation of the app
      */
 
-    if(window.location.hostname=='www.referyogi.com')
+if(window.location.hostname=='www.referyogi.com' || window.location.hostname=='referyogi.com')
             {
                 window.env = 'prod';
             }
@@ -451,7 +469,20 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
             return lines.join('<br />');
         }
-    }).controller('HomeCtrl', Home);
+    })
+
+.directive('whenScrolled', function() {
+    return function(scope, elm, attr) {
+        var raw = elm[0];
+
+        elm.bind('scroll', function() {
+            if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+                scope.$apply(attr.whenScrolled);
+            }
+        });
+    };
+})
+    .controller('HomeCtrl', Home);
     Home.$inject = ['homeService','LinkUrl', '$window', 'apiBaseURL', '$http', 'LoginService', '$location', '_', '$scope', '$timeout', 'ngToast', 'Socialshare', '$anchorScroll', '$rootScope'];
     /*
      * recommend
@@ -479,9 +510,27 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             // 'Access-Control-Allow-Origin': '*',
             // 'Access-Control-Allow-Methods': '*',
             // 'Access-Control-Allow-Headers': 'Content-Type',
-            // "Content-Type": 'application/json',
-            // 'Access-Token' : $rootScope.current_user.authentication_token
+            "Content-Type": 'application/json',
+            'Authorization' : $http.defaults.headers.common.Authorization,
+            // 'Authorization' : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI3fQ.-vu4hddMCmT33Z8C8LvOI-Eup6LpCAe88c97AzIwtN4"
             // 'Access-Token' : "$2a$10$Z1QJ46AB.9Qx/IDCIWqnTO20HogZNyOl7ztRDwqzl75nFaCbORNSW",
+        }
+        vm.saveOffer = function(offer,index){
+            debugger
+            alert("hi");
+            vm.post = {"saved_offer":{"offer_id": offer.id}};
+            $http({
+                method: "POST",
+                headers: headers,
+                url:  apiBaseURL,
+                data: vm.post
+            }).then(function mySuccess(response) {
+                vm.offers[index].saved =true ;
+            }, function myError(response) {
+                alert(response.data.errors[0].detail);
+               
+            });
+        
         }
         vm.closeLoginPopup = function() {
             document.getElementById("login-popup").style.width = "0%";
@@ -634,7 +683,11 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 document.getElementById(id).style.width = "0%";
             }
         }
-        vm.getSlidepopup = function(campaign_id, is_offer) {
+        vm.getSlidepopup = function(campaign_id, is_offer,is_slide) {
+
+            window.SlideClick = 0;
+            window.SlideClickSeoUrl ='';
+              debugger;
             if (is_offer) {
                 angular.forEach(vm.offers, function(value, key) {
                     if (value.id == campaign_id) {
@@ -643,7 +696,15 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                         console.log(value)
                     }
                 });
-            } else {
+            }
+            else if(is_slide)
+            {
+            window.SlideClick=1;
+
+            window.SlideClickSeoUrl = is_slide;
+
+            }
+            else {
                 vm.campaign_id = campaign_id;
             }
             console.log(campaign_id);
@@ -745,6 +806,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
             $http.get(url).then(function(response) {
                 if (response) {
+                    vm.setNextPage(response)
                     var response = response.data.data;
                     $scope.filter_items.push(response);
                     vm.offers = [];
@@ -784,7 +846,9 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
         };
         vm.searchBoxEnable = false;
         $rootScope.$on("SearchComplete", function(event, args) {
+
             if (vm.searchBoxEnable) {
+                vm.setNextPage(response)
                 console.log("SearchComplete");
                 var response = args.authData.data.data;
                 $scope.filter_items.push(response);
@@ -813,6 +877,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
 
 
+
             $http.get(url).then(function(response) {
                 if (response) {
                     $rootScope.$broadcast("SearchComplete", {
@@ -820,6 +885,69 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     });
                 }
             });
+        }
+
+
+
+window.scrollOff = true;
+
+
+        vm.nextPage = function()
+        {
+            var  url = document.getElementById('next_page').innerHtml;
+            if(url)
+{
+
+            if(window.scrollOff)
+    {
+
+window.scrollOff = false;
+
+
+
+
+
+
+        $http.get(url).then(function(response) {
+             if (response) {
+                document.getElementById('next_page').innerHtml ='';
+            vm.setNextPage(response)
+                               var response = response.data.data;
+
+                angular.forEach(response, function(item, key) {
+
+
+                $scope.filter_items.push(item);
+
+                vm.offers.push(item);
+
+
+        });
+
+
+                var data  = _.uniqBy(response, function(e) {
+                    return e.attributes.campaign_id;
+                });
+
+                          angular.forEach(data, function(item, key) {
+
+
+           vm.compaigns.push(data);
+
+
+        });
+
+
+
+
+
+                vm.overall_compaigns = vm.compaigns;
+}
+window.scrollOff = true;
+
+            });
+}}
+
         }
         vm.categories = [];
         vm.getCategories = function() {
@@ -866,19 +994,79 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             return window.SelectedOffer;
         }
         vm.getSelectedCampaignOffers = function() {
+
             vm.SelectedCampOffers = [];
+
+            debugger;
+
+             if(window.SlideClick==1)
+            {
+
+
+                 $http.get(apiBaseURL+'/home/offer_detail/?id='+window.SlideClickSeoUrl).then(function(response) {
+
+            vm.SelectedCampOffers.push(response.data.data);
+
+            debugger;
+              LoginService.offersClickTrack(response.data.data.id, function(result) {
+                if (result) {
+                    console.log('offersClickTrack');
+                }
+            })
+
+            window.SelectedCampOffers = [];
+            window.SelectedCampOffers = vm.SelectedCampOffers;
+
+
+            });
+
+            }
+            else if(window.singlePageOfferView == 1)
+            {
+
+                 $http.get(apiBaseURL+'/home/offers/'+window.offerInfo.attributes.seo_url).then(function(response) {
+
+            vm.SelectedCampOffers.push(response.data.data);
+
+            debugger;
+              LoginService.offersClickTrack(response.data.data.id, function(result) {
+                if (result) {
+                    console.log('offersClickTrack');
+                }
+            })
+
+            window.SelectedCampOffers = [];
+            window.SelectedCampOffers = vm.SelectedCampOffers;
+
+
+            });
+
+
+
+
+
+
+            }
+            else
+            {
+
             angular.forEach(vm.offers, function(value, key) {
                 if (value.attributes.campaign_id == vm.campaign_id) {
                     vm.SelectedCampOffers.push(value);
                 }
             });
+
             if (vm.SelectedCampOffers) {
+                if(vm.SelectedCampOffers[0])
+                {
                 vm.offersClickTrack(vm.SelectedCampOffers[0].id)
+                }
             }
             window.SelectedCampOffers = [];
             window.SelectedCampOffers = vm.SelectedCampOffers;
             return vm.SelectedCampOffers;
-        }
+
+        }}
         vm.goHome = function() {
             window.location = window.location.origin;
         }
@@ -943,20 +1131,66 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 $scope.myWelcome = response.statusText;
             });
         }
-        vm.filter_by_cat = function(id) {
-            vm.filter_items = vm.overall_compaigns;
-            vm.compaigns = [];
-            for (var i = 0; i <= vm.filter_items.length; i++) {
-                if (vm.filter_items[i]) {
-                    if (vm.filter_items[i].attributes.offer_category_id == id) {
-                        vm.compaigns.push(vm.filter_items[i]);
-                        //console.log(vm.compaigns);
+
+        vm.setNextPage = function(response)
+        {
+            if(response)
+            {
+                    if(response.data)
+                    {
+                if(response.data.links)
+                {
+
+                    if(response.data.links.next)
+                    {
+                            document.getElementById('next_page').innerHtml = response.data.links.next;
+                            return;
                     }
                 }
+                }
             }
-            vm.gridlength = 0;
-            vm.gridShow = false;
-            return vm.compaigns;
+
+                document.getElementById('next_page').innerHtml ='';
+
+
+        }
+        vm.filter_by_cat = function(id) {
+
+
+
+            var locationCookie = LoginService.getCityCookie();
+            if (locationCookie == false) {
+                var url = apiBaseURL + '/home/offers?category_id=' + id;
+            } else {
+                var url = apiBaseURL + '/home/offers?category_id=' + id +'&location_id='+locationCookie;
+            }
+
+
+             $http.get(url).then(function(response) {
+
+                vm.setNextPage(response)
+                               var response = response.data.data;
+                $scope.filter_items.push(response);
+
+                vm.offers = response;
+                var data  = _.uniqBy(response, function(e) {
+                    return e.attributes.campaign_id;
+                });
+                vm.compaigns.push(data);
+                vm.overall_compaigns = vm.compaigns;
+                vm.gridlength = 0;
+                vm.gridShow = false;
+                vm.gotoBottom();
+
+
+            });
+
+
+
+
+
+
+
         };
         vm.filter_by_food = function(some) {
             vm.filter_items = some;
@@ -1039,6 +1273,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
         }
     }
 })();
+
 (function () {
 	'use strict';
 
