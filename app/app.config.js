@@ -14,7 +14,7 @@ if(window.location.hostname=='www.referyogi.com' || window.location.hostname=='r
                 window.env = 'prod';
             }
     angular.module('angular-app').config(configure)
-  
+
      .constant('apiBaseURL', (window.env == "prod" ? 'https://api.spini.co/v1/' : 'https://stagingapi.spini.co/v1/'))
      .constant('LinkUrl', (window.env == "prod" ? 'https://www.referyogi.com/' : 'https://staging.spini.co/'))
 
@@ -29,7 +29,8 @@ if(window.location.hostname=='www.referyogi.com' || window.location.hostname=='r
          $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|file|tel|whatsapp):/);
 
 
-        //$locationProvider.html5Mode(true).hashPrefix('!');
+        $locationProvider.html5Mode(true).hashPrefix('!');
+
         // This is required for Browser Sync to work poperly
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         $urlRouterProvider.otherwise('/');
@@ -81,6 +82,7 @@ if(window.location.hostname=='www.referyogi.com' || window.location.hostname=='r
     function runBlock($rootScope) {
         'use strict';
         console.log('AngularJS run() function');
+
 
 
     }
