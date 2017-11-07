@@ -588,6 +588,7 @@ class="offers-grid" ng-init="vm.getOffers()" id="Gridbottom">
                             <button ng-click="vm.getSlidepopup(offer.attributes.campaign_id)">
                                 GET CODE!
                             </button>
+                            <a class="btn btn-primary" ng-click="vm.saveOffer(offer,$index)">save</a>
                             <h3>
                                 {{offer.attributes.name | limitTo:27}}
 

@@ -182,10 +182,8 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             vm.post = {"saved_offer":{"offer_id": offer.id}};
             alert("hi");
             alert(index);
-            if($http.defaults.headers.common.Authorization == undefined){
-                vm.openLoginPopup();
-            }
-            else {
+            alert(apiBaseURL);
+            if($http.defaults.headers.common.Authorization != undefined){
                 $http({
                 method: "POST",
                 headers: headers,
@@ -197,6 +195,10 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 alert(response.data.errors[0].detail);
                
             });
+                
+            }
+            else {
+                vm.openLoginPopup();
             }
             
             
