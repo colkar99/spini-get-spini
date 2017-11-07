@@ -37,7 +37,7 @@
                             dismissOnClick: false
                         });
                     }, 1000);
-                    $state.reload();
+                    window.location.reload();
                 } else if (result == 'vendor') {
                     document.getElementById("login-popup").style.width = "0%";
                     document.getElementById("login-signup").style.width = "0%";

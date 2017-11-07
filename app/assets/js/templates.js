@@ -447,7 +447,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                      </select>   -->\n" +
     "                            </div>\n" +
     "\n" +
-    "                              <div class=\"col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2\" style=\"    margin-top: 15px;\">\n" +
+    "                              <div class=\"col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2\" style=\"     padding-bottom: 15px;   margin-top: 15px;\">\n" +
     "                          \n" +
     "                            <button  ng-click=\"vm.setCityCookie(vm.cities()[vm.selectedCity])\" class=\"form-control\" style=\"background: #d8091f;\n" +
     "    color: white;\n" +
@@ -1130,7 +1130,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                        <div class=\"col-md-4 col-sm-6 hidden-xs text-right \" >\n" +
     "\n" +
     "\n" +
-    "                                            <img class=\"img-responsive\"  style=\"       float: right; margin-top: 3px; height: 70px;\" ng-src=\"{{item.attributes.business_avatar_thumb}}\">\n" +
+    "                                            <img class=\"img-responsive\"  style=\"       float: right; margin-top: 3px; height: 70px;\" ng-src=\"{{item.attributes.business_avatar_thumb}}\" ng-if=\"item.attributes.business_avatar_thumb != null\">\n" +
     "                                            </img>\n" +
     "                                        </div>\n" +
     "                                    </div>\n" +
@@ -1531,10 +1531,10 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        </label>\n" +
     "                    </div>\n" +
     "                    <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\" >\n" +
-    "                        <button class=\"btn btn-default field-tip\" ng-disabled=\"vm.user.wallet_money<500\" style=\"    border: 1px solid #40799a;\n" +
+    "                        <button class=\"btn btn-default field-tip\" ng-disabled=\"vm.user.wallet_money<250\" style=\"    border: 1px solid #40799a;\n" +
     "    color: #155275;\" ng-click=\"vm.openPopup()\">\n" +
-    "                            <span class=\"tip-content\" ng-hide=\"vm.user.wallet_money>500\">\n" +
-    "                                Earn minimum Rs.500/- to make a transfer\n" +
+    "                            <span class=\"tip-content\" ng-hide=\"vm.user.wallet_money>250\">\n" +
+    "                                Earn minimum Rs.250/- to make a transfer\n" +
     "                            </span>\n" +
     "                            Transfer to paytm wallet\n" +
     "                        </button>\n" +
