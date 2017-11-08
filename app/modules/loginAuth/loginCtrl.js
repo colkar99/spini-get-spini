@@ -36,8 +36,9 @@
                             dismissButton: true,
                             dismissOnClick: false
                         });
-                    }, 1000);
-                    window.location.reload();
+                    }, 2000);
+                    // window.location.reload();
+                    LoginService.getProfileInfo();
                 } else if (result == 'vendor') {
                     document.getElementById("login-popup").style.width = "0%";
                     document.getElementById("login-signup").style.width = "0%";
@@ -79,8 +80,10 @@
             console.log(args)
         });
         vm.FbLogin = function() {
+
             document.getElementById("login-popup").style.width = "0%";
                     document.getElementById("login-signup").style.width = "0%";
+
             console.log(window.loginRole)
             if (window.loginRole == 'vendor') {
                 console.log('vendor')

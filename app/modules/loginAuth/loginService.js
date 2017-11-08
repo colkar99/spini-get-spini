@@ -370,6 +370,7 @@
                 FB.login(function(response) {
                     console.log(response);
                     if (response.status === 'connected') {
+                        facebookLogin
                         $rootScope.$broadcast("FBLoginCompleteVendor", {
                             "authData": response
                         });
