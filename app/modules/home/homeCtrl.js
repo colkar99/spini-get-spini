@@ -172,9 +172,60 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             // 'Access-Control-Allow-Origin': '*',
             // 'Access-Control-Allow-Methods': '*',
             // 'Access-Control-Allow-Headers': 'Content-Type',
-            // "Content-Type": 'application/json',
-            // 'Access-Token' : $rootScope.current_user.authentication_token
+            "Content-Type": 'application/json',
+            'Access-Token' : $http.defaults.headers.common.Authorization
             // 'Access-Token' : "$2a$10$Z1QJ46AB.9Qx/IDCIWqnTO20HogZNyOl7ztRDwqzl75nFaCbORNSW",
+        }
+        vm.saveOffer = function(offer,index){
+            debugger
+            alert(offer.id);
+            alert(index);
+            alert($http.defaults.headers.common.Authorization);
+            if($http.defaults.headers.common.Authorization == undefined){
+                alert('user not login');
+                vm.openLoginPopup();
+            }
+            else{
+                alert("user login");
+                vm.postSavedOffer(offer,index);
+            }
+        }
+        vm.postSavedOffer = function(offer, index){
+            debugger
+            vm.postSavedOffer = {"saved_offer":{"offer_id":offer.id}};
+            $http({
+                method: "POST",
+                headers: headers,
+                url: apiBaseURL + '/saved_offers' ,
+                data: vm.postSavedOffer
+            }).then(function mySuccess(response) {
+                vm.offers[index].saved = true;
+            }, function myError(response) {
+                debugger
+                if(response.status == 422){
+                   $timeout(function() {
+                    ngToast.dismiss();
+                    ngToast.create({
+                        content: 'Already Saved',
+                        dismissOnTimeout: true,
+                        dismissButton: true,
+                        dismissOnClick: true
+                    });
+                }, 2000) 
+                }
+                else{
+                   $timeout(function() {
+                    ngToast.dismiss();
+                    ngToast.create({
+                        content: 'Oops some error please wait',
+                        dismissOnTimeout: true,
+                        dismissButton: true,
+                        dismissOnClick: true
+                    });
+                }, 2000) 
+                }
+                
+            });
         }
         vm.closeLoginPopup = function() {
             document.getElementById("login-popup").style.width = "0%";
