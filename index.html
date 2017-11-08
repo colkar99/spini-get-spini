@@ -318,7 +318,7 @@
 
 
 
-
+{{vm.offers}}
 
 
 
@@ -590,10 +590,12 @@ class="offers-grid" ng-init="vm.getOffers()" id="Gridbottom">
                             </button>
                           </span>
                             <a class="btn btn-default" ng-hide="offer.saved == true" ng-click="vm.saveOffer(offer,$index)" style="border-radius: 0px;padding: 0px 15px;"><i class="fa fa-bookmark-o " aria-hidden="true"></i> save</a>
-                            <a class="btn btn-default" ng-show="offer.saved == true" ng-click="vm.saveOffer(offer,$index)" style="border-radius: 0px;padding: 0px 15px;"><i class="fa fa-bookmark" aria-hidden="true "></i> un save</a>
-                          
+                            <a class="btn btn-default" ng-show="offer.saved == true" ng-click="vm.saveOffer(offer,$index)" style="border-radius: 0px;padding: 0px 15px;"><i class="fa fa-bookmark" aria-hidden="true " ng-disabled></i>saved</a>
+                           
+                            <a ng-click="vm.offerLiked(offer,$index)" style="float: right;color: black;" ng-if="!offer.liked"><i class="fa fa-heart-o fa-2x" aria-hidden="true"></i></a>
+                            <a   ng-click="vm.removeLiked(offer,$index)" style="float: right;color: red;" ng-if="offer.liked"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></a>
                           <span class="grisp" ng-click="vm.getSlidepopup(offer.attributes.campaign_id)">
-                            <h3>
+                            <h3>{{offer.liked}}{{offer.saved}}
                                 {{offer.attributes.name | limitTo:27}}
 
                                 {{offer.attributes.name.length > 27 ? '...' : ''}}

@@ -32,12 +32,13 @@
                         ngToast.dismiss();
                         ngToast.create({
                             content: 'Welcome to ReferYogi!!',
-                            dismissOnTimeout: false,
+                            dismissOnTimeout: true,
                             dismissButton: true,
                             dismissOnClick: false
                         });
-                    }, 1000);
+                    }, 2000);
                     window.location.reload();
+                    // LoginService.getProfileInfo();
                 } else if (result == 'vendor') {
                     document.getElementById("login-popup").style.width = "0%";
                     document.getElementById("login-signup").style.width = "0%";
@@ -63,11 +64,11 @@
                         ngToast.dismiss();
                         ngToast.create({
                             content: 'Something went wrong',
-                            dismissOnTimeout: false,
+                            dismissOnTimeout: true,
                             dismissButton: true,
                             dismissOnClick: false
                         });
-                    }, 1000)
+                    }, 2000)
                     console.log('not logged in');
                 }
             });
@@ -79,6 +80,10 @@
             console.log(args)
         });
         vm.FbLogin = function() {
+
+            document.getElementById("login-popup").style.width = "0%";
+                    document.getElementById("login-signup").style.width = "0%";
+
             console.log(window.loginRole)
             if (window.loginRole == 'vendor') {
                 console.log('vendor')

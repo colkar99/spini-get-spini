@@ -176,11 +176,8 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             'Access-Token' : $http.defaults.headers.common.Authorization
             // 'Access-Token' : "$2a$10$Z1QJ46AB.9Qx/IDCIWqnTO20HogZNyOl7ztRDwqzl75nFaCbORNSW",
         }
+         // $http.defaults.headers.common.Authorization = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI3fQ.-vu4hddMCmT33Z8C8LvOI-Eup6LpCAe88c97AzIwtN4";
         vm.saveOffer = function(offer,index){
-            debugger
-            alert(offer.id);
-            alert(index);
-            alert($http.defaults.headers.common.Authorization);
             if($http.defaults.headers.common.Authorization == undefined){
                 alert('user not login');
                 vm.openLoginPopup();
@@ -191,17 +188,24 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
         }
         vm.postSavedOffer = function(offer, index){
-            debugger
             vm.postSavedOffer = {"saved_offer":{"offer_id":offer.id}};
             $http({
                 method: "POST",
                 headers: headers,
-                url: apiBaseURL + '/saved_offers' ,
+                url: apiBaseURL + 'saved_offers' ,
                 data: vm.postSavedOffer
             }).then(function mySuccess(response) {
                 vm.offers[index].saved = true;
+                $timeout(function() {
+                    ngToast.dismiss();
+                    ngToast.create({
+                        content: 'Offer successfully added',
+                        dismissOnTimeout: true,
+                        dismissButton: true,
+                        dismissOnClick: true
+                    });
+                }, 2000)
             }, function myError(response) {
-                debugger
                 if(response.status == 422){
                    $timeout(function() {
                     ngToast.dismiss();
@@ -224,6 +228,43 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     });
                 }, 2000) 
                 }
+                
+            });
+        }
+        vm.offerLiked = function(offer,index){
+            if($http.defaults.headers.common.Authorization == undefined){
+                alert('user not login');
+                vm.openLoginPopup();
+            }
+            else{
+                alert("user login");
+                vm.postLikedOffer(offer,index);
+            }
+        }
+        vm.removeLiked = function(offer,index){
+            
+            $http({
+                method: "DELETE",
+                headers: headers,
+                url: apiBaseURL + 'liked_offers/' + offer.id ,
+                data: vm.postSavedOffer
+            }).then(function mySuccess(response) {
+                vm.offers[index].liked = false;
+            }, function myError(response) {
+            });
+        }
+        vm.postLikedOffer = function(offer, index){
+            vm.postSavedOffer = {"liked_offer":{"offer_id":offer.id}};
+            $http({
+                method: "POST",
+                headers: headers,
+                url: apiBaseURL + 'liked_offers' ,
+                data: vm.postSavedOffer
+            }).then(function mySuccess(response) {
+
+                vm.offers[index].liked = true;
+            }, function myError(response) {
+                
                 
             });
         }
