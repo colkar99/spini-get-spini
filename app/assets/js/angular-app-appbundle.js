@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-11-07. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-11-08. 
 * @author Kathik
 */
 
@@ -1325,7 +1325,7 @@ window.scrollOff = true;
                         ngToast.dismiss();
                         ngToast.create({
                             content: 'Welcome to ReferYogi!!',
-                            dismissOnTimeout: false,
+                            dismissOnTimeout: true,
                             dismissButton: true,
                             dismissOnClick: false
                         });
@@ -1356,11 +1356,11 @@ window.scrollOff = true;
                         ngToast.dismiss();
                         ngToast.create({
                             content: 'Something went wrong',
-                            dismissOnTimeout: false,
+                            dismissOnTimeout: true,
                             dismissButton: true,
                             dismissOnClick: false
                         });
-                    }, 1000)
+                    }, 2000)
                     console.log('not logged in');
                 }
             });
@@ -1372,6 +1372,8 @@ window.scrollOff = true;
             console.log(args)
         });
         vm.FbLogin = function() {
+            document.getElementById("login-popup").style.width = "0%";
+                    document.getElementById("login-signup").style.width = "0%";
             console.log(window.loginRole)
             if (window.loginRole == 'vendor') {
                 console.log('vendor')
