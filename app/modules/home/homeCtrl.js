@@ -299,7 +299,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
         }
         vm.SocialShareUpdate = function(url, type, offerid, trakingcode) {
-            debugger
+            // debugger
             LoginService.UpdateSocialShare(url, type,offerid, trakingcode, function(result) {})
         };
         vm.SetCookie = function() {
@@ -332,7 +332,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
 
             window.SlideClick = 0;
             window.SlideClickSeoUrl ='';
-              debugger;
+              // debugger;
             if (is_offer) {
                 angular.forEach(vm.offers, function(value, key) {
                     if (value.id == campaign_id) {
@@ -450,7 +450,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 var url = apiBaseURL + 'home/offers?location_id=' + locationCookie;
             }
             $http.get(url).then(function(response) {
-                debugger
+                // debugger
                 if (response) {
                     vm.setNextPage(response)
                     var response = response.data.data;
@@ -643,7 +643,7 @@ window.scrollOff = true;
 
             vm.SelectedCampOffers = [];
 
-            debugger;
+            // debugger;
 
              if(window.SlideClick==1)
             {
@@ -653,7 +653,7 @@ window.scrollOff = true;
 
             vm.SelectedCampOffers.push(response.data.data);
 
-            debugger;
+            // debugger;
               LoginService.offersClickTrack(response.data.data.id, function(result) {
                 if (result) {
                     console.log('offersClickTrack');
@@ -674,7 +674,7 @@ window.scrollOff = true;
 
             vm.SelectedCampOffers.push(response.data.data);
 
-            debugger;
+            // debugger;
               LoginService.offersClickTrack(response.data.data.id, function(result) {
                 if (result) {
                     console.log('offersClickTrack');

@@ -161,7 +161,7 @@
         }
 
         function UpdateSocialShare(url, media_type, offer_id, tracking_code, callback) {
-            debugger
+            // debugger
             $http.post(apiBaseURL + 'offer_shares',
 
 {
