@@ -160,7 +160,8 @@
             });
         }
 
-        function UpdateSocialShare(url, tracking_code, media_type, offer_id, callback) {
+        function UpdateSocialShare(url, media_type, offer_id, tracking_code, callback) {
+            debugger
             $http.post(apiBaseURL + 'offer_shares',
 
 {

@@ -298,8 +298,9 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 // console.log('error');
             }
         }
-        vm.SocialShareUpdate = function(url, type) {
-            LoginService.UpdateSocialShare(url, type, function(result) {})
+        vm.SocialShareUpdate = function(url, type, offerid, trakingcode) {
+            debugger
+            LoginService.UpdateSocialShare(url, type,offerid, trakingcode, function(result) {})
         };
         vm.SetCookie = function() {
             var track = {};
@@ -449,6 +450,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 var url = apiBaseURL + 'home/offers?location_id=' + locationCookie;
             }
             $http.get(url).then(function(response) {
+                debugger
                 if (response) {
                     vm.setNextPage(response)
                     var response = response.data.data;
