@@ -2,10 +2,10 @@
     <div class="container" style="padding: 15px;">
         <div class="col-sm-2">
             <div class="row" style="background-color: #fff;">
-                <div class="col-sm-12" style="    margin-top: 10px;">
+                <div class="col-sm-12" style="padding: 10px;">
                     <div class="side_nav_refferal">
                         <img class="img-thumbnail" height="150" ng-src="{{vm.user.profile_image}}" width="200">
-                            <div class="col-sm-12">
+                            <!-- <div class="col-sm-12">
                                 <p class="text-center" style="    margin-top: 20px;">
                                     <b>
                                         {{vm.user.name}}
@@ -16,8 +16,7 @@
                                         {{vm.user.mobile}}
                                     </b>
                                 </p>
-                                <!-- <label><i class=" glyphicon glyphicon-map-marker">Location</i></label> -->
-                            </div>
+                            </div> -->
                         </img>
                     </div>
                 </div>
@@ -44,7 +43,7 @@
                             </div>
                             <div class="navbar-collapse collapse sidebar-navbar-collapse">
                                 <ul class="nav navbar-nav">
-                                    <li style="font-size: 18px;">
+                                    <li style="font-size: 16px; outline:none; cursor: pointer;" class="referal_dashboard_menu">
                                         <a>
                                             <i aria-hidden="true" class="glyphicon glyphicon-stats pull-left">
                                             </i>
@@ -53,7 +52,7 @@
                                             </span>
                                         </a>
                                     </li>
-                                    <li style="font-size: 18px;">
+                                    <li style="font-size: 16px; outline:none; cursor: pointer;" class="referal_profile_menu">
                                         <a>
                                             <i class="glyphicon glyphicon-user pull-left">
                                             </i>
@@ -62,7 +61,7 @@
                                             </span>
                                         </a>
                                     </li>
-                                    <li style="font-size: 18px;">
+                                    <!-- <li style="font-size: 16px; outline:none;">
                                         <a>
                                             <i class="glyphicon glyphicon-tag pull-left">
                                             </i>
@@ -70,16 +69,7 @@
                                             Saved Offer
                                             </span>
                                         </a>
-                                    </li>
-                                    <li style="font-size: 18px;">
-                                        <a>
-                                            <i class="fa fa-inr pull-left" style="font-size: 20px;">
-                                            </i>
-                                            <span style="margin-left: 10px;">
-                                            Wallet
-                                            </span>
-                                        </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                             <!--/.nav-collapse -->
@@ -113,15 +103,12 @@
                             {{vm.user.wallet_money}}
                         </label>
                     </div>
-                    <div class="col-sm-12 text-center" style="padding: 20px;" >
-                        <button class="btn btn-default field-tip" ng-disabled="vm.user.wallet_money<250" style="    border: 1px solid #40799a;
-    color: #155275;" ng-click="vm.openPopup()">
-                            <span class="tip-content" ng-hide="vm.user.wallet_money>250">
-                                Earn minimum Rs.250/- to make a transfer
-                            </span>
-                            Transfer to paytm wallet
-                        </button>
-                    </div>
+                    <button class="btn btn-default field-tip" ng-disabled="vm.user.wallet_money<250" style="border: 1px solid #40799a; color: #155275;" ng-click="vm.openPopup()">
+                        <span class="tip-content" ng-hide="vm.user.wallet_money>250">
+                            Earn minimum Rs.250/- to make a transfer
+                        </span>
+                        Transfer to paytm wallet
+                    </button>
                 </div>
                 <div class="col-sm-3" style="border-right: 1px dashed #dcdcdc;">
                     <div class="col-sm-12 text-center" style="padding: 35px;">
@@ -146,11 +133,11 @@
                         <div class="col-sm-12 text-center nopad" style="padding-top: 35px;">
                             <hr>
                                 <div class="col-md-6 text-muted field-tip">
-                                    <span class="tip-content" style="    right: 80%;">
+                                   <!--  <span class="tip-content" style="    right: 80%;">
                                         Self : {{vm.user.offer_info.user.coupons}}
                             Guest : {{ vm.user.offer_info.guest.coupons}} 
                             Children : {{ vm.user.offer_info.child.coupons }}
-                                    </span>
+                                    </span> -->
                                     <label class="text-muted" s>
                                         No of Code Generated : {{vm.user.offer_info.user.coupons + vm.user.offer_info.guest.coupons + vm.user.offer_info.child.coupons }}
                                     </label>
@@ -159,11 +146,11 @@
                                     <label class="text-muted">
                                         No of Shares : {{vm.user.offer_info.user.shares + vm.user.offer_info.guest.shares + vm.user.offer_info.child.shares }}
                                     </label>
-                                    <span class="tip-content"  style="    right: 80%;">
+                                    <!-- <span class="tip-content"  style="    right: 80%;">
                                         Self : {{vm.user.offer_info.user.shares}}
                             Guest : {{ vm.user.offer_info.guest.shares}} 
                             Children : {{ vm.user.offer_info.child.shares }}
-                                    </span>
+                                    </span> -->
                                 </div>
                             </hr>
                         </div>
@@ -171,11 +158,11 @@
                             <div class="col-sm-12 text-center nopad" style="padding-top: 35px;">
                                 <hr>
                                     <div class="col-md-6 text-muted field-tip">
-                                        <span class="tip-content"  style="    right: 80%;">
+                                        <!-- <span class="tip-content"  style="    right: 80%;">
                                             Self : {{vm.user.offer_info.user.redemptions}}
                             Guest : {{ vm.user.offer_info.guest.redemptions}} 
                             Children : {{ vm.user.offer_info.child.redemptions }}
-                                        </span>
+                                        </span> -->
 
                                         <label class="text-muted">
                                             No of Code Redeemed : {{vm.user.offer_info.user.redemptions + vm.user.offer_info.guest.redemptions + vm.user.offer_info.child.redemptions }}
@@ -227,13 +214,52 @@
                     </div>
                 </div>
             </div>
+            <div class="referal-profile">
+                <ul>
+                    <li>
+                        <label>Name:</label>
+                        <span>{{vm.user.name}}</span>
+                    </li>
+                    <li>
+                        <label>Email:</label>
+                        <span>{{vm.user.email}}</span>
+                    </li>
+                    <li>
+                        <label>Phone Number:</label>
+                        <span>{{vm.user.mobile}}</span>
+                    </li>
+                    <li>
+                        <label>Joined on:</label>
+                        <span>{{vm.user.joined_date| limitTo: '12'}}</span>
+                    </li>
+                    <!-- <li>
+                        <label>Last Login:</label>
+                        <span>{{vm.user.last_login | date:'mediumDate'}}</span>
+                    </li> -->
+                </ul>
+            </div>
         </div>
     </div>
 </article>
 <style type="text/css">
+    .referal-profile ul{
+
+    }
+    .referal-profile ul li{
+        padding: 10px 0;
+    }
+    .referal-profile ul li label{
+        width: 25%;
+    }
+    .referal-profile ul li span{
+
+    }
+    .color_red{
+        color: #e83634 !important;
+    }
     .side_nav_refferal{
      /*border: 1px solid black;*/
-    height: 225px;
+    /*height: 225px;*/
   }
   .list-group-item {
     position: relative;
@@ -280,6 +306,20 @@
 .field-tip .tip-content {
 z-index: 99;
 }
+
+/*referal profile style starts here*/
+.referal-profile{
+    background-color: #fff;
+    /*border: 1px solid #dcdcdc;*/
+    display: inline-block;
+    width: 100%;
+    display: none;
+    padding: 20px;
+}
+.show_menu{
+    display: block;
+}
+/*referal profile style ends here*/
 </style>
 
 
@@ -300,7 +340,7 @@ z-index: 99;
                                 <label for="usr">
                                     Enter your paytm account no
                                 </label>
-                                <input class="form-control nbr min40" id="usr" maxlength="10" minlength="10" name="mobile" ng-model="mobile" ng-pattern="/^[0-9]+$/" placeholder="Mobile no" required="" type="number">
+                                <input class="form-control nbr min40" id="usr" maxlength="10" minlength="10" name="mobile" ng-model="mobile" ng-pattern="/^[0-9]+$/" placeholder="Paytm account no" required="" type="number">
                                     <span ng-show="(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.minlength" style="color: red">
                                         Minimum 10 digits required.
                                     </span>
@@ -350,3 +390,17 @@ z-index: 99;
     </div>
 </div>
 <!-- Get  PayTm Request-->
+<script>
+    $(".referal_dashboard_menu").click(function(){
+        $(".content-refferal").show();
+        $(".referal-profile").hide();
+        $(this).children().addClass("color_red");
+        $(this).siblings().children().removeClass("color_red");
+    });
+    $(".referal_profile_menu").click(function(){
+        $(".referal-profile").show();
+        $(".content-refferal").hide();
+        $(this).children().addClass("color_red");
+        $(this).siblings().children().removeClass("color_red");
+    });
+</script>
