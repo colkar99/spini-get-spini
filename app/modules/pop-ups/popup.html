@@ -710,11 +710,11 @@
 </span>
 
 
-                            <div class="col-md-5 nopad">
+                            <div class="col-md-6 nopad">
                                 <img   class="img-responsive" ng-src="{{item.attributes.avatar_medium}}" style="width: 100% !important;"/>
                                
                             </div>
-                            <div class="col-md-7 nopad">
+                            <div class="col-md-6 nopad">
                                 <div class="pad-top-none offer-details text-left">
                                     <div class="row">
 
@@ -740,12 +740,12 @@
                                         </div>
                                     </div>
                                     <div class="row space-div">
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                             <button ng-click="vm.getcodepopup(item.id)">
                                                 GET CODE!
                                             </button>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-7">
                                             <span class="offer-spini" ng-show=" {{item.attributes.treasure_value}}">
                                                 <i aria-hidden="true" class="fa fa-gift link-icon fagift">
                                                 </i>
@@ -764,7 +764,7 @@
                                     </div>
                                     <div class="min-height160px">
                                         <div class="col-md-10 nopad">
-                                            <p class="read" hm-dots-class="dots" hm-less-text="Read less" hm-limit="300" hm-link-class="read-more" hm-more-text="Read more" hm-read-more="" hm-text="{{ item.attributes.description | nl2br }}">
+                                            <p class="read" hm-dots-class="dots" hm-less-text="Read less" hm-limit="100" hm-link-class="read-more" hm-more-text="Read more" hm-read-more="" hm-text="{{ item.attributes.description | nl2br }}">
                                             </p>
                                             <p class="offer-wrap-text space-div">
                                                 **OFFER VALID TILL {{item.attributes.end_date | date:'mediumDate'}} only at {{item.attributes.business_name}} @ {{item.attributes.place}}
@@ -818,8 +818,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="offer-share col-md-6">
-                                    </div>
+                                    <!-- <div class="offer-share col-md-6">
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
