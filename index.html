@@ -406,6 +406,7 @@
         <li  ng-repeat="(key, value) in vm.categories" ng-click="vm.filter_by_cat(value.id); vm.gotoBottom();" >
 
                 <a  >{{value.name}}</a>
+                 <p ng-repeat="(key,value) in value.sub_categories" ng-click="vm.filter_by_cat(value.id); vm.gotoBottom();">{{value.name}}</p>
 
               </li>
 
