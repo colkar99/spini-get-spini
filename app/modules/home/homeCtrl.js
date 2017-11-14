@@ -491,9 +491,9 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             //$location.hash('Gridbottom');
             // $anchorScroll();
         };
-        vm.searchBoxEnable = false;
+        vm.searchBoxEnable = true;
         $rootScope.$on("SearchComplete", function(event, args) {
-
+            debugger
             if (vm.searchBoxEnable) {
                 vm.setNextPage(response)
                 console.log("SearchComplete");
@@ -512,6 +512,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
         });
         vm.searchBox = function(txt) {
+            debugger
             if (txt.length < 1) {
                 return;
             }
@@ -526,6 +527,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
 
 
             $http.get(url).then(function(response) {
+                debugger
                 if (response) {
                     $rootScope.$broadcast("SearchComplete", {
                         "authData": response
