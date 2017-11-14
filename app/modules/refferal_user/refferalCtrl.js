@@ -24,6 +24,7 @@
             document.getElementById("get-paytm-no-popup").style.width = "100%";
         }
         vm.PaytmAsk = function(mobile, PaytmAsk) {
+            debugger
             console.log(mobile)
             console.log(PaytmAsk)
             console.log(mobile);
