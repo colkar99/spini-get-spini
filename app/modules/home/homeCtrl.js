@@ -328,6 +328,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
         }
         vm.getSlidepopup = function(campaign_id, is_offer,is_slide) {
+            debugger
 
             window.SlideClick = 0;
             window.SlideClickSeoUrl ='';
@@ -594,13 +595,25 @@ window.scrollOff = true;
 
         }
         vm.categories = [];
+        vm.banners = [];
+        vm.api = apiBaseURL;
+        if (vm.api == "https://api.spini.co/v1/"){
+            vm.apiSlides = vm.api.substr(0 ,21);
+        }
+        else if(vm.api == "https://stagingapi.spini.co/v1/"){
+            vm.apiSlides = vm.api.substr(0 ,27);
+        }
+        
         vm.getCategories = function() {
             $http.get(apiBaseURL + 'home/preload_data').then(function(response) {
                 if (response) {
+                    debugger
                     vm.categories = response.data.categories;
+                    vm.banners = response.data.banners;
                 }
             });
         }
+
         vm.open = false;
         vm.isReferral = LoginService.isReferral;
         vm.isVendor = LoginService.isVendor;
