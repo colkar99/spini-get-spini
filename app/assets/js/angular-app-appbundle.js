@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-11-08. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-11-15. 
 * @author Kathik
 */
 
@@ -636,8 +636,9 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 // console.log('error');
             }
         }
-        vm.SocialShareUpdate = function(url, type) {
-            LoginService.UpdateSocialShare(url, type, function(result) {})
+        vm.SocialShareUpdate = function(url, type, offerid, trakingcode) {
+            // debugger
+            LoginService.UpdateSocialShare(url, type,offerid, trakingcode, function(result) {})
         };
         vm.SetCookie = function() {
             var track = {};
@@ -666,10 +667,11 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
         }
         vm.getSlidepopup = function(campaign_id, is_offer,is_slide) {
+            debugger
 
             window.SlideClick = 0;
             window.SlideClickSeoUrl ='';
-              debugger;
+              // debugger;
             if (is_offer) {
                 angular.forEach(vm.offers, function(value, key) {
                     if (value.id == campaign_id) {
@@ -787,6 +789,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 var url = apiBaseURL + 'home/offers?location_id=' + locationCookie;
             }
             $http.get(url).then(function(response) {
+                // debugger
                 if (response) {
                     vm.setNextPage(response)
                     var response = response.data.data;
@@ -826,9 +829,9 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             //$location.hash('Gridbottom');
             // $anchorScroll();
         };
-        vm.searchBoxEnable = false;
+        vm.searchBoxEnable = true;
         $rootScope.$on("SearchComplete", function(event, args) {
-
+            debugger
             if (vm.searchBoxEnable) {
                 vm.setNextPage(response)
                 console.log("SearchComplete");
@@ -847,6 +850,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
         });
         vm.searchBox = function(txt) {
+            debugger
             if (txt.length < 1) {
                 return;
             }
@@ -861,6 +865,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
 
 
             $http.get(url).then(function(response) {
+                debugger
                 if (response) {
                     $rootScope.$broadcast("SearchComplete", {
                         "authData": response
@@ -932,13 +937,25 @@ window.scrollOff = true;
 
         }
         vm.categories = [];
+        vm.banners = [];
+        vm.api = apiBaseURL;
+        if (vm.api == "https://api.spini.co/v1/"){
+            vm.apiSlides = vm.api.substr(0 ,21);
+        }
+        else if(vm.api == "https://stagingapi.spini.co/v1/"){
+            vm.apiSlides = vm.api.substr(0 ,27);
+        }
+        
         vm.getCategories = function() {
             $http.get(apiBaseURL + 'home/preload_data').then(function(response) {
                 if (response) {
+                    debugger
                     vm.categories = response.data.categories;
+                    vm.banners = response.data.banners;
                 }
             });
         }
+
         vm.open = false;
         vm.isReferral = LoginService.isReferral;
         vm.isVendor = LoginService.isVendor;
@@ -979,7 +996,7 @@ window.scrollOff = true;
 
             vm.SelectedCampOffers = [];
 
-            debugger;
+            // debugger;
 
              if(window.SlideClick==1)
             {
@@ -989,7 +1006,7 @@ window.scrollOff = true;
 
             vm.SelectedCampOffers.push(response.data.data);
 
-            debugger;
+            // debugger;
               LoginService.offersClickTrack(response.data.data.id, function(result) {
                 if (result) {
                     console.log('offersClickTrack');
@@ -1010,7 +1027,7 @@ window.scrollOff = true;
 
             vm.SelectedCampOffers.push(response.data.data);
 
-            debugger;
+            // debugger;
               LoginService.offersClickTrack(response.data.data.id, function(result) {
                 if (result) {
                     console.log('offersClickTrack');
@@ -1564,6 +1581,7 @@ window.scrollOff = true;
             document.getElementById("get-paytm-no-popup").style.width = "100%";
         }
         vm.PaytmAsk = function(mobile, PaytmAsk) {
+            debugger
             console.log(mobile)
             console.log(PaytmAsk)
             console.log(mobile);
@@ -1963,7 +1981,8 @@ LodashFactory.$inject = ['$window'];
             });
         }
 
-        function UpdateSocialShare(url, tracking_code, media_type, offer_id, callback) {
+        function UpdateSocialShare(url, media_type, offer_id, tracking_code, callback) {
+            // debugger
             $http.post(apiBaseURL + 'offer_shares',
 
 {

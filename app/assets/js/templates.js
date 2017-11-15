@@ -512,11 +512,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        </span>\n" +
     "                        Sign In with Facebook\n" +
     "                    </button>\n" +
-    "                   <!--  <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
+    "                    <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
     "                        <span class=\"fa fa-google left falign\">\n" +
     "                        </span>\n" +
     "                        Sign in with Google\n" +
-    "                    </button> -->\n" +
+    "                    </button>\n" +
     "                </div>\n" +
     "                <div>\n" +
     "                </div>\n" +
@@ -558,11 +558,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        </span>\n" +
     "                        Sign Up with Facebook\n" +
     "                    </button>\n" +
-    "         <!--            <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
+    "                    <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
     "                        <span class=\"fa fa-google left falign\">\n" +
     "                        </span>\n" +
     "                        Sign UP with Google\n" +
-    "                    </button> -->\n" +
+    "                    </button>\n" +
     "                </div>\n" +
     "                <div>\n" +
     "                </div>\n" +
@@ -1419,10 +1419,10 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "    <div class=\"container\" style=\"padding: 15px;\">\n" +
     "        <div class=\"col-sm-2\">\n" +
     "            <div class=\"row\" style=\"background-color: #fff;\">\n" +
-    "                <div class=\"col-sm-12\" style=\"    margin-top: 10px;\">\n" +
+    "                <div class=\"col-sm-12\" style=\"padding: 10px;\">\n" +
     "                    <div class=\"side_nav_refferal\">\n" +
     "                        <img class=\"img-thumbnail\" height=\"150\" ng-src=\"{{vm.user.profile_image}}\" width=\"200\">\n" +
-    "                            <div class=\"col-sm-12\">\n" +
+    "                            <!-- <div class=\"col-sm-12\">\n" +
     "                                <p class=\"text-center\" style=\"    margin-top: 20px;\">\n" +
     "                                    <b>\n" +
     "                                        {{vm.user.name}}\n" +
@@ -1433,8 +1433,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                        {{vm.user.mobile}}\n" +
     "                                    </b>\n" +
     "                                </p>\n" +
-    "                                <!-- <label><i class=\" glyphicon glyphicon-map-marker\">Location</i></label> -->\n" +
-    "                            </div>\n" +
+    "                            </div> -->\n" +
     "                        </img>\n" +
     "                    </div>\n" +
     "                </div>\n" +
@@ -1461,7 +1460,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                            </div>\n" +
     "                            <div class=\"navbar-collapse collapse sidebar-navbar-collapse\">\n" +
     "                                <ul class=\"nav navbar-nav\">\n" +
-    "                                    <li style=\"font-size: 18px;\">\n" +
+    "                                    <li style=\"font-size: 16px; outline:none; cursor: pointer;\" class=\"referal_dashboard_menu\">\n" +
     "                                        <a>\n" +
     "                                            <i aria-hidden=\"true\" class=\"glyphicon glyphicon-stats pull-left\">\n" +
     "                                            </i>\n" +
@@ -1470,7 +1469,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                            </span>\n" +
     "                                        </a>\n" +
     "                                    </li>\n" +
-    "                                    <li style=\"font-size: 18px;\">\n" +
+    "                                    <li style=\"font-size: 16px; outline:none; cursor: pointer;\" class=\"referal_profile_menu\">\n" +
     "                                        <a>\n" +
     "                                            <i class=\"glyphicon glyphicon-user pull-left\">\n" +
     "                                            </i>\n" +
@@ -1479,7 +1478,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                            </span>\n" +
     "                                        </a>\n" +
     "                                    </li>\n" +
-    "                                    <li style=\"font-size: 18px;\">\n" +
+    "                                    <!-- <li style=\"font-size: 16px; outline:none;\">\n" +
     "                                        <a>\n" +
     "                                            <i class=\"glyphicon glyphicon-tag pull-left\">\n" +
     "                                            </i>\n" +
@@ -1487,16 +1486,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                            Saved Offer\n" +
     "                                            </span>\n" +
     "                                        </a>\n" +
-    "                                    </li>\n" +
-    "                                    <li style=\"font-size: 18px;\">\n" +
-    "                                        <a>\n" +
-    "                                            <i class=\"fa fa-inr pull-left\" style=\"font-size: 20px;\">\n" +
-    "                                            </i>\n" +
-    "                                            <span style=\"margin-left: 10px;\">\n" +
-    "                                            Wallet\n" +
-    "                                            </span>\n" +
-    "                                        </a>\n" +
-    "                                    </li>\n" +
+    "                                    </li> -->\n" +
     "                                </ul>\n" +
     "                            </div>\n" +
     "                            <!--/.nav-collapse -->\n" +
@@ -1530,15 +1520,12 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                            {{vm.user.wallet_money}}\n" +
     "                        </label>\n" +
     "                    </div>\n" +
-    "                    <div class=\"col-sm-12 text-center\" style=\"padding: 20px;\" >\n" +
-    "                        <button class=\"btn btn-default field-tip\" ng-disabled=\"vm.user.wallet_money<250\" style=\"    border: 1px solid #40799a;\n" +
-    "    color: #155275;\" ng-click=\"vm.openPopup()\">\n" +
-    "                            <span class=\"tip-content\" ng-hide=\"vm.user.wallet_money>250\">\n" +
-    "                                Earn minimum Rs.250/- to make a transfer\n" +
-    "                            </span>\n" +
-    "                            Transfer to paytm wallet\n" +
-    "                        </button>\n" +
-    "                    </div>\n" +
+    "                    <button class=\"btn btn-default field-tip\" ng-disabled=\"vm.user.wallet_money<250\" style=\"border: 1px solid #40799a; color: #155275;\" ng-click=\"vm.openPopup()\">\n" +
+    "                        <span class=\"tip-content\" ng-hide=\"vm.user.wallet_money>250\">\n" +
+    "                            Earn minimum Rs.250/- to make a transfer\n" +
+    "                        </span>\n" +
+    "                        Transfer to paytm wallet\n" +
+    "                    </button>\n" +
     "                </div>\n" +
     "                <div class=\"col-sm-3\" style=\"border-right: 1px dashed #dcdcdc;\">\n" +
     "                    <div class=\"col-sm-12 text-center\" style=\"padding: 35px;\">\n" +
@@ -1563,11 +1550,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        <div class=\"col-sm-12 text-center nopad\" style=\"padding-top: 35px;\">\n" +
     "                            <hr>\n" +
     "                                <div class=\"col-md-6 text-muted field-tip\">\n" +
-    "                                    <span class=\"tip-content\" style=\"    right: 80%;\">\n" +
+    "                                   <!--  <span class=\"tip-content\" style=\"    right: 80%;\">\n" +
     "                                        Self : {{vm.user.offer_info.user.coupons}}\n" +
     "                            Guest : {{ vm.user.offer_info.guest.coupons}} \n" +
     "                            Children : {{ vm.user.offer_info.child.coupons }}\n" +
-    "                                    </span>\n" +
+    "                                    </span> -->\n" +
     "                                    <label class=\"text-muted\" s>\n" +
     "                                        No of Code Generated : {{vm.user.offer_info.user.coupons + vm.user.offer_info.guest.coupons + vm.user.offer_info.child.coupons }}\n" +
     "                                    </label>\n" +
@@ -1576,11 +1563,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                    <label class=\"text-muted\">\n" +
     "                                        No of Shares : {{vm.user.offer_info.user.shares + vm.user.offer_info.guest.shares + vm.user.offer_info.child.shares }}\n" +
     "                                    </label>\n" +
-    "                                    <span class=\"tip-content\"  style=\"    right: 80%;\">\n" +
+    "                                    <!-- <span class=\"tip-content\"  style=\"    right: 80%;\">\n" +
     "                                        Self : {{vm.user.offer_info.user.shares}}\n" +
     "                            Guest : {{ vm.user.offer_info.guest.shares}} \n" +
     "                            Children : {{ vm.user.offer_info.child.shares }}\n" +
-    "                                    </span>\n" +
+    "                                    </span> -->\n" +
     "                                </div>\n" +
     "                            </hr>\n" +
     "                        </div>\n" +
@@ -1588,11 +1575,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                            <div class=\"col-sm-12 text-center nopad\" style=\"padding-top: 35px;\">\n" +
     "                                <hr>\n" +
     "                                    <div class=\"col-md-6 text-muted field-tip\">\n" +
-    "                                        <span class=\"tip-content\"  style=\"    right: 80%;\">\n" +
+    "                                        <!-- <span class=\"tip-content\"  style=\"    right: 80%;\">\n" +
     "                                            Self : {{vm.user.offer_info.user.redemptions}}\n" +
     "                            Guest : {{ vm.user.offer_info.guest.redemptions}} \n" +
     "                            Children : {{ vm.user.offer_info.child.redemptions }}\n" +
-    "                                        </span>\n" +
+    "                                        </span> -->\n" +
     "\n" +
     "                                        <label class=\"text-muted\">\n" +
     "                                            No of Code Redeemed : {{vm.user.offer_info.user.redemptions + vm.user.offer_info.guest.redemptions + vm.user.offer_info.child.redemptions }}\n" +
@@ -1644,13 +1631,52 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
+    "            <div class=\"referal-profile\">\n" +
+    "                <ul>\n" +
+    "                    <li>\n" +
+    "                        <label>Name:</label>\n" +
+    "                        <span>{{vm.user.name}}</span>\n" +
+    "                    </li>\n" +
+    "                    <li>\n" +
+    "                        <label>Email:</label>\n" +
+    "                        <span>{{vm.user.email}}</span>\n" +
+    "                    </li>\n" +
+    "                    <li>\n" +
+    "                        <label>Phone Number:</label>\n" +
+    "                        <span>{{vm.user.mobile}}</span>\n" +
+    "                    </li>\n" +
+    "                    <li>\n" +
+    "                        <label>Joined on:</label>\n" +
+    "                        <span>{{vm.user.joined_date| limitTo: '12'}}</span>\n" +
+    "                    </li>\n" +
+    "                    <!-- <li>\n" +
+    "                        <label>Last Login:</label>\n" +
+    "                        <span>{{vm.user.last_login | date:'mediumDate'}}</span>\n" +
+    "                    </li> -->\n" +
+    "                </ul>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</article>\n" +
     "<style type=\"text/css\">\n" +
+    "    .referal-profile ul{\n" +
+    "\n" +
+    "    }\n" +
+    "    .referal-profile ul li{\n" +
+    "        padding: 10px 0;\n" +
+    "    }\n" +
+    "    .referal-profile ul li label{\n" +
+    "        width: 25%;\n" +
+    "    }\n" +
+    "    .referal-profile ul li span{\n" +
+    "\n" +
+    "    }\n" +
+    "    .color_red{\n" +
+    "        color: #e83634 !important;\n" +
+    "    }\n" +
     "    .side_nav_refferal{\n" +
     "     /*border: 1px solid black;*/\n" +
-    "    height: 225px;\n" +
+    "    /*height: 225px;*/\n" +
     "  }\n" +
     "  .list-group-item {\n" +
     "    position: relative;\n" +
@@ -1697,6 +1723,20 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     ".field-tip .tip-content {\n" +
     "z-index: 99;\n" +
     "}\n" +
+    "\n" +
+    "/*referal profile style starts here*/\n" +
+    ".referal-profile{\n" +
+    "    background-color: #fff;\n" +
+    "    /*border: 1px solid #dcdcdc;*/\n" +
+    "    display: inline-block;\n" +
+    "    width: 100%;\n" +
+    "    display: none;\n" +
+    "    padding: 20px;\n" +
+    "}\n" +
+    ".show_menu{\n" +
+    "    display: block;\n" +
+    "}\n" +
+    "/*referal profile style ends here*/\n" +
     "</style>\n" +
     "\n" +
     "\n" +
@@ -1717,7 +1757,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                <label for=\"usr\">\n" +
     "                                    Enter your paytm account no\n" +
     "                                </label>\n" +
-    "                                <input class=\"form-control nbr min40\" id=\"usr\" maxlength=\"10\" minlength=\"10\" name=\"mobile\" ng-model=\"mobile\" ng-pattern=\"/^[0-9]+$/\" placeholder=\"Mobile no\" required=\"\" type=\"number\">\n" +
+    "                                <input class=\"form-control nbr min40\" id=\"usr\" maxlength=\"10\" minlength=\"10\" name=\"mobile\" ng-model=\"mobile\" ng-pattern=\"/^[0-9]+$/\" placeholder=\"Paytm account no\" required=\"\" type=\"number\">\n" +
     "                                    <span ng-show=\"(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.minlength\" style=\"color: red\">\n" +
     "                                        Minimum 10 digits required.\n" +
     "                                    </span>\n" +
@@ -1766,7 +1806,21 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "<!-- Get  PayTm Request-->\n"
+    "<!-- Get  PayTm Request-->\n" +
+    "<script>\n" +
+    "    $(\".referal_dashboard_menu\").click(function(){\n" +
+    "        $(\".content-refferal\").show();\n" +
+    "        $(\".referal-profile\").hide();\n" +
+    "        $(this).children().addClass(\"color_red\");\n" +
+    "        $(this).siblings().children().removeClass(\"color_red\");\n" +
+    "    });\n" +
+    "    $(\".referal_profile_menu\").click(function(){\n" +
+    "        $(\".referal-profile\").show();\n" +
+    "        $(\".content-refferal\").hide();\n" +
+    "        $(this).children().addClass(\"color_red\");\n" +
+    "        $(this).siblings().children().removeClass(\"color_red\");\n" +
+    "    });\n" +
+    "</script>\n"
   );
 
 
