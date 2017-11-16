@@ -512,11 +512,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        </span>\n" +
     "                        Sign In with Facebook\n" +
     "                    </button>\n" +
-    "                    <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
+    "                    <!-- <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
     "                        <span class=\"fa fa-google left falign\">\n" +
     "                        </span>\n" +
     "                        Sign in with Google\n" +
-    "                    </button>\n" +
+    "                    </button> -->\n" +
     "                </div>\n" +
     "                <div>\n" +
     "                </div>\n" +
@@ -558,11 +558,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        </span>\n" +
     "                        Sign Up with Facebook\n" +
     "                    </button>\n" +
-    "                    <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
+    "                    <!-- <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
     "                        <span class=\"fa fa-google left falign\">\n" +
     "                        </span>\n" +
     "                        Sign UP with Google\n" +
-    "                    </button>\n" +
+    "                    </button> -->\n" +
     "                </div>\n" +
     "                <div>\n" +
     "                </div>\n" +
@@ -950,9 +950,9 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                </input>\n" +
     "\n" +
     "\n" +
-    "                               <div  ng-click=\"vm.VendorLoginPopup()\" class=\"mar20\">\n" +
+    "                               <div   class=\"mar20\">\n" +
     "\n" +
-    "                                Already have an account? <a class=\"btn btn-default\" style=\"display: inline;font-size: 15px;\">Log in</a>\n" +
+    "                                Already have an account? <a ng-click=\"vm.VendorLoginPopup()\" class=\"btn btn-default\" style=\"display: inline;font-size: 15px;\">Log in</a>\n" +
     "</div>\n" +
     "                            </div>\n" +
     "\n" +
@@ -1105,11 +1105,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "</span>\n" +
     "\n" +
     "\n" +
-    "                            <div class=\"col-md-5 nopad\">\n" +
-    "                                <img   class=\"img-responsive\" ng-src=\"{{item.attributes.avatar_medium}}\" style=\"width: 100% !important;\"/>\n" +
+    "                            <div class=\"col-md-6 nopad\">\n" +
+    "                                <img   class=\"img-responsive popup-offer-image\" ng-src=\"{{item.attributes.avatar_medium}}\" style=\"width: 100% !important;\"/>\n" +
     "                               \n" +
     "                            </div>\n" +
-    "                            <div class=\"col-md-7 nopad\">\n" +
+    "                            <div class=\"col-md-6\">\n" +
     "                                <div class=\"pad-top-none offer-details text-left\">\n" +
     "                                    <div class=\"row\">\n" +
     "\n" +
@@ -1159,7 +1159,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                    </div>\n" +
     "                                    <div class=\"min-height160px\">\n" +
     "                                        <div class=\"col-md-10 nopad\">\n" +
-    "                                            <p class=\"read\" hm-dots-class=\"dots\" hm-less-text=\"Read less\" hm-limit=\"300\" hm-link-class=\"read-more\" hm-more-text=\"Read more\" hm-read-more=\"\" hm-text=\"{{ item.attributes.description | nl2br }}\">\n" +
+    "                                            <p class=\"read\" hm-dots-class=\"dots\" hm-less-text=\"Read less\" hm-limit=\"100\" hm-link-class=\"read-more\" hm-more-text=\"Read more\" hm-read-more=\"\" hm-text=\"{{ item.attributes.description | nl2br }}\">\n" +
     "                                            </p>\n" +
     "                                            <p class=\"offer-wrap-text space-div\">\n" +
     "                                                **OFFER VALID TILL {{item.attributes.end_date | date:'mediumDate'}} only at {{item.attributes.business_name}} @ {{item.attributes.place}}\n" +
@@ -1213,8 +1213,8 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                            </div>\n" +
     "                                        </div>\n" +
     "                                    </div>\n" +
-    "                                    <div class=\"offer-share col-md-6\">\n" +
-    "                                    </div>\n" +
+    "                                    <!-- <div class=\"offer-share col-md-6\">\n" +
+    "                                    </div> -->\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
