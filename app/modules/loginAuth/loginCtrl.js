@@ -48,6 +48,7 @@
             });
         });
         $scope.$on("FBLoginCompleteVendor", function(event, args) {
+            
             var auth = {};
             auth.access_token = args.authData.authResponse.accessToken;
             auth.role = 'vendor';
@@ -76,8 +77,33 @@
             console.log(args)
         });
         $scope.$on("GoogleLoginComplete", function(event, args) {
+            var auth = {};
+            auth.access_token = args.authData.access_token;
+            auth.role = 'referer';
+            LoginService.LoginGoogle(auth, function(result) {
+                if (result == 'referer') {
+                    document.getElementById("login-popup").style.width = "0%";
+                    document.getElementById("login-signup").style.width = "0%";
+                    $timeout(function() {
+                        ngToast.dismiss();
+                        ngToast.create({
+                            content: 'Welcome to ReferYogi!!',
+                            dismissOnTimeout: true,
+                            dismissButton: true,
+                            dismissOnClick: false
+                        });
+                    }, 2000);
+                    window.location.reload();
+                    // LoginService.getProfileInfo();
+                } else if (result == 'vendor') {
+                    document.getElementById("login-popup").style.width = "0%";
+                    document.getElementById("login-signup").style.width = "0%";
+                } else {
+                    console.log('not logged in');
+                }
+            });
             console.log('my event GoogleLoginComplete');
-            console.log(args)
+            console.log(args);
         });
         vm.FbLogin = function() {
 
@@ -93,6 +119,9 @@
             }
         }
         vm.GoogleLogin = function() {
+            
+            document.getElementById("login-popup").style.width = "0%";
+                    document.getElementById("login-signup").style.width = "0%";
             SocialLoginService.googleLogin();
         }
     }

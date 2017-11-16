@@ -14,6 +14,7 @@
     function LoginService($http, $cookies, apiBaseURL, $state,ngToast) {
         var service = {};
         service.Login = Login;
+        service.LoginGoogle = LoginGoogle;
         service.Logout = Logout;
         service.isReferral = isReferral;
         service.getVendorProfileInfo = getVendorProfileInfo;
@@ -160,8 +161,7 @@
             });
         }
 
-        function UpdateSocialShare(url, media_type, offer_id, tracking_code, callback) {
-            // debugger
+        function UpdateSocialShare(url, tracking_code, media_type, offer_id, callback) {
             $http.post(apiBaseURL + 'offer_shares',
 
 {
@@ -308,6 +308,33 @@
             });
         }
 
+        function LoginGoogle(auth, callback) {
+            auth.tracking_code = this.TrackingCode();
+            $http.post(apiBaseURL + 'google_user_token', {
+                auth: auth
+            }).then(function(response) {
+                var response = response.data;
+                // login successful if there's a token in the response
+                if (response.jwt) {
+                    // store username and token in cookies storage to keep user logged in between page refreshes
+                    $cookies.put('role', response.role);
+                    $cookies.put('name', response.name);
+                    $cookies.put('token', response.jwt);
+                    if (response.mobile) {
+                        $cookies.put('mobile', response.mobile);
+                    }
+                    // add jwt token to auth header for all requests made by the $http service
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + response.jwt;
+                    // execute callback with true to indicate successful login
+                    callback(response.role);
+                } else {
+                    // execute callback with false to indicate failed login
+                    callback(false);
+                }
+            });
+        }
+
+
         function Logout() {
             $cookies.remove('role');
             $cookies.remove('name');
@@ -344,16 +371,34 @@
                     });
                 });
             },
-            googleCallBack: function(res) {
-                $rootScope.$broadcast("GoogleLoginComplete", {
-                    "authData": res
-                });
-            },
+            // googleCallBack: function(res) {
+            
+            //     $rootScope.$broadcast("GoogleLoginComplete", {
+
+            //         "authData": res
+            //     });
+            // },
+            // googleLogin: function() {
+            //     debugger
+            //     var myParams = {
+            //         'clientid': '186743695973-ff3cm1k1ptca8rib4sv350abqhnif0pb.apps.googleusercontent.com', //You need to set client id
+            //         'cookiepolicy': 'single_host_origin',
+            //         'callback': this.googleCallBack, //callback function
+            //         'approvalprompt': 'force',
+            //         'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read'
+            //     };
+            //     gapi.auth.signIn(myParams);
+            // },
             googleLogin: function() {
                 var myParams = {
-                    'clientid': '405658344932-5ot4r5m9vs424c8b4j6htt3dg1p8qfpd.apps.googleusercontent.com', //You need to set client id
+                    'clientid': '186743695973-ff3cm1k1ptca8rib4sv350abqhnif0pb.apps.googleusercontent.com', //You need to set client id
                     'cookiepolicy': 'single_host_origin',
-                    'callback': this.googleCallBack, //callback function
+                    'callback':function(res) {
+                        console.log(res);
+                        $rootScope.$broadcast("GoogleLoginComplete", {
+                            "authData": res
+                        });
+                    }, 
                     'approvalprompt': 'force',
                     'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read'
                 };

@@ -952,7 +952,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "                               <div  ng-click=\"vm.VendorLoginPopup()\" class=\"mar20\">\n" +
     "\n" +
-    "                                Already have an account? Log in\n" +
+    "                                Already have an account? <a class=\"btn btn-default\" style=\"display: inline;font-size: 15px;\">Log in</a>\n" +
     "</div>\n" +
     "                            </div>\n" +
     "\n" +
@@ -1238,7 +1238,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('app/modules/redeem_coupon/redeem_coupon.html',
     "<div class=\"container\" style=\"margin-top: 5px;\">\n" +
-    "<div class=\"col-md-2\">\n" +
+    "<div class=\"col-md-2\" ng-hide=\"true\">\n" +
     "    \n" +
     "       <label>\n" +
     "      Choose  Buiness :\n" +

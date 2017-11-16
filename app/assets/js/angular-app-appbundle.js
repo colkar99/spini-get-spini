@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-11-15. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-11-16. 
 * @author Kathik
 */
 
@@ -1358,6 +1358,7 @@ window.scrollOff = true;
             });
         });
         $scope.$on("FBLoginCompleteVendor", function(event, args) {
+            
             var auth = {};
             auth.access_token = args.authData.authResponse.accessToken;
             auth.role = 'vendor';
@@ -1386,8 +1387,33 @@ window.scrollOff = true;
             console.log(args)
         });
         $scope.$on("GoogleLoginComplete", function(event, args) {
+            var auth = {};
+            auth.access_token = args.authData.access_token;
+            auth.role = 'referer';
+            LoginService.LoginGoogle(auth, function(result) {
+                if (result == 'referer') {
+                    document.getElementById("login-popup").style.width = "0%";
+                    document.getElementById("login-signup").style.width = "0%";
+                    $timeout(function() {
+                        ngToast.dismiss();
+                        ngToast.create({
+                            content: 'Welcome to ReferYogi!!',
+                            dismissOnTimeout: true,
+                            dismissButton: true,
+                            dismissOnClick: false
+                        });
+                    }, 2000);
+                    window.location.reload();
+                    // LoginService.getProfileInfo();
+                } else if (result == 'vendor') {
+                    document.getElementById("login-popup").style.width = "0%";
+                    document.getElementById("login-signup").style.width = "0%";
+                } else {
+                    console.log('not logged in');
+                }
+            });
             console.log('my event GoogleLoginComplete');
-            console.log(args)
+            console.log(args);
         });
         vm.FbLogin = function() {
 
@@ -1403,6 +1429,9 @@ window.scrollOff = true;
             }
         }
         vm.GoogleLogin = function() {
+            
+            document.getElementById("login-popup").style.width = "0%";
+                    document.getElementById("login-signup").style.width = "0%";
             SocialLoginService.googleLogin();
         }
     }
@@ -1835,6 +1864,7 @@ LodashFactory.$inject = ['$window'];
     function LoginService($http, $cookies, apiBaseURL, $state,ngToast) {
         var service = {};
         service.Login = Login;
+        service.LoginGoogle = LoginGoogle;
         service.Logout = Logout;
         service.isReferral = isReferral;
         service.getVendorProfileInfo = getVendorProfileInfo;
@@ -1981,8 +2011,7 @@ LodashFactory.$inject = ['$window'];
             });
         }
 
-        function UpdateSocialShare(url, media_type, offer_id, tracking_code, callback) {
-            // debugger
+        function UpdateSocialShare(url, tracking_code, media_type, offer_id, callback) {
             $http.post(apiBaseURL + 'offer_shares',
 
 {
@@ -2129,6 +2158,33 @@ LodashFactory.$inject = ['$window'];
             });
         }
 
+        function LoginGoogle(auth, callback) {
+            auth.tracking_code = this.TrackingCode();
+            $http.post(apiBaseURL + 'google_user_token', {
+                auth: auth
+            }).then(function(response) {
+                var response = response.data;
+                // login successful if there's a token in the response
+                if (response.jwt) {
+                    // store username and token in cookies storage to keep user logged in between page refreshes
+                    $cookies.put('role', response.role);
+                    $cookies.put('name', response.name);
+                    $cookies.put('token', response.jwt);
+                    if (response.mobile) {
+                        $cookies.put('mobile', response.mobile);
+                    }
+                    // add jwt token to auth header for all requests made by the $http service
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + response.jwt;
+                    // execute callback with true to indicate successful login
+                    callback(response.role);
+                } else {
+                    // execute callback with false to indicate failed login
+                    callback(false);
+                }
+            });
+        }
+
+
         function Logout() {
             $cookies.remove('role');
             $cookies.remove('name');
@@ -2165,16 +2221,34 @@ LodashFactory.$inject = ['$window'];
                     });
                 });
             },
-            googleCallBack: function(res) {
-                $rootScope.$broadcast("GoogleLoginComplete", {
-                    "authData": res
-                });
-            },
+            // googleCallBack: function(res) {
+            
+            //     $rootScope.$broadcast("GoogleLoginComplete", {
+
+            //         "authData": res
+            //     });
+            // },
+            // googleLogin: function() {
+            //     debugger
+            //     var myParams = {
+            //         'clientid': '186743695973-ff3cm1k1ptca8rib4sv350abqhnif0pb.apps.googleusercontent.com', //You need to set client id
+            //         'cookiepolicy': 'single_host_origin',
+            //         'callback': this.googleCallBack, //callback function
+            //         'approvalprompt': 'force',
+            //         'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read'
+            //     };
+            //     gapi.auth.signIn(myParams);
+            // },
             googleLogin: function() {
                 var myParams = {
-                    'clientid': '405658344932-5ot4r5m9vs424c8b4j6htt3dg1p8qfpd.apps.googleusercontent.com', //You need to set client id
+                    'clientid': '186743695973-ff3cm1k1ptca8rib4sv350abqhnif0pb.apps.googleusercontent.com', //You need to set client id
                     'cookiepolicy': 'single_host_origin',
-                    'callback': this.googleCallBack, //callback function
+                    'callback':function(res) {
+                        console.log(res);
+                        $rootScope.$broadcast("GoogleLoginComplete", {
+                            "authData": res
+                        });
+                    }, 
                     'approvalprompt': 'force',
                     'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read'
                 };
