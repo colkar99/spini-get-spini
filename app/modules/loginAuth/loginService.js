@@ -34,6 +34,11 @@
         service.SetTrackingCode = SetTrackingCode;
         return service;
 
+        function getExp(){
+            var expireDate = new Date();
+        expireDate.setDate(expireDate.getDate() + 2);
+        return expireDate;
+        }
         function isReferral() {
             if ($cookies.get('role')) {
                 if ($cookies.get('role') == 'referer') {
@@ -60,7 +65,7 @@
         }
 
         function SetTrackingCode(code) {
-            $cookies.put('TrackingCode', code);
+            $cookies.put('TrackingCode', code, {expires: getExp()});
         }
 
         function authToken() {
@@ -87,9 +92,10 @@
         }
 
         function cityCookie(id,name) {
-            $cookies.put('city', id);
-            $cookies.put('city_name', name);
+            $cookies.put('city', id , {expires: getExp()});
+            $cookies.put('city_name', name , {expires: getExp()});
             window.location.reload();
+            console.log(cookies);
         }
 
 
@@ -144,11 +150,11 @@
                 // login successful if there's a token in the response
                 if (response.jwt) {
                     // store username and token in cookies storage to keep user logged in between page refreshes
-                    $cookies.put('role', 'vendor');
+                    $cookies.put('role', 'vendor', {expires: getExp()});
                     // $cookies.put('name', response.name);
-                    $cookies.put('token', response.jwt);
+                    $cookies.put('token', response.jwt , {expires: getExp()});
                     if (response.mobile) {
-                        $cookies.put('mobile', response.mobile);
+                        $cookies.put('mobile', response.mobile , {expires: getExp()});
                     }
                     // add jwt token to auth header for all requests made by the $http service
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.jwt;
@@ -199,7 +205,7 @@
                 var response = response.data.data;
                 // login successful if there's a token in the response
                 if (response.attributes) {
-                    $cookies.put(temp_cookie, temp_cookie);
+                    $cookies.put(temp_cookie, temp_cookie , {expires: getExp()});
                     callback(true);
                 } else {
                     // execute callback with false to indicate failed login
@@ -222,7 +228,7 @@
                 }
             }).then(function(response) {
                 var response = response.data.data;
-                $cookies.put(temp_cookie, temp_cookie);
+                $cookies.put(temp_cookie, temp_cookie , {expires: getExp()});
                 // login successful if there's a token in the response
                 if (response.attributes) {
                     callback(true);
@@ -291,11 +297,11 @@
                 // login successful if there's a token in the response
                 if (response.jwt) {
                     // store username and token in cookies storage to keep user logged in between page refreshes
-                    $cookies.put('role', response.role);
-                    $cookies.put('name', response.name);
-                    $cookies.put('token', response.jwt);
+                    $cookies.put('role', response.role , {expires: getExp()});
+                    $cookies.put('name', response.name , {expires: getExp()});
+                    $cookies.put('token', response.jwt , {expires: getExp()});
                     if (response.mobile) {
-                        $cookies.put('mobile', response.mobile);
+                        $cookies.put('mobile', response.mobile , {expires: getExp()});
                     }
                     // add jwt token to auth header for all requests made by the $http service
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.jwt;
@@ -317,11 +323,11 @@
                 // login successful if there's a token in the response
                 if (response.jwt) {
                     // store username and token in cookies storage to keep user logged in between page refreshes
-                    $cookies.put('role', response.role);
-                    $cookies.put('name', response.name);
-                    $cookies.put('token', response.jwt);
+                    $cookies.put('role', response.role , {expires: getExp()});
+                    $cookies.put('name', response.name , {expires: getExp()});
+                    $cookies.put('token', response.jwt , {expires: getExp()});
                     if (response.mobile) {
-                        $cookies.put('mobile', response.mobile);
+                        $cookies.put('mobile', response.mobile , {expires: getExp()});
                     }
                     // add jwt token to auth header for all requests made by the $http service
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.jwt;

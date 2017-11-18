@@ -299,7 +299,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
         }
         vm.SocialShareUpdate = function(url, type, offerid, trakingcode) {
-            // debugger
+            // 
             LoginService.UpdateSocialShare(url, type,offerid, trakingcode, function(result) {})
         };
         vm.SetCookie = function() {
@@ -329,11 +329,11 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
         }
         vm.getSlidepopup = function(campaign_id, is_offer,is_slide) {
-            debugger
+            
 
             window.SlideClick = 0;
             window.SlideClickSeoUrl ='';
-              // debugger;
+              // ;
             if (is_offer) {
                 angular.forEach(vm.offers, function(value, key) {
                     if (value.id == campaign_id) {
@@ -451,7 +451,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 var url = apiBaseURL + 'home/offers?location_id=' + locationCookie;
             }
             $http.get(url).then(function(response) {
-                // debugger
+                // 
                 if (response) {
                     vm.setNextPage(response)
                     var response = response.data.data;
@@ -493,7 +493,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
         };
         vm.searchBoxEnable = true;
         $rootScope.$on("SearchComplete", function(event, args) {
-            debugger
+            
             if (vm.searchBoxEnable) {
                 vm.setNextPage(response)
                 console.log("SearchComplete");
@@ -512,7 +512,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
         });
         vm.searchBox = function(txt) {
-            debugger
+            
             if (txt.length < 1) {
                 return;
             }
@@ -527,7 +527,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
 
 
             $http.get(url).then(function(response) {
-                debugger
+                
                 if (response) {
                     $rootScope.$broadcast("SearchComplete", {
                         "authData": response
@@ -611,7 +611,7 @@ window.scrollOff = true;
         vm.getCategories = function() {
             $http.get(apiBaseURL + 'home/preload_data').then(function(response) {
                 if (response) {
-                    debugger
+                    
                     vm.categories = response.data.categories;
                     vm.banners = response.data.banners;
                 }
@@ -658,7 +658,7 @@ window.scrollOff = true;
 
             vm.SelectedCampOffers = [];
 
-            // debugger;
+            // ;
 
              if(window.SlideClick==1)
             {
@@ -668,7 +668,7 @@ window.scrollOff = true;
 
             vm.SelectedCampOffers.push(response.data.data);
 
-            // debugger;
+            // ;
               LoginService.offersClickTrack(response.data.data.id, function(result) {
                 if (result) {
                     console.log('offersClickTrack');
@@ -689,7 +689,7 @@ window.scrollOff = true;
 
             vm.SelectedCampOffers.push(response.data.data);
 
-            // debugger;
+            // ;
               LoginService.offersClickTrack(response.data.data.id, function(result) {
                 if (result) {
                     console.log('offersClickTrack');

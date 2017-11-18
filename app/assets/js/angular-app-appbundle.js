@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-11-16. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-11-18. 
 * @author Kathik
 */
 
@@ -637,7 +637,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
         }
         vm.SocialShareUpdate = function(url, type, offerid, trakingcode) {
-            // debugger
+            // 
             LoginService.UpdateSocialShare(url, type,offerid, trakingcode, function(result) {})
         };
         vm.SetCookie = function() {
@@ -667,11 +667,11 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
         }
         vm.getSlidepopup = function(campaign_id, is_offer,is_slide) {
-            debugger
+            
 
             window.SlideClick = 0;
             window.SlideClickSeoUrl ='';
-              // debugger;
+              // ;
             if (is_offer) {
                 angular.forEach(vm.offers, function(value, key) {
                     if (value.id == campaign_id) {
@@ -789,7 +789,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 var url = apiBaseURL + 'home/offers?location_id=' + locationCookie;
             }
             $http.get(url).then(function(response) {
-                // debugger
+                // 
                 if (response) {
                     vm.setNextPage(response)
                     var response = response.data.data;
@@ -831,7 +831,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
         };
         vm.searchBoxEnable = true;
         $rootScope.$on("SearchComplete", function(event, args) {
-            debugger
+            
             if (vm.searchBoxEnable) {
                 vm.setNextPage(response)
                 console.log("SearchComplete");
@@ -850,7 +850,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
         });
         vm.searchBox = function(txt) {
-            debugger
+            
             if (txt.length < 1) {
                 return;
             }
@@ -865,7 +865,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
 
 
             $http.get(url).then(function(response) {
-                debugger
+                
                 if (response) {
                     $rootScope.$broadcast("SearchComplete", {
                         "authData": response
@@ -949,7 +949,7 @@ window.scrollOff = true;
         vm.getCategories = function() {
             $http.get(apiBaseURL + 'home/preload_data').then(function(response) {
                 if (response) {
-                    debugger
+                    
                     vm.categories = response.data.categories;
                     vm.banners = response.data.banners;
                 }
@@ -996,7 +996,7 @@ window.scrollOff = true;
 
             vm.SelectedCampOffers = [];
 
-            // debugger;
+            // ;
 
              if(window.SlideClick==1)
             {
@@ -1006,7 +1006,7 @@ window.scrollOff = true;
 
             vm.SelectedCampOffers.push(response.data.data);
 
-            // debugger;
+            // ;
               LoginService.offersClickTrack(response.data.data.id, function(result) {
                 if (result) {
                     console.log('offersClickTrack');
@@ -1027,7 +1027,7 @@ window.scrollOff = true;
 
             vm.SelectedCampOffers.push(response.data.data);
 
-            // debugger;
+            // ;
               LoginService.offersClickTrack(response.data.data.id, function(result) {
                 if (result) {
                     console.log('offersClickTrack');
@@ -1884,6 +1884,11 @@ LodashFactory.$inject = ['$window'];
         service.SetTrackingCode = SetTrackingCode;
         return service;
 
+        function getExp(){
+            var expireDate = new Date();
+        expireDate.setDate(expireDate.getDate() + 2);
+        return expireDate;
+        }
         function isReferral() {
             if ($cookies.get('role')) {
                 if ($cookies.get('role') == 'referer') {
@@ -1910,7 +1915,7 @@ LodashFactory.$inject = ['$window'];
         }
 
         function SetTrackingCode(code) {
-            $cookies.put('TrackingCode', code);
+            $cookies.put('TrackingCode', code, {expires: getExp()});
         }
 
         function authToken() {
@@ -1937,9 +1942,10 @@ LodashFactory.$inject = ['$window'];
         }
 
         function cityCookie(id,name) {
-            $cookies.put('city', id);
-            $cookies.put('city_name', name);
+            $cookies.put('city', id , {expires: getExp()});
+            $cookies.put('city_name', name , {expires: getExp()});
             window.location.reload();
+            console.log(cookies);
         }
 
 
@@ -1994,11 +2000,11 @@ LodashFactory.$inject = ['$window'];
                 // login successful if there's a token in the response
                 if (response.jwt) {
                     // store username and token in cookies storage to keep user logged in between page refreshes
-                    $cookies.put('role', 'vendor');
+                    $cookies.put('role', 'vendor', {expires: getExp()});
                     // $cookies.put('name', response.name);
-                    $cookies.put('token', response.jwt);
+                    $cookies.put('token', response.jwt , {expires: getExp()});
                     if (response.mobile) {
-                        $cookies.put('mobile', response.mobile);
+                        $cookies.put('mobile', response.mobile , {expires: getExp()});
                     }
                     // add jwt token to auth header for all requests made by the $http service
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.jwt;
@@ -2049,7 +2055,7 @@ LodashFactory.$inject = ['$window'];
                 var response = response.data.data;
                 // login successful if there's a token in the response
                 if (response.attributes) {
-                    $cookies.put(temp_cookie, temp_cookie);
+                    $cookies.put(temp_cookie, temp_cookie , {expires: getExp()});
                     callback(true);
                 } else {
                     // execute callback with false to indicate failed login
@@ -2072,7 +2078,7 @@ LodashFactory.$inject = ['$window'];
                 }
             }).then(function(response) {
                 var response = response.data.data;
-                $cookies.put(temp_cookie, temp_cookie);
+                $cookies.put(temp_cookie, temp_cookie , {expires: getExp()});
                 // login successful if there's a token in the response
                 if (response.attributes) {
                     callback(true);
@@ -2141,11 +2147,11 @@ LodashFactory.$inject = ['$window'];
                 // login successful if there's a token in the response
                 if (response.jwt) {
                     // store username and token in cookies storage to keep user logged in between page refreshes
-                    $cookies.put('role', response.role);
-                    $cookies.put('name', response.name);
-                    $cookies.put('token', response.jwt);
+                    $cookies.put('role', response.role , {expires: getExp()});
+                    $cookies.put('name', response.name , {expires: getExp()});
+                    $cookies.put('token', response.jwt , {expires: getExp()});
                     if (response.mobile) {
-                        $cookies.put('mobile', response.mobile);
+                        $cookies.put('mobile', response.mobile , {expires: getExp()});
                     }
                     // add jwt token to auth header for all requests made by the $http service
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.jwt;
@@ -2167,11 +2173,11 @@ LodashFactory.$inject = ['$window'];
                 // login successful if there's a token in the response
                 if (response.jwt) {
                     // store username and token in cookies storage to keep user logged in between page refreshes
-                    $cookies.put('role', response.role);
-                    $cookies.put('name', response.name);
-                    $cookies.put('token', response.jwt);
+                    $cookies.put('role', response.role , {expires: getExp()});
+                    $cookies.put('name', response.name , {expires: getExp()});
+                    $cookies.put('token', response.jwt , {expires: getExp()});
                     if (response.mobile) {
-                        $cookies.put('mobile', response.mobile);
+                        $cookies.put('mobile', response.mobile , {expires: getExp()});
                     }
                     // add jwt token to auth header for all requests made by the $http service
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.jwt;
