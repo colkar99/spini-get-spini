@@ -653,7 +653,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                    </div>\n" +
     "                    <div class=\"col-md-3 col-sm-4 col-xs-4 text-right\">\n" +
     "                        <img class=\"offer-logo-set\" style=\"    padding-right: 10px;\" ng-src=\"    {{item.attributes.business_avatar_thumb}}\">\n" +
-    "                        </img>\n" +
+    "                        \n" +
     "                    </div>\n" +
     "                 \n" +
     "                </div>\n" +
@@ -790,7 +790,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                </div>\n" +
     "                <div class=\"row backcls mar-10px text-left\">\n" +
     "                    <div class=\"form-group popupcenter \">\n" +
-    "                        <form name=\"get_coupen\" ng-submit=\"vm.sentMobileNo(mobile,true,item.id)\" novalidate=\"\">\n" +
+    "                        <form  name=\"get_coupen\" ng-submit=\"vm.sentMobileNo(mobile,true,item.id)\" novalidate=\"\">\n" +
     "                            <div class=\"col-md-8 nopad\">\n" +
     "                                <label for=\"usr\">\n" +
     "                                    Enter your mobile no to get code\n" +
@@ -802,7 +802,6 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                    <span ng-show=\"(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.maxlength\" style=\"color: red\">\n" +
     "                                        Maximum 10 digits only allowed.\n" +
     "                                    </span>\n" +
-    "                                </input>\n" +
     "                            </div>\n" +
     "                            <div class=\"col-md-4 nopad mar25x\">\n" +
     "                                <button class=\"btn min40 width100 nbr\" ng-disabled=\"get_coupen.$invalid\" type=\"submit\">\n" +
@@ -1136,8 +1135,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                    </div>\n" +
     "                                    <div class=\"row space-div\">\n" +
     "                                        <div class=\"col-md-6\">\n" +
-    "                                            <button ng-click=\"vm.getcodepopup(item.id)\">\n" +
+    "                                            <button ng-click=\"vm.getcodepopup(item.id)\" ng-if=\"!item.attributes.redirect_url\">\n" +
     "                                                GET CODE!\n" +
+    "                                            </button>\n" +
+    "                                            <button ng-click=\"vm.getcodepopup(item.id)\" ng-if=\"item.attributes.redirect_url\">\n" +
+    "                                                BUY NOW!\n" +
     "                                            </button>\n" +
     "                                        </div>\n" +
     "                                        <div class=\"col-md-6\">\n" +

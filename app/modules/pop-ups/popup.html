@@ -258,7 +258,7 @@
                     </div>
                     <div class="col-md-3 col-sm-4 col-xs-4 text-right">
                         <img class="offer-logo-set" style="    padding-right: 10px;" ng-src="    {{item.attributes.business_avatar_thumb}}">
-                        </img>
+                        
                     </div>
                  
                 </div>
@@ -395,7 +395,7 @@
                 </div>
                 <div class="row backcls mar-10px text-left">
                     <div class="form-group popupcenter ">
-                        <form name="get_coupen" ng-submit="vm.sentMobileNo(mobile,true,item.id)" novalidate="">
+                        <form  name="get_coupen" ng-submit="vm.sentMobileNo(mobile,true,item.id)" novalidate="">
                             <div class="col-md-8 nopad">
                                 <label for="usr">
                                     Enter your mobile no to get code
@@ -407,7 +407,6 @@
                                     <span ng-show="(get_coupen.mobile.$touched || submitted) && get_coupen.mobile.$error.maxlength" style="color: red">
                                         Maximum 10 digits only allowed.
                                     </span>
-                                </input>
                             </div>
                             <div class="col-md-4 nopad mar25x">
                                 <button class="btn min40 width100 nbr" ng-disabled="get_coupen.$invalid" type="submit">
@@ -741,8 +740,11 @@
                                     </div>
                                     <div class="row space-div">
                                         <div class="col-md-6">
-                                            <button ng-click="vm.getcodepopup(item.id)">
+                                            <button ng-click="vm.getcodepopup(item.id)" ng-if="!item.attributes.redirect_url">
                                                 GET CODE!
+                                            </button>
+                                            <button ng-click="vm.getcodepopup(item.id)" ng-if="item.attributes.redirect_url">
+                                                BUY NOW!
                                             </button>
                                         </div>
                                         <div class="col-md-6">

@@ -514,6 +514,10 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             // 'Access-Token' : $rootScope.current_user.authentication_token
             // 'Access-Token' : "$2a$10$Z1QJ46AB.9Qx/IDCIWqnTO20HogZNyOl7ztRDwqzl75nFaCbORNSW",
         }
+        vm.redirectUrl = function (red_Url) {
+            debugger
+             $window.open(red_Url, '_blank');
+        }
         vm.closeLoginPopup = function() {
             document.getElementById("login-popup").style.width = "0%";
         }
@@ -1107,6 +1111,18 @@ window.scrollOff = true;
                 url: apiBaseURL + 'coupon_codes',
                 data: vm.post
             }).then(function mySuccess(response) {
+                debugger
+                $http.get(apiBaseURL+'/home/offer_detail/?id='+offer_id).then(function(response) {
+                    debugger
+                    vm.redirectOffer = response.data.data;
+                    if(vm.redirectOffer.attributes.redirect_url != null){
+                        setTimeout(function() {
+                           vm.redirectUrl(vm.redirectOffer.attributes.redirect_url);
+                            }, 2000);
+                    }
+
+               });
+
                 var temp = LoginService.isReferral();
                 if (temp) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
