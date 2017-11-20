@@ -231,7 +231,7 @@
 
 
 <!-- Get Code POPUP -->
-<div class="overlay" id="confirm-code-popup" style="top: 5%">
+<div class="overlay" id="confirm-code-popup">
     <div class="overlay-content">
       
             <div class="col-md-8 row col-md-offset-2 white pad-bot0 pad10 ">
@@ -279,16 +279,18 @@
 
                   {{vm.usermobile()}}
                         </h4>
+                        <button class="btn btn-danger" ng-repeat="item in vm.getSelectedOfferData()" ng-if="item.attributes.redirect_url" ng-click="vm.gotourl(item.attributes.redirect_url)" style="border-radius: 0;">CLICK HERE</button>
                     </div>
                     <div class="col-md-12 nopad text-center" ng-hide="vm.isReferral()">
                         <h4 class="marbt20">
                             Hi  Guest
                         </h4>
                         <h4 class="marbt20">
-                            Offer code sent to your registered mobile No - 
+                            Offer code sent to your mobile No - 
 
                   {{vm.mobile()}}
                         </h4>
+                        <button class="btn btn-danger" ng-repeat="item in vm.getSelectedOfferData()" ng-if="item.attributes.redirect_url" ng-click="vm.gotourl(item.attributes.redirect_url)" style="border-radius: 0;">CLICK HERE</button>
                     </div>
                     <div class="col-md-12 nopad gpad text-center" ng-show="vm.isReferral()">
                         <span class="offer-spini">
@@ -348,7 +350,7 @@
 <!-- Get Code POPUP mobile no-->
 <div class="overlay" id="get-code-popup">
 
-    <div class="overlay-content" style="    top: 5%;">
+    <div class="overlay-content">
 
 
            

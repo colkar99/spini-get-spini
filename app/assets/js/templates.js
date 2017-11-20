@@ -626,7 +626,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "\n" +
     "<!-- Get Code POPUP -->\n" +
-    "<div class=\"overlay\" id=\"confirm-code-popup\" style=\"top: 5%\">\n" +
+    "<div class=\"overlay\" id=\"confirm-code-popup\">\n" +
     "    <div class=\"overlay-content\">\n" +
     "      \n" +
     "            <div class=\"col-md-8 row col-md-offset-2 white pad-bot0 pad10 \">\n" +
@@ -674,16 +674,18 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "\n" +
     "                  {{vm.usermobile()}}\n" +
     "                        </h4>\n" +
+    "                        <button class=\"btn btn-danger\" ng-repeat=\"item in vm.getSelectedOfferData()\" ng-if=\"item.attributes.redirect_url\" ng-click=\"vm.gotourl(item.attributes.redirect_url)\" style=\"border-radius: 0;\">CLICK HERE</button>\n" +
     "                    </div>\n" +
     "                    <div class=\"col-md-12 nopad text-center\" ng-hide=\"vm.isReferral()\">\n" +
     "                        <h4 class=\"marbt20\">\n" +
     "                            Hi  Guest\n" +
     "                        </h4>\n" +
     "                        <h4 class=\"marbt20\">\n" +
-    "                            Offer code sent to your registered mobile No - \n" +
+    "                            Offer code sent to your mobile No - \n" +
     "\n" +
     "                  {{vm.mobile()}}\n" +
     "                        </h4>\n" +
+    "                        <button class=\"btn btn-danger\" ng-repeat=\"item in vm.getSelectedOfferData()\" ng-if=\"item.attributes.redirect_url\" ng-click=\"vm.gotourl(item.attributes.redirect_url)\" style=\"border-radius: 0;\">CLICK HERE</button>\n" +
     "                    </div>\n" +
     "                    <div class=\"col-md-12 nopad gpad text-center\" ng-show=\"vm.isReferral()\">\n" +
     "                        <span class=\"offer-spini\">\n" +
@@ -743,7 +745,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "<!-- Get Code POPUP mobile no-->\n" +
     "<div class=\"overlay\" id=\"get-code-popup\">\n" +
     "\n" +
-    "    <div class=\"overlay-content\" style=\"    top: 5%;\">\n" +
+    "    <div class=\"overlay-content\">\n" +
     "\n" +
     "\n" +
     "           \n" +
