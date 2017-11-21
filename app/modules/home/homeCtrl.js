@@ -176,8 +176,14 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             // 'Access-Token' : $rootScope.current_user.authentication_token
             // 'Access-Token' : "$2a$10$Z1QJ46AB.9Qx/IDCIWqnTO20HogZNyOl7ztRDwqzl75nFaCbORNSW",
         }
+        vm.loadFirst = function(){
+            var tempLog = LoginService.isReferral();
+            if(!tempLog){
+                document.getElementById("login-signup").style.width = "100%";
+            }
+                        
+        }
         vm.gotourl = function(redirect_url){
-            debugger
             $window.open(redirect_url , "_blank");
         }
         vm.closeLoginPopup = function() {
@@ -448,6 +454,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             document.getElementById("offer-popup").style.width = "100%";
         }
         vm.getOffers = function() {
+            vm.loadFirst();
             var locationCookie = LoginService.getCityCookie();
             if (locationCookie == false) {
                 var url = apiBaseURL + 'home/offers';
@@ -892,7 +899,8 @@ window.scrollOff = true;
             return vm.compaigns;
         };
         vm.ChooseCity = function() {
-            document.getElementById('choose-city').style.width = '100%';
+            vm.setCityCookie();
+            // document.getElementById('choose-city').style.width = '100%';
         };
         vm.unixtime = function(date) {
             var dateSplitted = date.split('-'); // date must be in DD-MM-YYYY format
@@ -909,19 +917,24 @@ window.scrollOff = true;
                 if (response) {
                     vm.CityList = response.data.data;
                     window.CityList = response.data.data;
+                    // vm.ChooseCity();
                 }
             });
         }
+
         $timeout(function() {
             if (!window.loadData) {
                 window.loadData = 1;
                 var temp = LoginService.getCityCookie();
                 if (temp == false) {
                     vm.ChooseCity();
+                    
                 }
             }
         }, 10);
-        vm.setCityCookie = function(city) {
+        
+        vm.setCityCookie = function() {
+            var city = window.CityList[0];
             LoginService.cityCookie(city.id, city.attributes.name);
         }
         vm.temp = true;

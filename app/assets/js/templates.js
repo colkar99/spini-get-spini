@@ -658,14 +658,15 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                 \n" +
     "                </div>\n" +
     "            </div>\n" +
-    "            <div class=\"row backcls mar-10px text-left\">\n" +
+    "            <div class=\"row backcls mar-10px text-left\" ng-repeat=\"item in vm.getSelectedOfferData()\">\n" +
     "                <div class=\"form-group popupcenter padtop40 \">\n" +
     "                    <div class=\"col-md-12 nopad text-center\" ng-show=\"vm.isReferral()\">\n" +
     "                        <h4 class=\"marbt20\">\n" +
     "                            Hi  {{vm.username()}}\n" +
     "                        </h4>\n" +
     "                        <h4 class=\"marbt20\">\n" +
-    "                            Availing this offer will add  Rs.{{item.attributes.treasure_value}} to your ReferYogi Wallet!\n" +
+    "                            Availing this offer will get up to  Rs. {{item.attributes.referal_amount\n" +
+    "}} to your ReferYogi Wallet!\n" +
     "                        </h4>\n" +
     "                        <h4 class=\"marbt20\">\n" +
     "                            Offer code sent to your registered mobile No - \n" +

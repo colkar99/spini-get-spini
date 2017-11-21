@@ -263,14 +263,15 @@
                  
                 </div>
             </div>
-            <div class="row backcls mar-10px text-left">
+            <div class="row backcls mar-10px text-left" ng-repeat="item in vm.getSelectedOfferData()">
                 <div class="form-group popupcenter padtop40 ">
                     <div class="col-md-12 nopad text-center" ng-show="vm.isReferral()">
                         <h4 class="marbt20">
                             Hi  {{vm.username()}}
                         </h4>
                         <h4 class="marbt20">
-                            Availing this offer will add  Rs.{{item.attributes.treasure_value}} to your ReferYogi Wallet!
+                            Availing this offer will get up to  Rs. {{item.attributes.referal_amount
+}} to your ReferYogi Wallet!
                         </h4>
                         <h4 class="marbt20">
                             Offer code sent to your registered mobile No - 
