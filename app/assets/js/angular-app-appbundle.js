@@ -515,7 +515,6 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             // 'Access-Token' : "$2a$10$Z1QJ46AB.9Qx/IDCIWqnTO20HogZNyOl7ztRDwqzl75nFaCbORNSW",
         }
         vm.loadFirst = function(){
-            debugger
             var tempLog = LoginService.isReferral();
             if(!tempLog){
                 document.getElementById("login-signup").style.width = "100%";
@@ -523,7 +522,6 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                         
         }
         vm.gotourl = function(redirect_url){
-            debugger
             $window.open(redirect_url , "_blank");
         }
         vm.closeLoginPopup = function() {
@@ -795,18 +793,15 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
         }
         vm.getOffers = function() {
             vm.loadFirst();
-            debugger
             var locationCookie = LoginService.getCityCookie();
             if (locationCookie == false) {
                 var url = apiBaseURL + 'home/offers';
             } else {
-                debugger
                 var url = apiBaseURL + 'home/offers?location_id=' + locationCookie;
             }
             $http.get(url).then(function(response) {
                 // 
                 if (response) {
-                    debugger
                     vm.setNextPage(response)
                     var response = response.data.data;
                     $scope.filter_items.push(response);
@@ -1267,11 +1262,9 @@ window.scrollOff = true;
 
         $timeout(function() {
             if (!window.loadData) {
-                debugger
                 window.loadData = 1;
                 var temp = LoginService.getCityCookie();
                 if (temp == false) {
-                    debugger
                     vm.ChooseCity();
                     
                 }

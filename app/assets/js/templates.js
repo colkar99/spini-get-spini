@@ -665,7 +665,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                            Hi  {{vm.username()}}\n" +
     "                        </h4>\n" +
     "                        <h4 class=\"marbt20\">\n" +
-    "                            Availing this offer will get up to  Rs. {{item.attributes.referal_amount\n" +
+    "                            Availing this offer will get up to  Rs. {{item.attributes.treasure_value\n" +
     "}} to your ReferYogi Wallet!\n" +
     "                        </h4>\n" +
     "                        <h4 class=\"marbt20\">\n" +
