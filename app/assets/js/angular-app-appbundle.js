@@ -1272,7 +1272,6 @@ window.scrollOff = true;
         }, 10);
         
         vm.setCityCookie = function(city) {
-            debugger
             if (city == undefined){
                 var city = window.CityList[0];
             }

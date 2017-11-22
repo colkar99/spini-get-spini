@@ -1181,11 +1181,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                                        </a>\n" +
     "                                                    </li>\n" +
     "                                                    <li class=\"offer-share-fb\">\n" +
-    "                                                        <a ng-click=\"vm.SocialShareUpdate(item.attributes.seo_url,'facebook')\" socialshare=\"\" socialshare-provider=\"facebook\" socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.facebook)}}\">\n" +
+    "                                                        <a ng-click=\"vm.SeoHelpSocialShare(item.id,'facebook')\" socialshare=\"\" socialshare-provider=\"facebook\" socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.facebook)}}\">\n" +
     "                                                        </a>\n" +
     "                                                    </li>\n" +
     "                                                    <li class=\"offer-share-twitter\">\n" +
-    "                                                        <a ng-click=\"vm.SocialShareUpdate(item.attributes.seo_url,'twitter')\" socialshare=\"\" socialshare-hashtags=\"{item.attributes.seo_keywords}}\" socialshare-provider=\"twitter\" socialshare-text=\"{{item.attributes.seo_description}} {{item.attributes.seo_keywords}}\" socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}\">\n" +
+    "                                                        <a ng-click=\"vm.SeoHelpSocialShare(item.id,'twitter')\" socialshare=\"\" socialshare-hashtags=\"{item.attributes.seo_keywords}}\" socialshare-provider=\"twitter\" socialshare-text=\"{{item.attributes.seo_description}} {{item.attributes.seo_keywords}}\" socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.general)}}\">\n" +
     "                                                        </a>\n" +
     "                                                    </li>\n" +
     "\n" +

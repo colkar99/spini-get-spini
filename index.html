@@ -705,7 +705,7 @@ class="offers-grid" ng-init="vm.getOffers()" id="Gridbottom">
                                     </a>
                                 </li>
                                 <li class="offer-share-fb">
-                                    <a ng-click="vm.SocialShareUpdate(offer.attributes.seo_url,'facebook')" socialshare="" socialshare-provider="facebook" socialshare-url="{{vm.OfferLink(offer.attributes.seo_url,offer.attributes.tracking_code.facebook)}}">
+                                    <a ng-click="vm.SeoHelpSocialShare(offer.id,'facebook')" socialshare="" socialshare-provider="facebook" socialshare-url="{{vm.OfferLink(offer.attributes.seo_url,offer.attributes.tracking_code.facebook)}}">
                                     </a>
                                 </li>
                                 <li class="offer-share-twitter">
