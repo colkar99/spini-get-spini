@@ -597,6 +597,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             }
         }
         vm.SeoHelpSocialShare = function(offer_id, type) {
+           
             var data = {};
             angular.forEach(vm.offers, function(value, key) {
                 if (value.id == offer_id) {
@@ -609,6 +610,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     return data.treasure_value;
                 }
                 if (type == 'facebook') {
+                   
                     Socialshare.share({
                         'provider': 'facebook',
                         'attrs': {
