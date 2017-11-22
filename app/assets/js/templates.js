@@ -1164,8 +1164,10 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                    </div>\n" +
     "                                    <div class=\"min-height160px\">\n" +
     "                                        <div class=\"col-md-10 nopad\">\n" +
-    "                                            <p class=\"read\" hm-dots-class=\"dots\" hm-less-text=\"Read less\" hm-limit=\"100\" hm-link-class=\"read-more\" hm-more-text=\"Read more\" hm-read-more=\"\" hm-text=\"{{ item.attributes.description | nl2br }}\">\n" +
-    "                                            </p>\n" +
+    "                                            <p ng-if=\"item.attributes.shorten_redirect_url\">Use coupon code LONGLIVE Through following url:- <a ng-href=\"{{item.attributes.shorten_redirect_url}}\" target=\"_blank\" style=\"font-size: 12px;display: inline;\">{{item.attributes.shorten_redirect_url}}</a></p><span></span>\n" +
+    "                                            <p class=\"read\" hm-dots-class=\"dots\" hm-less-text=\"Read less\" hm-limit=\"100\" hm-link-class=\"read-more\" hm-more-text=\"Read more\" hm-read-more=\"\" hm-text=\"{{ item.attributes.description | nl2br }}\" >\n" +
+    "                                            \n" +
+    "                                            </p> \n" +
     "                                            <p class=\"offer-wrap-text space-div\">\n" +
     "                                                **OFFER VALID TILL {{item.attributes.end_date | date:'mediumDate'}} only at {{item.attributes.business_name}} @ {{item.attributes.place}}\n" +
     "                                            </p>\n" +
