@@ -933,8 +933,12 @@ window.scrollOff = true;
             }
         }, 10);
         
-        vm.setCityCookie = function() {
-            var city = window.CityList[0];
+        vm.setCityCookie = function(city) {
+            debugger
+            if (city == undefined){
+                var city = window.CityList[0];
+            }
+            
             LoginService.cityCookie(city.id, city.attributes.name);
         }
         vm.temp = true;

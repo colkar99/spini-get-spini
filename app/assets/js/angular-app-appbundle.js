@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-11-21. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-11-22. 
 * @author Kathik
 */
 
@@ -1271,8 +1271,12 @@ window.scrollOff = true;
             }
         }, 10);
         
-        vm.setCityCookie = function() {
-            var city = window.CityList[0];
+        vm.setCityCookie = function(city) {
+            debugger
+            if (city == undefined){
+                var city = window.CityList[0];
+            }
+            
             LoginService.cityCookie(city.id, city.attributes.name);
         }
         vm.temp = true;
