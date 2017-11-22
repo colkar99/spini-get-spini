@@ -1183,7 +1183,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                                        </a>\n" +
     "                                                    </li>\n" +
     "                                                    <li class=\"offer-share-fb\">\n" +
-    "                                                        <a ng-click=\"vm.SeoHelpSocialShare(item.id,'facebook')\" socialshare=\"\" socialshare-provider=\"facebook\" socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.facebook)}}\">\n" +
+    "                                                        <a ng-click=\"vm.SocialShareUpdate(item.id,'facebook')\" socialshare=\"\" socialshare-provider=\"facebook\" socialshare-url=\"{{vm.OfferLink(item.attributes.seo_url,item.attributes.tracking_code.facebook)}}\">\n" +
     "                                                        </a>\n" +
     "                                                    </li>\n" +
     "                                                    <li class=\"offer-share-twitter\">\n" +

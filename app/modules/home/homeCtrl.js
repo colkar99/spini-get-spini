@@ -266,7 +266,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     data = value.attributes;
                 }
             });
-            // console.log(data);
+            console.log(data);
             try {
                 if (type == 'treasure') {
                     return data.treasure_value;
@@ -279,6 +279,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                             'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.facebook)
                         }
                     });
+                    // debugger
                     LoginService.UpdateSocialShare(vm.OfferLink(data.seo_url, data.tracking_code.facebook), data.tracking_code.facebook, type, offer_id, function(result) {})
                     // LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
                 }
@@ -310,9 +311,21 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                 // console.log('error');
             }
         }
-        vm.SocialShareUpdate = function(url, type, offerid, trakingcode) {
-            // 
-            LoginService.UpdateSocialShare(url, type,offerid, trakingcode, function(result) {})
+        vm.SocialShareUpdate = function(offer_id, type) {
+            var data = window.SelectedCampOffers[0].attributes;
+            
+            if (type == 'facebook') {
+                   
+                    Socialshare.share({
+                        'provider': 'facebook',
+                        'attrs': {
+                            'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.facebook)
+                        }
+                    });
+                    LoginService.UpdateSocialShare(vm.OfferLink(data.seo_url, data.tracking_code.facebook), data.tracking_code.facebook, type, offer_id, function(result) {})
+                    // LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
+                }
+            
         };
         vm.SetCookie = function() {
             var track = {};
