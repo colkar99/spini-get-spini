@@ -936,6 +936,7 @@ window.scrollOff = true;
         vm.setCityCookie = function(city) {
             if (city == undefined){
                 var city = window.CityList[0];
+                LoginService.cityCookie(city.id, city.attributes.name);
             }
             
             LoginService.cityCookie(city.id, city.attributes.name);
