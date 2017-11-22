@@ -604,7 +604,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     data = value.attributes;
                 }
             });
-            console.log(data);
+            // console.log(data);
             try {
                 if (type == 'treasure') {
                     return data.treasure_value;
