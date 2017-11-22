@@ -663,6 +663,16 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
                     LoginService.UpdateSocialShare(vm.OfferLink(data.seo_url, data.tracking_code.facebook), data.tracking_code.facebook, type, offer_id, function(result) {})
                     // LoginService.UpdateSocialShare(data.seo_url, type, function(result) {})
                 }
+                else if (type == 'twitter') {
+                    Socialshare.share({
+                        'provider': 'twitter',
+                        'attrs': {
+                            'socialshareText': data.caption,
+                            'socialshareUrl': vm.OfferLink(data.seo_url, data.tracking_code.twitter)
+                        }
+                    });
+                    LoginService.UpdateSocialShare(vm.OfferLink(data.seo_url, data.tracking_code.twitter), data.tracking_code.twitter, type, offer_id, function(result) {})
+                }
             
         };
         vm.SetCookie = function() {
