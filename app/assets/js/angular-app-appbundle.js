@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-11-22. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-11-23. 
 * @author Kathik
 */
 
@@ -2294,7 +2294,7 @@ LodashFactory.$inject = ['$window'];
             // },
             googleLogin: function() {
                 var myParams = {
-                    'clientid': '186743695973-ff3cm1k1ptca8rib4sv350abqhnif0pb.apps.googleusercontent.com', //You need to set client id
+                    'clientid': '578322634034-30d0pgtgb6f4ec1hou0lpg35jr5cnn6o.apps.googleusercontent.com', //You need to set client id
                     'cookiepolicy': 'single_host_origin',
                     'callback':function(res) {
                         console.log(res);
