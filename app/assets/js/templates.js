@@ -1164,7 +1164,7 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                                    </div>\n" +
     "                                    <div class=\"min-height160px\">\n" +
     "                                        <div class=\"col-md-10 nopad\">\n" +
-    "                                            <p ng-if=\"item.attributes.shorten_redirect_url\">Use coupon code LONGLIVE Through following url:- <a ng-if=\"vm.isReferral()\" ng-href=\"{{item.attributes.shorten_redirect_url}}\" target=\"_blank\" style=\"font-size: 12px;display: inline;color:blue\" ng-click=\"vm.getcodepopup(item.id)\">{{item.attributes.shorten_redirect_url}}</a>\n" +
+    "                                            <p ng-if=\"item.attributes.shorten_redirect_url\">Use coupon code {{item.attributes.sms_code}} Through following url:- <a ng-if=\"vm.isReferral()\" ng-href=\"{{item.attributes.shorten_redirect_url}}\" target=\"_blank\" style=\"font-size: 12px;display: inline;color:blue\" ng-click=\"vm.getcodepopup(item.id)\">{{item.attributes.shorten_redirect_url}}</a>\n" +
     "                                            <a ng-if=\"!vm.isReferral()\"  style=\"font-size: 12px;display: inline;color:blue;cursor: pointer;\" ng-click=\"vm.getcodepopup(item.id)\">{{item.attributes.shorten_redirect_url}}</a>\n" +
     "                                        </p><span></span>\n" +
     "                                            <p class=\"read\" hm-dots-class=\"dots\" hm-less-text=\"Read less\" hm-limit=\"100\" hm-link-class=\"read-more\" hm-more-text=\"Read more\" hm-read-more=\"\" hm-text=\"{{ item.attributes.description | nl2br }}\" >\n" +
