@@ -558,11 +558,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        </span>\n" +
     "                        Sign Up with Facebook\n" +
     "                    </button>\n" +
-    "                    <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
+    "                    <!-- <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
     "                        <span class=\"fa fa-google left falign\">\n" +
     "                        </span>\n" +
     "                        Sign UP with Google\n" +
-    "                    </button>\n" +
+    "                    </button> -->\n" +
     "                </div>\n" +
     "                <div>\n" +
     "                </div>\n" +
@@ -607,11 +607,11 @@ angular.module('angular-app').run(['$templateCache', function($templateCache) {
     "                        </span>\n" +
     "                        Sign In with Facebook\n" +
     "                    </button>\n" +
-    "                    <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
+    "                    <!-- <button class=\"btn btn-block gbutton\" g-login=\"\" ng-click=\"vm.GoogleLogin('google')\">\n" +
     "                        <span class=\"fa fa-google left falign\">\n" +
     "                        </span>\n" +
     "                        Sign in with Google\n" +
-    "                    </button>\n" +
+    "                    </button> -->\n" +
     "                </div>\n" +
     "                <div>\n" +
     "                </div>\n" +
