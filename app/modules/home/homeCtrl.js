@@ -772,11 +772,11 @@ window.scrollOff = true;
                 ngToast.dismiss();
                 ngToast.create({
                     content: '<strong>ReferYogi</strong>: Link Copied',
-                    dismissOnTimeout: false,
+                    dismissOnTimeout: true,
                     dismissButton: true,
-                    dismissOnClick: false
+                    dismissOnClick: true
                 });
-            }, 0)
+            }, 2000)
         }
         vm.OfferLink = function(offer, tracking_id) {
 
@@ -821,11 +821,11 @@ window.scrollOff = true;
                     ngToast.dismiss();
                     ngToast.create({
                         content: '<strong>ReferYogi</strong>: Code already sent',
-                        dismissOnTimeout: false,
+                        dismissOnTimeout: true,
                         dismissButton: true,
-                        dismissOnClick: false
+                        dismissOnClick: true
                     });
-                }, 0)
+                }, 2000)
                 $scope.myWelcome = response.statusText;
             });
         }

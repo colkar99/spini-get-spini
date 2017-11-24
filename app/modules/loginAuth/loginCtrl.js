@@ -67,7 +67,7 @@
                             content: 'Something went wrong',
                             dismissOnTimeout: true,
                             dismissButton: true,
-                            dismissOnClick: false
+                            dismissOnClick: true
                         });
                     }, 2000)
                     console.log('not logged in');
@@ -90,7 +90,7 @@
                             content: 'Welcome to ReferYogi!!',
                             dismissOnTimeout: true,
                             dismissButton: true,
-                            dismissOnClick: false
+                            dismissOnClick: true
                         });
                     }, 2000);
                     window.location.reload();

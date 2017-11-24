@@ -1110,11 +1110,11 @@ window.scrollOff = true;
                 ngToast.dismiss();
                 ngToast.create({
                     content: '<strong>ReferYogi</strong>: Link Copied',
-                    dismissOnTimeout: false,
+                    dismissOnTimeout: true,
                     dismissButton: true,
-                    dismissOnClick: false
+                    dismissOnClick: true
                 });
-            }, 0)
+            }, 2000)
         }
         vm.OfferLink = function(offer, tracking_id) {
 
@@ -1159,11 +1159,11 @@ window.scrollOff = true;
                     ngToast.dismiss();
                     ngToast.create({
                         content: '<strong>ReferYogi</strong>: Code already sent',
-                        dismissOnTimeout: false,
+                        dismissOnTimeout: true,
                         dismissButton: true,
-                        dismissOnClick: false
+                        dismissOnClick: true
                     });
-                }, 0)
+                }, 2000)
                 $scope.myWelcome = response.statusText;
             });
         }
@@ -1424,7 +1424,7 @@ window.scrollOff = true;
                             content: 'Something went wrong',
                             dismissOnTimeout: true,
                             dismissButton: true,
-                            dismissOnClick: false
+                            dismissOnClick: true
                         });
                     }, 2000)
                     console.log('not logged in');
@@ -1447,7 +1447,7 @@ window.scrollOff = true;
                             content: 'Welcome to ReferYogi!!',
                             dismissOnTimeout: true,
                             dismissButton: true,
-                            dismissOnClick: false
+                            dismissOnClick: true
                         });
                     }, 2000);
                     window.location.reload();
@@ -2031,9 +2031,9 @@ LodashFactory.$inject = ['$window'];
                             ngToast.dismiss();
                             ngToast.create({
                                 content: response.data.errors[0].detail,
-                                dismissOnTimeout: false,
+                                dismissOnTimeout: true,
                                 dismissButton: true,
-                                dismissOnClick: false
+                                dismissOnClick: true
                             });
                         });
         }

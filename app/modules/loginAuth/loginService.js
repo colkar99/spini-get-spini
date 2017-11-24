@@ -134,9 +134,9 @@
                             ngToast.dismiss();
                             ngToast.create({
                                 content: response.data.errors[0].detail,
-                                dismissOnTimeout: false,
+                                dismissOnTimeout: true,
                                 dismissButton: true,
-                                dismissOnClick: false
+                                dismissOnClick: true
                             });
                         });
         }
