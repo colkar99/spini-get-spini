@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-11-24. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-11-27. 
 * @author Kathik
 */
 
@@ -517,7 +517,10 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
         vm.loadFirst = function(){
             var tempLog = LoginService.isReferral();
             if(!tempLog){
-                document.getElementById("login-signup").style.width = "100%";
+                setTimeout(function(){
+                 document.getElementById("login-signup").style.width = "100%";
+                 }, 10000);
+                
             }
                         
         }
