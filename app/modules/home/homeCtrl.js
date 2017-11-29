@@ -176,17 +176,22 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             // 'Access-Token' : $rootScope.current_user.authentication_token
             // 'Access-Token' : "$2a$10$Z1QJ46AB.9Qx/IDCIWqnTO20HogZNyOl7ztRDwqzl75nFaCbORNSW",
         }
+        vm.loadFirst = function(){
+            var tempLog = LoginService.isReferral();
+            if(!tempLog && window.popupcal == undefined){
+                vm.popupCome();
+            }
 
-        // vm.loadFirst = function(){
-        //     var tempLog = LoginService.isReferral();
-        //     if(!tempLog){
-        //         setTimeout(function(){
-        //          document.getElementById("login-signup").style.width = "100%";
-        //          }, 10000);
-                
-        //     }
+            
                         
-        // }
+        }
+        vm.popupCome = function(){
+                setTimeout(function(){
+                 document.getElementById("login-signup").style.width = "100%";
+                 }, 5000);
+                window.popupcal = true;
+        }
+        
         vm.gotourl = function(redirect_url){
             $window.open(redirect_url , "_blank");
         }

@@ -486,7 +486,7 @@
       </a>
     </div> -->
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<div id="myCarousel" class="carousel slide" data-ride="carousel" ng-mouseenter="vm.loadFirst()">
         <!-- Indicators -->
         <ol class="carousel-indicators" ng-repeat="banner in vm.banners">
             <li data-target="#myCarousel" data-slide-to="$index" ng-class="{'active': $index == 0}"></li>
