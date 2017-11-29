@@ -176,6 +176,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             // 'Access-Token' : $rootScope.current_user.authentication_token
             // 'Access-Token' : "$2a$10$Z1QJ46AB.9Qx/IDCIWqnTO20HogZNyOl7ztRDwqzl75nFaCbORNSW",
         }
+
         vm.loadFirst = function(){
             var tempLog = LoginService.isReferral();
             if(!tempLog){
@@ -482,7 +483,7 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             document.getElementById("offer-popup").style.width = "100%";
         }
         vm.getOffers = function() {
-            vm.loadFirst();
+            
             var locationCookie = LoginService.getCityCookie();
             if (locationCookie == false) {
                 var url = apiBaseURL + 'home/offers';
@@ -982,5 +983,6 @@ window.scrollOff = true;
                 })
             }
         }
+        vm.loadFirst();
     }
 })();
