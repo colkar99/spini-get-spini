@@ -515,16 +515,16 @@ readMore.$inject = ["$templateCache"], angular.module("hm.readmore", ["ngAnimate
             // 'Access-Token' : "$2a$10$Z1QJ46AB.9Qx/IDCIWqnTO20HogZNyOl7ztRDwqzl75nFaCbORNSW",
         }
 
-        vm.loadFirst = function(){
-            var tempLog = LoginService.isReferral();
-            if(!tempLog){
-                setTimeout(function(){
-                 document.getElementById("login-signup").style.width = "100%";
-                 }, 10000);
+        // vm.loadFirst = function(){
+        //     var tempLog = LoginService.isReferral();
+        //     if(!tempLog){
+        //         setTimeout(function(){
+        //          document.getElementById("login-signup").style.width = "100%";
+        //          }, 10000);
                 
-            }
+        //     }
                         
-        }
+        // }
         vm.gotourl = function(redirect_url){
             $window.open(redirect_url , "_blank");
         }
@@ -1321,7 +1321,7 @@ window.scrollOff = true;
                 })
             }
         }
-        vm.loadFirst();
+        // vm.loadFirst();
     }
 })();
 
