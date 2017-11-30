@@ -835,6 +835,15 @@ window.scrollOff = true;
                         dismissOnClick: true
                     });
                 }, 2000)
+                var temp = LoginService.isReferral();
+                if (temp) {
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
+                    LoginService.getProfileInfo(function(data) {
+                        vm.user = data;
+                        window.user = data;
+                    })
+                }
+                vm.openConformPopup();
                 $scope.myWelcome = response.statusText;
             });
         }

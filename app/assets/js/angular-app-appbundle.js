@@ -1,5 +1,5 @@
 /*!
-* angular-app - v0.0.1 - MIT LICENSE 2017-11-29. 
+* angular-app - v0.0.1 - MIT LICENSE 2017-11-30. 
 * @author Kathik
 */
 
@@ -1173,6 +1173,15 @@ window.scrollOff = true;
                         dismissOnClick: true
                     });
                 }, 2000)
+                var temp = LoginService.isReferral();
+                if (temp) {
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + LoginService.authToken();
+                    LoginService.getProfileInfo(function(data) {
+                        vm.user = data;
+                        window.user = data;
+                    })
+                }
+                vm.openConformPopup();
                 $scope.myWelcome = response.statusText;
             });
         }
